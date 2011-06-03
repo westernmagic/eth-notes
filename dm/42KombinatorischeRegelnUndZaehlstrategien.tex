@@ -10,41 +10,38 @@ Falls $(A_i)_{i=1 \dots n}$ paarweise disjunkt $(i \neq j \implies A_i \cap A_j 
 \end{gather*}
 
 \subsubsection{Gleichheitsregel}
-$S, T$ endlich, $\exists f: S \rightarrow T$ bijektiv $\implies |S| = |T|$
+$S, T$ endlich, $\exists f: S \rightarrow T$ bijektiv $\implies \abs{S} = \abs{T}$
 
 \subsubsection{Inklusion-Exklusion}
-\todo{Port to \textbackslash abs}
 \begin{gather*}
-	|A_1 \cup A_2| = |A_1| + |A_2| - |A_1 \cap A_2| \\
+	\abs{A_1 \cup A_2} = \abs{A_1} + \abs{A_2} - \abs{A_1 \cap A_2} \\
 	\begin{split}
-		|A_1 \cup A_2 \cup A_3|	&= |A_1| + |A_2| + |A_3| \\
-							&- |A_1 \cap A_2| - |A_1 \cap A_3| - |A_2 \cap A_3| \\
-							&+ |A_1 + A_2 + A_3|
+		\abs{A_1 \cup A_2 \cup A_3}
+			&= \abs{A_1} + \abs{A_2} + \abs{A_3} \\
+			&- \abs{A_1 \cap A_2} - \abs{A_1 \cap A_3} - \abs{A_2 \cap A_3} \\
+			&+ \abs{A_1 + A_2 + A_3}
 	\end{split}
 	\intertext{$n$ Mengen:}
 	\begin{split}
-		|A_1 \cup \dots \cup A_n|	&= |A_1| + \dots + |A_n| \\
-							&- |A_1 \cap A_2| - \dots - |A_{n-1} \cap A_n| \\
-							&\vdots \\
-							&+ (-1)^{n+1} \cdot |A_1 \cap \dots \cap A_n|
+		\abs{A_1 \cup \dotsb \cup A_n}
+			&= \bas{A_1} + \dotsb + \abs{A_n} \\
+			&- \abs{A_1 \cap A_2} - \dotsb - \abs{A_{n-1} \cap A_n} \\
+			&\vdots \\
+			&+ (-1)^{n+1} \cdot \abs{A_1 \cap \dotsb \cap A_n}
 	\end{split}\\
-	|\bigcup_{i=1}^n A_i| = \sum_{r=1}^n (-1)^{r-1} \sum_{1 \leq i_1 < i_2 < \dots < i_r \leq n} |\bigcap_{j=1}^r A_{ij}| \\
-	|\bigcup_{i=1}^n A_i| = \sum_{k=1}^n (-1)^{k-1} \sum_{\substack{\text{alle } I \subseteq \{1,\dotsc,n\}\\\text{mit } |I| = k}} |\bigcap_{i \in I}^r A_{ij}| \\
+	\abs{\bigcup_{i=1}^n A_i} = \sum_{r=1}^n (-1)^{r-1} \sum_{1 \leq i_1 < i_2 < \dots < i_r \leq n} \abs{\bigcap_{j=1}^r A_{ij}} \\
+	\abs{\bigcup_{i=1}^n A_i} = \sum_{k=1}^n (-1)^{k-1} \sum_{\substack{\text{alle } I \subseteq \{1,\dotsc,n\}\\\text{mit } \abs{I} = k}} \abs{\bigcap_{i \in I}^r A_{ij}} \\
 \end{gather*}
 \begin{bew}[note = Induktion über $n$]
 	\begin{description}
 		\item[IV)] $n=1 , n=2 \:\checkmark$
 		\item[IS)] $n \rightarrow n+1$ \\
 			\begin{align*}
-				|\bigcup_{i=1}^{n+1} A_i|	&= |(\bigcup_{i=1}^n A_i) \cup A_{n+1}| \\
-									&= |\bigcup_{i=1}^n A_i| + |A_{n+1}| - |(\bigcup_{i=1}^n A_i) \cap A_{n+1}| \\
-									&= \underbrace{\sum_{r=1}^n (-1)^{r-1} \sum_{
-											\substack{r\text{-Familien}\\a \leq i_j \leq n
-										}} |\bigcap_{j=1}^r A_{ij}|}_{r\text{-Familien ohne } A_{n+1}}
-										+ \underbrace{|A_{n+1}|}_{1\text{-Familie } A_{n+1}} \\
-									&\underbrace{ - \sum_{r=1}^n (-1)^{r-1} \sum_{r\text{-Familien}} |\bigcap (A_i \cap A_n)|}
-										_{+ \underbrace{\sum_{r=1}^n (-1)^{(r+1)-1} \sum_{r\text{-Familien}} |\bigcap (A_i \cap A_n)|}
-											_{(r+1) \text{ Familien mit } A_{n+1}}}
+				\abs{\bigcup_{i=1}^{n+1} A_i}
+					&= \abs{(\bigcup_{i=1}^n A_i) \cup A_{n+1}} \\
+					&= \abs{\bigcup_{i=1}^n A_i} + \abs{A_{n+1}} - \abs{(\bigcup_{i=1}^n A_i) \cap A_{n+1}} \\
+					&= \underbrace{\sum_{r=1}^n (-1)^{r-1} \sum_{\substack{r\text{-Familien}\\a \leq i_j \leq n}} \abs{\bigcap_{j=1}^r A_{ij}}}_{r\text{-Familien ohne } A_{n+1}} + \underbrace{\abs{A_{n+1}}}_{1\text{-Familie } A_{n+1}} \\
+					&\underbrace{ - \sum_{r=1}^n (-1)^{r-1} \sum_{r\text{-Familien}} \abs{\bigcap (A_i \cap A_n)}}_{+ \underbrace{\sum_{r=1}^n (-1)^{(r+1)-1} \sum_{r\text{-Familien}} \abs{\bigcap (A_i \cap A_n)}}_{(r+1) \text{ Familien mit } A_{n+1}}}
 			\end{align*}
 	\end{description}
 \end{bew}
@@ -67,8 +64,9 @@ Wie viele der $n!$ Permutationen einer $n$-Menge sind fixpunkte? \\
 \begin{gather*}
 	A_i \coloneqq \{ \text{Permutationen von } [n] \coloneqq \{1, 2, \dots, n \} \text{ mit Fixpunkt } i \} \\
 	\begin{split}
-	\text{\# Permutationen mit Fixpunkt} &= |\bigcup_{i=1}^n A_i| \underset{\mathrm{I.-E.}}{=} \sum_{k=1}^n (-1)^{k-1} \sum_{\substack{I \subseteq \{1, \dotsc , n\}\\|I| = k}} \underbrace{|\bigcap A_{ij}|}_{(n-k)!} \\
-	&= \sum_{k=1}^n (-1)^{k-1} \frac{n!}{k!} = n! - \frac{n!}{2!} + \frac{n!}{3!} - \frac{n!}{4!} + \dotsb
+	\text{\# Permutationen mit Fixpunkt}
+		&= \abs{\bigcup_{i=1}^n A_i} \underset{\mathrm{I.-E.}}{=} \sum_{k=1}^n (-1)^{k-1} \sum_{\substack{I \subseteq \{1, \dotsc , n\}\\\abs{I} = k}} \underbrace{\abs{\bigcap A_{ij}}}_{(n-k)!} \\
+		&= \sum_{k=1}^n (-1)^{k-1} \frac{n!}{k!} = n! - \frac{n!}{2!} + \frac{n!}{3!} - \frac{n!}{4!} + \dotsb
 	\end{split} \\
 	\begin{split}
 	\text{\# fixpunktfreie } &= \frac{n!}{2!} -\frac{n!}{3!} +\frac{n!}{4!} \mp \dotsb \\
@@ -79,7 +77,7 @@ Wie viele der $n!$ Permutationen einer $n$-Menge sind fixpunkte? \\
 	e^x = 1 + \frac{x}{1!} +\frac{x^2}{2!} +\frac{x^3}{3!} + \dotsb
 \end{gather*}
 
-$\varphi(n) \coloneqq |\{k \in \{0 , \dotsc , n-1 \} , ggT(k,n) = 1 \}|$ \\
+$\varphi(n) \coloneqq \abs{\{k \in \{0 , \dotsc , n-1 \} , ggT(k,n) = 1 \}}$ \\
 Eulersche $\varphi$-Funktion.\\
 \begin{bsp*}
 	\begin{gather*}
@@ -90,7 +88,7 @@ Eulersche $\varphi$-Funktion.\\
 		\end{split} \\
 		\text{Allgemein: } n = \prod_{i=1}^r {p_i}^{l_i} , l_i > 0 \text{ Primfaktorzerlegung} \\
 		A_i = \{ \text{ durch $p_i$ teilbare Zahlen $0, \dotsc , n-1$} \} \\
-		|\bigcup_{i=1}^n A_i| = \sum_{r=1}^n (-1)^{r-1} \sum_{1 \leq i_1 < i_2 < \dots < i_r \leq n} \underbrace{|\bigcap_{j=1}^r A_{ij}|}_{\substack{\text{Zahlen $0 \dots n-1$ geteilt von } \\p_{i_1} , p_{i_2} , \dotsc , p_{i_k} \\\implies \frac{n}{p_{i_1} \cdot p_{i_2} \cdot \dotsm \cdot p_{i_k}}}} \\
+		\abs{\bigcup_{i=1}^n A_i} = \sum_{r=1}^n (-1)^{r-1} \sum_{1 \leq i_1 < i_2 < \dots < i_r \leq n} \underbrace{\abs{\bigcap_{j=1}^r A_{ij}}}_{\substack{\text{Zahlen $0 \dots n-1$ geteilt von } \\p_{i_1} , p_{i_2} , \dotsc , p_{i_k} \\\implies \frac{n}{p_{i_1} \cdot p_{i_2} \cdot \dotsm \cdot p_{i_k}}}} \\
 		\begin{split}
 			\implies \varphi(n) &= n ( 1 - \sum_{k=1}^r (-1)^{k-1} \frac{1}{p_{i_1} \cdot p_{i_2} \cdot \dotsm \cdot p_{i_k}} ) \\
 			&= n ( 1 + \sum_{p_{i_1} , \dotsc , p_{i_k}} (-\frac{1}{p_{i_1}}) \cdot (-\frac{1}{p_{i_2}}) \cdot \dotsm \cdot (-\frac{1}{p_{i_k}}) ) \\
@@ -142,9 +140,9 @@ Eulersche $\varphi$-Funktion.\\
 \end{bsp*}
 
 \subsubsection{Doppeltes Abzählen}
-\[ \sum_{a \in A} m_a = \sum_{n \in B} n_b = |S| \]
+\[ \sum_{a \in A} m_a = \sum_{n \in B} n_b = \abs{S} \]
 \begin{bsp*}
-	\[\nu(n) \coloneqq |\{ k> 0 : k \mid n \}| \]\\
+	\[\nu(n) \coloneqq \abs{\{ k> 0 : k \mid n \}} \]\\
 	Frage: Was ist der Mittelwert von $\nu(k)$ für $k=1, \dotsc , n$ ? \\
 	\[ \sum_{k=1}^n \nu(k) = \sum_{k=1}^n \mu(k) = \sum_{k=1}^n \left\lfloor \frac{n}{k} \right\rfloor \]
 	''Jede $k$-te Zahl ist durch $k$ teilbar.'' \\
