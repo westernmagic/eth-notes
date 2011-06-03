@@ -1,0 +1,175 @@
+\chapter{Grundlagen}
+\section{Mengen}
+\begin{bsp*}
+	$\{1,2,3\} = \{3,1,2\} = \{1,1,2,3,2\}$ \qquad $3$ Elemente\\
+	Seien $x, y, z \in \R$. $\{x,y,z\}$ \qquad $1$-$3$ Elemente, eg. $x = y = z$
+\end{bsp*}
+
+\[ \{\} = \varnothing \]
+
+\begin{bsp*}
+	Für jede natürliche Zahl $n$ gilt $n^2 > n$\\
+	\begin{bew}
+		Sei $A$ die Menge aller natürlichen Zahlen mit $n^2 \leq n$.\\
+		Wenn $A \neq \varnothing$, dann enthält $A$ einen kleinsten Element.\\
+		\dots
+	\end{bew}
+\end{bsp*}
+
+\[ \forall x \in \varnothing : x > x \]
+
+$A \times \B = \{ (a,b) | a \in A, b \in B \}$\\
+$(a,b)$ Paar = List mit $2$ Elemente
+
+\begin{gather*}
+	\{a,b\} = \{b,a\} \\
+	(a,b) \neq (b,a) \Leftarrow a \neq b
+\end{gather*}
+
+\begin{itemize}
+	\item Paar
+	\item Tripel
+	\item Quardupel
+	\item Quitupel
+	\item n-Tupel
+\end{itemize}
+
+$A_1 \times \dots \times A_n = \{ (a_1 , \dotsc , a_n ) | a_i \in A_i \}$ ''kartesische Produkt''\\
+$\R^n$\\
+
+\begin{tabular}{ll}
+	$\cup$		&Vereinigung					\\
+	$\cap$		&Durchschnitt					\\
+	$\in$			&Element						\\
+	$\subset$		&Inklusion (Teilmenge oder gleich)	\\
+	$\setminus$	&Differenzmenge				
+\end{tabular}
+
+\[ A \setminus B = \{ a \in A | a \notin B \} \]
+
+\begin{gather*}
+	\Z^{\geq 0} = \{0, 1, 2, 3, \dotsc \} \\
+	\N = \{ (0,) 1, 2, 3, \dotsc \}
+\end{gather*}
+
+\section{Logik}
+\subsection{Junktoren}
+\begin{tabular}{ll}
+	$\wedge$	&und			\\
+	$\vee$	&oder		\\
+	$\neg$	&nicht		\\
+	$\implies$	&impliziert		\\
+	$\iff$	&äquivalent	
+\end{tabular}
+
+\subsection{Quantoren}
+\begin{tabular}{ll}
+	$\forall$	&für alle				\\
+	$\exists$	&es existiert			\\
+	$\exists!$	&es existiert genau ein	
+\end{tabular}
+
+\begin{bsp*}
+	\begin{gather*}
+		\forall x \in \R : x > x \implies 2 = 0 \\
+		\forall x \in \R : x > x \implies 2 = 2 \\
+		\forall x, y \in \R : x > y \implies x^3 > y^3 \\
+	\end{gather*}
+	Jede braune Henne legt braune Eier.\\
+	Jede rosa Henne legt rosa Eier.\\
+	\[ 2 > 2 \implies 2 =2 \]
+\end{bsp*}
+
+''$A \implies B$'' \qquad ''Wenn $A$, dann $B$.'' \qquad \textbf{nicht:} ''Es gilt $A$ und daher auch $B$.''\\
+\begin{tabular}{lll}
+	$A$		&$B$		&$A \implies B$	\\
+	gilt		&gilt		&gilt			\\
+	gilt		&gilt nicht	&gilt nicht		\\
+	gilt nicht	&gilt		&gilt			\\
+	gilt nicht	&gilt nicht	&gilt			
+\end{tabular}\\
+\begin{gather*}
+	(A \implies B) \iff (\neg A \vee B) \\
+	(A \iff B) \iff ((A \implies B) \wedge (B \implies A))
+\end{gather*}
+
+\section{Polarkoordinaten}
+\subsection{Ebene Polarkoordinaten}
+\begin{gather*}
+	x = r \cos \varphi \\
+	y = r \sin \varphi \\
+	\\
+	r = \sqrt{x^2 + y^2} \\
+	\varphi ''='' \arg((x,y)) \quad \text{''Argument'' wohlbestimmt bis auf $2\pi n , n \in \Z$} \\
+	\text{Konvention: } \varphi \leftarrow ] -\pi , \pi [ \\
+	\varphi = \begin{cases}
+		\arccos \frac{x}{r}	&y > 0	\\
+		-\arccos \frac{x}{r}	&y < 0	
+	\end{cases} \\
+	\varphi = \begin{cases}
+		\arcsin \frac{y}{r}	&x > 0	\\
+		\pi -\arcsin \frac{y}{r}	&x < 0	
+	\end{cases}
+\end{gather*}
+
+\begin{bsp*}
+	Spirale \\
+	$r =$ monotone Funktion von $\varphi$ \\
+	\begin{tabular}{ll}
+		$r = a \varphi , a > 0 . \varphi \geq 0$			&Spirale mit konstantem Abstand	\\
+		$r = a e^{b\varphi} , a, b > 0 , \varphi \in \R$	&logarithmische Spirale		
+	\end{tabular}
+\end{bsp*}
+
+\subsection{Zylinderkoordinaten}
+\begin{gather*}
+	x = \rho \cos \varphi \\
+	y = \rho \sin \varphi \\
+	z = z \\
+	\\
+	\rho = \sqrt{x^2 + y^2} \\
+	\varphi = \arg((x,y)) \\
+	z = z
+\end{gather*}
+
+\subsection{Kugelkoordinaten}
+\begin{gather*}
+	x = r \cos \theta \cos \varphi \\
+	y = r \cos \theta \sin \varphi \\
+	z = r \sin \theta \\
+	\\
+	r = \sqrt{x^2 + y^2 + z^2} \\
+	\varphi = \arg((x,y)) \\
+	\theta = \arcsin \frac{z}{r} \quad r \geq 0 , \varphi \neq 2\pi m , n \in \Z , \theta \in [ -\frac{\pi}{2} , \frac{\pi}{2} ]
+\end{gather*}
+
+\section{(vollständige) Induktion}
+Sei $A(n)$ eine Aussage, die von einer ganzen Zahl $n \geq 0$ abhängt.\\
+Falls: (a) $A(0)$ gilt (Induktionsverankerung) \\
+und: (b) $\forall n : \underbrace{A(n)}_{\text{Induktionsannahme}} \implies A(n+1)$ (Induktionschritt) \\
+Dann gilt: $\forall n \in \Z^{\geq 0} : A(n)$\\
+\begin{satz*}
+	Für alle $n \geq 1$ und alle $x_1, \dotsc , x_n \in ]0,1[$ gilt $\prod_{k=1}^n (1-x_n) > 1 - \sum_{k=1}^n x_k$\\
+	\begin{bem}[note = Erinnerung:]
+		\begin{gather*}
+			a, b \in \Z \\
+			\sum_{k=a}^b x_k = \begin{cases}
+				0						&a > b	\\
+				x_a + x_{a+1} + \dots + x_b	&a \leq b	
+			\end{cases} \\
+			\prod_{k=a}^b = \begin{cases}
+				1						&a > b	\\
+				x_a \cdot x_{a+1} \dotsm x_b	&a \leq b
+			\end{cases}\\
+			a \leq b \leq c \\
+			\sum_{k=a}^c x_k = \sum_{k=a}^b x_k + \sum_{k=b+1}^c x_k \\
+			\prod_{k=a}^c x_k = \prod_{k=a}^b x_k + \prod_{k=b+1}^c x_k
+		\end{gather*}
+	\end{bem}
+	\begin{bsp*}
+		\begin{gather*}
+			n! = \prod_{k=1}^n k \\
+			\binom{n}{k} = \frac{n!}{k!(n-k)!} = \prod_{i=1}^k \frac{n-i+1}{i} \qquad n \geq k \geq 0
+		\end{gather*}
+	\end{bsp*}
+\end{satz*}

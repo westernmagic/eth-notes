@@ -1,0 +1,78 @@
+(define-location-class "page-numbers" ("arabic-numbers") )
+
+(define-attributes (("def" "default")))
+
+(markup-index
+	:open "~n\begin{theindex}~n"
+	:close "~n\end{theindex}~n"
+	:tree
+)
+
+(markup-locref
+	:attr "default"
+	:open "\hyperpage{"
+	:close "}"
+)
+
+(markup-locref
+	:attr "def"
+	:open "\textbf{\hyperpage{"
+	:close "}}"
+)
+
+(markup-locclass-list :open ", " :sep ", ")
+(markup-locref-list :sep ", ")
+(markup-range :sep "-")
+
+(define-crossref-class "see")
+(markup-crossref-list :class "see" :open "\see{" :sep "; " :close "}{}")
+
+(define-crossref-class "seealso")
+(markup-crossref-list :class "seealso" :open "\seealso{" :sep "; " :close "}{}")
+
+(markup-crossref-layer-list :sep ", ")
+
+(markup-indexentry :open "~n	\item " :depth 0)
+(markup-indexentry :open "~n		\subitem " :depth 1)
+(markup-indexentry :open "~n			\subsubitem " :depth 2)
+
+(define-letter-groups ("a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m" "n" "o" "p" "q" "r" "s" "t" "u" "v" "w" "x" "y" "z"))
+
+(sort-rule "von" "")
+(sort-rule "-" "")
+
+(sort-rule "ä" "a")
+(sort-rule "ö" "o")
+(sort-rule "ü" "u")
+(sort-rule "Ä" "a")
+(sort-rule "Ö" "o")
+(sort-rule "Ü" "u")
+
+(sort-rule "A" "a")
+(sort-rule "B" "b")
+(sort-rule "C" "c")
+(sort-rule "D" "d")
+(sort-rule "E" "e")
+(sort-rule "F" "f")
+(sort-rule "G" "g")
+(sort-rule "H" "h")
+(sort-rule "I" "i")
+(sort-rule "J" "j")
+(sort-rule "K" "k")
+(sort-rule "L" "l")
+(sort-rule "M" "m")
+(sort-rule "N" "n")
+(sort-rule "O" "o")
+(sort-rule "P" "p")
+(sort-rule "Q" "q")
+(sort-rule "R" "r")
+(sort-rule "S" "s")
+(sort-rule "T" "t")
+(sort-rule "U" "u")
+(sort-rule "V" "v")
+(sort-rule "W" "w")
+(sort-rule "X" "x")
+(sort-rule "Y" "y")
+(sort-rule "Z" "z")
+
+(markup-letter-group-list :sep "~n	~n	\indexspace~n	")

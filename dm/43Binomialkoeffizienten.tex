@@ -1,0 +1,76 @@
+\section{Binomialkoeffizienten: Eigenschaften und Approximationen}
+\begin{gather*}
+	\binom{n}{k} = \frac{n!}{k!(n-k)!} = \frac{n\cdot (n-1) \dotsm (n-k+1)}{1 \cdot 2 \dotsm k}\\
+	\binom{n}{k} = \binom{n}{n-k} \\
+	\binom{n}{k} = \binom{n-1}{k-1} + \binom{n-1}{k}
+\end{gather*}
+
+\subsubsection{Vandermonde-Identität}
+$n$ Kugeln, $r$ gelbe, $n-r$ blaue, zeihen $k$, davon $t$ gelb\\
+\begin{gather*}
+	\binom{n}{k} = \sum_{t=0}^k \binom{r}{t} \cdot \binom{n-r}{k-t}
+\end{gather*}
+\begin{satz*}[note = Binomialsatz , index = Binomialsatz]
+	\[ (x+y)^n = \sum_{k=0}^n \binom{n}{k} x^{n-k} y^k \]
+\end{satz*}
+\begin{bsp*}
+	\begin{gather*}
+		x=1 \\
+		y=1 \\
+		2^n = \sum_{k=0}^n \binom{n}{k}
+	\end{gather*}
+\end{bsp*}
+\begin{bsp*}
+	\begin{gather*}
+		x=1 \\
+		y=-1 \\
+		0 = \sum_{k=0}^n (-1)^k \binom{n}{k}
+	\end{gather*}
+	Konsequenz: Von einer best. Länge gibt es gleich viele Strings mit gerader und ungerader Parität, Parität von $s_1,s_2,\dotsc,s_n:$\\
+	\[ \bigoplus_{i=1}^n s_i \]
+\end{bsp*}
+
+\subsubsection{Approximationen / Abschätzungen}
+\begin{gather*}
+	\begin{split}
+		\binom{n}{k} &= \frac{n\cdot (n-1) \dotsm (n-k+1)}{1 \cdot 2 \dotsm k} \\
+		&= \frac{n}{k} \cdot \frac{n-1}{k-1} \cdot \frac{n-2}{k-2} \dotsm \frac{n-i}{k-1} \dotsm \frac{n-(k-1)}{k-(k-1)} \geq \left( \frac{n}{k} \right)^k \\
+		\frac{\binom{n}{k}}{\binom{n}{k}^k} &= \underbrace{\frac{n\cdot (n-1) \dotsm (n-k+1}{n^k}}_{\leq 1} \cdot \underbrace{\frac{k^k}{1 \cdot 2 \dotsm k}}_{=\frac{k^k}{k!} \leq e^k} \\
+		\binom{n}{k} \leq e^k \cdot \left( \frac{n}{k} \right)^k = \left( \frac{n \cdot e}{k} \right)^k
+	\end{split}\\
+	\intertext{Exakter:}
+	n! \approx \sqrt{2 \pi n} \binom{n}{e}^n \qquad \text{Stirling-Approximation} \\
+	\intertext{Einsetzen:}
+	\binom{n}{k} \approx \frac{\sqrt{2 \pi n} \binom{n}{e}^n}{\sqrt{2 \pi k} \binom{k}{e}^k \sqrt{2 \pi (n-k)} \binom{n-k}{e}^{n-k}} \\
+	\frac{n^n}{k^k (n-k)^{n-k}} = \frac{1}{(\frac{k}{n})^k (\frac{n-k}{n})^{n-k}} = [(\frac{k}{n})^{\frac{k}{n}} (1 - \frac{k}{n})^{1-\frac{k}{n}}]^{-n}  \qquad x \coloneqq \frac{k}{n} \\
+	= [x^x (1-x)^{1-x}]^n = 2^{n\overbrace{(-x\log_2 x - (1-x)\log_2 (1-x))}^{h(x)}} = 2^{n \cdot h( x )} = 2^{n \cdot h(\frac{k}{n})}
+\end{gather*}
+
+\subsubsection{Datenkompression}
+Verlustfrei: gzip $\neq$ mpeg, jpeg \\
+$n$ unfaire Münzwürfe \\
+\begin{gather*}
+	P(0) x > \frac{1}{2} \\
+	\underbrace{\overbrace{000010000001000 \dots 0100}^n}_{\underbrace{1011100101110 \dots 0}_l}
+\end{gather*}
+Wie kurz kann $l$ sein?\\
+Strings mit $\frac{n}{2}$ 0'er, $\frac{n}{2}$ 1'er: \\
+\begin{gather*}
+	P = x^{\frac{n}{2}} (1-x)^{\frac{n}{2}} \\
+	\text{Anzahl: } \binom{n}{\frac{n}{2}} \approx 2^{n \overbrace{h(\frac{k}{n})}^{h(\frac{1}{2}) = 1}} = 2^n \\
+	\intertext{Totale WSK:}
+	2^n \cdot ( \sqrt{x(1-x)})^n = 2^n \cdot (<\frac{1}{2})^n = (<1)^n
+\end{gather*}
+Strings mit $xn$ 0'er, $(1-x)$ 1'er \\
+\begin{gather*}
+	P = x^{xn} (1-x)^{(1-x)n} = 2^{n(x \log_2 x + (1-x) \log_2 (1-x))} = 2 ^{-n \cdot h(x)} \\
+	\text{Anzahl: } \binom{x}{xn} = 2^{n h(x)} \\
+	\text{Totale WSK: } \approx 1
+\end{gather*}
+Codierbar durch einen String der Länge $n \cdot h(x)$ \\
+\[ \underbrace{h(x)}_{-x \log_2 x -(1-x) \log_2 (1-x)}  \text{ misst den Informationsgehalt} \]
+Allgemein: Quelle $x_i$ mit WSK $p_i$\\
+\begin{gather*}
+	\sum p_i = 1 \\
+	H(X) = \sum_i -p_i \cdot \log_2 p_i
+\end{gather*}

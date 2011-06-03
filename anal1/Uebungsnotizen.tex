@@ -1,0 +1,22 @@
+\part{Übungsnotizen}
+\setcounter{chapter}{0}
+\chapter{Landau-Symbole}
+$O(\cdot)$-Notation \\
+\begin{bsp*}
+	\[ e^x = 1 + x+ \frac{x^2}{2} + O(x^3) \]
+\end{bsp*} 
+\begin{bsp*}[note = Mergesort]
+	\begin{gather*}
+		k = \log_2 n \\
+		\begin{split}
+			\text{Laufzeit } T(n)	&= T(2^k) \\
+							&= 1 + (k-1) 2^k \\
+							&= 1 + (\log_2 n - 1 ) n \\
+							&= 1 + n \log_2 n  - n \\
+							&= O( n \log_2 n )
+		\end{split}
+	\end{gather*}
+\end{bsp*}
+
+$o(\cdot)$-Notation\\
+Restterm vernachlässigbar klein

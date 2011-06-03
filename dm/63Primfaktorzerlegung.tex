@@ -1,0 +1,65 @@
+\section{Primfaktorzerlegung}
+\begin{def*}[note = Prim , index = Prim]
+	\[ p \in \N , p > 1 , \text{ prim} \]
+	falls die einzigen positiven Teiler von $p$ $1$ und $p$.
+\end{def*}
+\begin{satz*}
+	\begin{gather*}
+		a, b \in \Z \\
+		p | a \cdot b \implies p | a \vee p | b \quad \blacksquare
+	\end{gather*}
+	\begin{bew}
+		\begin{gather*}
+			p |ab , p \nmid a , p \Prim \implies \ggt(p,a) = 1 \\
+			\exists u, v : 1 = u p + v a \implies b = \underbrace{u p b}_{p|\cdot} + v \underbrace{a b}_{p|\cdot}
+		\end{gather*}
+	\end{bew}
+\end{satz*}
+\begin{satz*}[note = Fundamentalsatz der Arithmetik]
+	Jede Zahl $n \in \N , n \geq 1$, \textbf{besitzt} eine \textbf{eindeutige} (bis auf die Reihenfolge der Faktoren) \textbf{Primfaktorzerlegung}.
+	\begin{bew}[note = Existenz]
+		Indirekt: \\
+		Sei $n$ die kleinste Zahl ohne Zerlegung. Dann ist $n$ nicht prim. Also hat $n$ einen Teiler $m , 1 < m < n : n = m k ; m , k < n$. $m, k$ haben Zerlegungen $\implies n$ hat Zerlegung $\lightning$.
+	\end{bew}
+	\begin{bew}[note = Eindeutigkeit]
+		Sei $n$ die kleinste Zahl mit zwei verschiedenen Zerlegungen.
+		\begin{gather*}
+			n = \underbrace{p_1^{e_1} p_2^{e_2} \dots p_r^{e_r}}_{e_i > 0} = \underbrace{q_1^{f_1} q_2^{f_2} \dots q_s^{f_s}}_{f_i > 0} \\
+			p_1 | q_1^{f_1} (q_2^{f_2} \dots q_s^{f_s}) \underset{p \text{ prim}}{\implies} p_1 | q_1 \vee p_1 | q_2^{f_2} \dots q_s^{f_s} \\
+			\implies \exists j : p_1 | q_j^{f_j} \implies p_1 | q_j \implies p_1 = q_j \\
+		\end{gather*}
+		$\frac{n}{p_1}$ hat zwei verschiedene Darstellungen $\lightning \quad \blacksquare$
+	\end{bew}
+\end{satz*}
+
+\subsubsection{ggT und kgV}
+\begin{def*}[note = kgV , index = kgV]
+	$a, b > 0$. Dann heisst \\
+	$l$ kleinstes gemeinsames Vielfaches von $a, b ; l = \kgv(a,b)$, falls:
+	\begin{itemize}
+		\item $a|l$
+		\item $b|l$
+		\item $a|m \wedge b|m \implies l|m$
+	\end{itemize}
+\end{def*}
+Falls $\prod p_i^{e_i} , \prod p_i^{f_i}$
+\begin{gather*}
+	\ggt(a,b) = \prod p_i^{\min(e_i , f_i)} \\
+	\kgv(a,b) = \prod p_i^{\max(e_i , f_i)} \\
+	\implies \ggt \cdot \kgv = \prod p_i^{\overbrace{\min(e_i , f_i) + \max(e_i , f_i)}^{e_i + f_i}} = \prod p_i^{e_i} \cdot \prod p_i^{f_i} = a b
+\end{gather*}
+
+\subsubsection{Weiteres zu Primzahlen}
+\begin{itemize}
+	\item Es gibt unendlich viele Primzahlen.
+	\item Es gibt beliebig gross Lücken: $[n!+2 , n!+n]$ enthält keine Primzahl, denn $k|n!+k$ für $k \leq n$
+	\item Dichte: $\pi(n) = \abs{\{ 1 < k < n | k \text{ prim} \}}$ \\
+		$\pi(n) \sim \frac{n}{\ln n}$ zB. ''Jede 230-ste 100-stellige Zahl ist prim''
+	\item Primzahltests?
+		\begin{itemize}
+			\item ''Primes is in P''
+			\item Probabilistische Methode \\
+				$p$ prim $\implies a^{p-1} \equiv 1 \pmod p$ \\
+				$a^{p-1} \not\equiv 1 \pmod p \implies p$ nicht prim
+		\end{itemize}
+\end{itemize}

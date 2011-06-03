@@ -1,0 +1,788 @@
+\chapter{Differenzierbarkeit}
+\begin{gather*}
+	f: X \rightarrow Y , X, Y, \subset \R, x_0 \in X\\
+	f \text{ stetig in } x_0 \iff f(x) = f(x_0) + o(1) \text{ für } x \rightarrow x_0 \\
+	\begin{split}
+	f \text{ ist differenzierbar in } x_0 \text{ mit Ableitung } f'(x_0) \\
+	\iff \\
+	f(x) = f(x_0) + \underbrace{f'(x_0)}_{\text{Steigung der Tangente}} \cdot (x-x_0) + o(x-x_0)
+	\end{split}\\
+	\begin{split}
+		\text{Äquivalent:}\qquad	&\abs{\frac{f(x) - f(x_0) - f'(x_0)(x-x_0)}{x-x_0}} \rightarrow 0	\\
+							&\abs{\frac{f(x) - f(x_0)}{x-x_0}} - f'(x_0) \rightarrow 0		\\
+		\text{Äquivalent:}\qquad	&f'(x_0) = \lim_{x \rightarrow x_0} \frac{f(x)-f(x_0)}{x-x_0}	
+	\end{split}\\
+	\text{Leibniz: } \frac{\dd y}{\dd x} = \lim_{x \rightarrow x_0} \frac{\Delta y}{\Delta x}
+\end{gather*}
+\begin{def*}[note = differenzierbar , index = differenzierbar]
+	$f$ ist differenzierbar, falls differenzierbar in jedem $x_0 \in X$.\\
+	Dann ist $f': X \rightarrow \R , x_0 \mapsto f'(x_0)$ eine neue Funktion gennannt Ableitung.
+\end{def*}
+\begin{bem}
+	differenzierbar $\implies$ stetig\\
+	differenzierbar $\not\Leftarrow$ stetig
+\end{bem}
+Interpretiation:\\
+$x$ Raumkoordinate $\rightsquigarrow f'$ Tangente / Veränderungsrate\\
+$f(t)$ = Ort, $t$ = Zeit $\implies$ $f'(t)$ = Geschwindigkeit, $f''(t)$ = Beschleunigung\\
+\begin{def*}[note = differenzierbar , index = differenzierbar]
+	$f$ heisst zweimal differenzierbar, falls $f$ differenzierbar ist und $f'$ differenzierbar ist.\\
+	\begin{tabular}{ll}
+		Analog:	&$f$ ist $n$-fach differenzierbar		\\
+				&$f$ ist beliebig oft differnezierbar	
+	\end{tabular}
+\end{def*}
+Notation:\\
+\begin{tabular}{ll}
+	Newton:	&$f, f', f''', f^{IV}, f^V, f^{(n)}$	\\
+	Leibniz:	&$\frac{\dd y}{\dd x} = \frac{\dd}{\dd x}(y) , \frac{\dd^2 y}{\dd x^2} = \left( \frac{\dd}{\dd x} \right) (y)$
+\end{tabular}\\
+\begin{bsp*}
+	\begin{gather*}
+		\R \rightarrow \R, x \mapsto \abs{x} \text{ ist differenzierbar für } x \neq 0 \\
+		\text{Ableitung } = \begin{cases}
+			1	&x > 0	\\
+			-1	&x < 0	
+		\end{cases}
+	\end{gather*}
+\end{bsp*}
+\begin{bsp*}
+	\begin{gather*}
+		\R \rightarrow \R , x \mapsto x^n , n \in \Z^{\geq 0} \text{ ist differenzierbar mit Ableitung } n x^{n-1}\\
+		\lim_{x \rightarrow x_0} \frac{x^n - x_0^n}{x-x_0} = \lim_{x \rightarrow x_0} ( x^{n-1} + x^{n-2}x_0 + \dots x_0^{n-1} ) = n x_0^{n-1}\\
+		x = x_0 + h ; h \rightarrow 0 \\
+		x^n = (x_0 + h)^n = x_0^n + n x_0^{n-1} h + \underbrace{\sum_{k=2}^n \binom{n}{k} x_0^{n-k} h^k}_{O(h^2) = o(h)}
+	\end{gather*}
+\end{bsp*}
+\begin{satz*}
+	Jede Potenzriehe $f(x) = \sum_{k=0}^\infty a_k x^k$ mit Konvergenzradius $\rho > 0$ ist für $x \in ] -\rho , \rho [$ differenzierbar mit Ableitung $f'(x) = \sum_{k=0}^\infty a_k k x^{k-1}$ mit demselben Konvergenzradius $\rho$.\\
+	Folge: Dann ist $f$ beliebig oft differenzierbar.
+\end{satz*}
+\begin{bsp*}
+	\[
+		(e^x)' = \left( \sum_{k \geq 0} \frac{x^k}{k!} \right)' = \sum_{k=1}^\infty \frac{k x^{k-1}}{k!} = \sum_{k=1}^\infty \frac{x^{k-1}}{(k-1)!} = \sum_{l=0}^\infty \frac{x^l}{l!}
+	\]
+\end{bsp*}
+\begin{bsp*}
+	\[
+		 \left( \underbrace{\sum_{k=1}^\infty \frac{x^k}{k}}_{\rho=1} \right)' = \sum_{k=1}^\infty \frac{k x^{k-1}}{k} = \sum_{l=0}^\infty x^l = \frac{1}{1-x}
+	\]
+\end{bsp*}
+\begin{bsp*}
+	\begin{gather*}
+		(\log x)' = \frac{1}{x} \\
+		y = \log x \iff x = e^y \\
+		\implies \frac{\dd x}{\dd y} = (e^y)' = e^y = x \\
+		\implies \frac{\dd y}{\dd x} = \left( \frac{\dd x}{\dd y} \right) ^{-1} = x^{-1} \\
+	\end{gather*}
+\end{bsp*}
+\begin{bsp*}
+	\begin{gather*}
+		\frac{\dd}{\dd x} (x^a) = a x^{a-1} \\
+		x > 0 , a \in \R \\
+		x^a = (e^{\log x})^a = e^{a \log x} \\
+		y = a \log x \\
+		z = e^y \\
+		\begin{split}
+			\frac{\dd}{\dd x} (e^{a \log x})	&= \frac{\dd z}{\dd x} = \frac{\dd z}{\dd y} \cdot \frac{\dd y}{\dd x} = e^y \cdot \frac{\dd}{\dd x} (a \log x ) \\
+								&= e^{a \log x} \cdot a \cdot \frac{\dd}{\dd x} (\log x) = x^a \cdot a \cdot \frac{1}{x} = a x^{a-1}
+		\end{split}
+	\end{gather*}
+\end{bsp*}
+\begin{bsp*}
+	\begin{gather*}
+		\frac{\dd}{\dd x} (a^x) = \frac{\dd}{\dd x} (e^{x \log a}) = e^{x \log a} \cdot \frac{\dd}{\dd x} (x \log a) = \log a \cdot a^x
+	\end{gather*}
+\end{bsp*}
+\begin{satz*}[note = Mittelwertsatz (MWS) , index = Mittelwertsatz]
+	Ist $f$ auf $[a,b]$ stetig und auf $]a,b[$ differenzierbar, so existiert $t \in ]a,b[$ mit $f'(t) = \frac{f(b) - f(a)}{b-a}$\\
+	\begin{bew}
+		Betrachte $g: [a,b] \rightarrow \R , x \mapsto f(x) - \frac{f(b)-f(a)}{b-a} x$\\
+		Dann ist $g$ stetig, auf $]a,b[$ differenzierbar, $g(b) = g(a)$\\
+		MWS für $g$ besagt: $\exists t \in ]a,b[ : g'(t) = 0$\\
+		\begin{satz*}[note = Satz von Rolle]
+			\begin{bew}
+				$g$ konstant $\implies$ klar! jedes $t$ tut's.\\
+				Sonst: falls $\exists t \in [a,b] : g(t) > g(a)$\\
+				$\implies m = \max\{ g(t) | t \in [a,b] \} > g(a)$ da $[a,b]$ kompakt und $g$ stetig.\\
+				Sei $t \in [a,b]$ mit $g(t) = m$\\
+				$\implies t\in ]a,b[$\\
+				$g$ ist in $t$ differenzierbar.\\
+				$g'(t) = \lim_{h \rightarrow 0} \frac{\overbrace{g(t+h) - g(t)}^{\leq 0}}{\underbrace{h}_{> 0 \text{ oder } < 0}}$
+			\end{bew}
+		\end{satz*}
+		Dann $0 = g'(t) = f'(t) - \frac{f(b)-f(a)}{b-a} \qquad \checkmark$\\
+		\begin{folge}
+			Ist $f: I \rightarrow \R, I \subset \R, I$ Intervall, differenzierbar und $\abs{f'(t)} \leq M$ für alle $t_1 , t_2 \in I: \abs{f(t_2)-f_1(t_1)} \leq M \cdot \abs{t_2-t_1}$\\
+			\begin{bew}
+				oBdA $t_1 < t_2$. ZWS für $f|[t_1,t_2] \rightarrow \exists t _in ]t_1,t_2[ : \abs{\frac{f(t_1)-f(t_2)}{t_1-t_2}} = \abs{f'(t)} \leq M$
+			\end{bew}
+		\end{folge}
+		\begin{folge}
+			$(M=0)$ $f$ differenzierbar auf $I$ mit $f' = 0$ überall $\implies f$ konstant.
+		\end{folge}
+		\begin{folge}
+			Sind $f, g : I \rightarrow \R , I$ Intervall, differenzierbar und $f'(t) = g'(t)$ für alle $t \in I$, dann ist $g(t) = f(t) + c$ für eine Konstante $c$.
+		\end{folge}
+	\end{bew}
+\end{satz*}
+\begin{bsp*}
+	\begin{gather*}
+		f(x) \coloneqq \sum_{k=1}^\infty \frac{x^k}{k} : ]-1,1[ \rightarrow \R \text{ differenzierbar} \\
+		f'(x) = \frac{1}{1-x} \\
+		g(x) \coloneqq -\log(1-x) : ]-1,1[ \rightarrow \R \text{ differenzierbar} \\
+		g'(x) = \frac{1}{1-x} = f'(x) \\
+		\implies f(x) = c -\log(1-x) \text{ für alle } x \in ]-1,1[ \\
+		0 = f(0) = c - \log(1-0) = c
+		\intertext{Fazit:}
+		\sum_{k=1}^\infty \frac{x^k}{k} = -\log{1-x} \text{ für alle } \abs{x} < 1 \\
+		\implies \log(1+x) = \sum_{k=1}^\infty \frac{(-1)^k x^k}{k} = x - \frac{x^2}{2} + \frac{x^3}{3} - \dots
+	\end{gather*}
+\end{bsp*}
+\begin{bsp*}
+	\begin{gather*}
+		f(x) \coloneqq \sum_{k=0}^\infty (-1)^k \cdot \frac{x^{2k+1}}{2k+1} \text{ für } \abs{x} < 1 \\
+		g(x) \coloneqq \arctan(x) \\
+		g'(x) = \frac{1}{1+x^2} \\
+		f'(x) = \sum_{k=0}^\infty (-1)^k x^{2k} = \sum_{k=0}^\infty (-x^2)^k = \frac{1}{1-(-x^2)} = \frac{1}{1+x^2} \\
+		\implies f(x) = \arctan(x) + c \\
+		0 = f'(0) = \arctan(0) + c = c
+		\intertext{Fazit:}
+		\arctan x = \sum_{k=0}^\infty (-1)^k \cdot \frac{x^{2k+1}}{2k+1}
+	\end{gather*}
+\end{bsp*}
+
+\begin{satz*}{note = Variante des MWS}
+	Seien $f, g: [a,b] \rightarrow \R$ stetig, auf $]a,b[$ differenzierbar, $a < b$. Sei $g'(t) \neq 0$ für alle $t \in ]a,b[$ mit
+	\[ \frac{f(b)-f(a)}{g(b)-g(a)} = \frac{f'(t)}{g'(t)} \]
+	Analog für $x \rightarrow a+$ \\
+	Analog für $x \rightarrow c, c \in ]a,b[$ \\
+	\begin{bem}
+		MWS für $g \implies g(b) \neq g(a)$
+	\end{bem}
+\end{satz*}
+\begin{satz*}[note = Regel von Bernoulli-de l'Hôpital , index = {Bernoulli-de l'Hôpital!Regel von}]
+	Seien $f, g : ]a,b[ \rightarrow \R$ differenzierbar mit $g'(t) \neq 0$ überall und seien $\lim_{x \rightarrow b-} f(x) = \lim_{x \rightarrow b-} g(x) = 0$ (oder beide $\infty$) \\
+	Dann gilt
+	\[ \lim_{x \rightarrow b-} \frac{f(x)}{g(x)} = \lim_{x \rightarrow b-} \frac{f'(x)}{g'(x)} \]
+	falls die R.S. existiert oder $=\pm \infty$ ist. \\
+	\begin{bew}
+		$b < \infty , \lim_{x \rightarrow b-} f(x) = \lim_{x \rightarrow b-} g(x) = 0$ \\
+		$\rightsquigarrow f, g$ haben stetige Fortsetzung auf $]a,b[$ \\
+		Für jedes $x\in ]a,b[$ anwende MWS auf $[x,b]$ \\
+		$\rightsquigarrow$ existiert $t \in ]x,b[$ mit \\
+		\[ \frac{f(x)}{g(x)} = \frac{f(b)-f(x)}{g(b)-g(x)} = \frac{f'(x)}{g'(t)} \]
+		Für $x \rightarrow b-$ gilt auch $t \rightarrow b-$ und \dots $\checkmark$ \\
+		Für $b=\infty$ sei oBdA $a > 0$
+		\begin{gather*}
+			\begin{split}
+			\lim_{t \rightarrow \infty} \frac{f(t)}{g(t)}	&= \lim_{s \rightarrow 0+} \frac{f\left(\frac{1}{s}\right)}{g\left(\frac{1}{s}\right)} = \lim_{s \rightarrow 0+} \frac{\frac{\dd}{\dd s} f\left(\frac{1}{s}\right)}{\frac{\dd}{\dd s} g\left(\frac{1}{s}\right)} \\
+											&= \lim_{s \rightarrow 0+} \frac{f'\left(\frac{1}{s}\right) \frac{1}{s^2}}{g'\left(\frac{1}{s}\right) \frac{1}{s^2}} = \lim_{t \rightarrow \infty} \frac{f'(t)}{g'(t)}
+			\end{split}\\
+			\lim_{s \rightarrow 0+} f\left(\frac{1}{s}\right) = \lim_{t \rightarrow \infty} f(t) = 0 \\
+			\lim_{s \rightarrow 0+} g\left(\frac{1}{s}\right) = \lim_{g \rightarrow \infty} f(t) = 0 
+		\end{gather*}
+		Fall $\lim_{x \rightarrow b-} f(x) = \lim_{x \rightarrow b-} g(x) = \infty$ weggelassen.
+	\end{bew}
+\end{satz*}
+\begin{bsp}
+	\[ \lim_{x \rightarrow 0} \frac{\sin x}{x} \overset{H}{=} \lim_{x \rightarrow 0} \frac{\cos x}{1} = \cos 0 = 1 \]
+\end{bsp}
+\begin{bsp}
+	\begin{gather*}
+		a,b > 0 \\
+		b \neq 1 \\
+		\lim_{x \rightarrow 0} \frac{a^x - 1}{b^x - 1} \overset{H}{=} \lim_{x \rightarrow 0} \frac{(\log a)a^x}{(\log b)b^x} = \lim_{x \rightarrow 0} \frac{(\log a)a^0}{(\log b)b^0} = \frac{\log a}{\log b}
+	\end{gather*}
+\end{bsp}
+\begin{bsp}
+	\[ \lim_{x \rightarrow \infty} \frac{(\log x)^2}{x} \overset{H}{=} \lim_{x \rightarrow \infty} \frac{2(\log x) \frac{1}{x}}{1} = \lim_{x \rightarrow \infty} \frac{2 \log x}{x} \overset{H}{=} \lim_{x \rightarrow \infty} \frac{2 \frac{1}{x}}{1} = 0 \]
+\end{bsp}
+\begin{bsp}
+	\[ \begin{split}
+		\lim_{x \rightarrow 0} \left( \frac{1}{x} - \frac{1}{\sin x} \right)	&= \lim_{x \rightarrow 0} \frac{\sin x - x}{x \sin x} \\
+													&\overset{H}{=} \lim_{x \rightarrow 0} \frac{\cos x - 1}{1 \sin x + x \cos x} \\
+													&\overset{H}{=} \lim_{x \rightarrow 0} \frac{-\sin x}{\cos x + 1 \cos x + x (-\sin x)} \\
+													&= \lim_{x \rightarrow 0} \frac{-\sin x}{2\cos x - x \sin x} = \frac{-\sin 0}{2\cos 0 - 0\sin 0} \\
+													&= \frac{1}{2}
+		\end{split} \]
+\end{bsp}
+\begin{bsp}
+	\[ \begin{split}
+		\lim_{x \rightarrow 0}  \frac{\log \cos x}{1 - \sqrt{1-x^2}}	&\overset{H}{=} \lim_{x \rightarrow 0} \frac{\frac{1}{\cos x} (-\sin x)}{-\frac{1}{2} (1-x^2)^{-\frac{1}{2}} (-2x)} = \lim_{x \rightarrow 0} \frac{-\frac{\sin x}{\cos x}}{\frac{x}{\sqrt{1-x^2}}} \\
+													&= \lim_{x \rightarrow 0}  \frac{\sqrt{1-x^2}}{-\cos x} \frac{\sin x}{x} = \frac{\sqrt{1-0^2}}{-\cos 0} \lim_{x \rightarrow 0} \frac{\sin x}{x} = -1 \cdot 1 \\
+													&= -1
+		\end{split} \]
+\end{bsp}
+
+Errinnerung:
+\begin{gather*}
+	f(x) = \sum_{k=0}^\infty a_k x^k \quad \text{mit Konvergenzradius } \rho > 0 \\
+	\implies f'(x) = \sum_{k=0}^\infty a_k k x^{k-1} \quad \text{für } \abs{x} < \rho \\
+	\implies f^{(n)}(x) = \sum_{k=n}^\infty a_k k (k-1) \dots (k-n+1) x^{k-n} \\
+	\implies f^{(n)}(0) = (\text{Term für } k=n) = a_n n!
+\end{gather*}
+Folge: Für jedes $n \in \Z^{\geq 0}$ ist
+\[ a_n = \frac{f^{(n)}(0)}{n!} \]
+Folge: Die Koeffzienten einer Potenzreihe mit Konvergenzradius $> 0$ sind durch die dargestellte Funktiin eindeutig bestimmt.\\
+\begin{satz*}[note = Potenzreihen Identitätssatz]
+	\begin{folge}
+		Stellen zwei Potenzreihen für $\abs{x} < \epsilon$ dieselbe Funktion dar, so sind sie bereits gliedweise gleich.
+	\end{folge}
+\end{satz*}
+
+\subsection{Extrema}
+Sei $A \subset \R$ eine Teilmenge.\\
+$\sup(A), \max(A)$, obere Schranke \\
+$\inf(A), \min(A)$, untere Schranke \\
+\begin{def*}[note = Extremalstelle , index = Extremalstelle]
+Sei $f: B \rightarrow \R$ eine Funktion.
+\begin{enumerate}[label = \alph*)]
+	\item Eine obere Schranke, Maximimum, Supremum, untere Schranke, Minimum, Infimum von $f(B) = image(f)$ heisst auch \dots von $f$. (global)\\
+	\item Ein $b \in B$ mit $f(b) = \max f$ heisst Maximalstelle von $f$. \\
+		Ein $b \in B$ mit $f(b) = \min f$ heisst Minimalstelle von $f$. \\
+		Beide solche $b$ heissen \textbf{Extremalstellen} von $f$
+\end{enumerate}
+\end{def*}
+\begin{def*}[note = Extremum , index = Extremum]
+	\textbf{Extremum} = Maximum oder Minimum
+\end{def*}
+\begin{satz*}
+	Ist $B \subset \R^n$ kompakt (d.h. abgeschlossen und beschränkt), und $f: B \rightarrow \R$ stetig, dann existieren $\max f$ und $\min f$
+\end{satz*}
+\begin{bsp*}
+	\begin{gather*}
+		f: \R \rightarrow \R , x \mapsto \frac{1}{1+x^2} \\
+		\max f = 1, \text{ einzige Maximalstelle ist } x = 0 \\
+		\min f \text{ existiert nicht}
+		\inf f = 0
+	\end{gather*}
+\end{bsp*}
+\begin{def*}[note = lokales Maximum , index = Minimum!lokales]
+	$f$ hat in $b_0 \in B \subset \R^n$ ein lokales Maximum, wenn
+	\[ \exists \delta > 0 : \forall b \in B : \abs{b-b_0} < \delta \implies f(b) \leq f(b_0) \]
+\end{def*}
+\begin{def*}[note = lokales Minimum , index = Maximum!lokales]
+	$f$ hat in $b_0 \in B \subset \R^n$ ein lokales Minimum, wenn
+	\[ \exists \delta > 0 : \forall b \in B : \abs{b-b_0} < \delta \implies f(b) \geq f(b_0) \]
+\end{def*}
+\begin{fakt}
+	Jedes globale Maximum von $f$ ist ein lokales Maximum von $f$ (analog Min.,Extr.)
+\end{fakt}
+\begin{def*}[note = kritischer Punkt , index = kritischer Punkt]
+	Jetzt sei $B \subset \R$ und $f: B \rightarrow \R$ differenzierbar.
+	Eine $b_0 'in B$ mit $f'(b_0) = 0$ heisst \textbf{kritischer Punkt} von $f$.
+\end{def*}
+Proposition: Jede lokale Extremstelle von $f$ in $B^\circ$ ist ein kritischer Punkt von $f$.\\
+\begin{bew}
+	\begin{gather*}
+		\exists \delta > 0 \forall b \in B : \abs{b-b_0} < \delta \implies f(b) \leq f(b_0) \\
+		\frac{f(b)-f(b_0)}{b-b_0} \text{ ist } \begin{cases}
+			\leq 0	&b > b_0	\\
+			\geq 0	&b < b_0	
+		\end{cases} \text{ und } \rightarrow f'(b) \text{ für } b \rightarrow b_0 \\
+		\implies f'(b) = 0 \quad \blacksquare
+	\end{gather*}
+\end{bew}
+\begin{folge}
+	Ist $f: [a,b] \rightarrow \R$ stetig und auf $]a,b[$ differenzierbar, so besitzt $f$ ein Maximum un ein Minimum, und zwar auf der Teilunmenge \\
+$\{ a,b \} \cup \{ \text{kritische Punkte von $f$ auf } ]a,b[ \}$
+\end{folge}
+\begin{bsp}
+	Bestimme die Extrema von $f: [-3,3] \rightarrow \R, x \mapsto x^3 - 3x^2 + 2$\\
+	Lösung: $f$ differenziebar \\
+	$f'(x) = 3x^2 - 6x = 3x(x-2)$\\
+	$\implies$ kritische Punkte $\{ 0 , 2 \} \subset ]-3,3[$ \\
+	Kandidaten $\{ -3,3,0,2 \}$\\
+	\begin{tabular}{ | c | c | c | c | c | }
+		\hline
+		$x$		&$-3$	&$3$	&$0$	&$2$		\\ \hline
+		$f(x)$	&$-52$	&$2$	&$2$	&$-2$	\\ \hline
+	\end{tabular} \\
+	Fazit: \\
+	$f$ hat Min. $-52$ nur an $x=-3$ \\
+	$f$ hat Max. $2$ genau an $x=0,3$
+\end{bsp}
+\begin{bsp}
+	Bestimme die Extrema von $f: \R \rightarrow \R, t \mapsto 2 \sin t + \sin 2t$ \\
+	Lösung: $f$ differenzierbar. \\
+	\begin{gather*}
+		f(t+2\pi) = f(t) \\
+		\implies f(\R) = f([0,2\pi]) \\
+		f \text{ stetig } \implies \exists \text{ Max., Min.} \\
+		\begin{split}
+			f'(t)	&= 2 \cos t + 2 \cos 2 t = 2 \cos t + 2( \cos^2 t - \sin^2 t) \\
+				&= 2 \cos t + 2( 2\cos^2 t - 1) = 4 \cos^2 t + 2 \cos t - 2 = 0
+		\end{split}\\
+		\cos t = \frac{-2 \pm \sqrt{4 + 4 \cdot 8}}{2 \cdot 4} = \frac{-2 \pm 6}{8} = \begin{Bmatrix}
+			\frac{1}{2}	\\
+			-1		
+		\end{Bmatrix}\\
+		\iff t = \begin{Bmatrix}
+			\pi			\\
+			\frac{\pi}{3}	\\
+			-\frac{\pi}{3}	
+		\end{Bmatrix} + 2\pi k, k \in \Z
+	\end{gather*}
+	\begin{tabular}{ | c | c | c | c | }
+		\hline
+		$t$	&$\pi$	&$\frac{\pi}{3}$		&$-\frac{\pi}{3}$			\\ \hline
+		$f(t)$	&$0$		&$\frac{3\sqrt{3}}{2}$	&$-\frac{3\sqrt{3}}{2}$	\\ \hline
+	\end{tabular} \\
+	Ergebnis:\\
+	Max $f = \frac{3\sqrt{3}}{2}$ \\
+	Maximalstellen $\frac{\pi}{3} + 2 \pi k, k \in \Z$ \\
+	Min $f = -\frac{3\sqrt{3}}{2}$ \\
+	Min. Stellen $= -\frac{\pi}{3} + 2 \pi k, k \in \Z$
+\end{bsp}
+\begin{bsp}
+	Bestimme den Abstand des Punkts $(a,0)$ von der Hyperbel $y^2 - x^2 = 1$ \\
+	\begin{bem}
+		$d(P,Q) =$ Abstand von $P$ zu $Q$ \\
+		$A$ Menge, $d(P,A) \coloneqq \inf\{ d(P,Q) | Q \in Q \}$
+	\end{bem}
+	$d(P,Q = \sqrt{(x-a)^2 + 1 + x^2}$ minimal \\
+	$\iff d(P,Q)^2 = (x-a)^2 + 1 + x^2 = 2x^2 - 2ax + a^2 + 1$\\
+	Da quadratisch $\implies \exists !$ Minimum $\implies$ kritischer Punkt \\
+	\begin{gather*}
+		x = \frac{a}{2} \\
+		\implies Q = (\frac{a}{2} , \sqrt{1 + \frac{a^2}{4}}) \\
+		\text{Abstand } = \sqrt{ \frac{a^2}{4} + 1}
+	\end{gather*}
+\end{bsp}
+Errinnerung: \\
+$I \subset \R$ kompakter Intervall, $f: I \rightarrow \R$ stetig, $I = [a,b]$ $\implies \exists \min f , \exists \max f$.\\
+\begin{satz*}
+	$I \subset \R$ Intervall, $f: I \rightarrow \R$ stetig. $x_0 \in [a,b] \subset I$ so, dass für alle $x \in I \setminus [a,b] : f(x) \leq f(x_0)$. Dann ist das Maximum von $f|_{[a,b]}$ schon ein Maximum von $f$.\\
+	\begin{bem}
+		Falls $\forall x \in I \setminus [a,b] : f(x) < f(x_0)$, dann nimmt $f$ ihr Max. nur auf $[a,b]$ an.
+	\end{bem}
+	Analog: Minimum
+\end{satz*}
+\begin{bsp}
+	Für welche $c \in \R$ besitzt $f: \R \rightarrow \R , x \mapsto \frac{x^2 + c}{x^4 + 1}$ ein Minimum? \\
+	Lösung: $f$ stetig \\
+	$\lim_{k \rightarrow \infty} f(x) = \lim_{k \rightarrow -\infty} f(x) = 0$ und für $\abs{x} > \sqrt{\abs{c}}$ ist $f(x) > 0$ \\
+	Ist $c \leq 0$, folgt mit $x_0 = 0 , [a,b] = [-\sqrt{\abs{c}},+\sqrt{\abs{c}}]$, dann hat $f$ ein Min. \\
+	Ist $c > 0$, so ist $f(x) > 0$ für alle $x \in \R$ \\
+	$\implies \inf(f) = 0$, und $\min f$ existiert nicht.
+\end{bsp}
+
+\subsection{Taylor-Approximation}
+Sei $f: X \rightarrow \R$ eine Funktion, und $x_0 \in X \subset \R$. \\
+$f$ stetig in $x_0 \iff f(x) = f(x_0) + o(1)$. \\
+$f$ differenzierbar in $x_0 \iff f(x) = f(x_0) + f'(x_0) \cdot (x - x_0) + o(x-x_0)$ für $x \rightarrow x_0$\\
+Allgemein: Gesucht $P(x)$ Polynom von Grad $\leq n$, sodass $f(x) = P(x) + o((x-x_0)^n)$
+
+\subsubsection{Wie $P(x)$ finden?}
+\begin{gather*}
+	P(x) = a_0 + a_1 (x-x_0) + \dots + a_n (x-x_0)^n \\
+	\implies P^{(k)}(x) = a_k k (k-1) \dots 1 (x-x_0)^0 + \dots \\
+	\text{für } 0 \leq k \leq n \implies P^{(k)}(x_0) = k! a_k \\
+	\implies a_k = \frac{P^{(k)}(x_0)}{k!}
+\end{gather*}
+\begin{bem}
+	\[ f(x) - P(x) = (x-x_0)^n \cdot g(x) \]
+	mit $g(x) \rightarrow 0 = g(x_0)$ für $x \rightarrow _0$
+	$\implies$ Ist $f$ $n$-fach differenzierbar, so ist $f^{(k)}(x_0) = P^{(k)}(x_0)$ für alle $k \leq n$.
+\end{bem}
+\begin{def*}[note = Taylor Polynom , index = Taylor Polynom]
+	Ist $f$ mindestens $n$-fach differenzierbar nahe $x_0$, so heisst
+	\[ j_{x_0}^n f(x) \coloneqq \sum_{k=0}^n \frac{f^{(k)}(x_0)}{k!} (x-x_0)^k \]
+	das $n$-te \textbf{Taylor Polynom} von $f$ an $x_0$ \\
+	Durch
+	\[ f(x) = j_{x_0}^n f(x) + R(x) \]
+	ist das $n$-te \textbf{Restglied} definiert.
+\end{def*}
+Ab jetzt sei $f$ beliebig oft differenzeirbar. \\
+\begin{satz*}[note = (Taylor)]
+	Für jedes $x \in X$ exsitiert $t$ zwischen $x$ und $x_0$ so, dass
+	\[ R_n(x) = \frac{f^{(n+1)}(t)}{(n+1)!} (x-x_0)^{n+1} \]
+	Folge:
+	\begin{gather*}
+		R_n(x) = O((x-x_0)^{n+1}) \\
+		R_n(x) = o((x-x_0)^n)
+	\end{gather*}
+	für $x \rightarrow x_0$
+	
+	\[ n=0 : R_n(x) = f(x) - f(x_0) \overset{?}{=} f'(t) \cdot (x-x_0) \]
+	Das ist der MWS! \\
+%	\begin{bew}
+%		Ersetze $f$ durch $R_n$. Dann ist $f^{(k)}(x_0) = 0$ für alle $0 \leq k \leq n$ und dadurch $j_{x_0}^n f = 0$, also jetzt $f = R_n$.
+%	\end{bew}
+	\todo{Fix}
+%	\begin{beh}
+%		Für alle $0 \leq k \leq n$: existiert $t$ zwischen $x$ und $x_0$ mit $f(x) = \frac{^{(n+1)}(t)}{(n+1)!} (x-x_0)^k$ \\
+%		\begin{bew}
+%			$k=0$: MWS siehe oben \\
+%			$k-1 \curvearrowright k$, für $k \geq 1$:
+%			\begin{align*}
+%				\frac{f(x)}{(x-x_0)^{k+1}}	&= \frac{f(x) - f(x_0)}{g(x) - g(x_0)} \\
+%									&= \frac{f'(t)}{g'(t)} \\
+%									&= \frac{1}{k+1} \frac{f'(t)}{(t-x_0)^k} \\
+%									&\overset{\text{IA}}{=} \frac{1}{k+1} \frac{f^{(k+1)}(t')}{k!} \\
+%									&= \frac{f^{(k+1)}(t')}{(k+1)!} \quad \blacksquare
+%			\end{align*}
+%			für ein $t'$ zwischen $x_0$ und $t$
+%		\end{bew}
+%	\end{beh}
+\end{satz*}
+\begin{bsp}
+	Berechne $\sqrt[5]{1023}$ näherungsweise mittels Taylorapproximation von Grad 1 und schätze den Fehler ab.
+	$\sqrt[5]{1024} = 4$. Sei $f(x) = x^{\frac{1}{5}}$ und $x_0 = 1024$
+	\begin{gather*}
+		f'(x) = \frac{1}{5} x^{-\frac{4}{5}} \implies f(x_0) = 4, f'(x_0) = \frac{1}{5} 4^{-4} = \frac{1}{5 \cdot 2^8} \\
+		f''(x) = \frac{1}{5} \frac{-4}{5} x^{-\frac{9}{5}} \\
+		\text{Taylor } \implies f(1023) = 4 + \frac{1}{5 \cdot 2^8} (1023 - 1024) + R_1(t) \\
+		R_1(t) = \frac{\frac{-4}{25} t^{\frac{-3}{5}}}{2} (1023 - 1024)^2 \quad \text{für } t \in [1023,1024] \\
+		\abs{R_1(t)} \leq \frac{4}{25} \frac{1}{2} (1023)^{-\frac{9}{5}} \leq \frac{1}{10 \cdot 2^18} < 10^{-6} \\
+		\implies \sqrt[5]{1023} = 3.99921875\dots \\
+		\implies \text{ Ergebnis bis auf 6 Nachkommastellen genau}
+	\end{gather*}
+\end{bsp}
+\begin{bsp}
+	Berechne $\log 1.2$ näherungsweise durch Taylor vom Grad 3. \\
+	Lösung: $x_0 = 1$
+	\begin{gather*}
+		\begin{array}{ l | l | l }
+			f(t)	&\log(1+t)			&t=0	\\
+			f'(t)	&\frac{1}{1+t}		&1	\\
+			f''(t)	&-\frac{1}{(1+t)^2}	&-1	\\
+			f'''(t)	&2\frac{1}{(1+t)^3}	&2	\\
+			f^{IV}	&-6\frac{1}{(1+t)^4}	&-6	
+		\end{array} \\
+		\begin{split}
+			\log(1+t)	&= \sum_{k=0}^3 \frac{f^{(k)}(t_0)}{k!} (t-t_0)^k + \frac{f^{(4)}(\tau)}{4!} (t-t_0)^4 \\
+					&t_0 = 0 \leq \tau \leq t = 0.2 \\
+					&= \underbrace{t - \frac{t^2}{2} + \frac{t^3}{3}}_{0.2 - 0.02 + 0.002\overline{6}} + 
+						\underbrace{\frac{-6}{24} \cdot \frac{1}{(1+\tau)^4} t^4}_{\underbrace{-\frac{1}{4} \cdot 0.2^t}_{-0.0004} \cdot ( \text{etwas } \in ]0,1] ) }
+		\end{split} \\
+		\text{mit | Fehler | } \leq 0.0004 \\
+		\intertext{$\implies$ Ergebnis ist bis auf 3 Nachkommastellen richtig}
+	\end{gather*}
+\end{bsp}
+\begin{def*}[note = Taylorreihe , index = Taylorreihe]
+	Sei $f$ beliebig oft differenzierbar in $x_0$.
+	\[ \sum_{k=0}^\infty \frac{f^{(k)}(x_0)}{k!} (x-x_0)^k \]
+	heisst die \textbf{Taylor-Reihe} von $f$ in $x_0$. Ihre $n$-te Partialsumme ist $j_{x_0}^n f$. Sie ist eine Potenzreihe in $x-x_0$
+\end{def*}
+\begin{fakt}
+	Falls $f$ als Potenzreihe in $x-x_0$ dargestellt werden kann, mit Konvergenzradius $\rho > 0$, dann hat auch die Taylorreihe Konvergenzradius $\rho > 0$ und stellt im Konvergenzbereich die Funktion $f$ dar.
+\end{fakt}
+\begin{bem}
+	Die Taylorreihe könnte Konvergenzradius 0 haben.
+\end{bem}
+\begin{bem}
+	Selbst wenn sie Konvergenzradius $>0 $ hat, stellt sie nicht notwendigerweise die Funktion $f$ dar.
+\end{bem}
+\begin{bsp*}
+	Die Funktion 
+	\[ f: \R \rightarrow \R , x \mapsto \begin{cases}
+		e^{-\frac{1}{x}}	&x > 0	\\
+		0			&x \leq 0	
+	\end{cases} \]
+	ist beliebig oft differenzierbar. Ihre Taylorreihe bei $x_0$ ist identisch $0$ und stellt in keiner Umgebung von $0$ die Funktion $f$ dar. \\
+	\begin{bem}
+		\begin{gather*}
+			f(x) = \sum_{k=0}^\infty 0 (x-x_0)^k \quad \text{für } x , x_0 < 0 \\
+			x_0 > 0 : \\
+			\left. \begin{matrix*}[l]
+				x = x_0 + t > 0 \\
+				x_0 > 0
+			\end{matrix*} \right\} \rightarrow f(x) = e^{\frac{-1}{x_0 + t}} = \exp\left( - \frac{1}{x_0+t} \right) \\
+			= \exp\left( -\underbrace{\frac{1}{x_0}}_{\text{konst. Faktor}} \cdot \underbrace{\frac{1}{1+\frac{t}{x_0}}}_{\text{geometrische Reihe für} \abs{t} < x_0} \right) \\
+			\implies f(x) = \text{ Potenzreihe in } x-x_0 \text{ für } \abs{x-x_0} < x_0
+		\end{gather*}
+	\end{bem}
+\end{bsp*}
+\begin{bsp*}
+	\begin{bem}
+		\begin{bew}
+			\begin{beh}
+				Für jeden $n \geq 0$ existiert $f^{(n)}$ und ist
+				\begin{gather*}
+					f^{(n)} = \begin{cases}
+						\left( \text{Polynom in } \frac{1}{x} \right) \cdot e^{-\frac{1}{x}}	&x > 0	\\
+						0												&x \leq 0	
+					\end{cases} \\
+					n = 0 : \text{ klar} \\
+					n \curvearrowright n+1 \\
+					\text{IA: } f^{(n)}(x) = \begin{cases}
+						P_n\left( \frac{1}{x} \right) \cdot e^{-\frac{1}{x}}	&x > 0	\\
+						0									&x \leq 0	
+					\end{cases} \\
+					\text{zu Zeigen: } f^{(n+1)}(x) \text{ existiert und ist } \\
+					 f^{(n+1)}(x) = \begin{cases}
+						P_{n+1}\left( \frac{1}{x} \right) \cdot e^{-\frac{1}{x}}	&x > 0	\\
+						0										&x \leq 0	
+					\end{cases} \\
+					x < 0 : \text{ klar!} \\
+					x > 0 : \\
+					\frac{\dd}{\dd x} \left( P_n\left( \frac{1}{x} \right) \cdot e^{-\frac{1}{x}} \right) \\
+					= \frac{\dd}{\dd x} \left( P_n\left( \frac{1}{x} \right) \right) \cdot e^{-\frac{1}{x}} \\
+					+  P_n\left( \frac{1}{x} \right) \cdot \frac{\dd}{\dd x} \left( e^{-\frac{1}{x}} \right) \\
+					= P'_n\left( \frac{1}{x} \right) \cdot \frac{-1}{x^2} \cdot e^{-\frac{1}{x}} \\
+					+ P_n\left( \frac{1}{x} \right) \cdot e^{-\frac{1}{x}} \cdot \frac{1}{x^2} \\
+					= \underbrace{ \left(  P_n\left( \frac{1}{x} \right) - P'_n\left( \frac{1}{x} \right) \right) \cdot \frac{1}{x^2}}_{P_{n+1}\left( \frac{1}{x} \right) } \cdot e^{-\frac{1}{x}} \quad \checkmark
+				\end{gather*}
+			\end{beh}
+		\end{bew}
+	\end{bem}
+\end{bsp*}
+\begin{bsp*}
+	\begin{bem}
+		\begin{bew}
+			\begin{gather*}
+				x_0 = 0 : \\
+				\frac{f^{(n)}(x) - f^{(n)}(x)}{x-0} \\
+				= \begin{cases}
+					\frac{1}{x} \cdot P_n\left(\frac{1}{x} \right) \cdot e^{-\frac{1}{x}}	&x > 0	\\
+					0												&x \leq 0	
+				\end{cases} \\
+				\rightarrow 0 \text{ für } x \rightarrow 0 \\
+				\text{Für } x \rightarrow 0- \text{ ist das klar} \\
+				\text{Für } x \rightarrow 0+ : \lim_{x \rightarrow 0+} \frac{1}{x} \cdot P_n\left(\frac{1}{x} \right) \cdot e^{-\frac{1}{x}} \\
+				= \lim_{t \rightarrow \infty} t P_n(t) e^{-t} = 0 \quad \checkmark
+				\intertext{$\implies$ Taylorreihe bei $0$}
+				\sum_{k=0}^\infty \frac{f^{(k)}(0)}{k!} x^k = 0
+			\end{gather*}
+		\end{bew}
+	\end{bem}
+\end{bsp*}
+
+\section{Kurvendiskussion}
+Sei $I \subset \R$ ein Intervall und $f: I \rightarrow \R$ differenzierbar.\\
+\begin{beh}
+	$f$ monoton wachsend (fallend) $\iff \forall t \in I : f'(t) \geq 0 \quad (\leq 0)$\\
+	\begin{bew}
+		Für $a < b ; a, b \in I$:\\
+		MWS: $\exists t \in ]a,b[ : f(b - f(a) = f'(t) \cdot \underbrace{(b-a)}_{>0}$\\
+		Daraus folgt ''$\Rightarrow$'' \\
+		Für ''$\Leftarrow$''
+		\begin{gather*}
+			f'(t) = \lim_{h \rightarrow 0} \frac{f(t+h) - f(t)}{h} \\
+			\begin{split}
+				h > 0	&\implies f(t+h) - f(t) \geq 0 \\
+					&\implies \frac{f(t+h) - f(t)}{h} \geq 0
+			\end{split} \\
+			\begin{split}
+				h > 0	&\implies f(t+h) - f(t) \leq 0 \\
+					&\implies \frac{f(t+h) - f(t)}{h} \geq 0
+			\end{split} \\
+			\implies \lim_{h \rightarrow 0} \frac{f(t+h) - f(t)}{h} \geq 0 \quad \blacksquare
+		\end{gather*}
+	\end{bew}
+\end{beh}
+\begin{beh}
+	$f$ ist streng monoton wachsend $\iff \forall t \in I : f'(t) \geq 0$ und $f'$ hat auf keinem Teilintervall positiver Länge identisch $0$ (und die Nullstellenmenge von $f'$ enthält kein Intervall der Länge $> 0$) \\
+	\begin{bew}
+		''$\Rightarrow$'' \\
+		streng monoton wachsend $\nearrow \implies$ monoton $\nearrow \implies \forall t : f'(t) \geq 0$.\\
+		Wäre $f' = 0$ für $t \in ]a,b[ ; a < b$ dann wäre nach MWS $f(b) - f(a) = \underbrace{f'(t)}_{=0} \cdot (b-a) = 0$ für ein solchen $t \quad \lightning$ \\
+		''$\Leftarrow$'' \\
+		$f$ ist monoton $\nearrow$ \\
+		Sei $a, b \in I ; a < b$ Falls $f(a) = f(b)$, dann ist $f|_{[a,b]}$ konstant und $f'|_{[a,b]} = 0 \quad \blacksquare$
+	\end{bew}
+\end{beh}
+\begin{bsp*}
+	\[ \R \rightarrow \R , x \mapsto x^3 \]
+\end{bsp*}
+\begin{bsp*}
+	\begin{gather*}
+		f: \R \rightarrow \R , x \mapsto \frac{1}{1+x^2} \\
+		f'(x) = \frac{-2}{(1+x^2)^2} \\
+		\sgn f'(x) = \begin{cases}
+			-1	&x > 0	\\
+			0	&x = 0	\\
+			1	&x < 0	
+		\end{cases} \\
+		\max f = 1 \text{ bei } x = 0 \\
+		f(x) > 0 \\
+		\lim_{x \rightarrow \pm \infty} f(x) = 0
+	\end{gather*}
+\end{bsp*}
+\begin{def*}[note = konvex , index = konvex]
+	$f$ heisst (nach unten) \textbf{konvex}, falls $\graph(f)$ auf jedem Teilintervall $[a,b]$ unterhalb der Sekante liegt.
+	
+	Für alle $a, b \in I ; a < b ; t \in [a,b]$:
+	\[ \frac{f(b) - f(t)}{b-a} \geq \frac{f(t) - f(a)}{t-a} \]
+\end{def*}
+\begin{def*}[note = konkav , index = konkav]
+	$f$ heisst \textbf{konkav} (nach oben konvex), falls $\graph(f)$ auf jedem Teilintervall $[a,b]$ oberhalb der Sekante liegt.
+\end{def*}
+\begin{beh}
+	Für $f$ zweimal differenzierbar, $f''$ stetig sind äquivalent:
+	\begin{itemize}
+		\item $f$ ist konvex
+		\item $f'$ ist monoton wachsend
+		\item $f'' \geq 0$
+		\item $\graph(f)$ liegt oberhalb jeder Tangente
+	\end{itemize}
+\end{beh}
+\begin{bsp*}[note = cont.]
+	\begin{gather*}
+		f(x) = \frac{1}{1+x^2} \\
+		f'(x) = \frac{-2}{(1+x^2)^2} = -2 \cdot (1+x)^{-2} \\
+		f''(x) = -2(1+x^2)^{-2} - 2x (-2)(1+x^2)^{-3} 2x = \frac{6(x^2 - \frac{1}{3})}{(1+x^2)^{\frac{1}{3}}} \\
+		\sgn f''(x) = \begin{cases}
+			1	&\abs{x} > \frac{1}{\sqrt{3}}	\\
+			0	&\abs{x} = \frac{1}{\sqrt{3}}	\\
+			-1	&\abs{x} < \frac{1}{\sqrt{3}}	
+		\end{cases} \\
+		\implies f' \text{ ist streng monoton } \begin{cases}
+			\text{wachsend}		&\abs{x} \geq \frac{1}{\sqrt{3}}	\\
+			\text{fallend}		&\abs{x} \leq \frac{1}{\sqrt{3}}	
+		\end{cases} \\
+		f \begin{cases}
+			\text{konvex}	&\abs{x} \geq \frac{1}{\sqrt{3}}	\\
+			\text{konkav}	&\abs{x} \leq \frac{1}{\sqrt{3}} 	
+		\end{cases}
+	\end{gather*}
+\end{bsp*}
+\begin{def*}[note = Wendepunkt , index = Wendepunkt]
+	Ein Punkt, in dem $f$ von konkav zu konvex wechselt (oder umgekehrt), heisst \textbf{Wendepunkt}. \\
+%	\begin{bem}
+%		Falls $f$ zweimal differenzierbar: wo $f''$ sein Vorzeichen wechselt
+%	\end{bem}
+\end{def*}
+\begin{bsp*}
+	\[ \R \rightarrow \R , x \mapsto \abs{x} \]
+	konvex
+\end{bsp*}
+\begin{beh}
+	Sei $f: I \rightarrow \R$ beliebig oft differenzierbar. Sei $x_0 \in I , n \geq 2$, mit $f'(x_0) = \dots f^{(n-1)}(x_0) = 0$ , und $f^{(n)}(x_0) \neq 0$.
+	
+	Ist $n$ gerade und $f^{(n)} > 0 $, so hat $f$ in $x_0$ ein lokales Minimum.
+	
+	Ist $n$ gerade und $f^{(n)} < 0 $, so hat $f$ in $x_0$ ein lokales Maximum.
+	
+	Ist $n$ ungerade, so hat $f$ in $x_0$ einen Sattelpunkt.
+	
+	\begin{bew}[head = Wieso:]
+		Taylor:
+		\begin{gather*}
+			\begin{split}
+				f(x)	&= j_{x_0}^n f(x) + R_n f(x) \\
+					&= \left[ f(x_0) + \frac{f^{(n)}(x_0)}{n!} (x-x_0)^n \right] \\
+					&+ \frac{f^{(n+1)}(x_0)}{(n+1)!} (x-x_0)^{n+1} \\
+					&= f(x_0) + \frac{f^{n}(x_0)}{n!} (x-x_0)^n \\
+					&\cdot \left[ 1 + \frac{f^{(n+1)}(x_0)(t)}{(n+1) f^{(n)}(x_0)} (x-x_0) \right] \\
+					&=  f(x_0) + \frac{f^{n}(x_0)}{n!} (x-x_0)^n [ 1 + O(x-x_0) ]
+			\end{split} \\
+			\implies \text{Fallunterscheidung}
+		\end{gather*}
+	\end{bew}
+\end{beh}
+
+\subsection{Einschub: Partialbruchzerlegung}
+\[ \frac{a}{b} + \frac{c}{d} = \frac{ad + bc}{bd} \]
+Ziel: Schreibe
+\[ \frac{e}{bd} = \frac{a}{b} + \frac{c}{d} \]
+\begin{fakt}
+	Das geht, ween $b, d$ teilerfremd sind.
+\end{fakt}\marginpar{Polynome teilerfremd = keine gemeinsame Nullstelle}
+\begin{fakt}
+	Jede rationale Funktion $\frac{f(x)}{g_1(x) \dots g_r(x)}$ mit $f , g_1 , \dotsc , g_r$ Polynome ; $g_1 , \dotsc , g_r$ paarweisse teilerfremd, lässt sich eindeutig schreiben als
+	\[ h(x) + \frac{k_1(x)}{g_1(x)} + \dots + \frac{k_r(x)}{g_r(x)} \]
+	für Polynome $h , k_1 , \dots k_r$ ; mit $\grad(k_i) < \grad(g_i)$ und $\grad(h) \leq \grad(f) - \grad(g_1) - \dots - \grad(g_r)$
+\end{fakt}
+\begin{bsp*}
+	\begin{gather*}
+		\frac{x^3}{1-x^2} = \frac{x^3}{(1-x)(1+x)} = c + dx + \frac{a}{1-x} + \frac{b}{1+x}
+		\intertext{Multipliziere mit Nenner:}
+		\begin{split}
+			x^3	&= (c+dx)(1-x^2) + a(1+x) + b(1-x) \\
+				&= (c+ a + b) + (d + a - b) x - cx^2 - dx^3
+		\end{split} \\
+		\begin{split}
+			\implies	&d = -1 \\
+					&c = 0 \\
+					&b = -a \\
+					&0 = -1 + a + a \\
+					&a = \frac{1}{2} \\
+					&b = -\frac{1}{2} \\
+		\end{split}
+	\end{gather*}
+\end{bsp*}
+
+\subsection{Newton Verfahren}
+Erinnergung: binäre Suche, Länge des Intervalls nach $n$ Schritten: $2^{-n} \cdot$ (Anfangslänge)\\
+Idee:
+\begin{gather*}
+	f'(x_n) = \frac{f(x_n) - 0}{x_n - x_{n+1}} \\
+	x_n - x_{n+1} = \frac{f(x_n)}{f'(x_n)} \\
+	x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)} \quad \text{Rekursionsschritt}
+\end{gather*}
+Probleme: \\
+$f'(x_n) = 0$ \\
+$f'(x_n)$ sehr klein \\
+$x_{n+1}$ nicht mehr im Definitionsbereich \\
+$\vdots$
+$\implies$ Muss nicht konvergieren! \\
+\begin{beh}
+	Falls $(x_n)$ gegen $x$ konvergiert mit $x \in I$ und $f'(x) \neq 0$, dann ist $f(x) = 0$ ($f: I \rightarrow \R$ differenzierbar, $I$ Intervall, $f'$ stetig) \\
+	\begin{bew}
+		\[ x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)} \]
+		Im $\lim_{n \rightarrow \infty}$ liefert dies: $x = x - \frac{f(x)}{f'(x)}$ \\
+		$\implies f(x) = 0 \quad \blacksquare$
+	\end{bew}
+\end{beh}
+Ab jetzt sei $f$ zweimal differenzierbar und $f''$ stetig \\
+\begin{beh}
+	Sei $[a,b] \subset I$ mit $f(a) < 0 f(b)$ und $f'$ und $f'' > 0$ auf $[a,b]$. \\
+	Dann konvergiert das Newton-Verfahren mit den Startwert $x_0 = b$ gegen eine Nullstelle in $]a,b[$. \\
+	\begin{bew}
+		Sei $\xi \in ]a,b[$ mit $f(\xi) = 0$
+		\[ x_0 > x_1 > x_2 > \dots > \xi \]
+		$\implies$ konvergiert und $x = \lim_{n \rightarrow \infty} x_n$ ist Nullstelle. \quad $\blacksquare$
+	\end{bew}
+\end{beh}
+\begin{itemize}
+	\item $f' < 0$ und $f'' < 0$ , ($f(a) > 0 > f(b)$) \\
+		$\rightsquigarrow$ Anwenden auf $-f(x) , x_0 = b$
+	\item $f' < 0$ und $f'' > 0$ , ($f(a) > 0 > f(b)$) \\
+		$\rightsquigarrow$ Anwenden auf $f(-x) , x_0 = a$
+	\item $f' > 0$ und $f'' < 0$ \\
+		$\rightsquigarrow$ Anwenden auf $-f(-x) , x_0 = a$
+\end{itemize}
+\begin{def*}[note = Quadratische Konvergenz , index = Konvergenz!quadratische]
+	Eine Folge $(x_n)$ konvergiert quadratisch gegen $\xi$ wenn sie gegen $\xi$ konvergiert und
+	\[ \exists n_0 \exists C \forall n \geq n_0 : \abs{x_{n+1} - \xi} \leq C \cdot \abs{x_n - \xi}^2 \]
+\end{def*}
+\begin{beh}
+	Falls $(x_n)$ gegen $\xi$ konvergiert und $f'(\xi) \neq 0$ ist, dann ist die konvergenz quadratisch.
+	\begin{bew}
+		Nach Konstruktion ist
+		\begin{gather*}
+			0 = f(x_n) + f'(x_n) (x_{n+1} - x_n) \\
+			\begin{split}
+				0	&= f(\xi) \\
+					&= f(x_n) + f'(x_n) \cdot (\xi - x_n) + \frac{f''(t)}{2} (\xi - x_n)^2
+			\end{split}\\
+			x_n < t < n \\
+			\intertext{Differenz:}
+			0 = \underbrace{f'(x_n)}_{\neq o \forall n \geq n_0} (\xi - x_{n+1}) + \frac{f''(t)}{2} (\xi - x_n)^2 \\
+			\xi - x_{n+1} = - \frac{f''(t)}{2 f'(x_n)} (\xi - x)^2 \\
+			\abs{\xi - x_{n+1}} = \abs{\frac{f''(t)}{2 f'(x_n)}} \cdot \abs{(\xi - x)}^2 \\
+			\intertext{Wähle $n_0$ so, dass $\forall n \geq n_0$}
+			\abs{f'(x_n)} \geq \frac{1}{2} \abs{f'(\xi)} \\
+			\exists [a,b] \subset I : \text{ alle } x_n , \xi \in [a,b] \\
+			\implies t \in [a,b] \quad n \geq n_0 \\
+			\intertext{und $M = \max \abs{f''|_{[a,b]}}$ existiert}
+			\implies \abs{\xi - x_{n+1}} \leq \underbrace{\frac{M}{2 \frac{1}{2} \abs{f'(\xi)}}}_{\eqqcolon C} \cdot \abs{\xi - x_n}^2 \quad \blacksquare
+		\end{gather*}
+	\end{bew}
+\end{beh}
+\begin{bsp*}
+	Finde $\sqrt{a} , a > 0 \iff$ \\
+	Finde Nullstellen von $f(x) = x^2 - a$ auf $[0,\infty[$ \\
+	\begin{gather*}
+		f'(x) = 2x \\
+		\begin{split}
+			x_{n+1}	&= x_n - \frac{f(x_n)}{f'(x_n)} \\
+					&= x_n - \frac{x_n^2 - a}{2x_n} \\
+					&= x_n - \frac{x_n}{2} + \frac{a}{2x_n} \\
+					&= \frac{1}{2} \left( x_n + \frac{a}{x_n} \right)
+		\end{split}
+	\end{gather*}
+\end{bsp*}

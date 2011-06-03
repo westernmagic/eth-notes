@@ -1,0 +1,35 @@
+\chapter{Zahlentheorie}
+\[ \N , \Z \]
+\begin{tabular}{ l c l }
+	bisher				&				&ab jetzt					\\ \hline
+	Allgemeinheit			&$\leftrightarrow$	&Struktur					\\
+	(Mengen, Graphen)		&				&(Zahlen, Graphen, Körper)		\\ \hline
+	neu (Euler)				&				&alt (Euklid)				\\ \hline
+	(Mathematische			&$\leftrightarrow$	&(Informatikrelevante)			\\
+	Informatik				&				&Mathematik				\\ \hline
+	sehr viele Anwendungen	&$\leftrightarrow$	&Sehr spezielle, überrraschende	\\
+	(Richtige Sprache)		&				&Anwendungen (Kommunikation:	\\
+						&				&Kryptographie, Codierung )		
+\end{tabular} \\
+BILD \\
+historisch: populär, einfach(formulierbare) ungelöste Probleme
+\begin{itemize}
+	\item Goldbach-Vermutung
+	\item Gibt es $\infty$ viele Primzahlzwillinge?
+	\item Fermat: $x^n + y^n = z^n \quad (n \geq 3 , x, y, z \in \N_{> 0} )$
+	\item $x^n - y^n = 1 \quad (m, n \geq 2 , x, y \in \N_{> 0} )$\\
+		$3^2 - 2^3 = 1$
+\end{itemize}
+heute: algorithmische Aspekte: Quelle schwieriger Probleme. \\
+Vorgehen: nicht axiomatisch: Grundtatsachen als wahr angenommen\\
+\begin{bsp*}
+	\begin{itemize}
+		\item $a \cdot b = 0 \iff a = 0 \vee b = 0$
+		\item $a \geq b \iff -a \leq -b$
+		\item $(-a) \cdot b \iff -(a \cdot b)$
+		\item $a^2 \geq 0 \forall a$
+	\end{itemize}
+\end{bsp*}
+Erstes Ziel: Existenz und Eindeutigkeit der Primzahlfaktoriesierung. \\
+Schlüsseltatsache:
+\[ p \text{ prim: } p | a \cdot b \implies p | a \vee p | b \]

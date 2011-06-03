@@ -1,0 +1,64 @@
+\chapter{Komplexe Zahlen}
+\begin{satz*}[note = Fundamentalsatz der Algebra , index = Fundamentalsatz der Algebra]
+	Jedes Polynom $P(z) = c_0 + c_1 z + \dots + c_n z^n$ mit $c_0 , \dotsc , c_n \in \C$ und $c_n \neq 0$ und $n \geq 1$ hat mindestens eine Nullstelle in $\C$.
+\end{satz*}
+\begin{fakt}
+	$\zeta$ ist Nullstelle von $P(z) \iff P(z) = (z - \zeta) \cdot Q(z)$ für ein Polynom $Q(z)$ von Grad $n-1$.
+\end{fakt}
+\begin{satz*}[note = Fundamentalsatz der Algebra 2 , index = Fundamentalsatz der Algebra]
+	Jedes Polynom $P(z) \neq 0$ mit Koeffizienten in $\C$ lässt sich als Produkt von linearfaktoren schreiben:
+	\[ P(z) = (z - \zeta_1) \dots (z - \zeta_n) \cdot c \text{ mit } \zeta_1 , \dotsc , \zeta_n , c \in \C ; c \neq 0 \]
+\end{satz*}
+\begin{bem}
+	Hat $P(z)$ Koeffizienten in $\R$ und ist $\zeta$ eine Nullstelle von $P$, dann ist auch $\overline{\zeta} \in \C$ eine Nullstelle von $P$. Denn:
+	\[ P(\overline{\zeta}) = c_0 + c_1 \overline{\zeta} + \dots + c_n \overline{\zeta}^n = \overline{c_0 + c_1 \zeta + \dots + c_n \zeta} = \overline{P(\zeta)} = \overline{0} = 0 \]
+	Folge: \\
+	Die Nullstelle eines reellen Polynoms sind reele oder Paare komplexer konjugierter komplexer nichtreeler Zahlen.
+\end{bem}
+\begin{bsp*}
+	\begin{gather*}
+		z^4 - 2 \\
+		\pm \sqrt[4]{2} \text{ oder } \pm \sqrt[4]{2} \imath
+	\end{gather*}
+\end{bsp*}
+
+\[ (z - \zeta)(z - \overline{\zeta}) = z^2 - (\zeta + \overline{\zeta}) z + \zeta \overline{\zeta} = z^2 - 2 \Re(\zeta) \cdot z + \abs{\zeta}^2 \]
+hat Koeffizienten in $\R$ \\
+Folge: \\
+Jedes Polynom mit reellen Koeffizienten ist Produkt von linearefaktoren und Faktoren von Grad 2, mit reellen Koeffizienten. \\
+\begin{bsp*}
+	\[ z^4 + 3z^2 - 6z + 10 = (z^2 - 2z + 2)(z^2 + 2z + 5) \]
+	hat Nullstelle $1 + \imath \qquad (z + 1)^2 + 4 = (z + 1 - 2\imath)(z + 1 - 2\imath)$ \\
+	$\implies$ auch $1 - \imath$
+	\[ (z - (\imath + 1))(z - (1 - \imath)) = (z-1)^2 - \imath^2 = z^2 - 2z + 2 \]
+	$\implies$ alle Nullstellen: $1 \pm \imath , -1 \pm 2\imath$
+\end{bsp*}
+
+\subsubsection{Fibonacci-Zahlen}
+\begin{gather*}
+	a_0 \coloneqq 1 \\
+	a_1 \coloneqq 1 \\
+	a_{n+2} \coloneqq a_n + a_{n+1} \text{ für } n \geq 2 \\
+	1, 1, 2, 3, 5, 8, 13, \dotsc \\
+	a_n = * \left( \frac{1+\sqrt{5}}{2} \right)^n + * \left( \frac{1-\sqrt{5}}{2} \right)^n \\
+	\text{Asymptotisch: } a_n = * \left( \frac{1+\sqrt{5}}{2} \right)^n + (\text{klein})
+\end{gather*}
+
+Variante:
+\begin{gather*}
+	a_0 \coloneqq 0 \\
+	a_1 \coloneqq 1 \\
+	a_{n+2} \coloneqq 2 a_{n+1} - 3 a_n \\
+	0, 1, 2, 1, -4, -11, -10, 13, \dotsc
+	\intertext{Ansatz:}
+	a_n = \alpha u^n + \beta v^n \\
+	\alpha u^{n+2} + \beta v^{n+2} = 2( \alpha u^{n+1} + \beta v^{n+1} - 3( \alpha u^n + \beta v^n) \\
+	\begin{split}
+		&\alpha ( u^{n+2} - 2u^{n+1} + 3u^n ) + \beta ( v^{n+2} - 2v^{n+1} + 3v^n ) \\
+		= &\alpha u^n (u^2 - 2u + 3) + \beta v^n (v^2 - 2v +3) \\
+		= &0 \\
+	\end{split}
+	u, v = 1 \pm \sqrt{2} \imath \\
+	\alpha = \frac{1}{2 \imath \sqrt{2}} (1 + \imath \sqrt{2})^n - \frac{1}{2 \imath \sqrt{2}} (1 - \imath \sqrt{2})^n = \Im\left(\frac{(1 + \imath \sqrt{2})^n}{\sqrt{2}} \right) \\
+	\abs{1 + \imath \sqrt{2}} = \sqrt{3}
+\end{gather*}

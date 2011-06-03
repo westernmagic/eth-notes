@@ -1,0 +1,612 @@
+\chapter{Vektorfelder}
+$U \subset \R^n$ \\
+$f: U \rightarrow \R$ Skalarfeld \\
+$K: U \rightarrow \R^n$ Vektrofeld (Strömung, Kraft, Gradient $(\nabla f)^T$)
+\begin{bsp*}[note = konstantes Vektorfeld]
+\end{bsp*}
+\begin{bsp}[note = Punktmasse]
+	\[ K(x) = c \cdot \frac{-x}{\abs{x}^3} \]
+\end{bsp}
+\begin{bsp}[note = Homogene Kugel mit Radius $R$]
+	$\rightsquigarrow$ Gravitationsfeld
+	\[ K(x) = \begin{cases}
+		c \cdot \frac{-x}{\abs{x}^3} &\text{für } \abs{x} \geq R \\
+		-c \cdot \frac{-x}{\abs{x}^3} &\text{für } \abs{x} \leq R
+	\end{cases} \]
+\end{bsp}
+\begin{bsp}
+	\[ K(x) = -c \cdot \frac{x}{\abs{x}^3} , c > 0 \]
+	(Gravitationsfeld einer Punktmasse
+\end{bsp}
+\begin{bsp}
+	$\omega \neq 0$ Vektor in $\R^3$
+	\[ K(x) = \omega \times x \]
+	Konstante Drehung um die Achse $\omega$
+\end{bsp}
+\begin{bsp}
+	\[ K(x) = \frac{\omega \times x}{\abs{\omega \times x}^2} \]
+\end{bsp}
+
+\section{Feldlinien}
+\begin{def*}[note = Feldlinie , index = Feldlinie]
+	Eine $C^1$-Abbildung $\gamma : [a,b] \rightarrow U$ mit
+	\[ \gamma'(t) = K(\gamma(t)) \]
+	heisst \textbf{Feldlinie} von $K$.
+	
+	Bedeutung falls $K$ das Geschwindigkeitsfeld eines strömmenden Mediums: Weg eines einzelnen Teilchens
+\end{def*}
+\begin{bsp*}[note = 2]
+	\[ \gamma(t) = -\sqrt[3]{3ct} \cdot \frac{x_0}{\abs{x_0}} \]
+\end{bsp*}
+\begin{bsp*}[note = {3,4}]
+	Kreislinien senkrecht zu $\omega$
+\end{bsp*}
+\begin{bem}
+	$K$ lokal Lipschitzstetig $\implies$ für jeden Startwert $\gamma(0) = x_0 \in U$ existiert eine Maximallösung. \\
+	$\implies$ Jeder Punkt liegt auf einer eindeutigen Feldlinien
+\end{bem}
+\begin{bsp}
+	\[ K\begin{pmatrix} x \\ y \end{pmatrix} = \begin{pmatrix} \frac{x-y}{\sqrt{x^2 + y^2}} \\ \frac{x+y}{\sqrt{x^2 + y^2}} \end{pmatrix} \]
+	auf
+	\[ \R^2 \setminus \left\{ \begin{pmatrix} 0 \\ 0 \end{pmatrix} \right\} \]
+	allgemeine Lösung:
+	\[ \gamma(t) = \begin{pmatrix} (t+c) \cdot \cos( \phi_0 + \log(t+c)) \\ (t+c) \cdot \sin( \phi_0 + \log(t+c)) \end{pmatrix} \]
+	logarithmische Spirale
+\end{bsp}
+
+\section{Potentiale}
+\begin{def*}[note = Potential , index = Potential]
+	Ist $K(x) = (\nabla f)^T$ für eine $C^1$-Funktion $f : U \rightarrow \R$ (d.h. ein \textbf{Skalarfeld} $f$), so heisst $f$ ein \textbf{Potential} von $K$.
+\end{def*}
+\begin{bem}
+	Ist $K$ ein Kraftfeld, so kann $f$ als zugehörige potentielle Energie verstanden werden.
+\end{bem}
+\begin{bem}
+	Feldlinien
+\end{bem}
+\begin{bsp*}[note = 2]
+	\[ K(x) = -c \cdot \frac{x}{\abs{x}^3} = \nabla \left( \frac{c}{\abs{x}} \right)^T \]
+\end{bsp*}
+\begin{bsp*}[note = {3,4}]
+	Existiert kein Potential!
+\end{bsp*}
+
+\subsection{Explizite Berechnung eines Potentials}
+im $\R^2$ ; $K\begin{pmatrix} x \\ y \end{pmatrix} = \begin{pmatrix} P \\ Q \end{pmatrix}$ stetig, definiert auf $I \times I'$ \\
+$\rightsquigarrow$ DGL:
+\begin{gather*}
+	P\begin{pmatrix} x \\ y \end{pmatrix} = \frac{\partial f}{\partial x} \\
+	Q\begin{pmatrix} x \\ y \end{pmatrix} = \frac{\partial f}{\partial y}
+	\intertext{Methode: Wähle Stammfunktion $f_1\begin{pmatrix} x \\ y \end{pmatrix} = \int P\begin{pmatrix} x \\ y \end{pmatrix} \dd x$}
+	\rightsquigarrow \text{ allgemeine Lösung der ersten DGL ist } f = f_1 + g_1(y)
+	\intertext{Einsetzen in zweite DGL}
+	Q = \frac{\partial f_1}{\partial y} + g'(y) \iff g = \int \left( Q - \frac{\partial f_1}{\partial y} \right) \dd y
+	\intertext{Das funktioniert genau dann, wenn $Q - \frac{\partial f_1}{\partial y}$ von $x$ unabhängig ist.}
+\end{gather*}
+\begin{bsp*}
+	\begin{gather*}
+		K\begin{pmatrix} x \\ y \end{pmatrix} = \begin{pmatrix} x^2 + xy^2 \\ x^2y - y^5 \end{pmatrix} \\
+		\begin{split}
+			\text{Ansatz: } \frac{\partial f}{\partial x} = x^3 + xy
+				&\iff f = \int (x^2 + xy^2) \dd x + g(y) \\
+				&\iff f\begin{pmatrix} x \\ y \end{pmatrix} = \frac{x^4}{4} + \frac{x^2 y^2}{2} + g'(y) \\
+				&\text{und } \frac{\partial f}{\partial y} = x^2 y - y^5 = x^2 y - g'(y) \\
+				&\iff g'(y) = \cancel{x^2 y} - \cancel{x^2 y} - y^5 \\
+				&\iff g'(y) = -\frac{y^6}{6} + c
+		\end{split} \\
+		\text{Existiert } f\begin{pmatrix} x \\ y \end{pmatrix} = \frac{x^4}{4} + \frac{x^2 y^2}{2} - \frac{y^6}{6} + c
+	\end{gather*}
+\end{bsp*}
+
+\subsubsection{Analog in \texorpdfstring{$\R^3$}{R3}}
+\begin{bsp*}
+	Für welche Konstanten $a , b , c$ hat
+	\[ K = \begin{pmatrix} 2xy + yz \\ x^2 + xz + z \\ axy + by + cz \end{pmatrix} \]
+	ein Potential. Lösung:
+	\begin{gather*}
+		\frac{\partial f}{\partial x} = 2xy + yz \iff f = \int (2xy + yz) \dd x + g\begin{pmatrix} y \\ z \end{pmatrix} \\
+		f = x^2 y + xyz + g\begin{pmatrix} y \\ z \end{pmatrix} \\
+		\frac{\partial f}{\partial y} = \cancel{x^2} + \cancel{xz} + z = \cancel{x^2} + \cancel{xz} + \frac{\partial g}{\partial y} \iff \frac{\partial g}{\partial y} = z \iff g\begin{pmatrix} y \\ z \end{pmatrix} = yz + h(z) \\
+		\frac{\partial f}{\partial z} = axy + by + cz = xy + y + \frac{\dd h}{\dd z} \iff \frac{\dd h}{\dd z} = (a-1) xy + (b-1) y + cz
+		\intertext{Hat eine Lösung $h(z)$ (von $x , y$ unabhängig) g.d.w. $a = 1$ und $b = 1$}
+		h(z) = c \frac{z^2}{2} + d
+		\intertext{Antwort: $K$ hat ein Potential g.d.w. $a=b=1$, und dann}
+		f = x^2 + xyz + yz + c \frac{z^2}{2} + d
+	\end{gather*}
+\end{bsp*}
+\begin{bem}
+	Analog wenn $U$ konvex ist.
+\end{bem}
+\begin{bem}[note = Allgemein]
+	$\rightsquigarrow$ Entscheiden ob lokal ein Potential existiert.
+\end{bem}
+\begin{satz*}
+	Ein $C^1$-Vektorfeld $K = \begin{pmatrix} K_1 \\ \vdots \\ K_n \end{pmatrix}$ hat lokal ein Potential g.d.w.
+	\[ \forall i \forall j : \frac{\partial K_i}{\partial x_j} = \frac{\partial K_j}{\partial x_i} \]
+	\begin{bew}
+		Ist $K = (\nabla f)^T$, so ist
+		\[ \frac{\partial K_i}{\partial x_j} = \frac{\partial}{\partial x_j} \left( \frac{\partial f}{\partial x_i} \right) = \frac{\partial^2 f}{\partial x_j \cdot \partial x_i} \quad (\text{d.h. } \nabla K = \nabla^2 f) \]
+		$K$ $C^1$ $\implies$ $f$ $C^2$ $\implies$ $\nabla^2$ symmetrisch. \\
+		umgekehrt: Sei $n=2$. Auf $I \times I' \subset U$ gelte
+		\begin{gather*}
+			\frac{\partial K_1}{\partial x_2} = \frac{\partial K_2}{\partial x_1} \\
+			\frac{\partial f}{\partial x_1} = K_1 \iff f\begin{pmatrix} x_1 \\ x_2 \end{pmatrix} = \underbrace{\int K_1\begin{pmatrix} x_1 \\ x_2 \end{pmatrix} \dd x_1}_{=f_1\begin{pmatrix} x_1 \\ x_2 \end{pmatrix}} + g(x_2) \\
+			\frac{\partial f}{\partial x_2} = K_2\begin{pmatrix} x_1 \\ x_2 \end{pmatrix} = \frac{\partial f_1}{\partial x_2} + \frac{\dd g}{\dd x_2} \iff \frac{\dd g}{\dd x_2} = K_2 - \frac{\partial f_1}{\partial x_2} = K_2 - \int \frac{\partial K_1}{\partial x_2} \dd x_1 = K_2 - \int \frac{\partial K_1}{\partial x_1} \dd x_1 = \text{ const.}(x_2) \quad \checkmark \blacksquare
+		\end{gather*}
+	\end{bew}
+\end{satz*}
+\begin{bsp*}[note = 3]
+	\begin{gather*}
+		\text{mit } \omega = \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix} \\
+		\implies K\begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix} \times \begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix} = \begin{pmatrix} -x_2 \\ x_1 \\ 0 \end{pmatrix} \\
+		\frac{\partial K_1}{\partial x_2} = -1 \neq 1 = \frac{\partial K_2}{\partial x_1}
+	\end{gather*}
+	$\implies$ Existiert kein Potential
+\end{bsp*}
+\begin{bsp*}[note = 4]
+	\begin{gather*}
+		K = \frac{1}{x_1^2 + x_2^2} \begin{pmatrix} -x_2 \\ x_1 \\ 0 \end{pmatrix} \\
+		\frac{\partial K_1}{\partial x_2} = \frac{\partial}{\partial x_2} \left( \frac{-x_2}{x_1^2 + x_2^2} \right) = \frac{-1(x_1^2 + x_2^2) - (-x_2) 2x_2}{(x_1^2 + x_2^2)^2} = \frac{-x_1^2 + x_2^2}{(x_1^2 + x_2^2)^2} \\
+		\frac{\partial K_2}{\partial x_1} = \frac{\partial}{\partial x_1} \left( \frac{x_1}{x_1^2 + x_2^2} \right) = \dots = - \frac{-x_1^2 + x_2^2}{(x_1^2 - x_2^2)^2} \\
+		\text{Also gilt } \frac{\partial K_1}{\partial x_2} = \frac{\partial K_2}{\partial x_1}
+		\intertext{und lokal existiert ein Potential. Nämlich:}
+		f(x) = \arg(x_1 + \imath x_2) + c = \begin{cases}
+			c + \arctan\left( \frac{x_2}{x_1} \right) &x_1 \neq 0 \\
+			c' - \arctan\left( \frac{x_1}{x_2} \right) &x_2 \neq 0
+		\end{cases}
+	\end{gather*}
+	Aber die kann man nicht zu einem globalen Potential auf $\R^3$ ($z$-Achse) zusammensetzen!
+\end{bsp*}
+
+\begin{def*}[note = Linienintegral , index = Linien integral , indexformat = {1.2 2!1-~}]
+	Sei $U \subset \R^n$ offen. Sei $\gamma : [a,b] \rightarrow U$ $C^1$ ein Weg von $\gamma(a)$ nach $\gamma(b)$. Sei $f: U \rightarrow \R$ stetig, Skalarfeld; $K: U \rightarrow \R^n$ stetig, Vektorfeld.
+	\[ \int_{\gamma} f(x) \abs{\dd x} \coloneqq \int_a^b f(\gamma(t)) \cdot \abs{\gamma'(t)} \dd t \]
+	Hängt nur ab von Bild von $\gamma$, ohne Orientierung.
+	\[ \int_{\gamma} K(x) \cdot \abs{\dd x} \coloneqq \int_a^b K(\gamma(t)) \cdot \abs{\gamma'(t)} \dd t \]
+	Hängt nur ab von Bild von $\gamma$, ohne Orientierung.
+	\[ \int_{\gamma} f(x) \dd x \coloneqq \int_a^b f(\gamma(t)) \cdot \gamma'(t) \dd t \]
+	Hängt nur ab von Bild von $\gamma$, mit Orientierung (Vorzeichenwechsel).
+	\[ \int_{\gamma} \langle K(x) , \dd x \rangle = \int_{\gamma} K(x) \cdot \dd x \coloneqq \int_a^b \langle K(\gamma(t)) , \gamma'(t) \rangle \dd t \]
+	Hängt nur ab von Bild von $\gamma$, mit Orientierung (Vorzeichenwechsel).
+%	\begin{bew}[note = Invarianz]
+%		Sei $[a',b'] \overset{\psi}{\rightarrow} [a,b] \overset{\gamma}{\rightarrow} U$ bijektiv, $C^1$, orientierung erhaltend:
+%		\begin{gather*}
+%			\int_a^b \langle K(\gamma(t)) , \gamma'(t) \rangle \dd t = \int_{a'}^{b'} \langle K(\gamma(\psi(s))) , \gamma'(\psi(s)) \rangle \psi'(s) \dd s = \int_{a'}^{b'} \langle K((\gamma \circ \psi)(s)) , (\gamma \circ \psi)'(s) \rangle \dd s
+%			\intertext{Falls $\psi$ Orientierung umkehrt, ist}
+%			\int_a^b \langle K(\gamma(t)) , \gamma'(t) \rangle = \int_{b'}^{a'} \langle K(\gamma(\psi(s))) , \gamma'(\psi(s)) \rangle \psi'(s) \dd s = - \int_{a'}^{b'} \langle K(\gamma(\psi(s))) , \gamma'(\psi(s)) \rangle \psi'(s) \dd s
+%		\end{gather*}
+%	\end{bew}
+\end{def*}\todo{Fix}
+\begin{satz*}
+	Sei $f: U \rightarrow \R$ $C^1$ und $\gamma$ ein $C^1$-Weg von $P$ nach $Q$. Dann gilt:
+	\[ \int_{\gamma} \nabla f(x) \cdot \dd x = f(Q) - f(P) \]
+	\begin{bew}
+		\begin{gather*}
+			\text{Linke Seite } = \int_a^b [ (\nabla f)(\gamma t) \cdot \gamma'(t) ] \dd t = \int_a^b (f \circ \gamma)'(t) \dd t \overset{\text{\scriptsize{Hauptsatz}}}{=} (f \circ \gamma)(b) - (f \circ \gamma)(a) = \text{ Rechte Seite} \quad \blacksquare
+		\end{gather*}
+	\end{bew}
+	Also: vektorielle Linienintegral eines Gradientenvektorfelds ist die Differenz der Potenzreihe an den Endpunkten.
+\end{satz*}
+\begin{satz*}
+	Für $K$ ein stetiges Vektorfeld auf $U$ sind äquivalent:
+	\begin{enumerate}[label = (\alph*)]
+		\item $K$ besitzt ein Potential
+		\item Das Linienintegral von $K$ über jeden Weg hängt nur von Anfangs- und Endpunkt ab
+		\item Das Linienintegral von $K$ über jeden geschlossenen Weg ist Null
+	\end{enumerate}
+	\begin{def*}[note = konservativ , index = konservativ]
+		Dann heisst $K$ \textbf{konservativ}.
+	\end{def*}
+	\begin{bew}
+		\begin{description}
+			\item[(a) $\implies$ (b):] $K = \nabla f$ direkte Folge aus Satz
+			\item[(c) $\implies$ (b):] $\int_{\gamma} - \int_{\delta} = \int_{\gamma} + \int_{\delta'} = \int_{\epsilon}$ $\epsilon$ = zusammengestezter Weg
+			\item[(b) $\implies$ (c):] $\gamma$ geschlossen $\implies \int_{\gamma} = \int_{\text{konstanter Weg}} = 0$
+			\item[(b) $\implies$ (a):] Wähle $P_0 \in U$ und setze $f(P) \coloneqq \int_{\gamma} K(x) \cdot \dd x$ für irgendein Weg von $P_0$ nach $P$. Nach (b) ist dies wohldefiniert. Dann ist $\frac{\partial f}{\partial x_i}(P) = \dots$. $f(P + h e_i) = \left( \int_{\gamma} + \int_{\substack{\text{Strecke}\\\text{von $P$}\\\text{nach } P+he_i}} K(x) \dd x \right)$ ($e_i$ $i$ter Einheitsvektor). Zweiter Term = $\int_0^h K(P + te_i) \cdot e_i \dd t$. Dessen Ableitung nach $h$ für $h = 0$ ist $K(P + te_i) \cdot e_i |_{t = 0} = K(P) \cdot e_i = K_i(P)$. Also ist $\nabla f = K$. Da $K$ stetig, folgt $f$ $C^1$
+		\end{description}
+	\end{bew}
+\end{satz*}
+\begin{bsp*}[note = 3]
+	\[ K_3(x) = \omega \cdot x = \begin{pmatrix} -x_2 \\ x_1 \\ 0 \end{pmatrix} \]
+	Linienintegral entlang einer Feldlinie:
+	\begin{gather*}
+		\gamma(t) = \begin{pmatrix} r \cos t \\ r \sin t \\ 0 \end{pmatrix} : [0 , 2\pi] \rightarrow \R^3 \\
+		\int_{\gamma} K_3(x) \dd x = \int_0^{2\pi} K_3\begin{pmatrix} r \cos t \\ r \sin t \\ 0 \end{pmatrix} \cdot \begin{pmatrix} -r \sin t \\ r \cos t \\ 0 \end{pmatrix} \dd t = \int_0^{2\pi} \left\langle \begin{pmatrix} r \cos t \\ r \sin t \\ 0 \end{pmatrix} , \begin{pmatrix} -r \sin t \\ r \cos t \\ 0 \end{pmatrix} \right\rangle \dd t = \int_0^{2\pi} r^2 \dd t = 2\pi r^2 
+	\end{gather*}
+\end{bsp*}
+\begin{bsp*}[note = 4]
+	\begin{gather*}
+		K_4(x) = \frac{\omega \times x}{\abs{\omega \cdot x}^2} = \frac{1}{x_1^2 + x_2^2} \begin{pmatrix} -x^2 \\ x_1 \\ 0 \end{pmatrix} \\
+		\int_{\gamma} K_4(x) \dd x = \frac{1}{r^2} \int_{\gamma} K_3(x) \dd x = 2\pi
+	\end{gather*}
+	$\implies$ Beide haben kein globales Potential.
+	Sei $\gamma'(t) \coloneqq \begin{pmatrix} a + r \cos t \\ r \sin t \\ 0 \end{pmatrix}$ für $a > r$. Übung: Dann ist $\int_{\gamma'} K_3 \neq 0 , \int_{\gamma'} K_4 = 0$
+\end{bsp*}
+
+\section{Satz von Green in \texorpdfstring{$\R^2$}{R2}}
+\begin{def*}[note = Randkurve , index = Rand kurve , indexformat = {1.2 1!~-2}]
+	Für $B \subset \R^2$ kompakt mit stückwiese $C^1$-Rand bezeichnet $\partial B$ die \textbf{Randkurve} (Kollektion endlich vieler Wege) mit derjenigen Orientierung für die $B$ in Blickrichtung jeweils links liegt.
+\end{def*}
+\begin{def*}[ note = Rotation , index = Rotation ]
+	Für ein $C^1$-Vektorfeld $K = \begin{pmatrix} P \\ Q \end{pmatrix} : B \rightarrow \R^2$ ist
+	\[ \rot K\begin{pmatrix} x \\ y \end{pmatrix} = \frac{\partial Q}{\partial x} - \frac{\partial Q}{\partial y} \]
+\end{def*}
+Ist $\gamma$ eine eindliche ''Summe'' (\textbf{Kette}) von Wegen $\gamma_1 , \dotsc , \gamma_m ; \gamma_i : [ a_i , b_i ] \rightarrow \R^n$ dann definieren wir
+\[ \int_{\gamma} = \int_{\gamma_1} + \dotsb + \int_{\gamma_m} \]
+\begin{satz*}[note = Satz von Green , index = Satz von Green , indexformat = {3!12~ 1!~23}]
+	Sei $B \subset \R^2$ kompakt mit stückweise $C^1$ Rand $\partial G$ und $K$ ein $C^1$-Vektorfeld auf $B$. Dann:
+	\[ \int_{\partial B} K \cdot \dd x = \int_B (\rot K) \cdot \mu(B) \]
+	\begin{bew}[note = für $B$ Rechteck]
+		\begin{gather*}
+			K = \begin{pmatrix} P \\ Q \end{pmatrix} \\
+			\gamma_1 : [a,b] \rightarrow B , t \mapsto (t,c)^T \\
+			\gamma_2 : [c,d] \rightarrow B , t \mapsto (b,t)^T \\
+			\gamma_3 : [a,b] \rightarrow B , t \mapsto (t,d)^T \\
+			\gamma_4 : [a,b] \rightarrow B , t \mapsto (a,t)^T \\
+			\partial B = \gamma_1 + \gamma_2 - \gamma_3 - \gamma_4 \\
+			\implies \int_{\partial B} K \dd\begin{pmatrix} x \\ y \end{pmatrix} = \int_{\gamma_1} + \int_{\gamma_2} - \int_{\gamma_3} - \int_{\gamma_4} \\
+			\begin{split}
+				&\qquad \int_{\gamma_1} \begin{pmatrix} P \\ Q \end{pmatrix} \cdot \dd\begin{pmatrix} x \\ y \end{pmatrix} \\
+				&\overset{\text{\scriptsize{def.}}}{=} \int_a^b \left\langle \begin{pmatrix} P \\ Q \end{pmatrix} \begin{pmatrix} t \\ c \end{pmatrix} , \dd\begin{pmatrix} t \\ c \end{pmatrix} \right\rangle \\
+				&= \int_a^b \left\langle \begin{pmatrix} P \\ Q \end{pmatrix} \begin{pmatrix} t \\ c \end{pmatrix} , \begin{pmatrix} 1 \\ 0 \end{pmatrix} \right\rangle \dd t \\
+				&= \int_a^b P\begin{pmatrix} t \\ c \end{pmatrix} \dd t
+			\end{split} \\
+			\begin{split}
+				&= \int_a^b P\begin{pmatrix} t \\ c \end{pmatrix} + \int_c^d Q\begin{pmatrix} b \\ t \end{pmatrix} \dd t - \int_a^b P\begin{pmatrix} t \\ d \end{pmatrix} \dd t - \int_c^d Q\begin{pmatrix} a \\ t \end{pmatrix} \dd t \\
+				&= \int_a^b \left( P\begin{pmatrix} t \\ c \end{pmatrix} - P\begin{pmatrix} t \\ d \end{pmatrix} \right) \dd t + \int_c^d \left( Q\begin{pmatrix} b \\ t \end{pmatrix} - Q\begin{pmatrix} a \\ t \end{pmatrix} \right) \dd t \\
+				&= - \int_a^b \left( P\begin{pmatrix} x \\ d \end{pmatrix} - P\begin{pmatrix} x \\ c \end{pmatrix} \right) \dd x + \int_c^d \left( Q\begin{pmatrix} b \\ y \end{pmatrix} - Q\begin{pmatrix} a \\ y \end{pmatrix} \right) \dd y \\
+				&= -\int_a^b \left( \int_c^d \frac{\partial P}{\partial y}\begin{pmatrix} x \\ y \end{pmatrix} \dd y \right) \dd x + \int_c^d \left( \int_a^b \frac{\partial Q}{\partial x}\begin{pmatrix} x \\ y \end{pmatrix} \dd x \right) \dd y \\
+				&= \int_B \left( \frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y} \right) \mu\begin{pmatrix} x \\ y \end{pmatrix}
+			\end{split}
+		\end{gather*}
+	\end{bew}
+	Zusammensetzen $\rightsquigarrow$ Satz für $B$ = endliche Vereinigung von Rechtecken \\
+	$B$ beliebig: Nähere an durch Vereinigung von Recktecken; Beide Seiten konvergieren
+\end{satz*}
+
+\subsection{Anwendung}
+Zu gegebenem Skalarfeld $f: B \rightarrow \R$ suche $K$ Vektorfeld mit $\rot K = f$
+\[ \rightarrow \int_B f(x) \mu(x) = \int_{\partial B} K \cdot \dd x \]
+Speziell:
+\[ K\begin{pmatrix} x \\ y \end{pmatrix} = \begin{pmatrix} 0 \\ x \end{pmatrix} , \begin{pmatrix} -y \\ 0 \end{pmatrix} , \begin{pmatrix} -\frac{y}{2} \\ \frac{x}{2} \end{pmatrix} \]
+haben alle $\rot K = 1$. Also:
+\begin{gather*}
+	\mu(B) = \int_{\partial B} \begin{pmatrix} 0 \\ x \end{pmatrix} \cdot \dd\begin{pmatrix} x \\ y \end{pmatrix} = \int_{\partial B} x \dd y \\
+	\mu(B) = \int_{\partial B} x \dd y = -\int_{\partial B} y \dd x = \int_{\partial B} \frac{x \dd y - y \dd x}{2}
+\end{gather*}
+\begin{bsp*}[ note = Fläche einer Zykloide ]
+	\begin{gather*}
+		\gamma : [ 0 , 2\pi ] \rightarrow \R^2 , t \mapsto \begin{pmatrix} r \cdot ( t - \sin t ) \\ r \cdot ( 1 - \cos t ) \end{pmatrix} \\
+		\delta : [ 0 , 2\pi r ] \rightarrow \R^2 , t \mapsto \begin{pmatrix} t \\ 0 \end{pmatrix} \\
+		\partial B = \delta - \gamma \\
+		\implies \mu(B) = -\int_{\partial B} y \dd x = -\int_{\delta} + \int_{\gamma} y \dd x \\
+		\int_{\delta} y \dd x = \int_0^{2\pi r} 0 \cdot \dd x = 0 \\
+		\begin{split}
+			\int_{\gamma} y \dd x
+				&= \int_0^{2\pi} r \cdot ( 1 - \cos t ) \dd( r( t - \sin t) ) \\
+				&= \int_0^{2\pi} r( 1 - \cos t) r ( 1 - \cos t) \dd t \\
+				&= r^2 \int_0^{2\pi} ( 1 - 2\cos t + \cos^2 t ) \dd t \\
+				&= r^2 \int_0^{2\pi} \left( 1 - 2\cos t + \frac{1 + \cos 2t}{2} \right) \dd t \\
+				&= r^2 \left. \left( \frac{3}{2} t - 2\sin t + \frac{\sin 2t}{4} \right) \right|_{t=0}^{t=2\pi} \\
+				&= r^2 \frac{3}{2} 2\pi = 3\pi r^2
+		\end{split}
+	\end{gather*}
+\end{bsp*}
+
+\subsubsection{Polarplanimeter von Amsler}
+\begin{gather*}
+	\begin{split}
+		\mu(B)
+			&= \int_{\partial B} \frac{x \dd y - y \dd x}{2} \\
+			&= \begin{vmatrix*}[l] x = r \cos \phi \\ y = r \sin \phi \end{vmatrix*} \\
+			&= \int_{\partial B} \frac{r \cos \phi \cdot ( \cancel{\dd r \cdot \sin \phi} + r \cos \phi \dd \phi ) - r \sin \phi \cdot ( \cancel{\dd r \cos \phi} - r \sin \phi \dd \phi )}{2} \\
+			&= \int_{\partial B} \frac{r^2}{2} \dd \phi
+	\end{split}
+\end{gather*}
+BILD \todo{Bild}
+\begin{gather*}
+	m^2 = r^2 + l^2 - 2rl \cos \psi \\
+	\implies \mu(B) = \int_{\partial B} \frac{m^2 - l^2 + 2rl \cos\psi}{2} \dd \phi = \underbrace{\int_{\partial B} \frac{m^2 - l^2}{2} \dd \phi}_{=0} + \int_{\partial B} rl \cos \phi \dd \phi \\
+	\R^2 = \C \\
+	\begin{pmatrix} x \\ y \end{pmatrix} = r \cdot e^{\imath \phi} \\
+	\text{Kontaktpunkt des Rads: } \rho = r e^{\imath\phi} - e^{\imath(\phi - \psi)} w
+	\intertext{Gemessen wird:}
+	\int_{\partial B} \Im\left( \frac{\dd \rho}{e^{\imath(\phi + \psi)}} \right) = \dots = \frac{\mu(B)}{l}
+	\intertext{Zu $K = \begin{pmatrix} P \\ Q \end{pmatrix}$ Vektorfeld auf $B \subset \R^2$ setze $\tilde{K} = \begin{pmatrix} \tilde{P} \\ \tilde{Q} \end{pmatrix} = \begin{pmatrix} -Q \\ P \end{pmatrix}$}
+	\int_{\partial B} \underbrace{\tilde{K} \dd\begin{pmatrix} x \\ y \end{pmatrix}}_{\substack{=\tilde{P} \dd x + \tilde{Q} \dd y \\ = P \dd y - Q \dd x \\ = K \cdot \begin{pmatrix} \dd y \\ -\dd x \end{pmatrix}}} \overset{\text{\scriptsize{Green}}}{=} \int_B \underbrace{\rot \tilde{K}}_{\substack{=\tilde{Q_x} - \tilde{P_x} \\ =P_x + Q_y}} \mu\begin{pmatrix} x \\ y \end{pmatrix} = \int_B \div K \mu\begin{pmatrix} x \\ y \end{pmatrix}
+\end{gather*}
+\begin{def*}[note = Divergenz , index = Divergenz]
+	\[ \div \begin{pmatrix} K_1 \\ \vdots \\ K_n \end{pmatrix} = K_{1,x_1} + \dotsb + K_{n,x_n} \]
+	Bedeutung: lokale Produktionsrate von $K$
+\end{def*}
+\[ \begin{split}
+	\int_{\gamma} K \cdot \begin{pmatrix} \dd y \\ -\dd x \end{pmatrix}
+		&= \int_a^b K(\gamma(t)) \cdot \underbrace{\begin{pmatrix} y'(t) \\ -x'(t) \end{pmatrix} \dd t}_{\underbrace{\frac{1}{\abs{\gamma'(t)}} \cdot \begin{pmatrix} y'(t) \\ -x'(t) \end{pmatrix}}_{\substack{\text{Normalvektor nach rechts}\\\text{Einheitsvektor $n$}}} \cdot \abs{\gamma'(t)} \dd t} \\
+		&= \int_0^b \langle K(\gamma(t)) , n(\gamma(t)) \rangle \cdot \abs{\gamma'(t)} \dd t \\
+		&= \int_{\gamma} K \cdot n \abs{\dd x}
+\end{split} \]
+\begin{def*}
+	\[ \int_{\gamma} K \cdot n \cdot \abs{\dd x} \coloneqq \int_a^b K(\gamma(t)) \cdot n(\gamma(t)) \cdot \abs{\gamma'(t)} \dd t \]
+	wobei $n$ der in Blickrichtung rechts oreintierte Normalen-Einheistvektor auf $\gamma$ ist.
+	
+	Bedeutung: Fluss von $K$ durch $\gamma$
+\end{def*}
+\begin{satz*}[note = {Satz von Gauss = Divergenzsatz in $\R^2$} , index = Satz von Gauss Divergenz satz in $\R^2$ , indexformat = {3!12~ 1!~23 4.5!~67 1!4-~!~67}]
+	Voraussetzung wie in Satz von Green
+	\[ \int_{\partial B} K \cdot n \cdot \abs{\dd z} = \int_B \div K \cdot \mu(z) \]
+\end{satz*}
+\begin{bsp*}
+	\begin{gather*}
+		B = \left\{ \begin{pmatrix} x \\ y \end{pmatrix} \in \R^2 \middle| x^2 + y^2 \leq r^2 \right\} \\
+		K\begin{pmatrix} x \\ y \end{pmatrix} = \begin{pmatrix} ax + by \\ cx + dy \end{pmatrix} \\
+		\nabla K = \begin{pmatrix} a & b \\ c & d \end{pmatrix} \\
+		\div K = a + d \implies \text{ konstante Produktionsrate} \\
+		\int_B \div K \mu\begin{pmatrix} x \\ y \end{pmatrix} = \int_B (a + d) \mu\begin{pmatrix} x \\ y \end{pmatrix} = (a + d) \pi r^2 \\
+		\gamma(t) = \begin{pmatrix} r \cos t \\ r \sin t \end{pmatrix} , t \in [ 0 , 2\pi ] \\
+		n\begin{pmatrix} x \\ y \end{pmatrix} = \frac{1}{\sqrt{x^2 + y^2}} \begin{pmatrix} x \\ y \end{pmatrix} \\
+		n(\gamma(t)) = \begin{pmatrix} \cos t \\ \sin t \end{pmatrix} \\
+		\begin{split}
+			\int_B K \cdot n \cdot \abs{\dd x}
+				&= \int_0^{2\pi} \begin{pmatrix} a \cdot r \cdot \cos t + b \cdot r \cdot \sin t \\ c \cdot r \cdot \cos t + d \cdot r \cdot \sin t \end{pmatrix} \cdot \begin{pmatrix} \cos t \\ \sin t \end{pmatrix} r \dd t \\
+				&= r^2 \int_0^{2\pi} ( a \cos^2 t + (b+c) \cos t \sin t + d \sin^2 t ) \dd t \\
+				&= r^2 \int_0^{2\pi} \left( a \cdot \frac{1 + \cos 2t}{2} + (b+c) \frac{sin 2t}{2} + d \frac{1 - \cos 2t}{2} \right) \dd t \\
+				&= r^2 \left[ a \left( \frac{t}{2} + \frac{\sin 2t}{4} \right) + (b+c) \cdot \frac{-\cos 2t}{4} + d \left( \frac{t}{2} - \frac{\sin 2t}{4} \right) \right]_{t=0}^{t=2\pi} \\
+				&= r^2 (a+d) \cdot \pi
+		\end{split}
+	\end{gather*}
+\end{bsp*}
+\begin{satz*}[note = Divergenzsatz im $\R^3$ , index = Divergenz satz im $\R^3$ , indexformat = {1.2!~34 2!1-~!~34}]
+	Sei $B \subset \R^2 , F \subset \R^3 , \phi : B \rightarrow F$ eine reguläre Parametriesierung eines Flächenstücks $F$
+	\[ n \coloneqq \frac{\phi_u \times \phi_v}{\abs{\phi_u \times \phi_v}} \qquad \text{Normaleneinheitsvektor} \]
+	$\implies \phi$ verleiht $F$ eine ''Orientierung'', d.h. eine konsistente Wahl eines Normaleneinheitsvektors in jeden Punkt. \\
+	Erinnerung:
+	\[ \int_F f(x) \abs{\dd \omega} = \int_B f\left(\phi\begin{pmatrix} u \\ v \end{pmatrix}\right) \cdot \underbrace{\abs{\phi_u \times \phi_v} \cdot \mu\begin{pmatrix} u \\ v \end{pmatrix}}_{\text{skalares Flächenelement}} \]
+\end{satz*}
+\begin{def*}
+	\[ \begin{split}
+		\int_F K \cdot n \cdot \abs{\dd \omega}
+			&\coloneqq \int_B K\left(\phi\begin{pmatrix} u \\ v \end{pmatrix}\right) \cdot n\left(\phi\begin{pmatrix} u \\ v \end{pmatrix}\right) \cdot \abs{\phi_u \times \phi_v} \mu\begin{pmatrix} u \\ v \end{pmatrix} \\
+			&= \int_B \left\langle K\left(\phi\begin{pmatrix} u \\ v \end{pmatrix}\right)\right. , \underbrace{(\phi_u \times \phi_v) \left\rangle \mu\begin{pmatrix} u \\ v \end{pmatrix}\right.}_{\text{vektorielles Flächenelement}}
+	\end{split} \]
+	Dies hängt nur von $F$ mit der Orientrierung ab. Wechselt das Vorzeichen unter Orientierungsumkehr.
+\end{def*}
+Sei jetzt $B \subset \R^3$ kompakt mit stückweise $C^1$ parametrisierten Rand $\partial B$
+\begin{satz*}[note = {Satz von Gauss = Divergenzsatz} , index = Satz von Gauss Divergenz satz in $\R^2$ , indexformat = {3!12~ 1!~23 4.5!~67 1!4-~!~67}]
+	\[ \int_{\partial B} K \cdot n \cdot \abs{\dd \omega} = \int_B \div K \mu(x) \]
+	$K$ ein $C^1$-Vektorfeld auf $B$
+\end{satz*}
+\begin{bsp*}
+	BILD
+	\begin{gather*}
+		B = \left\{ \begin{pmatrix} x \\ y \\ z \end{pmatrix} \in \R^3 \middle| 0 \leq \sqrt{x^2 + y^2} \leq z \leq 1 \right\} \\
+		K = \begin{pmatrix} 2x - yz \\ xz + 3y \\ xy - z \end{pmatrix} \\
+		\div K = 2 + 3 - 1 = 4 \\
+		\text{Rechte Seite } = \int_B 4 \mu\begin{pmatrix} x \\ y \\ z \end{pmatrix} = 4 \mu(B) = \dots = 4\pi \cdot \frac{1}{3} \\
+		\partial B = F_1 + F_2 \text{ mit } F_1 = \text{ Mantel} \\
+		F_1 : \phi : [0,1] \times [0,2\pi] \rightarrow F_1 \\
+		\begin{pmatrix} r \\ t \end{pmatrix} \mapsto \begin{pmatrix} r \cos t \\ r \sin t \\ r \end{pmatrix} \\
+		\phi_r \times \phi_t = \begin{pmatrix} \cos t \\ \sin t \\ 1 \end{pmatrix} \times \begin{pmatrix} -r \sin t \\ r \cos t \\ 0 \end{pmatrix} = \begin{pmatrix} r \cos t \\ - r \sin t \\ r \end{pmatrix}
+		\intertext{$\implies$ Falsche Orientierung!} \\
+		n = \frac{1}{\text{Betrag}} \begin{pmatrix} r \cos t \\ r \sin t \\ -r \end{pmatrix} \\
+		\int_{F_1} K \cdot n \cdot \abs{\dd \omega} = \int_{r=0}^1 \int_{t=0}^{2\pi} K\left(\phi\begin{pmatrix} r \\ t \end{pmatrix}\right) \cdot \underbrace{\begin{pmatrix} r \cos t \\ r \sin t \\ -r \end{pmatrix}}_{\begin{pmatrix} x \\ y \\ -z \end{pmatrix}} \dd t \dd r = (*) \\
+		K\begin{pmatrix} x \\ y \\ z \end{pmatrix} \cdot \begin{pmatrix} x \\ y \\ z \end{pmatrix} = \dots = 2x^2 + 3y^2 + z^2 - xyz \\
+		\begin{split}
+			(*)
+				&= \int_0^1 \int_0^{2\pi} \left( r^2 \cdot \left( \frac{7}{2} - \frac{\cos 2t}{2} \right) - r^3 \frac{\sin 2t}{2} \right) \dd t \dd r \\
+				&= \left. \frac{7\pi r^3}{3} \right|_0^1 \\
+				&= \frac{7\pi}{3}
+		\end{split} \\
+		F_2 : n = \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix} \\
+		\int_{F_2} K \cdot n \cdot \abs{\dd \omega} = \int_{\substack{x^2 + y^2 \leq 1 \\ z = 1}} K\begin{pmatrix} x \\ y \\ z \end{pmatrix} \cdot \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix} \dd x \dd y = \dots = -\pi \\
+		\int_{\partial B} = \int_{F_1} + \int_{F_2} = \frac{7\pi}{3} - \pi = \frac{4\pi}{3}
+	\end{gather*}
+\end{bsp*}\todo{Bild}
+\begin{bsp*}
+	\begin{gather*}
+		K(x) \coloneqq c \cdot \frac{x}{\abs{x}^3} \\
+		F_R = \{ x \in \R^3 | \abs{x} = R \} \\
+		n(x) = \frac{x}{\abs{x}} \\
+		\int_{F_R} \underbrace{\left\langle c \cdot \frac{x}{\abs{x}^3} , \frac{x}{\abs{x}} \right\rangle}_{c \frac{\abs{x}^2}{\abs{x}^4} = \frac{c}{R^2}} \abs{\dd \omega} = \frac{c}{R^2} \cdot \underbrace{\int_{F_R} \abs{\dd \omega}}_{=4\pi R^2} = 4\pi c
+	\end{gather*}
+	Wieso von $R$ unabhängig? Wende Gauss an auf
+	\[ B = \{ x \in \R^3 | R_1 \leq \abs{x} \leq R_2 \} \]
+	für $0 < R_1 < R_2$:
+	\[ \implies \int_{\partial B} = \int_{F_{R_2}} - \int_{F_{R_1}} = 0 \]
+	Wegen $\div K = 0$ ist
+	\[ \int_B \div K \dd \mu = 0 \]
+	\begin{bem}[note = Vorsicht]
+		Gauss ist hier nicht anwendbar auf
+		\[ B = \{ x \in \R^3 | \abs{x} \leq R \} \]
+		da $K$ in $0$ eine Singularität hat.
+	\end{bem}
+\end{bsp*}
+
+\section{Stokes}
+\begin{gather*}
+	\text{Green } \R^2 \supset B \overset{\overset{C^1\text{\scriptsize{-Parametrisierung}}}{\phi}}{\rightarrow} F \subset \R^3 \text{ Stokes} \\
+	K : F \rightarrow \R^3 \: C^1\text{-Vektorfeld} \\
+	\implies \int_F \rot K \cdot n \cdot \abs{\dd \omega} \overset{\text{\scriptsize{def.}}}{=} \int_B \left\langle \rot K\left(\phi\begin{pmatrix} u \\ v \end{pmatrix}\right) , \phi_u \times \phi_v \right\rangle \mu\begin{pmatrix} u \\ v \end{pmatrix}
+	\intertext{Die Orientierung von $F$ liefert eine einfeutige Orientierung der Randkurve $\partial F$. Sei $\partial B = \gamma_1 + \dotsb + \gamma_n$ mit $\gamma_i : [a_i , b_i] \rightarrow \partial B$ $C^1$-Parametrisierung. $\implies \partial F = (\phi \circ \gamma_1) + \dotsb + (\phi \circ \gamma_n)$}
+	\begin{split}
+		\int_{\partial F} K \cdot \dd x
+			&\overset{\text{\scriptsize{def.}}}{=} \sum_{i=1}^n \int_{a_i}^{b_i} \langle K(\phi(\gamma_i(t))) , \underbrace{(\phi \circ \gamma_i)'(t)}_{=\nabla \phi(\gamma_i(t)) \cdot \gamma_i'(t)} \rangle \dd t \\
+			&= \sum_{i=1}^n \int_{a_i}^{b_i} \underbrace{\langle K(\phi(\gamma_i(t))) , \nabla \phi(\gamma_i(t)) \cdot \gamma_i'(t) \rangle}_{K(\phi(\gamma_i(t)))^T \cdot \nabla \phi(\gamma_i(t)) \cdot \gamma_i'(t)} \dd t \\
+			&= \sum_{i=1}^n \int_{a_i}^{b_i} \langle ( K(\phi(\gamma_i(t)))^T \cdot \nabla \phi(\gamma_i(t)))^T , \gamma_i'(t) \rangle \dd t \\
+			&= \int_{\partial B} ( (K \circ \phi)^T \cdot \nabla \phi )^T \cdot \dd x \\
+			&\overset{\text{\scriptsize{Green}}}{=} \int_B \underbrace{\rot( ( ( K \circ \phi )^T \cdot \nabla \phi)^T )}_{\overset{\text{\scriptsize{Beh.}}}{=} \langle (\rot K) \circ \phi , \phi_u \times \phi_v \rangle \: (*)} \mu(x) \\
+			&= \int_B \langle (\rot K) \circ \phi , \phi_u \times \phi_v \rangle \mu\begin{pmatrix} u \\ v \end{pmatrix} \\
+			&\overset{\text{\scriptsize{def.}}}{=} \int_F (\rot K) \cdot n \abs{\dd \omega}
+	\end{split} \\
+	K = \begin{pmatrix} K_1 \\ K_2 \\ K_3 \end{pmatrix} \\
+	\phi = \begin{pmatrix} \phi_1 \\ \phi_2 \\ \phi_3 \end{pmatrix} \\
+	\begin{split}
+		(*)
+			&= \rot\left( \left( ( K_1 \circ \phi , K_2 \circ \phi , K_3 \circ \phi ) \begin{pmatrix} \phi_{1u} & \phi_{1v} \\ \phi_{2u} & \phi_{2v} \\ \phi_{3u} & \phi_{3v} \end{pmatrix} \right)^T \right) \\
+			&= \rot\begin{pmatrix} (K_1 \circ \phi) \cdot \phi_{1u} + (K_2 \circ \phi) \cdot \phi_{2u} + (K_3 \circ \phi) \cdot \phi_{3u} \\ (K_1 \cdot \phi) \cdot \phi_{1v} + (K_2 \circ \phi) \cdot \phi_{2v} + (K_3 \circ \phi) \cdot \phi_{3v} \end{pmatrix} \\
+			&= \frac{\partial}{\partial u} \left( \sum_{i=1}^3 (K_i \circ \phi) \phi_{iv} \right) - \frac{\partial}{\partial v} \left( \sum_{i=1}^3 (K_i \circ \phi) \phi_{iu} \right) \\
+			&= \sum_{i=1}^3 \left( \frac{\partial}{\partial u} (K_i \circ \phi) \cdot \phi_{iv} + \cancel{(K_i \circ \phi) \cdot \phi_{ivu}} - \frac{\partial}{\partial v} (K_i \circ \phi) \cdot \phi_{iu} - \cancel{(K_i \circ \phi) \cdot \phi_{iuv}} \right) \\
+			&= \sum_{i=1}^3 \left( \left( \sum_{j=1}^3 (K_{ix_j} \circ \phi) \cdot \phi_{ju} \right) \cdot \phi_{iv} - \left( \sum_{j=1}^3 (K_{ix_j} \circ \phi) \cdot \phi_{jv} \right) \cdot \phi_{iu} \right) \\
+			&= \sum_{j=1}^3 \sum_{i=1}^3 (K_{ix_j} \circ \phi) \cdot ( \underbrace{\phi_{ju} \cdot \phi_{iv} - \phi_{jv} \cdot \phi_{iu}}_{=0 \text{ für } i = j} ) \\
+			&= \sum_{1 \leq i < j \leq 3} (K_{ix_j} \circ \phi - K_{jx_i} \circ \phi) ( \phi_{ju} \cdot \phi_{iv} - \phi_{jv} \phi_{iu} ) \\
+			&= \left\langle \overbrace{\begin{pmatrix} K_{3x_2} - K_{2x_3} \\ K_{1x_3} - K_{3x_1} \\ K_{2x_1} - K_{1x_2} \end{pmatrix}}^{\rot K} \circ \phi , \phi_u \times \phi_v \right\rangle
+	\end{split}
+\end{gather*}
+\begin{def*}
+	\[ \rot K = \nabla \times K = \begin{pmatrix} \partial_1 \\ \partial_2 \\ \partial_3 \end{pmatrix} \times \begin{pmatrix} K_1 \\ K_2 \\ K_3 \end{pmatrix} \]
+	im $\R^3$
+\end{def*}
+\begin{satz*}[note = Satz von Stokes , index = Satz von Stokes , indexformat = {3!12~ 1!~23}]
+	$F \subset \R^3$ ein $C^1$-Flächenstück, orientiert; $\partial F$ Randkurve mit induzierten Orientierung; $K$ $C^1$-Vektorfeld auf $F$
+	\[ \implies \int_{\partial F} K \cdot \dd x = \int_F \rot K \cdot n \abs{\dd \omega} \]
+\end{satz*}
+
+\subsubsection{Bedeutung von \texorpdfstring{$\rot K$}{rot K}}
+$\rot K$ lokale Zirkulationsrate \\
+$\int_{\gamma} \rot K \cdot \dd x$: Zirkulation entlang $\gamma$ \\
+$(\rot K) \cdot n$: lokale Zirkulationsrate in der zu $n$ senkrechten Ebene.
+\begin{bem}
+	$\rot K = 0 \iff K$ hat lokal ein Potential.
+\end{bem}
+\begin{bsp*}
+	\begin{gather*}
+		K(x) = \omega \times x \\
+		\omega = \begin{pmatrix} \omega_1 \\ \omega_2 \\ \omega_3 \end{pmatrix} = \text{ konstant} \\
+		\begin{split}
+			\rot K
+				&= \begin{pmatrix} \partial_1 \\ \partial_2 \\ \partial_3 \end{pmatrix} \times \begin{pmatrix} \omega_2 x_3 - \omega_3 x_2 \\ \omega_3 x_1 - \omega_1 x_3 \\ \omega_1 x_2 - \omega_2 x_1 \end{pmatrix} \\
+				&= \begin{pmatrix} \omega_1 - (-\omega_1) \\ \vdots \\ \vdots \end{pmatrix} \\
+				&= \begin{pmatrix} 2\omega_1 \\ 2\omega_2 \\ 2\omega_3 \end{pmatrix} \\
+				&= 2\omega
+		\end{split}
+	\end{gather*}
+\end{bsp*}
+\begin{bsp*}
+	\[ K = \text{ konstant } \implies \rot K = 0 \]
+\end{bsp*}
+\begin{bsp*}
+	\begin{gather*}
+		K(x) = \frac{\omega \times x}{\abs{\omega \times x}^2} \\
+		\omega = \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix} \\
+		\implies \rot K = 0 \\
+		\int_{\gamma} K \dd x = 2\pi \\
+		\gamma \rightsquigarrow \begin{cases}
+			x^2 + y^2 = 1 \\
+			z = 0
+		\end{cases}
+		\intertext{Ist $F$ ein Flächenstück im $\R^3 \setminus \{ x = y = 0 \}$ mit $\partial F = \gamma' - \gamma$}
+		\begin{split}
+			\int_{\gamma'} K(x) \dd x - \int_{\gamma} K(x) \dd x
+				&= \int_{\partial F} K(x) \dd x \\
+				&\overset{\text{\scriptsize{Stokes}}}{=} \int_F \underbrace{\rot K}_{=0} \cdot n \abs{\dd \omega} \\
+				&= 0
+		\end{split} \\
+		\implies \int_{\gamma'} K(x) \dd x = 2\pi
+	\end{gather*}
+	Sei $\omega = \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix}$. Für jeden geschlossenen Weg $\gamma'$ in $\R^3 \setminus \{ x = y = 0 \}$ ist
+	\[ \int_{\gamma} \frac{\omega \times x}{\abs{\omega \times x}^2} \cdot \dd x = 2\pi \cdot \left( \text{ Windungszahl von $\gamma'$ um $\R\begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix}$} \right) \]
+\end{bsp*}
+
+\section{Anwendungen}
+\subsection{Hydrostatik}
+BILD\todo{Bild} \\
+Druck $p = p_0 - \gamma z$ für $p_0 , \gamma > 0$ konstant. \\
+Gesamtkraft auf $B$
+\begin{gather*}
+	\begin{pmatrix} A_1 \\ A_2 \\ A_3 \end{pmatrix} A \coloneqq \int_{\partial B} (p_0 - \gamma z) \cdot (-n) \abs{\dd \omega}
+	\intertext{Für $u \in \R^3$ folgt}
+	\begin{split}
+		\langle u , A \rangle
+			&= \int_{\partial B} \langle -u \cdot (p_0 - \gamma z) , +n \rangle \abs{\dd \omega} \\
+			&\overset{\text{\scriptsize{Gauss}}}{=} \int_B \underbrace{\div( \underbrace{-u( p_0 - \gamma z}_{\begin{pmatrix} u_1 (\gamma z - p_0) \\ u_2 (\gamma z - p_0) \\ u_3 (\gamma z - p_0)\end{pmatrix}} )}_{=u_3 \gamma} \mu(v) \\
+			&= u_3 \gamma \mu(B)
+	\end{split} \\
+	\implies A = \begin{pmatrix} 0 \\ 0 \\ \gamma \cdot \mu(B) \end{pmatrix}
+\end{gather*}
+$\implies$ Auftrieb auf $B = \gamma \cdot \mu(B)$ in Richtung $\uparrow$ proportional zu $\mu(B)$ \\
+Archimedische Gesetz
+
+\subsection{Hydrodynamik}
+fliessendes Medium \\
+$U \subset \R^3$ \\
+$\rho(x,t) =$ Dichte in $x \in U$ zur Zeit $t$. $v(x,t) =$ Geschwindigkeit.
+Sei $B \subset U$ kompakt als Test. \\
+\begin{gather*}
+	m_B(t) \coloneqq \text{ Masse in $B$ zur Zeit } t: \int_B \rho(x,t) \mu(x) \\
+	\text{Fluss durch $B$ zur Zeit } t = \int_{\partial B} \rho(x,t) \cdot v(x,t) \cdot n \abs{\dd \omega} \overset{\text{\scriptsize{Gauss}}}{=} \int_B \div( \rho v) \mu(x) \\
+	\implies \frac{\dd}{\dd t} m_B(t) = \int_B \frac{\partial \rho}{\partial t} \mu(x) \\
+	\text{Massenerhaltung } \implies \int_B \frac{\partial \rho}{\partial t} \mu(x) = -\int_B \div( \rho v ) \mu(x) \\
+	\implies \int_B \left( \frac{\partial \rho}{\partial t} + \div(\rho v) \right) \mu(x) = 0 \\
+	\implies \frac{\partial \rho}{\partial t} = -\div(\rho v)
+	\intertext{Spezialfall 1: Stationäre Strömung}
+	\implies \frac{\partial \rho}{\partial t} = \frac{\partial v}{\partial t} = 0 \\
+	\implies \div(\rho v) = 0
+	\intertext{Speziallfall 2: inkompressibles Medium, d.h.:}
+	\rho(x,t) = \rho_0 \text{ konstant} \\
+	\implies \div(\rho v) = \rho_0 \div v
+	\intertext{Falls auch stationär}
+	\implies \div v = 0 \\
+	\sum \frac{\partial v_i}{\partial x_i} = 0
+\end{gather*}
+
+\subsection{Wärmeleitung}
+Sei $u(x,t)$ die Temperatur im Punkt $x$ zur Zeit $t$. \\
+Temperaturgradient $\grad  u(x,t)$ (nur bezüglich $x \in U \subset R^3$) \\
+lokale Wärmeflussrate $-k \cdot \grad u$ mit $k > 0$ Wärmeleitzahl konstant. \\
+Sei $B \subset U$ kompakt. Medium homogen mit Dichte $\rho$ konstant.
+\begin{gather*}
+	\text{Gesamtwärme in $B$: } w = \int_B c u \rho \mu(x) \\
+	\frac{\partial w}{\partial t} = \int_B \frac{\partial u}{\partial t} \cdot \rho \mu(x)
+	\intertext{Fluss durch $\partial B$:}
+	-\frac{\partial w}{\partial t} = \int_{\partial B} (-k \cdot \grad u) \cdot n \abs{\dd \omega} = -k \int_B (\div \grad u) \mu(x) \\
+	\implies \int_B c \rho \frac{\partial u}{\partial t} \mu(x) = \int_B k \div \grad u \mu(x) \\
+	\implies c\rho \frac{\partial u}{\partial t} = k \cdot \Delta u
+\end{gather*}
+\begin{def*}[note = Laplace Operator , index = Laplace Operator]
+	\[ \begin{split}
+		\Delta
+			&\coloneqq \div \grad \text{ Laplace Operator} \\
+			&= \sum_{i=1}^n \frac{\partial^2}{\partial x_i^2}
+	\end{split} \]
+	Bedeutung: Diffusionsrate
+\end{def*}
+\begin{bem}[note = harmonisch , index = harmonisch]
+	stationärer Fall:
+	\[ \frac{\partial u}{\partial t} = 0 \qquad \Delta u = 0 \]
+	harmonisch
+\end{bem}
+\begin{gather*}
+	\text{Wärmeleitung: } \frac{\partial u}{\partial t} = c \cdot \Delta u \\
+	\text{Wellengleichung: } \frac{\partial^2 u}{\partial t^2} = c \cdot \Delta u
+\end{gather*}
+
+\subsection{Laplace in \texorpdfstring{$\R^2$}{R2}}
+\begin{gather*}
+	u\begin{pmatrix} x \\ y \end{pmatrix} = u\begin{pmatrix} r \cos \phi \\ r \sin \phi \end{pmatrix} = \tilde{u}\begin{pmatrix} r \\ \phi \end{pmatrix} \\
+	\Delta u = \frac{\partial^2 u}{\partial x^2} + \frac{\partial^2 u}{\partial u^2}
+\end{gather*}
+\begin{fakt}
+	In Polarkoordinaten ist dies
+	\[ = \frac{\partial^2 u}{\partial r^2} + \frac{1}{r} \frac{\partial u}{\partial r} + \frac{1}{r^2} \cdot \frac{\partial^2 u}{\partial \phi^2} \]
+\end{fakt}
+
+\subsubsection{Kreisförmige schwingende Membran; Radius \texorpdfstring{$R > 0$}{R > 0}}
+\[ \frac{\partial^2 u}{\partial t^2} = a^2 \cdot \Delta u \qquad a > 0 \]
+Ansatz: Entwickle Lösung als Fourierreihe von $\phi$. Suche Komponentenfunktionen periodisch in $t$:
+\begin{gather*}
+	u = f(r) \cdot e^{\pm n\imath\phi} \cdot e^{\alpha\imath t} \\
+	\implies \frac{\partial^2 u}{\partial t^2} = -\alpha^2 u \\
+	\frac{\partial^2 u}{\partial \phi^2} = -n^2 \cdot u \\
+	\implies -\frac{\alpha^2}{a^2} u = \frac{\partial^2 u}{\partial r} + \frac{1}{r} \frac{\partial u}{\partial r} - \frac{n^2}{r^2} u \\
+	\implies \left[ \frac{\partial^2}{\partial r^2} + \frac{1}{r} \frac{\partial f}{\partial r} + \left( \frac{\alpha^2}{a^2} - \frac{n^2}{r^2} \right) \right] (u) = 0 \\
+	\implies \frac{\partial^2 f}{\partial r^2} + \frac{1}{r} \frac{\partial f}{\partial r} + \left( \frac{\alpha^2}{a^2} - \frac{n^2}{r^2} \right) f = 0
+	\intertext{Das ist eine Besselsche DGL. Lösung regulär in $0: J_n\left( \frac{\alpha}{a} r\right)$}
+	J_n(s) = \sum_{k=0}^{\infty} \frac{(-1)^k}{4^k k! (k+n)!} s^{2k+n}
+	\intertext{Randbedingung:}
+	f(R) = 0 \\
+	u = J_n\left( \frac{\alpha}{a} r \right) \cdot e^{\pm n\imath\phi} \cdot e^{\alpha\imath t} \\
+	\text{mit } J_n\left( \frac{\alpha}{a} R \right) = 0 \\
+	\iff \alpha = \frac{a}{R} \cdot (\text{Nullstelle von $J_n$})
+\end{gather*}
+\begin{folge}
+	diskretes Frequenzspektrum
+\end{folge}

@@ -1,0 +1,636 @@
+\chapter{Mehrdimensionale Integration}
+\begin{fakt}
+	Jede kompakte Teilmenge $A$ von $\R^n$ hat ein Volumen $\mu(A)$ mit den Eigenschaften:
+	\begin{itemize}
+		\item \[ \mu(A) \in \R^{\geq 0} \]
+		\item \[ \mu(A \cup B) = \mu(A) + \mu(B) - \mu(A \cap B) \]
+		\item $\mu (A)$ falls $\dim(A) < n$ ist
+		\item $\mu(A \times B) = \mu(A) \cdot \mu(B)$ für $A \subset \R^n , B \subset \R^l$ kompakt ; $A \times B = \{ \begin{pmatrix} a \\ b \end{pmatrix} \mid a \in A , b \in B \}$
+		\item $\mu$ ist invariant unter Translationen, Drehungen, Spiegelungnen
+	\end{itemize}
+\end{fakt}
+
+Sei jezt $B \subset \R^n$ kompakt unf $f$ eine Funktion auf $B$. Eine \textbf{Zerlegung} $\mathcal{Z}$ von $B$ beteht aus kompakten Teilmengen $B_1 , \dotsc , B_n$ mit $B = \bigcup_{i=1}^r B_i$ und $\mu(B_i \cap B_j) = 0$ für alle $1 \leq i < j \leq r$ sowie Basispunkten $z_i \in B_i$. Die zugehörige \textbf{Riemann-Summe} ist
+\[ S_f(\mathcal{Z}) \coloneqq \sum_{i=1}^r f(z_i) \cdot \mu(B_i) \]
+Die \textbf{Feinheit} von $\mathcal{Z}$ ist
+\[ \delta(\mathcal{Z}) \coloneqq \max\{ \delta(B_i) \mid 1 \leq i \leq r \} \]
+wobei $\delta(B_i)$ der Durchmesser von $B_i$ ist, wobei der Durchmesser
+\[ \delta(B) \coloneqq \max\{ \abs{x-y} : x , y \in B \]
+\begin{def*}[note = Riemann-Integral , index = Riemann Integral , indexformat = {2!1-~ 1!~-2}]
+	Das \textbf{Riemann-Integral von $\mathbf{f}$} über $B$ ist
+	\[ \lim_{\delta(\mathcal{Z}) \rightarrow 0} S_f(\mathcal{Z}) \eqqcolon \int_B f(x) \mu(x) \]
+	falls es existiert.
+\end{def*}
+\begin{satz*}
+	Ist $f$ stetig auf $B \subset \R^n$ kompakt, so existiert das Integral.
+\end{satz*}
+
+\section{Grundeigenschaften}
+\begin{enumerate}[label=(\alph*)]
+	\item \[ \int_{A \cup B} f(z) \mu(z) = \int_A + \int_B - \int_{A \cap B} \]
+	\item \[ \int_B f(z) \mu(z) = 0 \text{ falls } \mu(B) = 0 \]
+	\item \[ \int_B 1 \cdot \mu(z) = \mu(B) \]
+	\item \[ \int_B ( f(z) + g(z) ) \mu(z) = \int_B f(z) \mu(z) + \int_B g(z) \mu(z) \]
+	\item \[ \int_B \lambda f(z) \mu(z) = \lambda \int_B f(z) \mu(z) \quad \lambda \text{const.} \]
+	\item \[ \forall z \in B : f(z) \leq g(z) \implies \int_B f(z) \mu(z) \leq \int_B g(z) \mu(z) \]
+	\item \[ \abs{ \int_B f(z) \mu(z) } \leq \int_B \abs{f(z)} \mu(z) \]
+	\item Ist $f(z) \leq g(z)$ für alle $x \in B$ für stetige $f , g : B \rightarrow \R$, so ist
+		\[ \begin{split}
+			&\int_B ( g(x) - f(x) ) \underbrace{\mu}_{n\text{-dimensionales Volumen}}(x) \\
+			&= \underbrace{\mu}_{n+1 \text{-dimensionales Volumen}}\left(\underbrace{\left\{ \begin{pmatrix} x \\ x_{n+1} \end{pmatrix} \middle| x \in B , f(x) \leq x_{n+1} \leq g(x) \right\}}_{C}\right)
+		\end{split} \]
+\end{enumerate}
+\begin{satz*}[note = Fubini , index = Satz von Fubini , indexformat = {3!12~ 1!~23}]
+	Vor. wie oben, $h: C \rightarrow \R$
+	\[ \begin{multlined}
+		\int_C h\begin{pmatrix} x_1 \\ \vdots \\ x_{n+1} \end{pmatrix} \mu\begin{pmatrix} x_1 \\ \vdots \\ x_{n+1} \end{pmatrix} \\
+		= \int_B \left( \int_{f\begin{pmatrix} x_1 \\ \vdots \\ x_n \end{pmatrix}}^{g\begin{pmatrix} x_1 \\ \vdots \\ x_n \end{pmatrix}} h\begin{pmatrix} x_1 \\ \vdots \\ x_{n+1} \end{pmatrix} \dd x_{n+1} \right) \mu\begin{pmatrix} x_1 \\ \vdots \\ x_n \\ \end{pmatrix}
+	\end{multlined} \]
+	Analog mit einem $x_i$ anstelle $x_{n+1}$
+\end{satz*}
+\begin{bsp}
+	\begin{gather*}
+		a , b \geq 1 \\
+		\begin{split}
+			\int_{ [1,a] \times [1,b] } \frac{1}{(x+y)^2} \mu\begin{pmatrix} x \\ y \end{pmatrix}
+				&\overset{\text{Fubini}}{=} \int_1^b \left( \int_1^a \frac{1}{(x+y)^2} \dd x \right) \dd y \\
+				&= \int_1^b \left( \left. \frac{-1}{x+y} \right|_1^a \right) \dd y \\
+				&= \int_1^b \left( \frac{1}{1+y} - \frac{1}{a+y} \right) \dd y \\
+				&= ( \log(1+y) - \log(a+y) )|_1^b \\
+				&= \log(1+b) - \log(a+b) \\
+				- \log(2) + \log(a+1) \\
+				&= \log \frac{(1+a)(1+b)}{2(a+b)}
+		\end{split}
+	\end{gather*}
+\end{bsp}
+\begin{bsp}
+	\begin{gather*}
+		W = \left[ -\frac{\pi}{2} , \frac{\pi}{2} \right]^3 \\
+		\begin{split}
+			&\int_W \cos( x + y + z ) \mu\begin{pmatrix} x \\ y \\ z \end{pmatrix} \\
+				&\qquad= \int_{ \left[ -\frac{\pi}{2} , \frac{\pi}{2} \right]^2 } \left( \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}} \cos( x + y + z ) \dd z \right) \mu\begin{pmatrix} x \\ y \end{pmatrix} \\
+				&\qquad= \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}} \left( \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}} \left( \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}} \cos( x + y + z ) \dd z \right) \dd y \right) \dd x \\
+			&\int_{-\frac{\pi}{2}}^{\frac{\pi}{2}} \cos( x + y + z ) \dd z \\
+				&\qquad= \sin( x + y + z )|_{-\frac{\pi}{2}}^{\frac{\pi}{2}} \\
+				&\qquad= \sin( x + y - \frac{\pi}{2} ) - \sin\left( x + y + \frac{\pi}{2} \right) \\
+				&\qquad= \cos( x+ y ) - ( -\cos( x + y )) \\
+				&\qquad= 2\cos( x + y ) \\
+			&\int_{-\frac{\pi}{2}}^{\frac{\pi}{2}} 2\cos( x + y ) \dd y \\
+				&\qquad= 4 \cos( x ) \\
+			&\int_{-\frac{\pi}{2}}^{\frac{\pi}{2}} 4\cos( x ) \dd x \\
+				&\qquad= 8
+		\end{split}
+	\end{gather*}
+\end{bsp}
+\begin{bsp}
+	Sei $B$ der Bereich
+	\begin{gather*}
+		B = \left\{ \begin{pmatrix} x \\ y \end{pmatrix} \mid \begin{matrix*}[l] 0 \leq x \leq 4 \\ -\sqrt{x} \leq y \leq \sqrt{4} \end{matrix*} \right\} \\
+		B = \left\{ \begin{pmatrix} x \\ y \end{pmatrix} \mid \begin{matrix*}[l] -2 \leq y \leq 2 \\ y^2 \leq x \leq 4 \end{matrix*} \right\} \\
+		\begin{split}
+			\int_B xy^2 \mu\begin{pmatrix} x \\ y \end{pmatrix}
+				&= \int_0^4 \left( \int_{-\sqrt{x}}^{\sqrt{x}} xy^2 \dd y \right) \dd x \\
+				&= \int_0^4 \left( \left. \frac{xy^3}{3} \right|_{-\sqrt{x}}^{\sqrt{x}} \right) \dd x \\
+				&= \int_0^4 \left( \frac{x}{3} 2x^{\frac{3}{2}} \right) \dd x \\
+				&= \int_0^4 \frac{2}{3} x^{\frac{5}{2}} \dd x \\
+				&= \left. \frac{2}{3} x^{\frac{7}{2}} \frac{2}{7} \right|_0^4 \\
+				&= \frac{512}{21} \\
+			\int_B xy^2 \mu\begin{pmatrix} x \\ y \end{pmatrix}
+				&= \int_{-2}^2 \left( \int_{y^2}^4 xy^2 \dd x \right) \dd y \\
+				&= \int_{-2}^2 \left( \left. \frac{x^2y^2}{2} \right|_{x=y^2}^{x=4} \right) \dd y \\
+				&= \int_{-2}^2 \left( 8y^2 - \frac{y^6}{2} \right) \dd y = \left. \left( \frac{8}{3} y^3 - \frac{y^7}{14} \right) \right|_{y=-2}^{y=2} \\
+				&\vdots \\
+				&= \frac{512}{21}
+		\end{split}
+	\end{gather*}
+\end{bsp}
+\begin{bsp}
+	\begin{gather*}
+		\int_0^2 \left( \int_{y^3}^{4\sqrt{2y}} f(x,y) \dd x \right) \dd y \\
+		\begin{split}
+			y^3 \leq 4\sqrt{2y} \text{ für } 0 \leq y \leq 2
+				&\iff y^6 \leq 16 \cdot 2y \\
+				&\iff y^5 \leq 32 \\
+				&\iff y \leq \sqrt[5]{32} = 2 \checkmark
+		\end{split} \\
+		\text{Also mit } B = \left\{ \begin{pmatrix} x \\ y \end{pmatrix} \mid \begin{matrix*}[l] 0 \leq y \leq 2 \\ y^3 \leq x \leq 4\sqrt{2y} \end{matrix*} \right\} \\
+		\text{ist das Integral } \int_B f(x,y) \mu\begin{pmatrix} x \\ y \end{pmatrix} \\
+		B = \left\{ \begin{pmatrix} x \\ y \end{pmatrix} \mid \begin{matrix*}[l] 0 \leq x \leq 8 \\ \frac{x^2}{32} \leq y \leq \sqrt[3]{x} \end{matrix*} \right\} \\
+		\implies \int_0^8 \left( \int_{\frac{x}{32}}^{\sqrt[3]{x}} f(x,y) \dd y \right) \dd x 
+	\end{gather*}
+\end{bsp}
+\begin{bsp}
+	Vertausche Integrationsreihenfolge in
+	\begin{gather*}
+		\int_{-1}^2 \left( \int_{-x}^{2-x^2} f(x,y) \dd y \right) \dd x \\
+		B = \left\{ \begin{pmatrix} x \\ y \end{pmatrix} \mid \begin{matrix*}[l] -1 \leq x \leq 2 \\ -x \leq y \leq 2 - x^2 \end{matrix*} \right\} \\
+		B_1 = \left\{ \begin{pmatrix} x \\ y \end{pmatrix} \mid \begin{matrix*} 1 \leq y \leq 2 \\ -\sqrt{2-y} \leq x \leq \sqrt{2-y} \end{matrix*} \right\} \\
+		B_2 = \left\{ \begin{pmatrix} x \\ y \end{pmatrix} \mid \begin{matrix*}[l] -2 \leq y \leq 1 \\ -y \leq x \leq \sqrt{2-y} \end{matrix*} \right\} \\
+		B = B_1 \cup B_2 \\ 
+		\mu( B_1 \cap B_2 ) = 0 \\
+		\text{Antwort:} \\
+		\int_1^2 \left( \int_{-\sqrt{2-y}}^{\sqrt{2-y}} f(x,y) \dd x \right) \dd y + \int_{-2}^1 \left( \int_{-y}^{\sqrt{2-y}} f(x,y) \dd x \right) \dd y
+	\end{gather*}
+\end{bsp}
+
+\subsubsection{Substitution}
+\[ \varphi : \R^n \supset \tilde{B} \rightarrow B \subset \R^n , \tilde{x} \mapsto x \]
+Betrachte kompakte $B , \tilde{B} \subset \R^n$ und $ : \tilde{B} \rightarrow B , \tilde{x} \mapsto x$ surjektive Abbildung, injektiv ausserhalb einer Teilmenge $C \subset \tilde{B}$ mit $\mu(C) = 0$ \\
+Annahme: $\varphi$ $C^1$-Funktion \\
+\begin{satz*}
+	Dann ist
+	\[ \int_B f(x) \mu(x) = \int_{\tilde{B}} f(\varphi(\tilde{x})) \cdot \abs{\nabla\varphi(\tilde{x})} \cdot \mu(\tilde{x}) \]
+	\begin{bew}[head = Beweisidee]
+		\begin{gather*}
+			\text{Linke Seite } = \lim_{\delta(\mathcal{Z}) \rightarrow 0} \sum_{i=1}^r \underbrace{f(z_i)}_{f(\varphi(\tilde{z}_i)} \underbrace{\mu(B_i)}_{\mu(\varphi(\tilde{B}_i))}
+			\intertext{Setze $\tilde{B}_i \coloneqq \varphi^{-1}(B_i)$}
+			\implies B_i = \varphi( \tilde{B}_i )
+			\intertext{Wähle $\tilde{z}_i \in \tilde{B}_i$ mit $\varphi(\tilde{z}_i) = z_i$}
+			= \lim_{\delta(\mathcal{Z}) \rightarrow 0} \underbrace{\sum_{i=1}^r ( f(\varphi(\tilde{z}_i)) \cdot \abs{\nabla\varphi(\tilde{z}_i)} ) \cdot \mu(\tilde{B}_i)}_{\substack{\text{Riemannsumme von } f(\varphi(\tilde{x})) \abs{\nabla\varphi(\tilde{x})} \\ \text{ bezüglich der Zerlegung } \tilde{\mathcal{Z}} = (\tilde{B}_i , \tilde{z}_i )_{i = 1 \dotsc r}}} \\
+			= \lim_{\delta(\mathcal{Z}) \rightarrow 0} S_{f \circ \varphi \cdot \abs{\nabla\varphi}}(\tilde{\mathcal{Z}}) \\
+			= \text{ Rechte Seite} \quad \blacksquare
+		\end{gather*}
+	\end{bew}
+\end{satz*}
+\begin{bem}
+	$n = 1:$
+	\begin{gather*}
+		\int_{\varphi(\tilde{a})}^{\varphi(\tilde{b})} f(x) \dd x = \int_{\tilde{a}}^{\tilde{b}} f(\varphi(\tilde{x})) \varphi'(\tilde{x}) \dd \tilde{x} \\
+		\varphi : [ \tilde{a} , \tilde{b} ] \rightarrow [ a , b ]
+		\intertext{äquivalent:}
+		\underbrace{\int_a^b f(x) \dd x}_{= \int_{[a,b]} f(x) \mu(x)} = \underbrace{\int_{\tilde{a}}^{\tilde{b}} f(\varphi(\tilde{x})) \cdot \abs{\varphi'(\tilde{x})} \dd \tilde{x}}_{= \int_{[\tilde{a},\tilde{b}]} \dots}
+	\end{gather*}
+\end{bem}
+\begin{bsp*}[note = lineare Substitution]
+	$\varphi : \tilde{B} \rightarrow B , x \mapsto Ax + b$ für $b \in \R^n$ und für eine $n \times n$-Matrix $A$ mit $\det(A) \neq 0$
+	\begin{gather*}
+		\implies \nabla\varphi = A \\
+		\implies \int_{\varphi\tilde{B})} f(x) \mu(x) = \int_{\tilde{B}} f(A\tilde{x} + b) \cdot \underbrace{\abs{\det A}}_{\text{const.}} \cdot \mu(\tilde{x})
+	\end{gather*}
+	Insbesondere: $\abs{\det A} = 1$ für Translationen, Drehungen, Spiegelungen.
+\end{bsp*}
+\begin{bsp*}[note = Polarkoordinaten]
+	\begin{gather*}
+		\text{kompakt } [0 , \infty [ \times [-\pi , \pi ] \supset \tilde{B} \rightarrow B \subset \R^2 \\
+		\psi : \begin{pmatrix} r \\ \varphi \end{pmatrix} = \begin{pmatrix} r \cos \varphi \\ r \sin \varphi \end{pmatrix} \\
+		\implies \abs{\nabla\psi} = r \\
+		\implies \int_B f\begin{pmatrix} x \\ y \end{pmatrix} \mu\begin{pmatrix} x \\ y \end{pmatrix} = \int_{\tilde{B}} f\begin{pmatrix} r \cos \varphi \\ r \sin \varphi \end{pmatrix} \cdot r \cdot \mu\begin{pmatrix} r \\ \varphi \end{pmatrix} \\
+		\text{d.h. } \int_B f\begin{pmatrix} x \\ y \end{pmatrix} \dd x \dd y = \int_{\tilde{B}} f\begin{pmatrix} r \cos \varphi \\ r \sin \varphi \end{pmatrix} \cdot r \dd r \dd \varphi
+	\end{gather*}
+\end{bsp*}
+\begin{bsp*}[note = Kreisfläche]
+	\begin{gather*}
+		B = \left\{ \begin{pmatrix} x \\ y \end{pmatrix} \middle| x^2 + y^2 \leq R^2 \right\} \\
+		\tilde{B} = [ 0 , R ] \times [ -\pi , \pi ] \\
+		\begin{split}
+			\implies \mu(B)
+				&= \int_B 1 \dd x \dd y \\
+				&= \int_{[ 0 , R ] \times [ -\pi , \pi ]} r \dd r \dd \varphi \\
+				&= \int_0^R r \dd r \cdot \int_{-\pi}^\pi \dd \varphi \\
+				&= \left. \frac{r^2}{2} \right|_0^R \cdot 2\pi \\
+				&= \pi R^2
+		\end{split}
+	\end{gather*}
+	Analog: Zylinderkoordinaten
+\end{bsp*}
+\begin{bsp*}[note = Kugelkoordinaten]
+	\begin{gather*}
+		[ 0 , \infty [ \times [ -\pi , \pi ] \times [ -\frac{\pi}{2} , \frac{\pi}{2} ] \rightarrow \R^3
+		\intertext{bijektiv ausserhalb des Randes mit $\mu = 0$}
+		\psi: \begin{pmatrix} r \\ \varphi \\ \theta \end{pmatrix} \mapsto \begin{pmatrix} r \cos \theta \cos \varphi \\ r \cos \theta \sin \varphi \\ r \sin \theta \end{pmatrix} \\
+		\abs{\nabla\psi} = r^2 \cos \theta \\
+		\implies \int f\begin{pmatrix} x \\ y \\ z \end{pmatrix} \dd x \dd y \dd z \\
+		= \int f\begin{pmatrix} r \cos \theta \cos \varphi \\ r \cos \theta \sin \varphi \\ r \sin \theta \end{pmatrix} \cdot r^2 \cos \theta \dd r \dd \theta \dd \varphi
+	\end{gather*}
+\end{bsp*}
+\begin{bsp*}[note = Volumen der Kugel mit Radius $R$]
+	\begin{gather*}
+		\tilde{B} = [ 0 , R ] \times [ -\pi , \pi ] \times [ -\frac{\pi}{2} , \frac{\pi}{2} ] \\
+		\begin{split}
+			\implies \mu(B)
+				&= \int_B 1 \dd x \dd y \dd z \\
+				&= \int_{r=0}^R \int_{\theta=-\frac{\pi}{2}}^{\frac{\pi}{2}} \int_{\varphi=-\pi}^\pi r^2 \cos \theta \dd r \dd \theta \dd \varphi \\
+				&= \int_0^R r^2 \dd r \cdot \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}} \cos \theta \dd \theta \cdot \int_{-\pi}^\pi \dd \varphi \\
+				&= \left. \frac{r^3}{3} \right|_0^R \cdot \left. \sin \theta \right|_{-\frac{\pi}{2}}^{\frac{\pi}{2}} \cdot \left. \varphi \right|_{-\pi}^\pi \\
+				&= \frac{R^3}{3} \cdot 2 \cdot 2\pi \\
+				&= \frac{4\pi R^3}{3}
+		\end{split}
+	\end{gather*}
+\end{bsp*}
+\begin{bsp*}
+	\begin{gather*}
+		B = \left\{ \begin{pmatrix} x \\ y \\ z \end{pmatrix} \in R^3 : x^2 + y^2 + z^2 \leq R^2 \right\} \\
+		\begin{split}
+			C
+				&= \left\{ \begin{pmatrix} x \\ y \\ z \\ u \end{pmatrix} \in R^4 : x^4 + y^4 + z^4 + u^4 \leq R^2 \right\} \\
+				&= \left\{ \begin{pmatrix} x \\ y \\ z \\ u \end{pmatrix} : \begin{pmatrix} x \\ y \\ z \end{pmatrix} \in B \text{ und } \abs{u} \leq \sqrt{ R^2 - x^2 - y^2 - z^2} \right\}
+		\end{split} \\
+		\begin{split}
+			\mu(C)
+				&= \int_C 1 \mu\begin{pmatrix} x \\ y \\ z \\ u \end{pmatrix} \\
+				&\overset{\text{\scriptsize{Fubini}}}{=} \int_B \left( \int_{-\sqrt{ R^2 - x^2 - y^2 - z^2}}^{\sqrt{ R^2 - x^2 - y^2 - z^2}} 1 \dd u \right) \mu\begin{pmatrix} x \\ y \\ z \\ u \end{pmatrix} \\
+				&= \int_B 2 \sqrt{ R^2 - x^2 - y^2 - z^2} \mu\begin{pmatrix} x \\ y \\ z \\ u \end{pmatrix} \\
+				&= \int_0^R \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}} \int_{-\pi}^\pi 2 \sqrt{R^2 - r^2} \cdot r^2 \cos \theta \dd r \dd \theta \dd \varphi \\
+				&= \underbrace{\int_0^R 2 \sqrt{R^2 - r^2} r^2 \dd r}_{*} \cdot \underbrace{\int_{-\frac{\pi}{2}}^{\frac{\pi}{2}} \cos \theta \dd \theta}_{2} \cdot \underbrace{\int_{-\pi}^\pi 1 \dd \varphi}_{2\pi} \\
+		\end{split} \\
+		r = R \cdot \sin t \\ 
+		\dd r = R \cdot \cos t \dd t \\
+		r = 0 \iff t = 0 \\
+		r = R \iff t = \frac{\pi}{2} \\
+		\begin{split}
+			*
+				&= \int_0^{\frac{\pi}{2}} 2 \sqrt{R^2 - R^2 \sin^2 t} \cdot R^2 \sin^2 t R \cos t \dd t \\
+				&= 2R^4 \int_0^{\frac{\pi}{2}} \sin^2 t \cos^2 t \dd t \\
+				&= \frac{R^4}{2} \int_0^{\frac{\pi}{2}} (\sin 2t)^2 \dd t \\
+				&= \frac{R^4}{2} \int_0^{\frac{\pi}{4}} \frac{1 - \cos 4t}{2} \dd t \\
+				&= \frac{R^4}{2} \left. \left( \frac{t - \frac{\sin 4t}{4}}{2} \right) \right|_0^{\frac{\pi}{2}}
+		\end{split} \\
+		\mu(C) = \frac{\pi R^4}{8} \cdot 2 \cdot 2\pi = \frac{\pi^2 R^4}{2}
+	\end{gather*}
+\end{bsp*}
+
+\subsubsection{Anwendungen: Masse (/Ladung), Schwerpunkt, etc.}
+\begin{description}
+	\item[Masse]
+		Punktmassen $m_i$ im Punkten $x_i \in \R^n$ $\implies$ Gesamtmasse $\sum m_i$ \\
+		kontinuierliche Variante: Massenverteilung $m: B \rightarrow \R$ \\
+		$\implies$ Gesamtmasse $m(B) = \int_B m(x) \mu(x)$ \\
+		Ist $m(x) = m$ konstant, dann ist $m(B) = m \cdot \mu(B)$
+	\item[Schwerpunkt]
+		$\implies$ Gesamtschwerpunkt $S$
+		\[ S = \frac{\sum m_i x_i}{\sum m_i} \]
+		analog:
+		\[ S = \frac{\overbrace{\int_B m(x) \cdot \overbrace{x}^{x = \begin{pmatrix} x_1 \\ \vdots \\ x_n \end{pmatrix}} \mu(x)}^{\substack{\text{vektorwertiger Integral } = \\ \begin{pmatrix} \int_B m(x) x_1 \mu(x) \\ \vdots \\ \int_B m(x) x_n \mu(x) \end{pmatrix}}}}{\int_B m(x) \mu(x)} \]
+\end{description}
+
+\subsubsection{Speziallfall: Rotationskörper}
+\[ B = \left\{ \begin{pmatrix} x \\ y \\ z \end{pmatrix} \middle| \begin{matrix} a \leq z \leq b \\ x^2 + y^2 \leq r(z)^2 \end{matrix} \right\} \]
+für $r : [ a , b ] \rightarrow \R^{\geq 0}$
+\begin{gather*}
+	\int_B f\begin{pmatrix} \sqrt{x^@ + y^2} \\ z \end{pmatrix} \mu\begin{pmatrix} x \\ y \\ z \end{pmatrix} = \int_a^b \left( \iint_{\sqrt{x^2 + y^2} \leq r(z)} f\begin{pmatrix} \sqrt{x^2 + y^2} \\ z \end{pmatrix} \dd x \dd z \right) \dd z
+	\intertext{ebene Polarkoordinaten:}
+	\left. \begin{matrix}
+		x = \rho \cos \varphi \\
+		y = \rho \sin \varphi
+	\end{matrix} \middle| \dd x \dd y = \rho \dd \rho \dd \varphi \right. \\
+	= \int_a^b \left( \int_{\rho = 0}^{\rho = 2\pi} \left( \int_{\varphi = 0}^{2\pi} \underbrace{ f\begin{pmatrix} \rho \\ z \end{pmatrix} \rho \dd \varphi }_{2\pi f\begin{pmatrix} \rho \\ z \end{pmatrix} \rho} \right) \dd \rho \right) \dd z \\
+	= \int_a^b \left( \int_0^{r(z)} f\begin{pmatrix} \rho \\ z \end{pmatrix} \cdot 2\pi \rho \dd \rho \right) \dd z \\
+	\text{Wegen } \int_0^{r(z)} 2\pi \rho \dd \rho = \left. \pi \rho^2 \right|_0^{r(z)} = \pi r(z)^2 \text{ folgt} \\
+	\int_B f(z) \mu\begin{pmatrix} x \\ y \\ z \end{pmatrix} = \int_a^b f(z) \pi r(z)^2 \dd z \\
+	\text{Insbesondere: } f(z) = 1 \implies \text{ Volumen} \\
+	\mu(B) = \int_a^b \pi r(z)^2 \dd z
+\end{gather*}
+\begin{bsp*}[note = Kegel]
+	\begin{gather*}
+		[ a , b ] \rightarrow [ 0 , h ] \\
+		r(z) = \frac{R}{h} (h-z) \\
+		\begin{split}
+			\implies \mu(B)
+				&= \int_0^h \pi \left[ \frac{R}{h} (h-z) \right]^2 \dd z \\
+				&= \left. \pi \frac{R^2}{h^2} \frac{(z-h)^3}{3} \right|_0^h \\
+				&= \pi \frac{R^2}{h^2} \left( 0 - \frac{(-h)^3}{3} \right) \\
+				&= \frac{\pi R^3 h}{3}
+		\end{split}
+	\end{gather*}
+\end{bsp*}
+
+Sei $B \subset \R^n$ kompakt, $m : B \rightarrow \R^{\geq 0}$ Massenverteilung auf $B$. \\
+\begin{gather*}
+	\text{Gesamtmasse } \int_B m(x) \mu(x) \\
+	\text{Schwerpunkt (falls Nenner $\neq 0$)} \frac{\int_B m(x) \cdot x \mu(x)}{\int_B m(x) \mu(x)}
+\end{gather*}
+\begin{bsp*}[note = Hablkreisscheibe]
+	\begin{gather*}
+		B = \left\{ \begin{pmatrix} x \\ y \end{pmatrix} \middle| \begin{matrix} x^2 + y^2 \leq R^2 \\ x \geq 0 \end{matrix} \right\} \\
+		m\begin{pmatrix} x \\ y \end{pmatrix} = 1 \\
+		\int_B \mu\begin{pmatrix} x \\ y \end{pmatrix} = \frac{\pi}{2} \cdot R^2 \\
+		\int_B \begin{pmatrix} x \\ y \end{pmatrix} \dd x \dd y = \int_0^R \left( \int_{-\sqrt{R^2 - x^2}}^{+\sqrt{R^2 - x^2}} \begin{pmatrix} x \\ y \end{pmatrix} \dd y \right) \dd x \\
+		\begin{split}
+			\int_B x \dd x \dd y
+				&= \int_0^R \left( \int_{-\sqrt{R^2 - x^2}}^{+\sqrt{R^2 - x^2}} x \dd y \right) \dd x \\
+				&= \int_0^R x \cdot 2 \sqrt{R^2 - x^2} \dd x \\
+				&= \dots \\
+				&= \frac{2}{3} R^3
+		\end{split} \\
+		\int_B y \dd x \dd y = \int_0^R \left( \underbrace{\int_{-\sqrt{R^2 - x^2}}^{+\sqrt{R^2 - x^2}} y \dd y}_{= \left. \frac{y^2}{2} \right|_{-\sqrt{R^2 - x^2}}^{+\sqrt{R^2 - x^2}} = 0} \right) \dd x = 0 \\
+		\implies \text{ Schwerpunkt } = \frac{\begin{pmatrix} \frac{2}{3} R^3 \\ 0 \end{pmatrix}}{\frac{\pi}{2} R^2} = \begin{pmatrix} \frac{4R}{3\pi} \\ 0 \end{pmatrix}
+	\end{gather*}
+\end{bsp*}
+
+Trägheitsmoment von $B$ bzgl. Achse in Richtung eines Einheitsvektors; $B \subset \R^3$ \\
+Punktmasse $m$ im $P$ mit Abstand $\rho$ zur Achse hat Betrag $m \cdot \rho^2$ ; $\rho = \abs{e \times P}$
+\[ \Theta_e(B) = \int_B m(B) \cdot \abs{e \times P}^2 \mu(P) \]
+Speziall: $z$-Achse \\
+\begin{gather*}
+	\implies e = \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix} ; \rho = \sqrt{x^2 + y^2} \\
+	\implies \Theta_e(B) = \int_B m\begin{pmatrix} x \\ y \\ z \end{pmatrix} \cdot (x^2 + y^2) \mu\begin{pmatrix} x \\ y \\ z \end{pmatrix}
+\end{gather*}
+\begin{bsp*}[note = Kugel]
+	\begin{gather*}
+		B = \left\{ \begin{pmatrix} x \\ y \\ z \end{pmatrix} : x^2 + y^2 + z^2 \leq R^2 \right\} \\
+		m = 1 \text{ konstant} \\
+		B = \left\{ \begin{pmatrix} x \\ y \\ z \end{pmatrix} \middle| \begin{matrix} -R \leq z \leq R \\ \sqrt{x^2 + y^2} \leq \sqrt{R^2 - z^2} \end{matrix} \right\} \\
+		\begin{split}
+			\text{Masse: } \int_B \mu\begin{pmatrix} x \\ y \\ z \end{pmatrix}
+				&= \int_{-R}^R \pi (R^2 - z^2) \dd z \\
+				&= \left. \pi \left( R^2 z - \frac{z^3}{3} \right)\right|_{-R}^R \\
+				&= \pi \left( R^3 - \frac{R^3}{3} + R^3 - \frac{R^3}{3} \right) \\
+				&= \frac{4\pi}{3} R^3
+		\end{split} \\
+		\text{Schwerpunkt:} \\
+		\int_B \begin{pmatrix} x \\ y \\ z \end{pmatrix} \mu\begin{pmatrix} x \\ y \\ z \end{pmatrix}
+		\int_B z \mu\begin{pmatrix} x \\ y \\ z \end{pmatrix} = \int_{-R}^R z \pi (R^2 - z^2) \dd z = 0 \\
+		\underset{\text{\scriptsize{Variablenwechsel}}}{\implies} \int_B x \mu\begin{pmatrix} x \\ y \\ z \end{pmatrix} = \int_B y \mu\begin{pmatrix} x \\ y \\ z \end{pmatrix} = \int_B z \mu\begin{pmatrix} x \\ y \\ z \end{pmatrix} = 0 \\
+		\implies \text{ Schwerpunkt } \begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix}
+		\intertext{Trägheitsmoment}
+		\begin{split}
+			\Theta_e(B)
+				&\underset{\text{\scriptsize{Symmetrie}}}{=} \Theta_{\begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix}}(B) \\
+				&= \int_B (x^2 + y^2) \mu\begin{pmatrix} x \\ y \\ z \end{pmatrix} \\
+				&= \int_{-R}^R \left( \int_0^{\sqrt{R^2 - z^2}} \underbrace{\rho^2 \cdot 2\pi \rho}_{2\pi\rho^3} \dd \rho \right) \dd z \\
+				&= \int_{-R}^R \left( \left. \frac{2\pi}{4} \rho^4 \right|_0^{\sqrt{R^2 - z^2}} \right) \dd z \\
+				&= \int_{-R}^R \frac{\pi}{2} \cdot (R^2 - z^2)^2 \dd z \\
+				&= \frac{\pi}{2} \cdot \int_{-R}^R ( R^4 - 2 R^2 z^2 + z^4 ) \dd z \\
+				&= \frac{\pi}{2} \left. \left( R^4 z - \frac{2 R^3}{3} z^3 - \frac{z^5}{5} \right) \right|_{-R}^R \\
+				&= \frac{\pi}{2} \cdot 2 \cdot ( R^5 - \frac{2}{3} R^5 + \frac{R^5}{5} ) \\
+				&= \pi \frac{8}{15} R^5
+		\end{split} \\
+		\text{Masse: } \frac{4\pi}{3} R^3 \\
+		\text{Trägheitsmoment: } \frac{8\pi}{15} R^5
+		\intertext{allgemein: konstante Masse $m = 1$}
+		\lambda > 0 ,  \lambda B = \left\{ \lambda\begin{pmatrix} x \\ y \\ z \end{pmatrix} \middle| \begin{pmatrix} x \\ y \\ z \end{pmatrix} \in B \right\} \\
+		\implies \text{Masse von } \lambda B = \lambda^3 \cdot ( \text{Masse von } B ) \\
+		\text{Trägheitsmoment von } \lambda B = \lambda^5 \cdot ( \text{Trägheitsmoment von } B )
+	\end{gather*}
+	\begin{bew}
+		\begin{gather*}
+			\Theta_e(\lambda B) : \varphi : B \rightarrow \lambda B , \begin{pmatrix} x \\ y \\ z \end{pmatrix} \mapsto \begin{pmatrix} \lambda x \\ \lambda y \\ \lambda z \end{pmatrix} \\
+			\nabla \varphi = \begin{pmatrix} \lambda & 0 & 0 \\ 0 & \lambda & 0 \\ 0 & 0 & \lambda \end{pmatrix} \\
+			\abs{\det \nabla \varphi} = \lambda^3 \\
+			\begin{split}
+				\implies \Theta_e(\lambda B)
+					&= \int_{\lambda B} (x^2 + y^2) \mu\begin{pmatrix} x \\ y \\ z \end{pmatrix} \\
+					&= \int_B (\lambda^2 x^2 + \lambda^2 y^2) \cdot \lambda^3 \mu\begin{pmatrix} x \\ y \\ z \end{pmatrix} \\
+					&= \lambda^5 \int_B (x^2 + y^2) \mu\begin{pmatrix} x \\ y \\ z \end{pmatrix}
+			\end{split}
+		\end{gather*}
+	\end{bew}
+\end{bsp*}
+\begin{bsp*}[note = homogene Kugel mit Radius $R$]
+	\begin{gather*}
+		B = \left\{ \begin{pmatrix} x \\ y \\ z \end{pmatrix} : x^2 + y^2 + z^2 \leq R^2 \right\} \text{ Massenverteilung } M \\
+		\text{Masse $m$ } P = \begin{pmatrix} 0 \\ 0 \\ a \end{pmatrix} ; a > R \\
+		\implies \text{ Betrag der Gravitation } \begin{pmatrix} x \\ y \\ z \end{pmatrix} \text{ auf } P = \frac{G m M}{\abs{P - \begin{pmatrix} x \\ y \\ z \end{pmatrix}}^2} \\
+		\text{Vektor } \frac{G m M}{\abs{P - \begin{pmatrix} x \\ y \\ z \end{pmatrix}}^3} \left[ P - \begin{pmatrix} x \\ y \\ z \end{pmatrix} \right] \\
+		\implies \text{ Gesamtkraft auf } P : \\
+		\int_B \frac{G m M \cdot \left[ \begin{pmatrix} x \\ y \\ z \end{pmatrix} - P \right]}{\abs{\begin{pmatrix} x \\ y \\ z \end{pmatrix} - P}^3} \mu\begin{pmatrix} x \\ y \\ z \end{pmatrix} \\
+		\text{Symmetrie } \implies = \begin{pmatrix} 0 \\ 0 \\ * \end{pmatrix} \text{ mit} \\
+		* = \int_B \frac{GmM(z-a)}{\abs{\begin{pmatrix} x \\ y \\ z \end{pmatrix} - P}^3} \\
+		\begin{split}
+			\abs{\begin{pmatrix} x \\ y \\ z \end{pmatrix} - p}
+				&= \sqrt{x^2 + y^2 + (z-a)^2} \\
+				&= \int \frac{GmM(z-a)}{(x^2 + y^2 + (z-a)^2)^{\frac{3}{2}}} \mu\begin{pmatrix} x \\ y \\ z \end{pmatrix} \\
+				&= \int_{-R}^R \left( \int_0^{\sqrt{R^2 - z^2}} \frac{GmM(z-a)}{(\rho^2 + (z-a)^2)^{\frac{3}{2}}} \right) \mu\begin{pmatrix} x \\ y \\ z \end{pmatrix} \\
+				&= \dots
+		\end{split}
+	\end{gather*}
+\end{bsp*}\todo{Check with Simon}
+\begin{bsp*}[note = Gravitation einer Kugelschale]
+	\begin{gather*}
+		0 \leq R_1 \leq R_2 \\
+		b = \left\{ \begin{pmatrix} x \\ y \\ z \end{pmatrix} \in \R^3 \middle| R_1^2 \leq x^2 + y^2 + z^2 \leq R_2^2 \right\} \\
+		P = \begin{pmatrix} 0 \\ 0 \\ a \end{pmatrix} ; 0 < a < R_1 , \text{ oder } a > R_2 \\
+		\text{konstante Dichte $m$ , Masse $M$} \\
+		\text{$G$ Newtonsche Gravitationskonstante} \\
+		\begin{pmatrix} x \\ y \\ z \end{pmatrix} \in B \text{ übt auf $P$ dei Kraft } GmM \cdot \frac{\begin{pmatrix} x \\ y \\ z - a \end{pmatrix}}{\abs{\begin{pmatrix} x \\ y \\ z - a \end{pmatrix}}^3} \\
+		\begin{split}
+			&\implies \text{ Gesamtkraft } = \int_B GmM \frac{\begin{pmatrix} x \\ y \\ z - a \end{pmatrix}}{\abs{\begin{pmatrix} x \\ y \\ z - a \end{pmatrix}}^3} \mu\begin{pmatrix} x \\ y \\ z \end{pmatrix} \\
+			&\overset{\text{\scriptsize{Kugelkoordinaten}}}{=} GmM \cdot \\
+			&\int_{R_1}^{R_2} \left( \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}} \left( \int_0^{2\pi} \frac{\begin{pmatrix} r \cos \theta \cos \varphi \\ r \cos \theta \sin \varphi \\ r \sin \theta - a \end{pmatrix}}{\abs{\begin{pmatrix} r \cos \theta \cos \varphi \\ r \cos \theta \sin \varphi \\ r \sin \theta - a \end{pmatrix}}^3} r^2 \cos \theta \dd \varphi \right) \dd \theta \right) \dd r
+		\end{split} \\
+		\begin{split}
+			\abs{\begin{pmatrix} r \cos \theta \cos \varphi \\ r \cos \theta \sin \varphi \\ r \sin \theta - a \end{pmatrix}}
+				&= \sqrt{r^2 \cos^2 \theta + (r \sin \theta - a)^2} \\
+				&= \sqrt{r^2 - 2ra\sin\theta + a^2}
+		\end{split} \\
+		\text{Inneres Integral} = * = \int_0^{2\pi} \begin{pmatrix} r \cos \theta \cos \varphi \\ r \cos \theta \sin \varphi \\ r \sin \theta - a \end{pmatrix} \dd \varphi \\
+		\text{Wegen } \int_0^{2\pi} \cos\varphi \dd \varphi = \int_0^{2\pi} \sin\varphi \dd \varphi = 0 \text{ ist das } \begin{pmatrix} 0 \\ 0 \\ z \end{pmatrix} \\
+		\begin{split}
+			&\text{$z$ - Komponente} \\
+			&= GmM \cdot \int_{R_1}^{R_2} \left( \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}} \frac{2\pi (r\sin\theta - a) r^2 \cos \theta \dd \theta}{(r^2 - 2ra\sin\theta  + a^2)^{\frac{3}{2}}} \right) \dd r \\
+			&= \begin{vmatrix} t = \sin \theta \\ \dd t = \cos \theta \dd \theta \\ t = \pm 1 \leftrightarrow \theta = \pm \frac{\pi}{2} \end{vmatrix} \\
+			&= GmM \int_{R_1}^{R_2} \left( \int_{-1}^1 \frac{2\pi(rt - a) r^2 \dd t}{(r^2 - 2rat + a^2)^{\frac{3}{2}}} \right) \dd r
+		\end{split} \\
+		r^2 - 2rat + a^2 = u^2 ; u > 0 \\
+		-2ra \cdot \dd t = 2u \dd u \\
+		r^2 + a^2 - u^2 = 2rat \\
+		rt-a = \frac{r^2 + a^2 - u^2}{2a} - a = \frac{r^2 - a^2 - u^2}{2a} \\
+		t = -1 \leftrightarrow u = \abs{r-a} = r+a \\
+		t = 1 \leftrightarrow u = \abs{r-a} \leftrightarrow u^2 = r^2 - a^2 \\
+		\begin{split}
+			&\dots = GmM \cdot \int_{R_1}^{R_2} \left( \int_{r+a}^{\abs{r-a}} \frac{2\pi \frac{r^2 - a^2 - u^2}{2a} \cdot r^2 \cdot \frac{2u \dd u}{-2ra}}{u^3} \right) \dd r = \\
+			& GmM \cdot \int_{R_1}^{R_2} \left( \frac{2\pi r^2 2}{2a (-2ra)} \cdot \underbrace{\int_{r+a}^{\abs{r-a}} \left( \frac{(r^2 - a^2 - u^2) u \dd u}{u^3} \right)}_{(*)} \right) \dd r
+		\end{split} \\
+		\begin{split}
+			(*)
+				&= \abs{(r^2 - a^2) \cdot \frac{-1}{u} - u}_{r+a}^{\abs{r-a}} \\
+				&= \underbrace{\left( -\frac{r^2 - a^2}{\abs{r-a}} - \abs{r-a} \right)}_{\left( \frac{r^2 - a^2}{r-a} - (r-a) \right)} - \underbrace{\left( -\frac{r^2 - a^2}{r+a} - (r+a) \right)}_{(-(r-a) - r - a) = -2r} \\
+				&= -2r \cdot \sgn(r-a) + 2r \\
+				&= \begin{cases} +4r & r < a \iff a > R_2 \\ 0 & r > a \iff a < R_1 \end{cases}
+		\end{split} \\
+		\dots = \begin{cases} 0 & a < R_1 \\ GmM \cdot \int_{R_1}^{R_2} \frac{\pi r}{-a^2} (+4r) \dd r & \text{sonst} \end{cases} \\
+		\begin{split}
+			= -GmM \frac{4\pi}{a^2} \int_{R_1}^{R^2} r^2 \dd r
+				&= - GmM \cdot \frac{4\pi}{3a^2} \cdot ( R_2^3 - R_1^3 ) \\
+				&= \dots \\
+				&= -GM M_B \frac{1}{a^2}
+		\end{split} \\
+		\underbrace{\text{Masse von $B$}}_{M_B} = m \mu(B) = m \cdot \frac{4\pi}{3} (R_2^3 - R_1^3) \\
+		\begin{split}
+			\implies \text{ Gesamtkraft }
+				&= \begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix} \text{ falls } a < R_1 \\
+				&\text{ bzw. } \begin{pmatrix} 0 \\ 0 \\ -\frac{GM \cdot M_B}{a^2} \end{pmatrix} \text{ falls } a > R_2
+		\end{split}
+	\end{gather*}
+	\begin{bem}
+		Für $R_1 \leq a \leq R_2$ haben wir ein uneigentilchen Integral, das aber in diesem Fall existiert.
+	\end{bem}
+\end{bsp*}
+
+\subsubsection{Uneigentilches Integral}
+\begin{def*}[note = Uneigentliches Integral , index = uneigentliches Integral , indexformat = {2!1~}]
+	Ist $f$ auf $B$ stetig aber $B$ nicht kompakt, so definieren wir
+	\[ \int_B f(x) \mu(x) \coloneqq \lim_{B' \subset B \text{ kompakt}} \int_{B'} f(x) \mu(x) \]
+	falls der $\lim$ existiert, d.h. falls gilt
+	\[ \int_B f(x) \mu(x) = A \]
+	mit
+	\[ \begin{split}
+		&\forall \epsilon > 0 \exists B_0 \subset B \text{ kompakt}: \forall B' \subset B \text{ kompakt} : B_0 \subset B' \\
+		&\quad\implies \abs{\int_{B'} f(x) \mu(x) - A} < \epsilon
+	\end{split} \]
+\end{def*}
+\begin{bem}
+	Ist $f \geq 0$ auf $B$ (oder $f \leq 0$ auf $B$) so existiert das Integral oder es ist $\infty$, und man kann es immer mit Fubini berechnen
+\end{bem}
+\begin{bem}
+	Im allgemeinen berechne über die Punkte mit $f \geq 0$ bzw. $f \leq 0$ separat. \\
+	$\rightsquigarrow$ Uneigentiliches Integral ist \textbf{nicht} definiert falls dies $\infty - \infty$ ergibt.
+\end{bem}
+\begin{bsp*}
+	Für welches $s \in \R$ existiert
+	\[ \begin{split}
+		\int_{[1 , \infty [ \times [ 1 , \infty [} \frac{1}{(x+y)^s} \dd x \dd y
+			&= \int_1^\infty \left( \underbrace{\int_1^\infty \frac{\dd x}{(x+y)^s}}_{=\infty \text{ falls } s \leq 1} \right) \dd y \\
+			&\overset{s > 1}{=} \int_1^\infty \left( \left. \frac{(x+y)^{1-s}}{1-s} \right|_1^\infty \right) \dd y \\
+			&= \int_1^\infty \left( - \frac{(1+y)^{1-s}}{1-s} \right) \dd y \\
+			&\overset{z=1+y}{=} \frac{1}{s-1} \underbrace{\int_2^\infty z^{1-s} \dd z}_{=\infty \text{ falls } 1-s \geq -1 \iff s \leq 2} \\
+			&\overset{s > 2}{=} \frac{1}{s-1} \left. \frac{z^{2-s}}{2-s} \right|_0^\infty \\
+			&= \frac{1}{s-1} \left( -\frac{2^{2-s}}{2-s} \right) \\
+			&= \begin{cases} \infty & s \leq 2 \\ \frac{2^{2-s}}{(s-1)(2-s)} \end{cases}
+	\end{split} \]
+\end{bsp*}
+\begin{bsp*}
+	Berechne
+	\[ I = \int_{-\infty}^\infty e^{-x^2} \dd x \]
+	Lösung: $I > 0$
+	\[ \begin{split}
+		I^2
+			&= \int_{-\infty}^\infty e^{-x^2} \dd x \cdot \int_{-\infty}^\infty e^{-y^2} \dd y \\
+			&= \int_{\R^2} e^{-x^2 -y^2} \dd x \dd y \\
+			&\overset{\text{\scriptsize{Polarkoordinaten}}}{=} \int_{r=0}^\infty \int_{\varphi=0}^{2\pi} e^{-r^2} r \dd \varphi \dd r \\
+			&= \int_0^\infty 2\pi e^{-r^2} r \dd r \\
+			&= \left. -\pi e^{-r^2} \right|_0^\infty \\
+			&= 0 - (-\pi e^0) = \pi
+	\end{split} \]
+	Antwort:
+	\[ \int_{-\infty}^\infty e^{-x^2} \dd x = \sqrt{\pi} \]
+\end{bsp*}
+
+\subsection{Linienintegral}
+\[ \varphi : [ a , b ] \rightarrow \R^n , t \mapsto \varphi(t) \: C^1 \]
+Parametrisierung einer Kurve $C = \varphi( [a,b] )$
+\begin{gather*}
+	\abs{\frac{\dd \varphi}{\dd t}} = \text{ lokaler Streckungsfaktor bei } t \\
+	\varphi(t+h) = \varphi(t) + h \cdot \varphi'(t) + o(h) \iff \abs{\varphi(t+h) - \varphi(t)} = h \cdot \abs{\varphi'(t) - o(1)}
+\end{gather*}
+\begin{def*}[note = Linienintegral , index = Linien Integral , indexformat = {2!1-~}]
+	\[ \int_C f(x) \dd x \coloneqq \int_a^b f(\varphi(x)) \cdot \abs{\varphi'(t)} \dd t \]
+\end{def*}
+\begin{bem}
+	Analog zur Substitutionsformel
+\end{bem}
+\begin{def*}[note = Linienintegral , index = Linien Integral , indexformat = {2!1-~}]
+	\[ I = [a,b] \overset{\phi}{\rightarrow} \overbrace{x \in}{C} \subset \R^n \]
+	bijektiv ausser in endlich vielen Punkten und $C^1$
+	\begin{gather*}
+		f: C \rightarrow \R \\
+		\int_C f(x) \abs{\dd x} \coloneqq \int_a^b f(\phi(t)) \cdot \abs{\phi'(t)} \dd t
+	\end{gather*}
+	Das existiert, falls $f$ stückwiese stetig ist.
+	\begin{bew}[head = Wegen]
+		\[ \phi(t+h) = \phi(t) + \phi'(t) \cdot h + o(h) \]
+		ist $\abs{\phi'(t)}$ der lokale Streckungsfaktor.
+	\end{bew}
+\end{def*}
+\begin{fakt}
+	Das Linienintegral ist von der Parametrisierung unabhängig, d.h. hängt nur von $C$, $f$ ab.
+%	\begin{bew}
+%		Sei $\psi : [a',b'] \rightarrow [a,b]$ bijektiv, $C^1$ \\
+%		$\rightarrow \phi \circ \psi : [a',b'] \rightarrow C$ zweite Parametrisierung
+%		\[ \begin{split}
+%			\implies \int_{a'}^{b'} f(\phi(\psi(s))) \cdot \underbrace{\abs{(\phi \circ \psi)'(s)}}_{\abs{\phi'(\psi(s))} \cdot \abs{\psi'(s)}} \dd s 
+%				&= \int_{a'}^{b'} \left. \left( f(\phi(t)) \cdot \abs{\phi'(t)} \right) \right|_{t=\phi(s)} \cdot \abs{\psi'(s)} \dd s \\
+%				&= \int_a^b \left( f(\phi(t)) \cdot \abs{\phi'(t)} \right) \dd t
+%		\end{split} \]
+%	\end{bew}
+\end{fakt}\todo{Fix}
+\begin{bsp*}[note = Kurvenlänge]
+	\[ (\text{Länge von $C$}) = \int_C 1 \cdot \abs{\dd x} = \int_a^b \abs{\phi'(t)} \dd t \]
+	Speziell: $C = \graph(\psi)$ für $\psi : [a,b] \rightarrow \R$
+	$\rightsquigarrow$ Parametrisierung $\phi : [a,b] \rightarrow^2 , t \mapsto \begin{pmatrix} t \\ \psi(t) \end{pmatrix}$ \\
+	$\implies \phi'(T) = \begin{pmatrix} 1 \\ \psi'(t) \end{pmatrix}$ \\
+	$\implies$ Länge von $C$ ist $\int_a^b \sqrt{1 + \psi'(t)^2} \dd t$
+\end{bsp*}
+\begin{bsp*}[note = Länge einer Parabel]
+	\begin{gather*}
+		\psi : [-1,1] \rightarrow \R , t \mapsto t^2 \\
+		\begin{split}
+			\text{Länge }
+				&= \int_{-1}^1 \sqrt{1 + 4t^2} \dd t \\
+				&= \begin{vmatrix*}[c] 2t = \sinh s \\ \dots \end{vmatrix*} \\
+				&= \dots \\
+				&= \left. \left( \sqrt{1 + 4t^2} \cdot \frac{t}{2} + \frac{\arsinh 2t}{4} \right) \right|_{-1}^1 \\
+				&= \sqrt{5} + \frac{\arsinh 2}{2} \\ 
+				&= \sqrt{5} + \frac{\log(2 + \sqrt{5})}{2}
+		\end{split}
+	\end{gather*}
+\end{bsp*}
+
+\subsubsection{Flächenintegral}
+\begin{def*}[note= Flächenintegral , index = Integral!Flächen-]
+	\[ R^2 \supset \underbrace{B}_{\ni \begin{pmatrix} u \\ v \end{pmatrix}} \overset{\phi}{\rightarrow} F \subset \R^2 \]
+	$B$ kompakt , $\phi$ $C^1$-Funktion, bijektiv ausserhalb Teilmenge mit $\mu = 0$
+	\[ \int_F f(x) \delta(x) \coloneqq \int_B f\left(\phi\begin{pmatrix} u \\ v \end{pmatrix}\right) \abs{\frac{\partial \phi}{\partial u} \times \frac{\partial \phi}{\partial v} } \mu\begin{pmatrix} u \\ v \end{pmatrix} \]
+	Parallelogramm aufgespannt von $\frac{\partial \phi}{\partial u} , \frac{\partial \phi}{\partial v}$
+\end{def*}
+\begin{fakt}
+	Das hängt nur von $F$ und $f$ ab. \\
+	Speziallfall:
+	\begin{gather*}
+		F = \graph \psi , \psi : B \rightarrow \R \: C^1 \\
+		\rightsquigarrow \text{ Parametrisierung: } \phi\begin{pmatrix} u \\ v \end{pmatrix} = \begin{pmatrix} u \\ v \\ \psi\begin{pmatrix} u \\ v \end{pmatrix} \end{pmatrix} \\
+		\begin{split}
+			\abs{\frac{\partial \phi}{\partial u} \times \frac{\partial \phi}{\partial v}}
+				&= \abs{\begin{pmatrix} 1 \\ 0 \\ \psi_u \end{pmatrix} \times \begin{pmatrix} 0 \\ 1 \\ \psi_v \end{pmatrix}} \\
+				&= \abs{\begin{pmatrix} \psi_u \\ -\psi_v \\ 1 \end{pmatrix}} \\
+				&= \sqrt{1 + \psi_u^2 + \psi_v^2}
+		\end{split} \\
+		\implies \text{ Flächeninhalt von } \graph \psi \\
+		\int_B \sqrt{1 + \psi_u^2 + \psi_v^2} \dd u \dd v
+	\end{gather*}
+\end{fakt}
+\begin{bsp*}
+	\begin{gather*}
+		\psi\begin{pmatrix} u \\ v \end{pmatrix} = u^2 - v^2 \\
+		B = \left\{ \begin{pmatrix} u \\ v \end{pmatrix} \middle| u^2 + v^2 \leq R^2 \right\} \\
+		\sqrt{1 + \psi_u^2 + \psi_v^2} = \sqrt{1 + (2u)^2 + (-2v)^2} = \sqrt{1 + 4(u^2 + v^2)} \\
+		\begin{split}
+			\implies \text{ Flächeninhalt }
+				&= \int_{u^2 + v^2 \leq R^2} \sqrt{1 + 4(u^2 + v^2)} \dd u \dd v \\
+				&= \int_0^R \int_0^{2\pi} \sqrt{4r^2} r \dd \phi \dd r \\
+				&= \int_0^R \sqrt{1+4r^2} 2\pi r \dd r \\
+				&= \left. \frac{2\pi(1+4r^2)^{\frac{3}{2}}}{12} \right|_0^R \\
+				&= \frac{\pi}{6} \cdot((1+4R^2)^{\frac{3}{2}} - 1)
+		\end{split}
+	\end{gather*}
+\end{bsp*}
+\begin{bsp*}[note = Rotationsfläche]
+	\begin{gather*}
+		g : [a,b] \rightarrow \R^{\geq 0}
+		F = \left\{ \begin{pmatrix} x \\ y \\ z \end{pmatrix} \in \R^3 \middle| \begin{matrix*}[l] a \leq z \leq b \\ x^2 + y^2 = g(z)^2 \end{matrix*} \right\}
+		\intertext{Parametrisierung:}
+		\phi : B = [a,b] \times [0,2\pi] \overset{\phi}{\rightarrow} F \subset \R^3 , \begin{pmatrix} z \\ \theta \end{pmatrix} \mapsto \begin{pmatrix} a(z) \cos \theta \\ b(z) \sin \theta \\ z \end{pmatrix} \\
+		\begin{split}
+			\abs{\frac{\partial \phi}{\partial z} \times \frac{\partial \phi}{\partial \phi}{\partial \theta}}
+				&= \abs{\begin{pmatrix} g'(z) \cos \theta \\ g(z) \sin \theta \\ 1 \end{pmatrix} \times \begin{pmatrix} -g(z) \sin \theta \\ +g(z) \cos \theta \\ 0 \end{pmatrix}} \\
+				&= \abs{\begin{pmatrix} -g(z) \cos \theta \\ -g(z) \sin \theta \\ g(z) \cdot g'(z) \end{pmatrix}} \\
+				&= g(z) \cdot \sqrt{1 + g'(z)}
+		\end{split}
+		\intertext{Flächeninhalt von $F$}
+		= \int_{z=a}^b \left( \int_{\theta = 0}^{2\pi} g(z) \sqrt{1+g'(z)} \dd \theta \right) \dd z \\
+		= 2\pi\int_a^b g(z) \sqrt{1+g'(z)} \dd z
+	\end{gather*}
+\end{bsp*}
+\begin{bsp*}[note = Oberfläche einer Kugel mit Radius $R$]
+	\begin{gather*}
+		[a,b] = [-R,R] \\
+		g(z) = \sqrt{R^2 - z^2} \\
+		\begin{split}
+			&\implies 2\pi \int_{-R}^R \sqrt{R^2 - z^2} \sqrt{1 + \left( \frac{-2z}{2\sqrt{R^2 -z^2}} \right)^2} \dd z \\
+			&\qquad= 2\pi \int_{-R}^R \sqrt{(R^2 - z^2) + (-z)^2} \dd z \\
+			&\qquad= 2\pi \int_{-R}^R R \dd z \\
+			&\qquad= 2\pi \cdot R \cdot 2R \\
+			&\qquad= 4\pi R^2
+		\end{split}
+	\end{gather*}
+\end{bsp*}

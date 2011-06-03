@@ -1,0 +1,250 @@
+\chapter{Folgen \& Reihen}
+\section{Folgen}
+
+\[ a \in \Z^{\geq 0} , \Z^{\geq 1} \rightarrow \R^n , k \rightarrow a_k \]
+
+Wende Grenzwertbegriff an auf
+\[ \lim_{k \rightarrow \infty} a_k = \begin{cases}
+	\text{existiert in } \R^n	&\text{konvergente Folge}			\\
+	+\infty \text{ oder } -\infty	&\text{divergiert gegen } \pm \infty	\\
+	\text{existiert nicht}		&\text{divergiert}				
+\end{cases} \]
+
+\begin{satz*}
+	Jede monotone beschränkte Folge ist konvergent nämlich
+	\[ \lim_{k \rightarrow \infty} a_k = \sup\{ a_k | k \geq 0 \} \]
+\end{satz*}
+\begin{satz*}
+	Sei $f: X \rightarrow \R^n , X \subset R^m$ und $x_0 \in X$.\\
+	Dann ist $f$ stetig in $x_0$ \gdw für jede Folge $(x_k)$ in $X$ mit $\lim_{k \rightarrow \infty} = x_0$ gilt $\lim_{k \rightarrow \infty} f(x_k) = f(x_0)$
+\end{satz*}
+\begin{bsp*}
+	Sei $a \geq 1, x_0 \coloneqq a$, für $k \geq 0 : x_{k+1} \coloneqq \frac{1}{2} (x_k + \frac{a}{x_k}$ eine rekursiv definierte Folge.\\
+	\begin{bem}
+		$x_0 > 0$ und $\forall k \geq 0 : x_k > 0 \implies x_{k+1} > 0 \rightsquigarrow$ wohldefiniert.
+	\end{bem}
+	Beh. $(x_k)$ monoton fallend, d.h. $x_{k+1} \leq x_k \leftrightsquigarrow \frac{1}{2} \left( x_k + \frac{a}{x_k} \right) \leq x_k \leftrightsquigarrow \frac{a}{x_k} \leq x_k \iff a \leq x_k^2$
+	\begin{gather*}
+		a^2 \geq x_0^2 = a^2 \leq a \\
+		a^2 \geq x_k^2 \geq a , \text{ so ist } x_{k+1}^2 = \left( \frac{1}{2} \left( x_k + \frac{a}{x_k} \right) \right)^2 \geq \sqrt{x_k \frac{a}{x_k}}^2 = a \\
+		\text{Induktion } \implies \forall k : x_k^2 \leq a \\
+		\forall k : x_{k+1} \leq x_k \geq \sqrt{a}
+		\intertext{Also ist $(x_k)$ monoton fallend, nach unten beschränkt durch $\sqrt{a}$}
+		\implies x \coloneqq \lim_{k \rightarrow \infty} x_k \geq \sqrt{a} \\
+		\implies x = \lim_{k \rightarrow \infty} x_{k+1} = \lim_{k \rightarrow \infty} \frac{1}{2} \left( x_k + \frac{a}{x_k} \right) = \frac{1}{2} \left( x + \frac{a}{x} \right) \\
+		\implies x = \sqrt{a}
+	\end{gather*}
+\end{bsp*}
+
+\section{Summen}
+\[ \sum_{i=p}^q a_i = \begin{cases}
+	a_p + \dots + a_q	&\text{falls } p \leq q	\\
+	0				&\text{sonst}		
+\end{cases} \]
+
+\subsection{Grundregeln}
+\begin{gather*}
+	\sum_{i=p}^q (a_i + b_i) = \sum_{i=p}^q a_i + \sum_{i=p}^q b_i \\
+	\sum_{i=p}^q c \cdot a_i = c \cdot \sum_{i=p}^q a_i = \sum_{i=p}^q a_i \cdot a_i = \left( \sum_{i=p}^q a_i \right) \cdot c \\
+	\sum_{i=p}^r a_i = \sum_{i=p}^q a_i + \sum_{i=q+1}^r a_i = \sum_{i=p}^{q-1} a_i + \sum_{i=q}^r a_i \quad \text{ für } p \leq q \leq r \\
+	\sum_{i=p}^q a_i = \sum_{j=p+k}^{q+k} a_{j-k} \quad j = i+k , i = j-k \\
+	\sum_{i=p}^q a_i = \sum_{j=k-q}^{k-p} a_{k-j}
+\end{gather*}
+
+\subsubsection{Anwendung}
+\[ \begin{split}
+	\left( \sum_{i=p}^q a_i \right)^2	&= \left( \sum_{i=p}^q a_i \right) \cdot \left( \sum_{i=p}^q a_i \right) \\
+							&= \sum_{j=p}^q \sum_{i=p}^q a_i a_j \\
+							&= \sum_{j=p}^q \left( \sum_{i=p}^{j-1} a_i a_j + a_j^2 + \sum_{i=j+1}^q a_i a_j \right) \\
+							&= \sum_{j=p}^q a_j^2 + \sum_{j=p}^q \sum_{i=p}^{j-1} a_i a_j + \sum_{i=p}^q \sum_{j=i+1}^q a_i a_j \\
+							&= \sum_{i=p}^q a_i^2 + \sum_{j=p}^q \sum_{i=p}^{j-1} a_i a_j + \sum_{i=p}^q \sum_{j=i+1}^q a_i a_j \\
+							&= \sum_{p \leq i \leq q} a_i^2 + 2 \cdot \sum_{p \leq i \leq j \leq q} a_i a_j
+\end{split} \]
+\begin{bsp*}[note = Geometrische Summe]
+	Für $x \neq 1$ und $n \in \Z$ ist $\sum_{i=0}^n \frac{x^{n+1} - 1}{x-1}$\\
+	Denn: $(x-1) \cdot \sum_{i=0}^q x^i = \sum _{i=0}^q (x^{i+1} - x^i) = x^{n+1} - 1$	\todo{What? Why?}
+\end{bsp*}
+\begin{bsp*}[note = Teleskopsumme]
+	\[ \begin{split}
+		\sum_{i=p}^q (a_i - a_{i-1})	&= (a_p - a_{p-1}) + (a_{p+1} - a_p) + \dots + (a_q - a_{q-1}) \\
+							&= \sum_{i=p}^q a_i - \sum_{i=p}^q a_{i-1} \\
+							&= \sum_{i=p}^q a_i - \sum_{j=p-1}^{q-1} a_j
+	\end{split} \]
+\end{bsp*}
+
+\section{Reihen}
+\[\begin{matrix*}[l]
+	\sum_{k=0}^n x_k \coloneqq x_0 + x_1 + \dots + x_n	&\text{Summe}	\\
+	\sum_{k=0}^\infty x_k ''\coloneqq x_0 + x_1 + \dots''	&\text{Reihe}	
+\end{matrix*}\]
+
+\begin{def*}[note = Reihe , index = Reihe]
+	Ein Ausdruck
+	\[ \sum_{k=0}^\infty x_k \]
+	heisst (unendliche) \textbf{Reihe}
+\end{def*}
+\begin{def*}[note = Partialsumme , index = Partialsumme]
+	Für $n \geq 0$ heisst
+	\[ s_n \coloneqq \sum_{k=0}^n x_k \]
+	die \textbf{$\mathbf{n}$-te Partialsumme}.
+	\[ s_0 = x_0 ; s_{n+1} = s_n + x_{n+1} \]
+	Die Reihe heisst konvergent bzw. divergent, falls die Folge $(s_n)$ es ist.
+\end{def*}
+\begin{def*}[note = Wert , index = Reihe!Wert]
+	\[ \sum_{k=k_0}^\infty x_k \coloneqq \lim_{n \rightarrow \infty} s_n \]
+	heisst der \textbf{Wert} der Reihe. \\
+	Auch wenn $\lim_{n \rightarrow \infty} s_n = \pm \infty$ ist: ''uneigentlicher Grenzwert''.
+\end{def*}
+\begin{bem}
+	$(x_k)$ konvergiert $\not\implies \sum_{k=0}^\infty \implies (x_k)$ konvergiert gegen $0$ \quad [Da $x_k = s_k - s_{k-1}$]
+\end{bem}
+\begin{bsp*}
+	\[ q \in \R \rightsquigarrow \sum_{k=0}^\infty q^k \]
+	Beh. Konvergent \gdw $\abs{q} < 1$, und dann ist $\sum_{k=0}^\infty q^k = \frac{1}{1-q}$ \\
+	\begin{bew}
+		konvergent $\implies \lim_{k \rightarrow \infty} = 0 \implies \abs{q} < 1$
+		\[ s_k = \sum_{l=0}^k q^l = \frac{q^{k+1} - 1}{q-1} = \frac{1}{1-q} + \frac{q^{k+1}}{q-1} \quad \blacksquare \]
+	\end{bew}
+\end{bsp*}
+\begin{bsp*}[note = Harmonische Reihe]
+	\[ \sum_{k=1}^\infty \frac{1}{k} = \infty \quad ''\text{divergiert gegen } \infty '' \]
+	\begin{bew}
+		 \begin{gather*}
+		 	\begin{split}
+				s_{2^n-1} = \sum_{k=1}^m \left( \sum_{k=2^{l-1}}^{2^l - 1} \frac{1}{k} \right)	&\geq \sum_{l=1}^m \left( 2^{l-1} \frac{1}{2^l} \right) \\
+																		&= \sum_{l=1}^m \frac{1}{2} = \frac{m}{2}
+			\end{split} \\
+			 1 \leq k \leq 2^m \implies 2^{l-1} \leq k < 2^l \text{ für ein } 1 \leq l \leq m
+		\end{gather*}
+		Da $\frac{1}{k} > 0$ ist, ist $(s_k)$ streng monoton wachsend $\implies s_k \rightarrow$ für $k \rightarrow \infty$ %%FIXME
+	\end{bew}
+\end{bsp*}
+\begin{bsp*}
+	\[ \sum_{k=1}^\infty \frac{1}{k^s} = \infty \text{ für } s \in ]0,1] \]
+	Minorantenkriterium
+\end{bsp*}
+\begin{bsp*}
+	\[ \sum_{k=1}^\infty \frac{1}{k^s} \text{ konvergiert für } s > 1 \]
+	\begin{bew}
+		Wegen $\frac{1}{k^s} > 0$ ist $(s_k)$ streng monoton wachsend. \\
+		Genügt zu zeigen $(s_k)$ ist nach oben beschränkt. \\
+		\begin{gather*}
+			\begin{split}
+				s_{2^m - 1}	&= \sum_{l=1}^m \left( \sum_{k=2^{l-1}}^{2^l - 1} \frac{1}{k^s} \right) \\
+							&\leq \sum_{l=1}^m \left( 2^{l-1} \cdot \frac{1}{2^{(l-1) \cdot s}} \right) \\
+							&= \sum_{l=1}^m 2^{(l-1)(1-s)} \\
+							&= \sum_{n=0}^{m-1} \left( 2^{1-s} \right)^n \leq \sum_{n=0}^\infty \left( 2^{1-s} \right)^n \\
+							&= \frac{1}{1 - 2^{1-s}} < \infty \quad \blacksquare
+			\end{split}\\
+			k \geq 2^{l-1} \implies \frac{n}{k^s} \leq \frac{1}{(2^{l-1})^s}
+		\end{gather*}
+	\end{bew}
+\end{bsp*}
+\begin{bsp*}
+	\begin{gather*}
+		\sum_{k=2}^\infty \frac{1}{k \log k} = \infty \\
+		\sum_{k=2}^\infty \frac{1}{k \log^2 k} < \infty
+	\end{gather*}
+\end{bsp*}
+\begin{bem}
+	\[ \zeta(s) = \sum_{k=1}^\infty \frac{1}{k^s}\]
+	heisst die Riemannsche Zetafunktion
+\end{bem}
+\begin{bem}
+	Sind alle $a_k \geq 0$ so ist $s_k$ monoton wachsend und daher $\sum_{k=0}^\infty a_k$ existiert in $\R$ oder $= \infty$
+\end{bem}
+\begin{def*}[note = alternierende Reihe , index = Reihe!alternierend]
+	Eine Reihe $\sum_{k=0}^\infty (-1)^k c_k$ mit $c_0 \geq c_1 \geq \dots$ und $\lim_{k \rightarrow \infty}$ heisst \textbf{alternierende Reihe}. %%CHECKME
+\end{def*}
+\begin{satz*}
+	Jede alternierende Reihe konvergiert.\\
+	\begin{bew}
+		\begin{gather*}
+			s_{2l} = s_{2(l-1)} + (-1)^{2l-1} \cdot c_{2l-1} + (-1)^{2l} c_{2l} \leq s_{2(l-1)} \\
+			\text{Analog: } s_{2l+1} \leq s_{2l-1} \\
+			\abs{s_{2l} - s_{2l-1}} = c_{2l} \rightarrow 0 \text{ für } l \rightarrow \infty
+		\end{gather*}
+	\end{bew}
+\end{satz*}
+\begin{bsp*}[note = Alternierende harmonische Reihe]
+	\[ \sum_{k=1}^\infty (-1)^{k-1} \frac{1}{k} = \ln 2 \]
+\end{bsp*}
+
+\subsubsection{Umordnung von Reihen}
+\begin{def*}[note = absolute Konvergenz , index = Konvergenz!absolute]
+	$\sum_{k=0}^\infty a_k$ heisst absolut konvergent, falls $\sum_{k=0}^\infty \abs{a_k}$ konvergiert. \\
+%	\begin{bem}
+%		Auch für $a_k \in \R^n$
+%	\end{bem}
+	\todo{Fix}
+\end{def*}
+\begin{bsp*}
+	\[ \sum_{k=1}^\infty (-1)^k \frac{1}{k} \]
+	ist konvergent, aber nicht absolut konvergent.
+\end{bsp*}
+\begin{satz*}
+	Jede absolut konvergente Reihe ist konvergent, und bleibt absolut konvergent mit demselben Grenzwert unter beliebigen Umordnung.
+\end{satz*}
+\begin{bem}
+	Ist $\sum_{k=0}^\infty a_k$ nicht absolut konvergent, so existiert eine Umordnung, die divergiert.
+	\begin{bew}[head = Beweisidee:]
+		Sei $\epsilon > 0$ \\
+		Dann $\exists k_0 : \sum_{k=k_0}^\infty a_k \leq \epsilon$ \\
+		Sei $(b_k)$ eine Umordnung von $(a_k)$. \\
+		Dann existiert $k_1$ so, dass alle $a_k$ für $k < k_0$ unter den $b_k$ für $k < k_1$ auftauchen. \\
+		Für $m \geq k_1 : \sum_{k=0}^m b_k = \sum_{k=0}^{k_0 - 1} a_k + ( \underbrace{\text{Summe von endlich vielen $a_k$ für $k \geq k_0$}}_{ = ( \text{Summe gewisser $\abs{a_k}$ für } k \geq k_0 ) < \epsilon } )$
+	\end{bew}
+\end{bem}
+\begin{satz*}[note = majorisierte Konvergenz]
+	Ist $\sum_{k=k_0}^\infty b_k$ konvergent und gilt
+	\[ \forall k \geq k_0 : \abs{a_k} \leq b_k \]
+	so ist $\sum_{k=k_0}^\infty a_k$ absolut konvergent. \\
+	Denn:
+	\[ \sum_{k=0}^m a_k \leq \sum_{k=0}^m b_k \leq \sum_{k=0}^\infty b_k \quad \blacksquare \]
+\end{satz*}
+\begin{bsp*}
+	Sind $c, q \in \R , q < 1$ und $\forall k \geq k_0 : \abs{a_k} \leq c \cdot q^k$ \\
+	so ist $\sum_{k=0}^\infty a_k$ abs .konv. \\
+	Denn: $\sum_{k=0}^\infty a_k \leq c' + \sum_{k=0}^\infty c \cdot q^k = c' + c \cdot \sum_{k=0}^\infty q^k = c' + c \cdot \frac{1}{1-q} < \infty$
+\end{bsp*}
+\begin{bsp*}
+	Sind $c, s \in \R$ mit $s > 1$, und $\forall k \geq k_0 : \abs{a_k} \leq \frac{c}{k^s}$ \\
+	Dann ist $\sum a_k$ absolut konvergent.
+\end{bsp*}
+\begin{bsp*}
+	$\sum_{k=1}^\infty \frac{1}{k(k+1)}$ konvergiert absolut da
+	\begin{gather*}
+		\abs{\frac{1}{k(k+1)}} \leq \frac{1}{k^s} \\
+		\sum_{k=1}^m \frac{1}{k(k+1)} = \sum_{k+1}^m  \left( \frac{1}{k} - \frac{1}{k+1} \right) = \frac{1}{1} - \frac{1}{m+1} \\
+		\text{Also } \sum_{k=1}^\infty a_k = 1
+	\end{gather*}
+\end{bsp*}
+
+\subsubsection{Rechenregeln}
+Falls die rechte Seite konvergiert, tut's auch die linke und es gilt ''=''. \\
+\begin{itemize}
+	\item $\sum_{k=k_0}^\infty a_k = \sum_{k=k_0}^{k_1 - 1} a_k + \sum_{k=k_1}^\infty a_k \quad \text{für } k_0 \leq k_1$
+	\item $\sum_{k=k_0}^\infty ( a_k + b_k ) = \sum_{k=k_0}^\infty a_k + \sum_{k=k_0}^\infty b_k$
+	\item $\sum_{k=k_0}^\infty c \cdot a_k = c \cdot \sum_{k=k_0}^\infty a_k$
+	\item Wenn $\forall k : a_k \leq \sum_{k=k_0}^\infty b_k$ dann gilt $\sum_{k=k_0}^\infty a_k \leq \sum_{k=k_0}^\infty b_k$
+	\item $\sum_{k=k_0}^\infty \sum_{l=l_0}^\infty a_{k,l} \overset{?}{=} \sum_{l=l_0}^\infty \sum_{k=k_0}^\infty a_{k,l}$ \\
+		Mehrfache-Reihen heissen absolut konvergent, falls $\sum_{k=k_0}^\infty \sum_{=l_0}^\infty \abs{a_{k,l}} < \infty$. Dann darf man beliebig umordnen, zB. wie oben.
+\end{itemize}
+
+\begin{bsp*}
+	\begin{align*}
+		\sum_{k=1}^\infty	&\sum_{l=1}^\infty \frac{1}{k^2+l^2} \qquad \text{konvergiert absolut} \\
+						&\:\uparrow \text{ konvergent, da } \frac{1}{k^2 + l^2} \leq \frac{1}{l^4} \text{ und Majorantekriterium}
+	\end{align*}
+\end{bsp*}
+Speziell
+\[ \left( \sum_{k=k_0}^\infty a_k \right) \cdot \left( \sum_{l=l_0}^\infty b_k \right) = \sum_{k=k_0}^\infty \sum_{l=l_0}^\infty a_k \cdot b_l \]
+\begin{bsp*}
+	Eine Reihe def Form
+	\begin{gather*}
+		\sum_{k=-\infty}^\infty a \cdot e^{ \imath k x}
+		\intertext{oder}
+		\sum_{k=k_0} a_k \cdot \cos kx + \sum_{k=k_0}^\infty b_k \cdot \sin kx
+	\end{gather*}
+	heisst Fourierreihe.
+\end{bsp*}

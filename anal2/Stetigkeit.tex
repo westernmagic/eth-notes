@@ -1,0 +1,81 @@
+\chapter{Einschub: Stetigkeit}
+\begin{gather*}
+	f: X \rightarrow \R^n , X \rightarrow \subset \R^m \\
+	f \text{ stetig } \iff \forall x \in X \forall \epsilon > 0 \exists \delta > 0 : \forall y \in X : \abs{ x - y } < \delta \implies \abs{ f( x ) - f( y ) } < \epsilon \\
+	f \text{ gleichmässig stetig } \iff \\
+	\forall \epsilon > 0 \exists \delta > 0 \forall x \in X \forall y \in X : \abs{ x - y } < \delta \implies \abs{ f( x ) - f( y ) } < \epsilon 
+\end{gather*}
+\begin{bem}
+	gleichmässig stetig $\Rightarrow$ stetig \\
+	gleichmässig stetig $\not\Leftarrow$ stetig
+\end{bem}
+\begin{bsp*}
+	\begin{gather*}
+		\R \rightarrow \R , x \mapsto \abs{ x } \rightsquigarrow \delta \coloneqq \epsilon \text{ tut's} \\
+		\abs{ x - y } < \epsilon \implies \abs{ \abs{ x } - \abs{ y } } < \epsilon
+	\end{gather*}
+\end{bsp*}
+\begin{bsp*}
+	\begin{gather*}
+		\R \rightarrow \R , x \mapsto \sin x \rightsquigarrow d \coloneqq \text{ tut's} \\
+		\abs{ \sin x - \sin y } \overset{\text{MWS}}{=} \abs{ \frac{d \sin x}{d x} }_{x = t} \text{ für ein $t$ zu $x,y$} \\
+		\abs{ \sin x - \sin y } = \abs{ \cos t } \leq 1
+	\end{gather*}
+\end{bsp*}
+\begin{bsp*}
+	$\R \rightarrow \R , x \mapsto x^2$ nicht gleichmässig stetig. Denn wenn zu $\epsilon > 0$ ein $\delta > 0$ es täte, dann insbesondere $y = x + \frac{\delta}{2}$ \\
+	$\abs{ x^2 - ( x + \frac{\delta}{2} )^2 } = \abs{ \frac{\delta}{2} (2x + \frac{\delta}{2} ) } \rightarrow \infty$ für $x \rightarrow \infty$, insbesondere nicht $< \epsilon$ für alle $x \in \R$
+\end{bsp*}
+\begin{bsp*}
+	$\R^{\geq 0} \rightarrow \R , x \mapsto \sqrt{x}$ gleichmässig stetig, denn:
+	auf $[0,1]$ wegen Satz (siehe unten), auf $[1,\infty[$ wegen $\abs{f'(x)} \leq 1$ $\rightsquigarrow$ auf $[0,\infty[$ tut's jeweils das kleinere $\delta$
+\end{bsp*}
+\begin{satz*}
+	$X$ kompakt $\implies$ jede Folge in $X$ besitzt eine konvergente Teilfolge. \\
+	\begin{bew}[head = Beweisidee]
+		Halbierungsprinzip
+	\end{bew}
+\end{satz*}
+\begin{satz*}
+	$X$ kompakt, $f: X \rightarrow \R^n$ stetig $\implies f$ ist gleichmässig stetig \\
+	\begin{bew}
+		Wenn nicht, sei $\epsilon > 0$ , so dann:
+		$\forall \delta > 0 \exists x \exists y \in X : \abs{ x - y } < \delta \wedge \abs{ f( x ) - f( y ) } \geq \epsilon$ \\
+		Zu jedem $r \in \Z^{\geq 0}$: wähle $x_r \in X , y_r \in X : \abs{ x_r - y_r } < \frac{1}{r} , \abs{ f( x_r ) - f( y_r ) } \geq \epsilon$ \\
+		Dann ist $(x_r)$ eine Folge in $X$ , d.h.: $\exists$ natürliche Zahlen $r_1 < r_2 < r_3 < \dots$ sodass $\lim_{i \rightarrow \infty} x_{r_i} = x \in X \implies \abs{ x - x_{r_i} } \rightarrow 0$ für $i \rightarrow \infty$ \\
+		$\underbrace{\abs{ x - y_{r_i} }}_{\rightarrow 0} \leq \underbrace{\abs{ x - x_{r_i} }}_{\rightarrow 0} + \underbrace{\abs{ x_{r_i} - y_{r_i} }}_{\leq \frac{1}{r_i} \rightarrow 0}$ \\
+		Aber: $f$ stetig in $x \implies \exists \delta > 0 : \forall z \in X : \abs{ z - x } < \delta \implies \abs{ f( z ) - f( x ) } < \frac{\epsilon}{3}$ \\
+		$\implies \exists i_0 \forall i \geq i_0 :$ \\
+		$\abs{ x - x_{r_i} } < \delta \implies \abs{ f( x ) - f( x_{r_i} ) } < \frac{\epsilon}{3}$ \\
+		$\abs{ x - y_{r_i} } < \delta \implies \abs{ f( x ) - f( y_{r_i} ) } < \frac{\epsilon}{3}$ \\
+		$\implies \abs{ f( x_{r_i} ) - f( y_{r_i} ) } \leq \frac{2 \epsilon}{3}$ Widerspruch!
+	\end{bew}
+\end{satz*}
+\begin{def*}[note = Lipschitz stetig , index = Lipschitz stetig , indexformat = {2!1~ 1!~2}]
+	$f$ heisst \textbf{Lipschitz stetig}, falls $\exists C > 0 : \forall x,y \in X : \abs{ f(x) - f(y) } \leq C \cdot \abs{x-y}$ (dann tut's $\delta \coloneqq \frac{\epsilon}{C}$ in gleichmässiger Stetigkeit)
+\end{def*}
+\begin{def*}[note = lokal Lipschitz stetig , index = lokal Lipschitz stetig , indexformat = {3!2~!1~ 2!~3!1~}]
+	$f$ heisst \textbf{lokal Lipschitz stetig}, falls: \\
+	$\forall x \in X : \exists C > 0 \exists \delta >0 : \forall y \in X : \abs{x-y} < \delta \implies \abs{f(x)-f(y)} \leq C \cdot \abs{x-y}$
+\end{def*}
+\begin{bsp*}
+	$\R^{\geq 0} \rightarrow \R , x \mapsto x^\alpha$ für $0 < \alpha < 1$ ist nicht lokal Lipschitz stetig, denn: \\
+	$x = 0 , \abs{f(x)-f(y)} = y^\alpha \not\leq C \cdot y$ für $y \rightarrow 0$
+\end{bsp*}
+\begin{bem}
+	$f$ differenzierbar $\implies f$ lokal Lipschitz stetig. \\
+	\begin{bew}{head = Denn}
+		Für $x \in X$ fest: $f(y) = f(x) + f'(x) \cdot (x-y)$ \\
+		$\implies \abs{f(y)-f(x)} \leq \abs{f'(x)} \cdot \abs{x-y} + \abs{x-y}$ \\
+		$\implies C \coloneqq \abs{f'(x)} + 1$ \\
+		$\frac{g(x)}{\abs{x-y}} \rightarrow 0$ für $y \rightarrow x$ \\
+		$\implies \exists \delta > 0 : \frac{\abs{g(x)}}{\abs{x-y}} \leq 1$ \\
+		Dieses $C$ und dieses $\delta$ tun's!
+	\end{bew}
+\end{bem}
+\begin{bem}
+	Die Grundrechenarten sind lokal Lipschitz stetig.
+\end{bem}
+\begin{bem}
+	Jede Komposition von lokal Lipschitz stetigen Funktionen ist Lipschitz stetig.
+\end{bem}

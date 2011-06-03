@@ -1,0 +1,124 @@
+\section{Planare Graphen}
+[Abbot: Flatland]\\
+BILD\\
+\begin{def*}[note = planar , index = planar]
+	$G=(V,E)$ \textbf{planar}, wenn er so gezeichnet werden kann (in die Ebene eingebettet), dass sich keine Kanten überkreuzen (Die Kanten müssen keine Geradestücke sein.
+\end{def*}
+\begin{satz*}[note = Eulersche Polyederformel , index = Eulersche Polyederformel]
+	Sei $G=(V,E)$ zusammenhängender Graph, planar, die Ebene in $f$ Gebiete unterteilt. Dann $\abs{V} + f - \abs{E} = 2$.
+	\begin{bew}
+		Solange $G$ Kreise enthält, entferne Kanten: $\abs{V}$ unverändert, $\abs{E}: -1$, $f: -1$. Für Bäume stimmt die Formel: $\abs{V} = \abs{E} + 1, f = 1$
+	\end{bew}
+	\begin{korr*}
+		$G=(V,E)$ planar, $\abs{V} \geq 3$. Dann $\abs{E} \leq 3 \abs{V} - 6$\\
+		\begin{bew}
+			\begin{gather*}
+				\abs{V} + f - \abs{E} = 2 \\
+				3f \leq 2 \abs{E} \\
+				f \leq \frac{2}{3} \abs{E} \\
+				\abs{V} + f - \abs{E} = 2 \leq \abs{V} + \frac{2}{3} \abs{E} - \abs{E} = \abs{V} - \frac{\abs{E}}{3} \\
+				\abs{E} \leq 3 \abs{V} - 2
+			\end{gather*}
+		\end{bew}
+	\end{korr*}
+	\begin{gather*}
+		\abs{E} < 3 \abs{V} \\
+		\sum_{v \in V} \deg v = 2 \abs{E} < 6 \abs{V} \\
+		\frac{\sum_{v \in V} \deg v}{\abs{V}} < 6
+	\end{gather*}
+\end{satz*}
+
+\begin{gather*}
+	K_5: \abs{E} = 10 , \abs{V} = 5 \\
+	10 \leq 3 \cdot 5 - 6 = 9 \quad \lightning \\
+	\implies K_5 \text{ nicht planar}\\
+	\\
+	K_{3,3}: \abs{V} = 6 , \abs{E} = 9 \\
+	9 \leq 3 \cdot 6 - 6 = 12 ?
+\end{gather*}
+\begin{korr*}
+	$G=(V,E)$ planar und bipartit(Dreiecksfrei), $\abs{V} \geq 3$. Dann $\abs{E} \leq 2 \abs{V} - 4$\\
+	\begin{bew}
+		\begin{gather*}
+				4f \leq 2 \abs{E} \\
+				f \leq \frac{\abs{E}}{2} \\
+				\abs{V} + f - \abs{E} = 2 \leq \abs{V} + \frac{\abs{E}}{2} - \abs{E} \\
+				\abs{E} \leq 2 \abs{V} - 4
+		\end{gather*}
+	\end{bew}
+	\[ \implies \overline{\deg(v)} < 4 \]
+\end{korr*}
+
+Nicht planar sind:
+\begin{itemize}
+	\item $K_5 , K_{3,3}$
+	\item $K_6 , K_{3,4} , K_{4,4} , \dotsc$
+	\item Graphen, die $K_5$ oder $K_{3,3}$ als Teilgraphen enthalten.
+	\item Unterteilungen des $K_5$ oder des $K_{3,3}$ $(*)$
+	\item Graphen, die $(*)$ als Teilgraphen enthalten.
+\end{itemize}
+\begin{satz*}[note = (Kuratowski)]
+	Die Liste ist vollständig.
+\end{satz*}
+
+\subsection{Färbung von Graphen}
+\begin{def*}[note = Knotenfärbung , index = Knotenfärbung]
+	\textbf{(Knoten-)Färbung} von $G=(V,E)$ mit $k$ Farben: $c: V \rightarrow \{ 1, 2, \dotsc , k \}$ so, dass $(u,v) \in E \implies c(u) \neq c(v)$.
+\end{def*}
+\begin{def*}[note = chromatische Zahl , index = chromatische Zahl]
+	\textbf{chronatische Zahl} $X(G)$: min. Anzahl Farben $k$, sodass eine $k$-Färbung von $G$ existiert.
+\end{def*}
+\begin{bsp*}
+	\begin{gather*}
+		X(K_n) = n \\
+		X(K_{m,n}) = 2 \\
+		X(M_{m,n}) = 2 \quad ( \neq( m = 1 \wedge n = 1 )) \\
+		X(C_n) = \begin{cases}
+			2	&n \text{ gerade}	\\
+			3	&n \text{ ungerade}
+		\end{cases} \\
+		X(\text{Baum}) = 2 \quad ( \abs{V} \geq 2 )
+	\end{gather*}
+\end{bsp*}
+\begin{satz*}
+	$G=(V,E)$ zusammenhängend, $\abs{V} \geq 2$ bipartit ($X(G) = 2$) \gdw es keinen Kreis ungerader Länge enthält.\\
+	\begin{bew}
+		''$\Rightarrow$'' klar, da $X($ungerader Kreis$) > 2$ und $X($Teilgraph$) \leq X($Graph$)$ \\
+		''$\Leftarrow$'' Spannbaum von $G$. Querverbindungen:
+		\begin{itemize}
+			\item zwischen Etagen gleicher Parität $\implies$ ungerader Kreis $\implies$ existieren nicht.
+			\item ungleicher Parität: kein Problem
+		\end{itemize}
+	\end{bew}
+\end{satz*}
+
+Enscheidung, ob \dots
+\begin{itemize}
+	\item $X(G) = 2$: lineare Zeit
+	\item $X(G) = 3$: NP-vollständig
+\end{itemize}
+
+\begin{satz*}
+	$G=(V,E)$ planar $\implies X(G) \leq 4$
+\end{satz*}
+Analoge, ''historisches'' Problem: Wie viele Farben sind nötig, um eine Landkarte so einzufärben, dass angrenzende Länder verschiedene Farben haben? (Länder zusammenhängend) $\rightarrow$ Färben planarer Graphen
+
+\begin{description}
+	\item[3?] $K_4$ planar
+	\item[4?] $K_5$ nicht planar $\implies$ 4-Färbbarkeit möglich.
+\end{description}
+
+\begin{satz*}
+	$G$ planar $\implies X(G) \leq 6$\\
+	\begin{bew}
+		\begin{gather*}
+			G \text{ planar } \implies \abs{E} \leq 3 \abs{V} - 6 \\
+			\sum_{v \in V} \deg(v) = 2 \abs{E} \leq 6\abs{V} - 6 < 6\abs{V} \\
+			\frac{1}{\abs{V}} \sum_{v \in V} \deg(v) < 6 \\
+			\exists v \in V : \deg(v) < 6
+		\end{gather*}
+		Induktion über $\abs{V} = n$ \\
+		IV: $n \leq 6$ \\
+		$n \rightarrow n+1$
+	\end{bew}
+\end{satz*}

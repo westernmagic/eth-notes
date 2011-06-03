@@ -1,0 +1,755 @@
+\chapter{Algebra}
+\section{Gruppen}
+\clearpage
+\begin{def*}[note = Gruppe , index = Gruppe]
+	$(G,*) , G$ Menge (endlich oder unendlich) \\
+	$* : G \times G \rightarrow G$ Operation \\
+	$(G,*)$ \textbf{Gruppe}, falls
+	\begin{itemize}
+		\item $\forall a , b , c \in G : (a*b)*c = a*(b*c)$ (Assoziativität)
+		\item $\exists e : a*e = e*a = a \forall a$ (Neutralelement)
+		\item $\forall a \exists b : a*b = b*a = e$ (Inverse)
+	\end{itemize}
+	Folgerungen:
+	\begin{itemize}
+		\item Klammer weglassen
+		\item \[ a^n = \begin{cases}
+			\underbrace{a * a * \dots * a}_{n \text{ mal}}				&n \geq 0	\\
+			e											&n = 0	\\
+			\underbrace{a^{-1} * a^{-1} * \dots * a^{-1}}_{-n \text{ mal}}	&n \geq 0	
+			\end{cases} \] $\rightarrow$ Potenzgesetze
+		\item Neutralelement eindeutig: $e, e'$ Neutrlelemente: \[ e \overset{e'}{=} e * e' \overset{e}{=} e' \]
+		\item Inverse eindeutig: $b, b'$ Inverse von $a$ \[ b = b*e = b*(a*b') = (b*a)*b' = b' \implies b = b' = a^{-1} \]
+	\end{itemize}
+\end{def*}
+\begin{bem}
+	Kommutativität ($\forall a, b \in G : a * b = b * a$) \textbf{nicht} gefordert. \\
+	Falls sie gilt: \textbf{Abelsche} Gruppe
+\end{bem}
+Folgerung:
+$\forall a, b \in G : a * x = b$ hat \text{genau eine} Lösung. \\
+\begin{bew}[note = Exsitenz]
+	\begin{gather*}
+		x = a^{-1} * b \\
+		a * ( a^{-1} * b ) = ( a * a^{-1} ) * b = b
+	\end{gather*}
+\end{bew}
+\begin{bew}[note = Eindeutigkeit]
+	$x, x'$ Lösungen \\
+	\begin{gather*}
+		a * x = b = a * x' \quad \mid a^{-1} * \\
+		a^{-1} * a * x = a^{-1} * a * x' \\
+		x = x'
+	\end{gather*}
+\end{bew}
+
+\begin{bsp*}[head = Beispiele von Gruppen]
+	\begin{itemize}
+		\item $( \Z , + )$ , $( \Z_m^* , \cdot )$
+		\item $( \Q , + )$ , $( \Q \setminus \{ 0 \} , \cdot )$
+		\item $( \R , + )$ , $( \R \setminus \{ 0 \} , \cdot )$
+		\item $( \Z_p , + )$ , $( \Z_p \setminus \{ 0 \} , \cdot )$
+		\item ( $\R^n$ , Vektoraddition )
+		\item ( $M^{n \times n}(\R)$ mit $\det(M) \neq 0$, Matrixmultiplikation )
+		\item ( Permutationen auf einer Menge $M$ , Komposition )
+	\end{itemize}
+\end{bsp*}
+\begin{def*}{Geometrische Gruppen}
+	Abbildung der Ebene auf sich, die gewisse Grössen invariant lassen.
+\end{def*}
+\begin{bsp*}
+	\begin{itemize}
+		\item Rotation um 0.
+		\item Ähnlichkeitstransformationen
+		\item Kongruenztransformationen: (nicht kommutativ)
+			\begin{itemize}
+				\item Translationen
+				\item Rotationen
+				\item Spiegelungen
+			\end{itemize}
+		\item Symmetriegruppen:
+			\begin{itemize}
+				\item Symmertiegruppe $S_3$ des gleichseitegen Dreiecks: Menge aller Kongruenztransformationen, die den Dreieck invariant lassen. \\
+					Anzahl Ecken: $6 = 3!$
+				\item Symmetriegruppe $S_4$ des Quadrats \\
+					Anzahl Elemente: 8
+				\item Symmetriegruppe $S_n$ des $n$-Ecks \\
+					Anzahl Elemente: $2n$ \\
+					Die Gruppe wird erzeugt von:
+						\begin{itemize}
+							\item Drehung um $\frac{2\pi}{n}$
+							\item eine Spiegelung
+						\end{itemize}
+						oder
+						\begin{itemize}
+							\item alle Spiegelungen
+						\end{itemize}
+						$\implies$ 1 oder 2 Spiegelungen
+			\end{itemize}
+	\end{itemize}
+\end{bsp*}
+\begin{bsp*}[head = Beispiele von endlichen Gruppen: systematisch]
+	\begin{description}
+		\item[1 Element?] Triviale Gruppe $G = \{ e \} , e * e = e$
+		\item[2 Elemente?] \{ Identität, eine feste Spiegelung \} , $( \Z_2 , + )$ , $( \Z_3^* , \cdot )$ , XOR
+		\item[3 Elemente?] Es gibt nur eine Gruppe mit 3 Elementen. \\
+			\begin{tabular}{ c | c c c }
+				$\cdot$	&e	&a	&b	\\ \hline
+				e		&e	&a	&b	\\
+				a		&a	&b	&e	\\
+				b		&b	&e	&a	
+			\end{tabular} \quad
+			\begin{tabular}{ c | c c c }
+				$( \Z_3 , + )$	&0	&1	&2	\\ \hline
+				0			&0	&1	&2	\\
+				1			&1	&2	&0	\\
+				2			&2	&0	&1	
+			\end{tabular}
+		\item[4 Elemente?]
+			\begin{tabular}{ c | c c c c }
+				$*$		&e	&a		&b		&c	\\ \hline
+				e		&e	&a		&b		&c	\\
+				a		&a	&\fbox{e}	&c		&b	\\
+				b		&b	&c		&\fbox{e}	&a	\\
+				c		&a	&b		&a		&e	
+			\end{tabular} $\not\equiv$
+			\begin{tabular}{ c | c c c c }
+				$*$		&e	&a		&b	&c	\\ \hline
+				e		&e	&a		&b	&c	\\
+				a		&a	&\fbox{e}	&c	&b	\\
+				b		&b	&c		&\fbox{a}	&e	\\
+				c		&a	&b		&e	&a	
+			\end{tabular} $\equiv$
+			\begin{tabular}{ c | c c c c }
+				$*$		&e	&a		&b	&c	\\ \hline
+				e		&e	&a		&b	&c	\\
+				a		&a	&\fbox{b}	&c	&e	\\
+				b		&b	&c		&e	&a	\\
+				c		&a	&e		&a	&b	
+			\end{tabular} $\equiv ( \Z_4 , + ) \equiv ( \Z_5^* , \cdot )$
+	\end{description}
+\end{bsp*}
+\begin{def*}[note = Isomorphismus , index = Isomorphismus]
+	\textbf{Isomorphismus} zwischen $( G , * ) , ( G' , \circ )$:
+	$\varphi : G \rightarrow G'$ bijektiv, sodass
+	\[ \forall a, b \in G : \varphi( a * b ) = \varphi( a ) \circ \varphi( b ) \]
+	$G$ und $G'$ sind \textbf{isomorph}, $G \equiv G'$
+\end{def*}
+Es gilt dann auch:
+\[ \varphi( e ) = e' \in G' \]
+\begin{bew}
+	\begin{gather*}
+		\varphi(a) = \varphi(a * e) = \varphi(a) \circ \varphi(e) \\
+		\implies \varphi(e) = e' \in G'
+	\end{gather*}
+\end{bew}
+\[ \varphi(a^{-1}) = \varphi(a)^{-1} \]
+\begin{bew}
+	\[ e' = \varphi(e) = \varphi(a * a^{-1}) = \varphi(a) \circ \underbrace{\varphi(a^{-1})}_{=\varphi(a)^{-1}} \quad \blacksquare \]
+\end{bew}
+\begin{gather*}
+	\text{CRS: } \Z_2 \times \Z_3 = \Z_6 \\
+	\Z_2 \times \Z_2 \\
+	\begin{pmatrix}a\\b\end{pmatrix} * \begin{pmatrix}c\\d\end{pmatrix} = \begin{pmatrix}a \oplus c\\b \oplus d\end{pmatrix}
+\end{gather*}
+\begin{tabular}{ c | c c c c }
+	$*$		&$\begin{pmatrix}0\\0\end{pmatrix}$	&$\begin{pmatrix}1\\0\end{pmatrix}$		&$\begin{pmatrix}0\\1\end{pmatrix}$	&$\begin{pmatrix}1\\1\end{pmatrix}$	\\ \hline
+	$\begin{pmatrix}0\\0\end{pmatrix}$		&$\begin{pmatrix}0\\0\end{pmatrix}$	&$\begin{pmatrix}1\\0\end{pmatrix}$		&$\begin{pmatrix}0\\1\end{pmatrix}$	&$\begin{pmatrix}1\\1\end{pmatrix}$	\\
+	$\begin{pmatrix}1\\0\end{pmatrix}$		&$\begin{pmatrix}1\\0\end{pmatrix}$	&$\begin{pmatrix}0\\0\end{pmatrix}$	&$\begin{pmatrix}1\\1\end{pmatrix}$	&$\begin{pmatrix}0\\1\end{pmatrix}$	\\
+	$\begin{pmatrix}0\\1\end{pmatrix}$		&$\begin{pmatrix}0\\1\end{pmatrix}$	&$\begin{pmatrix}1\\1\end{pmatrix}$		&$\begin{pmatrix}0\\0\end{pmatrix}$	&$\begin{pmatrix}1\\0\end{pmatrix}$	\\
+	$\begin{pmatrix}1\\1\end{pmatrix}$		&$\begin{pmatrix}1\\1\end{pmatrix}$	&$\begin{pmatrix}0\\1\end{pmatrix}$		&$\begin{pmatrix}1\\0\end{pmatrix}$	&$\begin{pmatrix}0\\0\end{pmatrix}$	
+\end{tabular}\\
+\begin{def*}[note = Produkt , index = Produkt]
+	$(G , \circ_G) , (G' , \circ_{G'})$ Gruppen \\
+	\textbf{Produkt} $G \times G' : (G \times G' , \circ ):$ \\
+	\[ (a,a') \circ (b,b') \coloneqq (a \circ_G b , a' \circ_{G'} b') \quad a , b \in G ; a' , b' \in G' \]
+	$(G \times G' , \circ)$ ist Gruppe
+\end{def*}
+\begin{def*}[note = Untergruppe , index = Untergruppe]
+	$(G , \circ)$ Gruppe \\
+	$\varnothing \neq H \subseteq G$ \textbf{Untergruppe} von $G$, falls $H$ selbst eine Gruppe bezüglich $\circ$ ist:
+	\begin{itemize}
+		\item $e \in H$
+		\item $a , b \in H \implies a \circ b \in H$
+		\item $a \in H \implies a^{-1} \in H$
+	\end{itemize}
+\end{def*}
+\begin{bsp*}
+	\begin{itemize}
+		\item Untergruppen von $\Z_{10} : \{ 0 , 1 , \dotsc , 9 \}$ \\
+			$\Z_{10} , \{ 0, 2, 4, 6, 8 \} , \{ 0, 5 \} , \{ 0 \}$
+		\item $\{ -1 , 1 \}$ ist UG von $\Z_{10}^* \quad (n > 2)$ \\
+			$2 \mid \abs{Z_n^*} = \varphi(n) = \prod (p_i -1) p_i^{e_i - 1}$
+	\end{itemize}
+\end{bsp*}
+\begin{satz*}[note = (Lagrange)]
+	$G$ endliche Gruppe, $H$ Untergruppe von $G$. \\
+	Dann $\abs{H} \mid \abs{G}$\\
+	\begin{bew}
+		\begin{gather*}
+			a \in G \\
+			a H \coloneqq \{ a \cdot h \mid h \in H \} \\
+		\end{gather*}
+		Nebenklasse \\
+		Beobachtungen:
+		\begin{itemize}
+			\item Falls $e \notin H$, dann ist $a H$ keine Untergruppe von $G$ $(e \notin a \cdot H) \quad [e = a \cdot h \implies a = \underbrace{e}_{\in H} \cdot \underbrace{h^{-1}}_{\in H} \implies a \in H \: \lightning]$
+			\item Falls $a \cdot H \cap b \cdot H \neq \varnothing \implies aH = bH$. \\
+				Sei $c = a \cdot h = b \cdot h' \implies a = b \cdot \underbrace{h' \cdot h^{-1}}_{\in H} \quad h , h' \in H$\\
+				Sei $x \in aH$ \\
+				$x = a \cdot \underbrace{h''}_{\in H} = b \cdot \underbrace{h' \cdot h^{-1} \cdot h''}_{\in H} \in b H$\\
+				Analog: $bH \subseteq aH$. Also $aH = bH$
+			\item $\underbrace{\abs{aH}}_{=\abs{\{ a \cdot h \mid h \in H \}}} = \abs{H}$ \\
+				$ah = ah' \overset{a^{-1} \cdot}{\iff} h = h'$
+		\end{itemize}
+		disjunkte Vereinigung
+		\[ G = H \cup aH \cup a'H \cup \dots \implies \abs{H} \mid \abs{G} \]
+	\end{bew}
+	Konsequenzen? \\
+	Betrachte $ e = a^0 , a^1 , a^2 , a^3 , \dotsc , a^i , \dotsc a^j$
+	$a^i = a^j \implies \underbrace{a^j (a^i)^{-1}}_{a^{j-1}} = e$
+\end{satz*}
+\begin{def*}[note = Ordnung , index = Ordnung]
+	\begin{gather*}
+		G , a \in G \\
+		\ord(a) \coloneqq \min\{ i > 0 \mid a^i = e \} \\
+		\textbf{Ordnung} \text{ von } a \\
+		H_a \coloneqq \{ e , a , a^2 , \dotsc , a^{\ord(a) - 1} \}
+	\end{gather*}
+	\begin{itemize}
+		\item $H_a$ hat genau $\ord(a)$ Elemente.
+		\item $H_a$ ist Abelsche Untergruppe von $G$ \\
+			\begin{itemize}
+				\item $a^i \circ a^j = a^{i+j} = a^{k \cdot \ord(a) + R_{\ord(a)}(i+j)} = \underbrace{(\underbrace{a^{\ord(a)}}_{e})^k}_{e} \circ a^{\overbrace{R_{\ord(a)}(i+j)}^{< \ord(a)}} \in H_a$
+				\item $(\underbrace{a^i}_{\in H_a})^{-1} = a^{\ord(a) - i} \in H_a \quad [ a^i \circ a^{\ord(a) - i} = a^{\ord(a)} = e ]$
+				\item $a^i \circ a^j = a^{i+j} = a^{j+i} = a^j \circ a^i$
+			\end{itemize}
+	\end{itemize}
+\end{def*}
+\begin{satz*}[note = (Lagrange)]
+	$G$ endliche Gruppe, $a \in G$. \\
+	Dann $\ord(a) \mid \abs{G}$ und
+	\[ a^{\abs{G}} = e \]
+	\begin{bew}
+		\begin{gather*}
+			\ord(a) = \abs{H_a} , H_a \text{ UG von } G \\
+			\implies \abs{H_a} \mid \abs{G} \implies \ord(a) \mid \abs{G} \\
+			\implies \exists k \in \Z : k \cdot \ord(a) = \abs{G} \\
+			a^{\abs{G}} = a^{k \cdot \ord(a)} = ( a^{\ord(a)} )^k = e^k = e \quad \blacksquare
+		\end{gather*}
+	\end{bew}
+\end{satz*}
+Spezialfall: \\
+\begin{satz*}[note = (Fermat)]
+	$p$ prim , $p \nmid a$:
+	\[ a^{p-1} \equiv 1 \pmod p \]
+	\begin{bew}
+		Lagrange für $G = \Z_p^*$
+	\end{bew}
+\end{satz*}
+\begin{satz*}[note = (Euler)]
+	$n \in \N , \ggt(a,n) = 1$ \\
+	Dann
+	\[ a^{\varphi(n)} \equiv 1 \pmod n \]
+	\begin{bew}
+		$\varphi(n) = \abs{\Z_n^*}$\\
+		$a \in \Z_n^*$\\
+		Lagrange
+	\end{bew}
+\end{satz*}
+\begin{bsp*}
+	\begin{gather*}
+		p , q , p \neq q , p \nmid a , q \nmid a , n = p \cdot q \\
+		a = (p-1)(q-1) \equiv 1 \pmod {pq}
+	\end{gather*}
+\end{bsp*}
+
+\subsection{RSA 1978 (Rivest, Shamir, Adleman)}
+Public-Key-Kryptolosystem (1976 Diffie, Hellman)
+
+Ingredienzen von RSA:
+\begin{description}
+	\item[Effizienz] Modulare Arithmetik, erweiterter Euklid
+	\item[Korrektheit] Euler (Fermat + CRS)
+	\item[Sicherheit] $p \cdot q \rightarrow p , q$ schwierig?
+\end{description}
+\begin{tabularx}{\textwidth}{ X c X }
+	Alice								&		&Bob								\\
+&&	Wählt grosse Primzahlen $p , q$.													\\
+&&	Berechne $n \coloneqq p \cdot q$												\\
+&&	$e$ zufällig mit $\ggt(e,(p-1)(q-1)) = 1$											\\
+&&	Berechne $d = e^{-1} \pmod{(p-1)(q-1)}$											\\
+&&	$pk = (n,e) , sk = (n,d)$														\\
+&	$\overset{pk}{\leftarrow}$														&\\
+	Meldung $M (\leq n)$															&&\\
+	ENC: $C = R_n(M^e)$															&&\\
+	Effiziente Berechnung:															&&\\
+	$M , m^2 , M^4 , M^6 , \dotsc , M^{2i}$												&&\\
+	$e = (e_r e_{r-1} \dots e_1 e_0)_2$ Binärdarstellung									&&\\
+	$C = ((((M^{e_r})^2 \cdot M^{e_{r-1}})^2 \cdot M^{e_{r-2}})^2 \cdot M^{e_{r-3}})^2 \dotsm M^{e_0}$ 	&&\\
+	in $\Z_n^* \implies R_n(\cdot)$ bei jedem Schritt										&&\\
+&	$\overset{C}{\rightarrow}$														&\\
+&&	DEC: $M = R_n(C^d)$															
+\end{tabularx}
+
+\subsubsection{Wieso ist RSA korrekt?}
+\begin{gather*}
+	M \rightarrow C = R_n(M^e) \rightarrow R_n(C^d) \overset{??}{=} M \\
+	R_n(C^d) = R_n((R_n(M^e))^d) = R_n(M^{e \cdot d}) = R_n(M^{1 + k(p-1)(q-1)}) \\
+	d \equiv e^{-1} \pmod{(p-1)(q-1)} \iff e \cdot d \equiv 1 \pmod{(p-1)(q-1)}
+\end{gather*}
+
+\subsubsection{Sicherheit}
+RSA gebrochen, falls $\underbrace{p \cdot q}_{n} \rightarrow p , q$ \quad Bester Algorithmus?
+\begin{description}
+	\item[naiv:] $\sqrt{n} = e^{\frac{1}{2} \log n}$
+	\item[NFS:] $e^{(\log n)^{\frac{1}{3}}}$
+\end{description}
+
+\subsubsection{Digitale Signaturen}
+\begin{tabularx}{\textwidth}{ X c X }
+	Alice				&	&Bob		\\
+	$SK = (n,d)$					\\
+	$PK = (n,e)$					\\
+&	$\overset{PK}{\rightarrow}$			\\
+	Ich schulde Bob 1000 CHF = $v$		\\
+	$S = R_n(v^d)$					\\
+&	$\overset{v,S}{\rightarrow}$			\\
+&&	Verifizieren: $R_n(S^e) \overset{?}{=} v$	\\
+&&	Bob geht zum Richter:				\\
+&&	$v, S, (n,e) = PK$ Alice				
+\end{tabularx}
+
+\subsubsection{Anzahl Gruppen mit 5 Elementen}
+\begin{gather*}
+	G = \{ e , a , b , c , d \} \\
+	\ord(a) \mid 5 , \quad a \neq e \implies \ord(a) \neq 1 \\
+	\implies \ord(a) = 5
+	\intertext{Also:}
+	G = \{ e , a , a^2 , a^3 , a^4 \} \\
+	a^i \circ a^j = a^{R_5(i+j)} \\
+	\implies G \equiv \Z_5 \\
+	\intertext{Isomorphismus: $a^i \leftrightarrow i$}
+\end{gather*}
+
+\subsubsection{Gruppen mit 6 Elementen}
+$\Z_6 \equiv \Z_7^* \equiv \Z_2 \times \Z_3 \not\equiv S_3$ (Symmetriegruppe des Dreiecks) $\equiv$ Permutation on $\{ 1, 2, 3 \}$\\
+\[ \begin{array}{ c | c | c }
+	\Z_7^*	&\Z_6	&\Z_2 \times \Z^3				\\ \hline
+	1		&0		&\begin{pmatrix}0\\0\end{pmatrix}	\\
+	3		&1		&\begin{pmatrix}1\\1\end{pmatrix}	\\
+	2		&2		&\begin{pmatrix}0\\2\end{pmatrix}	\\
+	6		&3		&\begin{pmatrix}1\\0\end{pmatrix}	\\
+	4		&4		&\begin{pmatrix}0\\1\end{pmatrix}	\\
+	5		&5		&\begin{pmatrix}1\\2\end{pmatrix}	
+\end{array} \]
+
+\subsubsection{Gruppen mit 7 Elementen}
+$\Z_7$
+
+\subsubsection{Gruppen mit \texorpdfstring{$p$}{p} Elementen (\texorpdfstring{$p$}{p} prim)}
+$\Z_p$
+
+\begin{def*}[note = zyklisch , index = zyklisch]
+	Eine (endliche) Gruppe $G$ heisst \textbf{zyklisch}, falls es $g \in G$ gibt mit $\ord(g) = \abs{G}$:
+	\[ G = \{ g^0 , g^1 , \dotsc , g^{\abs{G}-1} \} \]
+	$g$ heisst \textbf{Generator} von $g$, $G \equiv \langle g \rangle$
+\end{def*}
+\begin{bem}
+	$G$ zyklisch $\implies G$ abelsch \\
+	\[ a \circ b = g^i \circ g^j = g^{i+j} = g^{j+i} = b \circ a \]
+	Umkehrung gilt nicht! (Gegenbeispiel $\Z_2 \times \Z_2$)
+\end{bem}
+\begin{satz*}
+	$\abs{G}$ prim $\implies G$ zyklisch \\
+	Jedes $g \neq e$ ist Generator. \\
+	\begin{bew}
+		\begin{gather*}
+			g \neq e , \ord(g) \mid \abs{G} , \ord(g) \neq 1 \\
+			\implies \ord(G) = \abs{G} \implies G = \langle g \rangle \quad \blacksquare
+		\end{gather*}
+	\end{bew}
+\end{satz*}
+$G$ zyklisch : $G \equiv \Z_{\abs{G}}$ \\
+\begin{bsp*}
+	\begin{gather*}
+		\Z_p^* \equiv \Z_{p-1} = \langle a \rangle \\
+		\varphi : R_p(a^x) \leftrightarrow x
+	\end{gather*}
+	BILD $\Z_{10}$ \\
+	BILD $\Z_{\abs{G}}$ \\
+	$i \mapsto g^i$: square \& multiply \\
+	\# ops $\leq 2 \cdot \log \abs{G}$
+	$\rightarrow$ effizient \\
+	$g^i \mapsto i$ schwierig \\
+	Diskreter Logarithmus:
+	\begin{enumerate}[label=\arabic*)]
+		\item naiv: $g^0 , g^1 , g^2 , \dotsc , g^i \rightarrow \abs{G}$ Schritte
+		\item ''Baby-step giant-step'' falls Speicher für $M$ Gruppenelemente \\
+			Tabelle: $(0,g^i) , (1,g^{i+1}) , \dotsc , (M,g^{i+M})$ sortiert nach zweiten Eintrag \\
+			BILD \\
+			$g^{jM} = g^{i+k} \implies i = jM - k$ \\
+			\# Schritte: $M + \frac{\abs{G}}{M}$, optimal: $M \approx \sqrt{\abs{G}} \rightsquigarrow \sim \sqrt{\abs{G}}$
+	\end{enumerate}
+\end{bsp*}
+\begin{bsp*}
+	\begin{tabular}{ l l l }
+		$\abs{G} =$	&$2^{1000}$				\\
+		$i \mapsto g^i$:	&$2000$					\\
+		$g^i \mapsto i$:	&naiv:	&$\sim 2^{1000}$	\\
+					&BS-GS:	&$\sim 2^{500}$		
+	\end{tabular}
+\end{bsp*}
+
+\subsubsection{Diffie-Hellman-Protokoll}
+\begin{tabular}{ c c c }
+	Alice				&	&Bob												\\
+					&$\overset{G,g,G=\langle g \rangle}{\rightarrow}$	&				\\
+	$x$				&$\overset{g^x}{\rightarrow}$				&				\\
+					&$\overset{g^y}{\leftarrow}$				$y$				\\
+	$(g^y)^x = g^{xy}$	&									&$(g^x)^y = g^{xy}$	\\
+		&$g^x, g^y \rightsquigarrow g^{xy}$						&				\\
+		&vermutlich schwierig									&				
+\end{tabular}\\
+Ziel: Verständnis von fehlerkorrigierenden Codes\\
+Problem: Verrauschter Kanal\\
+BILD
+
+\subsection{Körper und Polynome}
+\begin{def*}[note = Körper , index = Körper]
+	$(K,+,\cdot)$ Körper, falls
+	\begin{itemize}
+		\item $(K,+)$ Abelsche Gruppe (Neutralelement $0$)
+		\item $(K^* = K \setminus \{ 0 \},\cdot)$ Abelsche Gruppe (Neutralement $1 \neq 0$)
+		\item Distibutivität: $\forall a, b, c \in K : a \cdot (b+c) = a \cdot b + a \cdot c$
+	\end{itemize}
+\end{def*}
+
+\subsubsection{Beispiele von Körper}
+\[ \C , \R , \Q , ( \Z_p , + , \cdot ) (p \text{ prim}) \]
+$p=2$
+\begin{gather*}
+	\begin{array}{ c | c c }
+		+	&0	&1	\\ \hline
+		0	&0	&1	\\
+		1	&1	&0	
+	\end{array} \quad \begin{array}{ c | c c }
+		\cdot	&0	&1	\\ \hline
+		0	&0	&0	\\
+		1	&0	&1	
+	\end{array}
+\end{gather*}
+
+\subsubsection{Eigenschaften}
+\begin{itemize}
+	\item $0 \cdot a = 0$ \\
+		\begin{bew}
+			\begin{gather*}
+				0 \cdot a = (0+0) \cdot a = 0 \cdot a + 0 \cdot a \quad + (-0 \cdot a) \\
+				0 = 0 \cdot a
+			\end{gather*}
+		\end{bew}
+	\item Nullteilerfreiheit: $a \cdot b = 0 \implies a = 0 \vee b = 0$ \\
+		\begin{bew}
+			\begin{gather*}
+				a \neq 0 \implies \exists a^{-1} \\
+				b = a^{-1} \cdot \underbrace{a \cdot b}_{=0} = 0
+			\end{gather*}
+		\end{bew}
+	\item $(a+b)^2 = a^2 + \underbrace{2}_{=(1+1)}ab + b^2$
+	\item Gleichungssystem Lösen: Gauss-Elimination \\
+		$Ax = b$ hat eindeutige Lösung, falls $\det(A) \neq 0 \quad (A \in K^{n \times n} , b \in K^n)$
+\end{itemize}
+
+\subsubsection{Endliche Körper}
+$GF(2)$ ''Galois-field'' (1811 - 1832) \\
+\begin{gather*}
+	GF(2) \\
+	\begin{array}{ c | c c }
+		+	&0	&1	\\ \hline
+		0	&0	&1	\\
+		1	&1	&0	
+	\end{array} \quad \begin{array}{ c | c c }
+		\cdot	&0	&1	\\ \hline
+		0	&0	&0	\\
+		1	&0	&1	
+	\end{array} \\
+	GF(3) \\
+	\begin{array}{ c | c c c }
+		+	&0	&1	&2	\\ \hline
+		0	&0	&1	&2	\\
+		1	&1	&2	&0	\\
+		2	&2	&0	&1
+	\end{array} \quad \begin{array}{ c | c c c }
+		\cdot	&0	&1	&2	\\ \hline
+		0	&0	&0	&0	\\
+		1	&0	&1	&2	\\
+		2	&0	&2	&1	
+	\end{array} \\
+	\text{Körper mit 4 Elementen? } (\Z_4,+,\cdot) \text{ kein Körper } 2 \cdot 2 = 0 \\
+	GF(4) \\
+	\begin{array}{ c | c c c c }
+		+	&0	&1	&a	&b	\\ \hline
+		0	&0	&1	&a	&b	\\
+		1	&1	&0	&b	&a	\\
+		a	&2	&b	&0	&1	\\
+		b	&b	&a	&1	&0	
+	\end{array} \quad \begin{array}{ c | c c c c }
+		\cdot	&0	&1	&a	&b	\\ \hline
+		0	&0	&0	&0	&0	\\
+		1	&0	&1	&a	&b	\\
+		a	&0	&a	&b	&1	\\
+		b	&0	&b	&1	&a	
+	\end{array}
+\end{gather*}
+$\Z$ $\rightarrow$ \begin{tabular}{c}Euklid\\Restsatz\end{tabular} $\rightarrow$ Teilbarkeit $\rightarrow$ \begin{tabular}{c}ggT\\Erweiterter\\Eulkid\\$\ggt(a,b) = u \cdot a + v \cdot b$\end{tabular} $\rightarrow$ \begin{tabular}{c}Primzahlen\\eindeutige Zerlegung\\$p | a \cdot b \implies p | a \vee p | b$\end{tabular} $\rightarrow$ \begin{tabular}{c}Arithmetik modulo $p$\\Existenz von Inversen\\$\rightarrow$ Primkörper $\Z_p = GF(p)$\end{tabular} \\
+\begin{tabular}{c}Polynome\\über Körper\\(z.B. über $GF(4)$\end{tabular} $\rightarrow$ '' $\rightarrow$ '' $\rightarrow$ '' $\rightarrow$ \begin{tabular}{c}Irreduzible Polynome\\eindeutige Zerlegung\end{tabular} $\rightarrow$ \begin{tabular}{c}Arithmetik modulo\\irreduzible Polynome\\Existenz der Inverse\\$\rightarrow$ Erweiterungskörper\end{tabular}\\
+\begin{bsp*}
+	\begin{gather*}
+		GF(4) = GF(2^2) \\
+		[ GF(2): 1+1=0 , + = - , (a+b)^2 = a^2 + b^2 ] \\
+		p(x) = x^2 + x + 1 \text{ Primpolynom} \\
+		K = \{ 0 , 1 , x , x+1 \} \\
+		\begin{array}{ c | c c c c }
+		+	&0	&1	&x	&x+1	\\ \hline
+		0	&0	&1	&x	&x+1	\\
+		1	&1	&0	&x+1	&x	\\
+		x	&x	&x+1	&0	&1	\\
+		x+1	&x+1	&x	&1	&0	
+	\end{array} \\
+	\begin{array}{ c | c c c c }
+		\cdot	&0	&1	&x	&x+1	\\ \hline
+		0	&0	&0	&0	&0	\\
+		1	&0	&1	&x	&x+1	\\
+		x	&0	&x	&x+1	&1	\\
+		x+1	&0	&x+1	&1	&x	
+	\end{array}
+	\end{gather*}
+\end{bsp*}
+
+\subsubsection{Polynome über einem Körper K}
+\begin{def*}[note = Polynomring , index = Polynomring]
+	$K$ Körper. $K[x]$ Polynomring,
+	\begin{gather*}
+		K[x] \coloneqq \left\{ \sum_{i=0}^n a_i x^i \mid a_i \in K , a_n \neq 0 \right\} \cup \{ 0 \} \\
+		a_n \neq 0 : \deg\left( \sum_{i=0}^n a_i x^i \right) = n \\
+		''\deg(0) = -\infty'' \\
+		\deg(a \cdot b) = \deg(a) + \deg(b)
+	\end{gather*}
+\end{def*}
+\begin{satz*}[note = (Euklid)]
+	$K$ Körper, $a(x) , b(x) \in K[x] , b(x) \not\equiv 0$.\\
+	Dann gibt es eindeutige $q(x) , r(x) \in K[x]$ mit
+	\[ a(x) = q(x) \cdot b(x) + r(x) , \quad \deg(r(x)) < \deg(b(x)) \]
+	\begin{bew}
+		Existenz:
+		\begin{description}
+			\item[1. Fall] \[ \deg(a) < \deg(b) : q(x) \equiv 0 , r(x) \equiv a(x) \]
+			\item[2. Fall]
+				\begin{gather*}
+					\deg(a) \geq \deg(b) :	\\
+					a(x) = a_n x^n + a_{n-1} x^{n-1} + \dots + a_1 x + a_0 \\
+					b(x) = b_m x^m + b_{m-1} x^{m-1} + \dots + b_1 x + b_0 \\
+					q_1(x) = \frac{a_n}{b_m} x^{n-m} \\
+					\deg(\underbrace{a(x) - q_1(x) b(x)}_{=a'(x)}) \leq \deg(a) - 1
+				\end{gather*}
+				Falls $\deg(a') \geq \deg(b)$: Analog: $\deg(a'(x) - q_2(x) b(x)) \leq \deg(a') - 1 \leq \deg(a) - 2$ \\
+				Wiederholen, bis $\deg(\underbrace{a(x) - ( q_1(x) + q_2(x) + \dots ) b(x)}_{=r(x)}) < \deg(b)$
+		\end{description}
+		Eindeutigkeit:
+		\begin{gather*}
+			\deg(r) < \deg(b) , \deg(r') < \deg(b) \\
+			\begin{split}
+				a(x)	&\equiv q(x) b(x) + r(x) \\
+					&\equiv q'(x) b(x) + r'(x)
+			\end{split} \\
+			(q(x) - q'(x)) b(x) \equiv \underbrace{r'(x) - r(x)}_{<\deg(b)} \\
+			\begin{split}
+				\implies	&q(x) \equiv q'(x) \\
+						&r(x) \equiv r'(x)
+			\end{split} \quad \blacksquare
+		\end{gather*}
+	\end{bew}
+\end{satz*}
+
+\subsubsection{Teilbarkeit und irreduzible Polynome}
+\begin{def*}[note = irreduzibel , index = irreduzibel]
+	$a(x) , b(x) \in K[x] , b \not\equiv 0$. Dann
+	\begin{gather*}
+		b(x) \mid a(x) :\iff \exists c(x) \in K[x] : b(x) \cdot c(x) = a(x) \\
+		(\deg(p) \geq 1) \\
+		p(x) \text{ irreduzibel } \\
+		:\iff ( p(x) = s(x) \cdot t(x) \implies \deg(s) = 0 \vee \deg(t) = 0 )
+	\end{gather*}
+\end{def*}
+\begin{bsp*}
+	\[ \R , x+1 = \frac{1}{5} \cdot (5x + 5) \]
+\end{bsp*}
+
+Wie erkennt man, ob ein Polynom irreduzibel ist?\\
+Nullstellen und lineare Faktoren\\
+\begin{satz*}
+	$a(x) \in K[x] , c \in K$ mit $a(c) = 0$. ($a(x)$ als Funktion $K \rightarrow K$, ausgewertet an $x = c$). Dann und nur dann gilt
+	\[(x-c) | a(x) \]
+	\begin{bew}
+		Euklid: 
+		\begin{gather*}
+			a(x) = q(x) (x-c) + r(x) \\
+			\deg(r) < 1 \\
+			r \in K \\
+			a(x) = q(x) (x-c) + r \\
+			c \text{ ist Nullstelle} \\
+			0 = a(c) = q(c) \underbrace{(c-c)}_{0} + r \\
+			\implies r = 0 \\
+			\implies a(x) = q(x) (x-c) \implies (x-c) | a(x) \quad \blacksquare
+		\end{gather*}
+	\end{bew}
+	\[ x-c \equiv 1 \cdot x^1 + (-c) \cdot x^0 \]
+\end{satz*}
+
+\subsubsection{Irreduzible Polynome über GF(2)}
+\begin{description}
+	\item[Grad 1] $x, x+1$
+	\item[Grad 2] 
+		\[ \begin{array}{ c c c c c c }
+				&	&	&	&	&\text{NS}	\\
+			x^2	&	&	&	&	&0		\\
+			x^2	&	&	&+	&1	&1		\\
+			x^2	&+	&x	&	&	&0,1		\\
+			x^2	&+	&x	&+	&1	&\leftarrow
+		\end{array} \]
+	\item[Grad 3] 
+		\[ \begin{array}{ c c c c c c c c }
+				&	&	&	&	&	&	&\text{NS}	\\
+			x^3	&	&	&	&	&	&	&0		\\
+			x^3	&	&	&	&	&+	&1	&1		\\
+			x^3	&	&	&+	&x	&	&	&0,1		\\
+			x^3	&	&	&+	&x	&+	&1	&\leftarrow\\
+			x^3	&+	&x^2	&	&	&	&	&0,1		\\
+			x^3	&+	&x^2	&	&	&+	&1	&\leftarrow\\
+			x^3	&+	&x^2	&+	&x	&	&	&0		\\
+			x^3	&+	&x^2	&+	&x	&+	&1	&1	
+		\end{array} \]
+	\item[Grad 4]
+		Keine NS, aber nicht irreduzibel: $(x^2+x+1)(x^2+x+1) = x^4+x^2+1$ \\
+		$x^4 + \dots + 1$ ungerade \# Summanden: \\
+		$x^4+x^3+1$ \\
+		$x^4+x+1$ \\
+		$x^4+x^3+x^2+x+1$
+\end{description}
+Es gibt irreduzible Polynome beliebigen Grades über $GF(p)$
+
+\subsubsection{ggT und Erweiterter Euklid}
+\[ a(x) | b(x) \wedge b(x) | a(x) \implies a(x) = k \cdot b(x) , k \in K^* \]
+\begin{bew}
+	\begin{gather*}
+		a(x) = c(x) \cdot b(x) \equiv c(x) \cdot c'(x) \cdot a(x) \\
+		\implies c(x) \cdot c'(x) \equiv 1 \implies c(x) = k \in K^* , c' = \frac{1}{k} \text{ konstant}
+	\end{gather*}
+\end{bew}
+\begin{def*}[note = ggT , index = ggT]
+	$c(x)$ ist ggT von $a(x)$ und $b(x)$, falls 
+	\begin{itemize}
+		\item $c(x) | a(x)$
+		\item $c(x) | b(x)$
+		\item $d(x) | a(x) \wedge d(x) | b(x) \implies d(x) | c(x)$
+	\end{itemize}
+	ggT ist bis auf Konstante eindeutig.
+\end{def*}
+
+Euklid:
+\begin{gather*}
+	K = GF(3) \quad \ggt(x^3+2x+1 , 2x^2+x+2) = u \cdot (x^3+2x+1) + v \cdot (2x^2+x+2)
+\end{gather*}
+\begin{gather*}
+	\begin{array}{ | c | c | c | }
+									\hline
+					&u		&v		\\ \hline
+		x^3 + 2x + 1	&1		&0		\\ \hline
+		2x^2 + x + 2	&0		&1		\\ \hline
+		2x			&1		&x+1		\\ \hline
+		2			&2x+1	&2x^2 + 2	\\ \hline
+		1			&x + 2	&x^2 + 1	\\ \hline
+	\end{array} \\
+	1 = (x+2)(x^3+2x+1) + (x^2+1)(2x^2+x+2)
+\end{gather*}
+Euklid Restsatz, EEA
+\[ \ggt(a(x),b(x)) = u(x)a(x) + v(x)b(x) \]
+(Lemma von Bézont)
+\begin{gather*}
+	p \in K[x] \text{ irreduzibel} \\
+	p \nmid a : \ggt(a,p) = 1(x) \\
+	u \cdot a + v \cdot p \equiv 1(x) \\
+	u \equiv a^{-1}(x) \pmod{p(x)} \text{ Inverses}
+\end{gather*}
+$\implies$ Die Polynome modulo $p(x)$ sind ein \textbf{Körper} \\
+Grundmenge: Polynome vom Grad $< n$ (falls $n \deg(p)$)
+\[ \abs{ \{ a_0 + a_1 x + a_2 x^2 + \dots + a_{n-1} x^{n-1} \mid a_i \in K \} } = \abs{K}^n \]
+\begin{gather*}
+	p \text{ irreduzibel} \\
+	p(x) \mid a(x) \cdot b(x) \implies p(x) \mid a(x) \vee p(x) \mid b(x) \\
+	p \nmid a \implies \ggt(p,a) = 1 = ua + vp \implies b = \underbrace{uab}_{p \mid} + vpb \implies p \mid b
+\end{gather*}
+$\rightarrow$ Eindeutigkeit der Zerlegung in irreduzible Polynome \\
+$\rightarrow$ Polynom vom Grad $n$ hat höchstens $n$ Nullstellen.
+
+\subsubsection{Klassifikation endlicher Körper}
+\begin{itemize}
+	\item $p$ prim, $u \in \N \implies$ Dann existiert genau ein Körper mit $p^n$ Elementen: $GF(p^n)$ ($GF(p)$, irreduzibles Polynom vom Grad $n$, Grösse: $\abs{GF(p)}^n = p^n$)
+	\item Das sind alle!
+\end{itemize}
+Charakteristik von $K$: $X(K) \coloneqq \ord_{(K,+)}(1)$ \\
+\begin{beh}
+	$X(K)$ ist prim. \\
+	\begin{bew}
+		\begin{gather*}
+			\ord(1) = a \cdot b \\
+			\underbrace{1 + 1 + \dots + 1}_{a \cdot b} = 0 \\
+			\underbrace{(1 + 1 + \dots + 1)}_{a} \cdot \underbrace{(1 + 1 + \dots + 1)}_{b} \implies a = 1 \vee b = 1 \implies \ord(1) \text{ prim}
+		\end{gather*}
+	\end{bew}
+\end{beh}
+\[ K' = \{ 0 , 1 , 1 + 1 , \dotsc , \underbrace{1 + 1 + \dotsc}_{p-1} \} \]
+$K'$ ist ein Körper, $GF(p)$ \\
+$K$ ist Vektorraum über $K'$ der $\dim d$ \\
+$\abs{K} = \abs{GF(p)}^d = p^d$
+
+Polynom ($\not\equiv 0$) vom Grad $n$ hat höchstens $n$ Nullstellen. \\
+Heisst auch: Falls Zwei Polynome $p_1(x) , p_2(x)$ von Grad $\leq n$ an $n+1$ Stellen den Gleichen Wert annehmen, dann sind die identisch. \\
+($p_1(x) - p_2(x)$ Polynome von Grad $\leq n$, $n+1$ Nullstellen $\implies p_1(x) - p_2(x) \equiv 0$)
+
+\subsubsection{Lagrange-Interpolation}
+$\exists ! p(x) , \deg(p) \leq n$ durch die $n+1$ Stützstellen. \\
+Eindeutigkeit: siehe oben. \\
+Existenz:
+\begin{gather*}
+	p(x) = \sum \beta_i u_i(x) \\
+	u_i(x) = \frac{(x-\alpha_0) (x-\alpha_1) \dotsm (x-\alpha_{i-1}) (x-\alpha_{i+1}) \dotsm (x-\alpha_n)}{(\alpha_i-\alpha_0)(\alpha_i-\alpha_1) \dotsm (\alpha_i-\alpha_{i-1}) (\alpha_i-\alpha_{i+1}) \dotsm (\alpha_i-\alpha_n)} \\
+	u_i(d_j) = \begin{cases}
+		0	&i \neq j	\\
+		1	&i = j		
+	\end{cases}
+\end{gather*}
+
+\subsubsection{Secret Sharing}
+Geheimnis $s$ \\
+Bedingung: $k$ aus $n$ sollen das Geheimnis kennen, $k-1$ nicht.
+ \[ p(x) = \underbrace{s}_{=b_0} + b_1 x + b_2 x^2 + \dots + b_{k-1} x^{k-1} \]
+ $k-1$ Shares $\rightarrow$ keine Information \\
+ 
+ Codierungstheorie: \\
+ $a_i \in GF(p)$ \\
+ BILD \\
+ \begin{gather*}
+ 	p(x) = \sum_{i=0}^k a_i x^i \\
+ 	\beta_i = p(\alpha_i)
+\end{gather*}
+Es reicht, wenn $k+1$ Werte korrekt ankommen (Falls man weiss welche ...).
+
+Minimaldistanz eines Codes: \\
+min. Hammingdistanz $d_{min}$ zwischen zwei Codewörtern. \\
+Polynomcode: $d_{min} = n + 1 - k$ für lineare Codes \textbf{optimal} \\
+\# Fehler korrigierbar: $\lfloor \frac{d_{min} - 1}{2} \rfloor$ \\
+\# Fehler detektierbar: $d_{min} - 1$ \\
+Reed-Solomon-Codes
+	

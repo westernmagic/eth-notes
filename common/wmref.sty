@@ -1,0 +1,92 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{wmref}[2011/05/12]
+
+\RequirePackage{xparse}
+\RequirePackage{xifthen}
+\RequirePackage{varindex}
+\RequirePackage{xstring}
+\RequirePackage{makeidx}
+%\RequirePackage{xeindex}
+%\RequirePackage{index}
+%\RequirePackage{glossaries}
+\RequirePackage{hyperref}
+\RequirePackage{zref}
+
+\catcode`\~=11\relax
+
+\hypersetup{
+	pdfborder = 0 0 0 ,
+	hyperindex=false ,
+	pageanchor ,
+	plainpages
+}
+
+\makeindex
+
+\newcommand*{\labelescape}[1]{
+	\makecommand*{\@tempstring}{#1}
+	\IfSubStr{\@tempstring}{|}{\StrBefore*{\@tempstring}{|}[\@tempstring]}{}
+	\IfSubStr{\@tempstring}{@}{\StrBefore*{\@tempstring}{@}[\@tempstring]}{}
+	\StrDel{\@tempstring}{ }[\@tempstring]
+	\StrDel{\@tempstring}{!}[\@tempstring]
+	\StrDel{\@tempstring}{,}[\@tempstring]
+	\StrDel{\@tempstring}{;}[\@tempstring]
+	\StrDel{\@tempstring}{$}
+}
+
+\zref@newprop{index}[]{}
+\zref@newprop{indexformat}[]{}
+\zref@addprops{main}{index,indexformat}
+
+\newcommand{\fullexpand}[1]{\edef\ProcessedArgument{#1}}
+
+% \wmindex
+% #1 : *
+% #2 : index format
+% #3 : index
+% #4 : index style
+\DeclareDocumentCommand{\wmindex}{s O{ } m O{default}}{%
+	\IfBooleanTF{#1}{%
+		\varindex*{#3}{#2}[|#4]%
+	}{%
+		\varindex{#3}{#2}[|#4]%
+	}%
+}
+
+% \wm@index
+% #1 : index format
+% #2 : index
+\DeclareDocumentCommand{\wm@index}{>{\fullexpand} O{} >{\fullexpand} m >{\fullexpand} O{}}{%
+	\wmindex[#1]{#2}[#3]%
+}
+
+% \wmlabel
+% #1 : *
+% #2 : label
+% #3 : index
+% #4 : index format
+% #5 : index style
+\DeclareDocumentCommand{\wmlabel}{s m o O{} O{def}}{%
+	\zref@setcurrent{index}{#3}%
+	\zref@setcurrent{indexformat}{#4}%
+	\zref@label{#2}%
+	\label{#2}%
+	\zref@setcurrent{index}{}%
+	\zref@setcurrent{indexformat}{}%
+	\IfNoValueTF{#3}{%
+		\ifthenelse{\isempty{#4}}{%
+			\wmindex{#3}[#5]%
+		}{%
+			\wmindex[#4]{#3}[#5]%
+		}%
+	}%
+}
+
+% \wmref
+% #1 : *
+% #2 : label
+% #3 : text
+\DeclareDocumentCommand{\wmref}{s m m}{%
+	\hyperref[#2]{#3}%
+	\wm@index[\zref@extract{#2}{indexformat}]{\zref@extract{#2}{index}}%
+}

@@ -1,0 +1,153 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{wmtheorem}[2011/05/02]
+
+\RequirePackage{xifthen}
+\RequirePackage{scrlfile}
+\RequirePackage{hopatch}
+\hopatch@AfterPackage{makecmds}{
+	\makecommand*\renewlength[2]{\setlength#1{#2}}
+	\makecommand*\makelength[2]{
+		\providelength{#1}
+		\renewlength{#1}{#2}
+	}
+}
+
+\RequirePackage{makecmds}
+\RequirePackage{xkeyval}
+\RequirePackage[usenames,dvipsnames]{xcolor}
+\RequirePackage{mdframed}
+\RequirePackage{wmref}
+
+\newboolean{wmthm@numbered}
+
+\define@cmdkeys{wmthm}{
+	innerleftmargin ,
+	innerrightmargin ,
+	innertopmargin ,
+	innerbottommargin ,
+	leftmargin ,
+	rightmargin ,
+	skipabove ,
+	skipbelow ,
+	splittopskip ,
+	splitbottomskip ,
+	linewidth ,
+	backgroundcolor ,
+	fontcolor ,
+	indent ,
+	headfont ,
+	notefont ,
+	bodyfont ,
+	headnotesep ,
+	notebodysep ,
+	headbodysep ,
+	noteleftsep ,
+	noterightsep ,
+	head ,
+	note ,
+	index ,
+	indexformat ,
+	indexstyle ,
+	counter ,
+	label
+}{}
+
+\define@cmdkey{wmthm}{counter}{
+	\setboolean{wmthm@numbered}{true}
+	\providecounter{\cmdKV@wmthm@counter}[subsection]
+}
+
+\define@key{wmthm}{innermargin}{
+	\setkeys{wmthm}{
+		innerleftmargin   = #1 ,
+		innerrightmargin  = #1 ,
+		innertopmargin    = #1 ,
+		innerbottommargin = #1 , 
+		splittopskip      = #1 ,
+		splitbottomskip   = #1
+	}
+}
+
+\setkeys{wmthm}{
+	innerleftmargin   = 1cm ,
+	innerrightmargin  = 1cm ,
+	innertopmargin    = 1cm ,
+	innerbottommargin = 1cm ,
+	leftmargin        = 0cm ,
+	rightmargin       = 0cm ,
+	skipabove         = \the\baselineskip ,
+	skipbelow         = \the\baselineskip ,
+	splittopskip      = 1cm ,
+	splitbottomskip   = 1cm ,
+	linewidth         = 0pt ,
+	backgroundcolor   = white ,
+	fontcolor         = black ,
+	indent            = 1cm ,
+	headfont          = \normalfont\bfseries ,
+	notefont          = \normalfont\bfseries , 
+	bodyfont          = \normalfont ,
+	headnotesep       = {: } ,
+	notebodysep       = : ,
+	headbodysep       = : ,
+	noteleftsep       = ,
+	noterightsep      = ,
+	head              = \relax ,
+	indexformat       = { } ,
+	indexstyle        = default
+}
+
+\newcommand*{\maketheorem}[2][]{
+	\makeenvironment{#2}[1][]{
+		\setboolean{wmthm@numbered}{false}
+		\setkeys{wmthm}{note={}}
+		\setkeys{wmthm}{#1}
+		\setkeys{wmthm}{##1}
+		
+		\makelength{\wmthm@mdinnerleftmargin}{\cmdKV@wmthm@innerleftmargin + \cmdKV@wmthm@indent}
+		
+		\begin{mdframed}[
+			style             = 0 ,
+			innerleftmargin   = \the\wmthm@mdinnerleftmargin ,
+			innerrightmargin  = \cmdKV@wmthm@innerrightmargin ,
+			innertopmargin    = \cmdKV@wmthm@innertopmargin ,
+			innerbottommargin = \cmdKV@wmthm@innerbottommargin ,
+			leftmargin        = \cmdKV@wmthm@leftmargin ,
+			rightmargin       = \cmdKV@wmthm@rightmargin ,
+			skipabove         = \cmdKV@wmthm@skipabove ,
+			skipbelow         = \cmdKV@wmthm@skipbelow ,
+			splittopskip      = \cmdKV@wmthm@splittopskip ,
+			splitbottomskip   = \cmdKV@wmthm@splitbottomskip ,
+			linewidth         = \cmdKV@wmthm@linewidth ,
+			backgroundcolor   = \cmdKV@wmthm@backgroundcolor ,
+			fontcolor         = \cmdKV@wmthm@fontcolor
+		]
+			\hbox{
+				\hskip-\cmdKV@wmthm@indent%
+				\cmdKV@wmthm@headfont%
+				\cmdKV@wmthm@head%
+				\ifthenelse{\isundefined{\cmdKV@wmthm@label}}{%
+					\ifthenelse{\isundefined{\cmdKV@wmthm@index}}{}{%
+						\wm@index[\cmdKV@wmthm@indexformat]{\cmdKV@wmthm@index}[\cmdKV@wmthm@indexstyle]%
+					}%
+				}{%
+					\ifthenelse{\isundefined{\cmd@wmthm@index}}{%
+						\wmlabel{\cmdKV@wmthm@label}%
+					}{%
+						\wmlabel{\cmdKV@wmthmlabel}[\cmdKV@wmthm@index][\cmdKV@wmthm@indexformat][\cmdKV@wmthm@indexstyle]%
+					}%
+				}%
+				\ifthenelse{\boolean{wmthm@numbered}}{%
+					\stepcounter{\cmdKV@wmthm@counter}%
+					\arabic{\cmdKV@wmthm@counter}%
+				}{}%
+				\ifthenelse{\isundefined{\cmdKV@wmthm@note} \OR \expandafter\isempty\expandafter{\cmdKV@wmthm@note}}{%
+					\cmdKV@wmthm@headbodysep%
+				}{%
+					\cmdKV@wmthm@headnotesep\cmdKV@wmthm@notefont\cmdKV@wmthm@noteleftsep\cmdKV@wmthm@note\cmdKV@wmthm@noterightsep\cmdKV@wmthm@notebodysep%
+				}%
+			}%
+			\cmdKV@wmthm@bodyfont%
+	}{%
+		\end{mdframed}%
+	}%
+}

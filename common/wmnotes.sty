@@ -1,0 +1,426 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{wmnotes}[2011/05/02]
+
+\RequirePackage{silence}
+\RequirePackage{scrlfile}
+\RequirePackage{hopatch}
+\hopatch@AfterPackage{makecmds}{
+	\makecommand*\renewlength[2]{\setlength#1{#2}}
+	\makecommand*\makelength[2]{
+		\providelength{#1}
+		\renewlength{#1}{#2}
+	}
+}
+\hopatch@AfterPackage{graphicx}{
+	\ifthenelse{\boolean{pdf} \OR \boolean{xetex}}{
+		\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+	}{
+		\renewcommand{\includegraphics}[2][]{\\}
+	}
+}
+
+\RequirePackage{fixltx2e}
+\RequirePackage{etextools}
+\RequirePackage{makecmds}
+\RequirePackage{inlinedef}
+\RequirePackage{versions}
+\RequirePackage{extract}
+
+\RequirePackage{xifthen}
+\RequirePackage{iftex}
+\RequirePackage{ifpdf}
+\RequirePackage{ifxetex}
+\RequirePackage{ifplatform}
+
+\newcommand*\OptionSwitch[1]{
+	\newboolean{#1}
+	\setboolean{#1}{false}
+	\DeclareOption{#1}{
+		\setboolean{#1}{true}
+	}
+}
+
+\OptionSwitch{bw}
+
+\ProcessOptions\relax
+
+\RequirePackage{amssymb}
+
+\ifthenelse{\boolean{xetex}}{
+	\RequirePackage{fontspec}
+	\setmainfont{ETH Light}
+}{
+	\RequirePackage{ucs}
+	\RequirePackage[utf8x]{inputenc}
+	\RequirePackage[T1]{fontenc}
+	\renewcommand{\familydefault}{let}
+	\renewcommand{\sfdefault}{let}
+}
+
+\RequirePackage[english,german,ngerman]{babel}
+\RequirePackage{babelbib}
+
+\RequirePackage[fleqn,sumlimits,intlimits,namelimits]{amsmath}
+\RequirePackage{amsfonts}
+\RequirePackage[mathb]{mathabx}
+\RequirePackage[nointegrals]{wasysym}
+\RequirePackage{trfsigns}
+\RequirePackage[clock]{ifsym}
+\RequirePackage{ccicons}
+\RequirePackage{skak}
+\RequirePackage{ellipsis}
+\RequirePackage{hologo}
+
+\RequirePackage[usenames,dvipsnames]{xcolor}
+\RequirePackage{pdfpages}
+\RequirePackage{graphicx}
+\RequirePackage{grffile}
+\RequirePackage{epstopdf}
+\RequirePackage[3D]{movie15}
+\RequirePackage{pgf}
+\RequirePackage{tikz}
+\RequirePackage{pgfplots}
+\RequirePackage{egplot}
+%\RequirePackage[all]{xy}
+\RequirePackage{marginnote}
+\RequirePackage{mdframed}
+\RequirePackage{colortbl}
+\RequirePackage{tabularx}
+\RequirePackage{longtable}
+\RequirePackage{ltxtable}
+\RequirePackage{multirow}
+\RequirePackage[normalem]{ulem}
+\PassOptionsToPackage{unicode,hyperindex=false}{hyperref}
+\RequirePackage{zref}
+\RequirePackage{xr}
+\RequirePackage{xr-hyper}
+\RequirePackage{enumitem}
+\RequirePackage{enumitem-zref}
+\RequirePackage{refcheck}
+\RequirePackage{hyperref}
+\RequirePackage{listings}
+\RequirePackage{wmtheorem}
+\RequirePackage{algorithm}
+\RequirePackage{algorithmic}
+%\RequirePackage{xesearch}
+\RequirePackage{wmref}
+\RequirePackage{fancyhdr}
+\RequirePackage{fnbreak}
+\RequirePackage{todonotes}
+\RequirePackage{attachfile}
+
+\RequirePackage{esint}
+\RequirePackage{cancel}
+\RequirePackage{delarray}
+\RequirePackage{gauss}
+\RequirePackage{maybemath}
+\RequirePackage{breqn}
+\RequirePackage{mathtools}
+
+\RequirePackage{mhchem}
+\RequirePackage{chemfig}
+
+\RequirePackage{authoraftertitle}
+
+\RequirePackage{csquotes}
+\RequirePackage{siunitx}
+\RequirePackage{lipsum}
+
+%\RequirePackage{nath}
+
+\setcounter{tocdepth}{4}
+
+\makeindex
+
+\abovedisplayshortskip=1ex
+\belowdisplayshortskip=1ex
+\abovedisplayskip=1ex
+\belowdisplayskip=1ex
+\setlength{\parindent}{0cm}
+\setlength{\hangindent}{0cm}
+\setlength{\mathindent}{0.5cm}
+\frenchspacing
+\sloppy
+\reversemarginpar
+\changenotsign
+\allowdisplaybreaks[1]
+\hypersetup{
+	hyperindex = false , 
+	pageanchor = true ,
+	plainpages = true ,
+	pdfborder = 0 0 0 , 
+	bookmarksopen = true
+}
+
+\lstloadlanguages{C++}
+\lstset{
+	basicstyle        = \ttfamily\small ,
+	breaklines        = true            ,
+	breakatwhitespace = true            ,
+	showstringspaces  = false           ,
+	numbers           = left            ,
+	numberstyle       = \tiny           ,
+	stepnumber        = 1               ,
+	numbersep         = 5pt             ,
+	language          = C++             ,
+	extendedchars     = true
+}
+
+\fancypagestyle{plain}{
+	\setlength{\headheight}{46pt}
+	\fancyhf{}
+	\fancyhf[HL]{\leftmark\vspace{25pt}}
+	\fancyhf[HC]{}
+	\fancyhf[HR]{\rightmark}
+	\fancyhf[FL]{\MyAuthor\\Stand: \today}
+	\fancyhf[FC]{\thepage}
+	\fancyhf[FR]{\ccbyncsaeu}
+}
+\pagestyle{plain}
+
+\let\oldepsilon\epsilon
+\renewcommand*{\epsilon}{\ensuremath{\varepsilon}}
+\let\oldphi\phi
+\renewcommand*{\phi}{\ensuremath{\varphi}}
+\let\oldemptyset\emptyset
+\renewcommand*{\emptyset}{\ensuremath{\varnothing}}
+\let\olddiv\div
+\renewcommand*{\div}{\operatorname{div}}
+
+\newcommand{\gdw}{g.d., w. }
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\makecommand{\C}{\ensuremath{\mathbb{C}}}
+\newcommand{\I}{\ensuremath{\mathbb{I}}}
+\makecommand{\L}{\ensuremath{\mathcal{L}}}
+
+\newcommand*{\abs}[1]{\left\lvert #1 \right\rvert}
+\newcommand*{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand*{\scal}[1]{\left\langle #1 \right\rangle}
+\newcommand*{\ciel}[1]{\left\lciel #1 \right\rciel}
+\newcommand*{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand*{\round}[1]{\left( #1 \right)}
+%\newcommand*{\square}[1]{\left[ #1 \right]}
+\newcommand*{\curly}[1]{\left\{ #1 \right\}}
+\newcommand*{\set}[2]{\left\{ #1 \middle| #2 \right\}}
+
+\DeclareMathOperator{\Res}{Res}
+\DeclareMathOperator{\Resf}{Res*}
+\DeclareMathOperator{\Prim}{Prim}
+\DeclareMathOperator{\ggt}{ggT}
+\DeclareMathOperator{\kgv}{kgV}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\graph}{graph}
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\range}{range}
+\DeclareMathOperator{\image}{image}
+\DeclareMathOperator{\arsinh}{arsinh}
+\DeclareMathOperator{\arcosh}{arcosh}
+\DeclareMathOperator{\artanh}{artanh}
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\dd}{d\!}
+\DeclareMathOperator{\Kern}{Kern}
+\DeclareMathOperator{\Bild}{Bild}
+\DeclareMathOperator{\ch}{ch}
+\DeclareMathOperator{\Log}{Log}
+\DeclareMathOperator{\rang}{rang}
+\DeclareMathOperator*{\res}{res}
+\DeclareMathOperator{\rot}{rot}
+
+\newcommand*\Dashv{\mathrel{\mathpalette\m@thr@fl@ct{\mathord\vDash}}}
+\newcommand*\m@thr@fl@ct[2]{\reflectbox{$\m@th#1#2$}}
+
+\newcommand{\XeLaTeX}{\begingroup\fontspec{lmroman10-regular.otf}\Hologo{XeLaTeX}\endgroup}
+
+\newlength{\skak}
+\settowidth{\skak}{\BlackEmptySquare}
+
+\newcommand{\bspbackground}{SkyBlue}
+\newcommand{\bspcolor}{Black}
+\newcommand{\satzbackground}{Orange}
+\newcommand{\satzcolor}{Black}
+\newcommand{\defbackground}{Red}
+\newcommand{\defcolor}{Yellow}
+\newcommand{\bewbackground}{Yellow}
+\newcommand{\bewcolor}{Black}
+\newcommand{\otherbackground}{Purple}
+\newcommand{\othercolor}{Yellow}
+
+\ifthenelse{\boolean{bw}}{	
+	\maketheorem[
+		head            = Bsp. ,
+		counter         = bspcounter
+	]{bsp}
+	\maketheorem[
+		head            = Bsp.
+	]{bsp*}
+	\maketheorem[
+		head            = Satz ,
+		counter         = satzcounter
+	]{satz}
+	\maketheorem[
+		head            = Satz
+	]{satz*}
+	\maketheorem[
+		head            = Korrolar ,
+		counter         = satzcounter
+	]{korr}
+	\maketheorem[
+		head            = Korrolar
+	]{korr*}
+	\maketheorem[
+		head            = Lemma ,
+		counter         = satzcounter
+	]{lem}
+	\maketheorem[
+		head            = Lemma
+	]{lem*}
+	\maketheorem[
+		head            = Def.
+	]{def*}
+	\maketheorem[
+		head            = Bew.
+	]{bew}
+	\maketheorem[
+		head            = Bem.
+	]{bem}
+	\maketheorem[
+		head            = Fakt
+	]{fakt}
+	\maketheorem[
+		head            = Beh.
+	]{beh}
+	\maketheorem[
+		head            = Folge
+	]{folge}
+}{
+	\maketheorem[
+		head            = Bsp. ,
+		counter         = bspcounter ,
+		backgroundcolor = SkyBlue ,
+		fontcolor       = Black
+	]{bsp}
+	\maketheorem[
+		head            = Bsp. ,
+		backgroundcolor = SkyBlue ,
+		fontcolor       = Black
+	]{bsp*}
+	\maketheorem[
+		head            = Satz ,
+		counter         = satzcounter ,
+		backgroundcolor = Orange ,
+		fontcolor       = Black
+	]{satz}
+	\maketheorem[
+		head            = Satz ,
+		backgroundcolor = Orange ,
+		fontcolor       = Black
+	]{satz*}
+	\maketheorem[
+		head            = Korrolar ,
+		counter         = satzcounter ,
+		backgroundcolor = Orange ,
+		fontcolor       = Black
+	]{korr}
+	\maketheorem[
+		head            = Korrolar ,
+		backgroundcolor = Orange ,
+		fontcolor       = Black
+	]{korr*}
+	\maketheorem[
+		head            = Lemma ,
+		counter         = satzcounter ,
+		backgroundcolor = Orange ,
+		fontcolor       = Black
+	]{lem}
+	\maketheorem[
+		head            = Lemma ,
+		backgroundcolor = Orange ,
+		fontcolor       = Black
+	]{lem*}
+	\maketheorem[
+		head            = Def. ,
+		backgroundcolor = Red ,
+		fontcolor       = Yellow
+	]{def*}
+	\maketheorem[
+		head            = Bew. ,
+		backgroundcolor = Yellow ,
+		fontcolor       = Black
+	]{bew}
+	\maketheorem[
+		head            = Bem. ,
+		backgroundcolor = Purple ,
+		fontcolor       = Yellow
+	]{bem}
+	\maketheorem[
+		head            = Fakt ,
+		backgroundcolor = Purple ,
+		fontcolor       = Yellow
+	]{fakt}
+	\maketheorem[
+		head             = Beh. ,
+		backgroundcolor = Purple ,
+		fontcolor        = Yellow
+	]{beh}
+	\maketheorem[
+		head            = Folge ,
+		backgroundcolor = Purple ,
+		fontcolor       = Yellow
+	]{folge}
+}
+
+\newcommand{\editor}[1]{\makecommand{\MyEditor}{#1}}
+\newcommand{\lecture}[1]{\makecommand{\MyLecture}{#1}}
+\newcommand{\subtitle}[1]{\makecommand{\MySubtitle}{#1}}
+\newcommand{\professor}[1]{\makecommand{\MyProfessor}{#1}}
+\newcommand{\semester}[1]{\makecommand{\MySemester}{#1}}
+\author{}
+\editor{}
+\lecture{}
+\subtitle{}
+\professor{}
+\semester{}
+
+\AtBeginDocument{
+	\begin{titlepage}
+		\begin{center}
+			\null\vfil
+			\Huge{\MyLecture} \\
+			\ifthenelse{\expandafter\isempty\expandafter{\MySubtitle}}{}{
+				\normalsize{\MySubtitle} \\
+			}
+			\Large{\MyProfessor} \\
+			\large{\MySemester}
+			\vskip 3em
+			\Large{\MyAuthor} \\
+			\ifthenelse{\expandafter\isempty\expandafter{\MyEditor}}{}{
+				\footnotesize{(Mitschrift)} \\
+				\Large{\MyEditor} \\
+				\footnotesize{(Korrektur \& Ergänzung)}
+			}
+			\vskip 1.5em
+			\vfil\null
+			\normalsize{Geschrieben in} \\
+			\normalsize{\XeLaTeX}
+		\end{center}
+	\end{titlepage}
+	
+	\clearpage
+	\tableofcontents
+	\clearpage
+}
+\AtEndDocument{
+	\clearpage
+	\phantomsection
+	\addcontentsline{toc}{chapter}{Index}
+	\printindex
+	\clearpage
+	\phantomsection
+	\addcontentsline{toc}{chapter}{ToDo}
+	\listoftodos
+}
+\endinput

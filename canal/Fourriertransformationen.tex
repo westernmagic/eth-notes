@@ -1,0 +1,190 @@
+\chapter{Fouriertransformationen}
+''Fourrierreihen im limes $T \rightarrow \infty$''
+
+\begin{def*}[note = Integral , index = Integral]
+	Das Integral
+	\[ \int{-\infty}^{\infty} f(t) \dd t \]
+	einer Funktion $f: \R \rightarrow \C$ ist definert als
+	\[ \lim_{M \rightarrow \infty} \int_{-M}^M f(t) \dd t \]
+	( falls der Grenzwert existiert ).
+\end{def*}
+\begin{def*}[note = integrabel , index = integrabel]
+	Eine Funktion $f$ heisst \textbf{integrabel} falls der Grenzwert
+	\[ \lim_{M \rightarrow \infty} \int_{-M}^M \abs{f(t)} \dd t \]
+	existiert. ( man schreibt auch $\int_{-\infty}^\infty \abs{f(t)} \dd t < \infty$ ) \\
+	Dann existiert auch $\int_{-\infty}^\infty f(t) \dd t$ und es gilt
+	\[ \abs{\int_{-\infty}^\infty f(t) \dd t} \leq \int_{-\infty}^\infty \abs{f(t)} \dd t \]
+\end{def*}
+\begin{def*}[note = Fourriertransformierte , index = Fourrier transformierte , indexformat = {1!~.2 2!1.~}]
+	Die \textbf{Fourriertransformierte} einer integrablen Funktion ist die Funktion
+	\[ \hat{f}(\omega) = \int_{-\infty}^\infty f(t) e^{-\imath\omega t} \dd t , \omega \in \R \]
+\end{def*}
+Intuition:
+\[ \hat{f}(\omega) = \lim_{T \rightarrow \infty} ( T c_n |_{\omega = \frac{2\pi}{T} n} ) = \lim_{T \rightarrow \infty} \int_{-\frac{T}{2}}^{\frac{T}{2}} f(t) e^{-\imath\omega t} \dd t \]
+Wohldefiniert da $\abs{f(t) e^{-\imath\omega t}} = \abs{f(t)}$ \\
+Umkehrformel: Kann man $f$ aus $\hat{f}$ wiedergewinnen? \\
+Intuition:
+\[ \begin{split}
+	f(t)	&= \lim_{T \rightarrow \infty} \sum_{\omega = \frac{2\pi}{t} n} c_n e^{\imath \omega t} \\
+		&= \lim_{T \rightarrow \infty} \frac{1}{2\pi} \sum_{\omega = \frac{2\pi}{t} n} \underbrace{\frac{2\pi}{T}}_{\Delta \omega} \hat{f}(\omega) e^{\imath\omega t} \\
+		&= \frac{1}{2\pi} \int_{-\infty}^\infty \hat{f}(\omega) e^{\imath\omega t} \dd \omega
+\end{split} \]
+(Riemann-Summe) \\
+\begin{satz*}[note = Umkehrsatz von Fourier]
+	Sei $f$ integrabel und $\hat{f}$ integrabel. Dann gilt
+	\[ f(t) = \frac{1}{2\pi} \int_{-\infty}^\infty \hat{f}(\omega) e^{\imath\omega t} \dd \omega \]
+	\begin{bew}
+		später
+	\end{bew}
+\end{satz*}
+\begin{bsp}
+	\[ f(t) = \chi_{[a,b]}(t) \coloneqq \begin{cases}
+		1	& a\leq t \leq b	\\
+		0	& \text{sonst}	
+	\end{cases} \]
+	charakteristische Funktion von $[a,b]$ \\
+	\[ \begin{split}
+		\hat{f}(\omega)	&= \int_{-\infty}^\infty \chi_{[a,b]}(t) e^{-\imath\omega t} \dd t \\
+					&= \int_a^b 1 e^{-\imath\omega t} \dd t \\
+					&= \left[ \frac{1}{-\imath\omega} e^{-\imath\omega t} \right]_a^b \\
+					&= \frac{1}{-\imath\omega}(e^{-\imath\omega b} - e^{-\imath\omega a}) \\
+					&= e^{-\imath\omega \frac{a+b}{2}} \frac{1}{-\imath\omega} (e^{\imath\omega\frac{a-b}{2}} - e^{-\imath\omega\frac{a-b}{2}} ) \\
+					&= \underbrace{e^{-\imath\omega \frac{a+b}{2}}}_{\abs{\cdot} = 1} \frac{2 \sin\left( \omega \frac{b-a}{2} \right)}{\omega}
+	\end{split} \]
+\end{bsp}
+\begin{bem}
+	Man kann zeigen, dass $\hat{f}(\omega)$ stetig ist und $\lim_{\omega \rightarrow \pm \infty} \hat{f}(\omega) = 0$ (Riemann-Lebesgue).
+\end{bem}
+\begin{bsp}
+	\begin{gather*}
+		f(t) = e^{-a \frac{t^2}{2}} , a > 0 \\
+		\hat{f}(\omega) = \int_{-\infty}^\infty e^{-a\frac{t^2}{2} - \imath\omega t} \dd t \\
+		\text{z.B. } \hat{f}(0) = \int_{-\infty}^\infty = e^{-a\frac{t^2}{2}} \dd t = \sqrt{\frac{2\pi}{a}} \\
+		\begin{split}
+			\int_{-\infty}^\infty e^{-a\frac{t^2}{2} - bt} \dd t	&= \int_{-\infty}^\infty e^{-\frac{a}{2}(t+\frac{b}{a})^2 + \frac{b^2}{2a}} \dd t \\
+												&= e^{\frac{b^2}{2a}} \int_{-\infty}^\infty e^{-\frac{a}{2} (t+\frac{b}{a})^2} \dd t \\
+												&= e^{\frac{b^2}{2a}} \int_{-\infty}^\infty e^{-\frac{a}{2} s^2} \dd s \\
+												&= \sqrt{\frac{2\pi}{a}} e^{\frac{b^2}{2a}}
+		\end{split}
+		\intertext{Setze $b = \imath\omega$ (wieso das erlaubt ist, werden wir aus der Funktionentheorie lernen)}
+		\hat{f}(\omega) = \sqrt{\frac{2\pi}{a}} e^{-\frac{\omega^2}{2a}}
+	\end{gather*}
+	Verifikation des Umkehrsatzes für diese Funktion
+	\[ \begin{split}
+		\frac{1}{2\pi} \int_{-\infty}^\infty \sqrt{\frac{2\pi}{a}} e^{-\frac{\omega^2}{2a}} e^{\imath\omega t} \dd \omega
+			&= \frac{1}{2\pi} \sqrt{\frac{2\pi}{a}} \int_{-\infty}^\infty e^{-\frac{1}{a} \frac{\omega^2}{2} + \imath t \omega} \dd \omega \\
+			&= \frac{1}{2\pi} \sqrt{\frac{2\pi}{a}} e^{-\frac{(-t)^2}{2\frac{1}{a}}} \\
+			&= e^{-\frac{at^2}{2}}
+	\end{split} \]
+\end{bsp}
+\begin{bsp}
+	\begin{gather*}
+		f(t) = e^{-\abs{t}} \\
+		\begin{split}
+			\hat{f}(\omega)	&= \int_{-\infty}^\infty e^{-\abs{t} - \imath\omega t} \dd t \\
+						&= \int_0^\infty e^{-t - \imath \omega t} \dd t + \int_{-\infty}^0 e^{+t - \imath\omega t} \dd t \\
+						&= \frac{-1}{1+\imath\omega} [ e^{-t-\imath\omega t} ]_0^\infty + \frac{1}{1-\imath\omega} [e^{t-\imath\omega t} ]_{-\infty}^0 \\
+						&= \frac{1}{1+\imath\omega} + \frac{1}{1-\imath\omega} \\
+						&= \frac{1}{1+\omega^2}
+		\end{split}
+	\end{gather*}
+\end{bsp}
+
+%\section{Eigenschaften von $\hat{f}$}
+\begin{enumerate}[label=\arabic*)]
+	\item Die Fouriertransformation ist linear $h(t) = af(t) + bg(t) \implies \hat{h}(\omega) = a\hat{f}(\omega) + b\hat{g}(\omega) \Leftarrow$ Linearität von $\int_{-\infty}^\infty$
+	\item $g(t) = f(t-a) \implies \hat{g}(\omega) = e^{-\imath a \omega} \hat{f}(\omega)$
+	\item $g(t) = f\left( \frac{t}{a} \right) \wedge a > 0 \implies \hat{g}(\omega) = a \hat{f}(a\omega)$ \\
+		\begin{bew}
+			$\hat{g}(\omega) = \int_{-\infty}^\infty g(t) e^{-\imath\omega t} \dd t = \int_{-\infty}^\infty f\left( \frac{t}{a} \right) e^{-\imath\omega t} \dd t = \int_{-\infty}^\infty f(t) e^{-\imath\omega at} a \dd t = a \hat{f}(a\omega)$
+		\end{bew}
+	\item $g(t) = e^{\imath at} f(t) \implies \hat{g}(\omega) = \hat{f}(\omega - a)$, analog zu 2)
+	\item $g(t) = f'(t)$, $g,f$ integrabel , $f(t) \rightarrow 0$ für $t \rightarrow \pm \infty \implies \hat{g} = \imath \omega \hat{f}(\omega)$ \\
+		\begin{bew}
+			\[ \hat{g}(\omega) = \int_{-\infty}^\infty f'(t) e^{-\imath \omega t} \dd t = \int_{-\infty}^\infty f(t) \imath\omega e^{-\imath \omega t} \dd t \]
+		\end{bew}
+	\item \begin{satz*}[note = Falltungssatz]
+		\begin{gather*}
+			(f*g)(t) \coloneqq \int_{-\infty}^\infty f(t-s) g(s) \dd s \\
+			\widehat{(f*g)}(\omega) = \hat{f}(\omega) \cdot \hat{g}(\omega)
+		\end{gather*}
+	\end{satz*}
+\end{enumerate}
+
+\subsubsection{Faltung(sprodukt)}
+$f,g$ integrabel \\
+Faltung von $f$ und $g$:
+\[ (f*g)(t) = \int_{-\infty}^\infty f(t-s) g(s) \dd s \]
+Man kann zeigen, dass das Integral existiert für alle $t$ und eine integable Funktion $f*g$ definiert. \\
+\begin{bsp*}
+	Signal $g(t)$ \\
+	$\rightsquigarrow$ Signal $h(t) =$ Mittelwert von $g$ im Zeitintervall $[t-a,t]$.
+	\[ h(t) = \frac{1}{a} \int_{t-a}^t g(s) \dd s \]
+	ist eine Faltung von $g$ mit einer Funktion
+	\[ \Phi(t) = \begin{cases}
+		\frac{1}{a}	& 0 \leq t \leq a	\\
+		0		&\text{sonst}	
+	\end{cases} \]
+	Tatsächlich gilt:
+	\begin{gather*}
+		(\Phi * g)(t) = \int_{-\infty}^\infty \Phi(t-s) g(s) \dd s \\
+		\Phi(t-s) = \begin{cases}
+			\frac{1}{a}	& 0 \leq t-s \leq a \iff t \geq s \geq t-a	\\
+			0		&\text{sonst}
+		\end{cases} \\
+		(\Phi * g)(t) = \frac{1}{a} \int_{t-a}^t g(s) \dd s
+	\end{gather*}
+\end{bsp*}
+\begin{satz*}
+	\[ \widehat{f*g}(\omega) = \hat{f}(\omega) \hat{g}(\omega) \]
+	\begin{bew}
+		\[ \begin{split}
+			\widehat{f*g}(\omega)	&= \int_{-\infty}^\infty (f*g)(t) e^{-\imath \omega t} \dd t \\
+							&= \int_{-\infty}^\infty \left( \int_{-\infty}^\infty f(t-s) g(s) e^{-\imath\omega t} \dd s \right) \dd t \\
+							&= \int_{-\infty}^\infty \left( \int_{-\infty}^\infty f(t-s) g(s) e^{-\imath\omega t} \dd t \right) \dd s \\
+							&= \int_{-\infty}^\infty g(s) \underbrace{ \left(\int_{-\infty}^\infty f(t-s) e^{-\imath\omega t} \dd t \right) }_{\hat{f}(\omega) e^{-\imath\omega s}}  \dd s \\
+							&= \hat{f}(\omega) \int_{-\infty}^\infty g(s) e^{-\imath\omega s} \dd s \\
+							&= \hat{f}(\omega) \hat{g}(\omega)
+		\end{split} \]
+	\end{bew}
+\end{satz*}
+\begin{satz*}[note = Satz von Fubini]
+	Wenn $F(t,s)$ stetig, $t \mapsto F(t,s)$ integrabel für alle $s$ , $s \mapsto F(t,s)$ integrabel für alle $t$, dann
+	\[ \int_{-\infty}^\infty \left( \int_{-\infty}^\infty F(t,s) \dd t \right) \dd s = \int_{-\infty}^\infty \left( \int_{-\infty}^\infty F(t,s) \dd s \right) \dd t \]
+\end{satz*}
+\begin{satz*}[note = Unkehrsatz von Fourier]
+	Wenn $f,\hat{f}$ integrabel, $f$ stetig, dann gilt
+	\[ f(t) = \frac{1}{2\pi} \int_{-\infty}^\infty \hat{f}(\omega) e^{\imath\omega t} \dd \omega \]
+	\begin{bew}
+		\[ \begin{split}
+				&\frac{1}{2\pi} \int_{-\infty}^\infty \hat{f}(\omega) e^{\imath\omega t} \dd \omega \\
+			=	&\frac{1}{2\pi} \int_{-\infty}^\infty \left( \int_{-\infty}^\infty f(s) e^{-\imath\omega s} e^{\imath\omega t} \dd s \right) \dd \omega \\
+			=	&\lim_{\epsilon \downarrow 0} \frac{1}{2\pi} \int_{-\infty}^\infty \left( \int_{-\infty}^\infty f(s) e^{-\imath\omega (s-t) - \epsilon \frac{\omega^2}{2}} \dd s \right) \dd \omega \\
+			=	&\lim_{\epsilon \downarrow 0} \frac{1}{2\pi} \int_{-\infty}^\infty f(s) \left( \int_{-\infty}^\infty e^{-\imath\omega (s-t) - \epsilon \frac{\omega^2}{2}} \dd \omega \right) \dd s \\
+			=	&\lim_{\epsilon \downarrow 0} \frac{1}{2\pi} \int_{-\infty}^\infty f(s) \sqrt{\frac{2\pi}{\epsilon}} e^{-\frac{(s-t)^2}{2\epsilon}} \dd s \\
+			=	&\lim_{\epsilon \downarrow 0} \frac{1}{2\pi} \sqrt{\frac{2\pi}{\epsilon}} \int_{-\infty}^\infty f(t + \sqrt{\epsilon} u ) e^{-\frac{u^2}{2}} \sqrt{\epsilon} \dd u \\
+			=	&f(t) \frac{1}{2\pi} \int_{-\infty}^\infty e^{-\frac{u^2}{2}} \dd u \\
+			=	&f(t)
+		\end{split} \]
+	\end{bew}
+\end{satz*}
+\begin{bsp*}
+	\begin{gather*}
+		f(t) = e^{-a \frac{t^2}{2}} , a > 0 \\
+		\hat{f}(\omega) = \sqrt{\frac{2\pi}{a}} e^{-\frac{\omega^2}{2a}}
+	\end{gather*}
+\end{bsp*}
+\begin{gather*}
+	f : \R \rightarrow \R \\
+	a \cos(\omega t) + b \sin(\omega t) = Ae^{\imath\omega t} + \overline{A}e^{-\imath\omega t}
+\end{gather*}
+''harmonische Schwingungen mit Kreisperiode $\omega$ (Periode $T = \frac{2\pi}{\omega}$)''
+\begin{gather*}
+	f(t+T) = f(t) \quad f(t) = \sum_{n = -\infty}^\infty c_n e^{\frac{2\pi}{T} \imath n t}
+	\intertext{Superposition von harmonischen Schwingungen mit Kreisfrequenz}
+	n \cdot \omega_0 \quad \omega_0 = \frac{2\pi}{T} \\
+	f \text{ allgemein aber integrabel} ( \Leftarrow f(t) \rightarrow \rightarrow 0 \text{ schnell genung für } t \rightarrow \infty ) \\
+	f(t) = \int_{-\infty}^\infty \hat{f}(\omega) e^{\imath \omega t} \dd \omega \\
+	c_n = \frac{1}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} f(t) e^{-\frac{2\pi\imath}{T} nt} \dd t \\
+	\hat{f}(\omega) = \int_{-\infty}^\infty f(t) e^{-\imath\omega t} \dd t
+\end{gather*}

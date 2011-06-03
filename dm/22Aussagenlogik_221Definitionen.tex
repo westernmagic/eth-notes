@@ -1,0 +1,94 @@
+\section{Aussagenlogik}
+\subsection{Definitionen}
+\begin{def*}[note = Aussage , index = Aussage]
+	\textbf{Eine Aussage ist ein sprachlicher Ausdruck, der wahr oder falsch ist.}
+\end{def*}
+\begin{bsp*}
+	\begin{itemize}
+		\item Wenn es regnet, dann sind die Strassen nass.
+		\item Wenn der Hahn kräht auf dem Mist, ändert das Wetter oder es bleibt wie es ist.     (Tautologie)
+		\item Dies ist keine Aussage. \qquad (Aussage, falsch)
+		\item Diese Aussage ist falsch.
+		\item Wale sind Fische und Fische sind Tiere.
+	\end{itemize}
+\end{bsp*}
+\textbf{Atomare Aussagen} mit \textbf{Junktoren} verbunden $\rightarrow$ Zusammengesetzte Aussagen.
+
+\subsubsection{Junktoren als Wahrheitsfunktionen}
+\qquad $\drsh$ Wahrheitstabellen \\
+\url{http://en.wikipedia.org/wiki/Logical_connective} \\
+AND (konjunktion) \\
+\begin{tabular}{ | l | l | l | }
+	\hline
+	$A$	& $B$	& $A \wedge B$	\\ \hline
+	W	& W		& W			\\ \hline
+	W	& F		& F			\\ \hline
+	F	& W		& F			\\ \hline
+	F	& F		& F			\\ \hline
+\end{tabular} \\
+NOT \\
+\begin{tabular}{ | l | l | }
+	\hline
+	$A$	& $\neg A$	\\ \hline
+	W	& F			\\ \hline
+	W	& F			\\ \hline
+\end{tabular} \\
+NAND (universell) \\
+\begin{tabular}{ | l | l | l | }
+	\hline
+	$A$	& $B$	& $A \mid B$	\\ \hline
+	W	& W		& F			\\ \hline
+	W	& F		& W			\\ \hline
+	F	& W		& W			\\ \hline
+	F	& F		& W			\\ \hline
+\end{tabular}\\
+OR (disjunktion) \\
+\begin{tabular}{ | l | l | l | }
+	\hline
+	$A$	& $B$	& $A \vee B$	\\ \hline
+	W	& W		& W			\\ \hline
+	W	& F		& W			\\ \hline
+	F	& W		& W			\\ \hline
+	F	& F		& F			\\ \hline
+\end{tabular} \\
+XOR (ausschliessendes Oder) \\
+\begin{tabular}{ | l | l | l | }
+	\hline
+	$A$	& $B$	& $A \oplus B$	\\ \hline
+	W	& W		& F			\\ \hline
+	W	& F		& W			\\ \hline
+	F	& W		& W			\\ \hline
+	F	& F		& F			\\ \hline
+\end{tabular} \\
+XNOR (Äquivalenz) \\
+\begin{tabular}{ | l | l | l | }
+	\hline
+	$A$	& $B$	& $A \leftrightarrow B$	\\ \hline
+	W	& W		& W					\\ \hline
+	W	& F		& F					\\ \hline
+	F	& W		& F					\\ \hline
+	F	& F		& W					\\ \hline
+\end{tabular} \\
+$A \leftrightarrow B \equiv \neg ( A \oplus B )$ \\
+Implikation \\
+\begin{tabular}{ | l | l | l | }
+	\hline
+	$A$	& $B$	& $A \rightarrow B$	\\ \hline
+	W	& W		& W			\\ \hline
+	W	& F		& F			\\ \hline
+	F	& W		& W			\\ \hline
+	F	& F		& W			\\ \hline
+\end{tabular} \\
+$A \rightarrow B \equiv ( \neg A ) \vee B$ \\
+\begin{bem}
+	$A \rightarrow B$ ist nicht gleich $ B \rightarrow A$ oder $\neg A \rightarrow \neg B$
+\end{bem}
+\begin{gather*}
+	A \rightarrow B \equiv \neg B \rightarrow \neg A \qquad \text{(indirekter Beweis)} \\
+	B \rightarrow A \equiv \neg A \rightarrow \neg B
+\end{gather*}
+\subsubsection{Syntax \texorpdfstring{$\leftrightarrow$}{<->} Semantik}
+\begin{tabular}{ l l }
+	Syntax:	& Welche Zeichenketten sind korrekte Formeln? \\
+	Semantik:	& Für korrekte Formeln: wahr oder falsch?
+\end{tabular}
