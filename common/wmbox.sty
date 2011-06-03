@@ -1,0 +1,60 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{wmbox}
+
+\RequirePackage{xparse}
+\RequirePackage{xifthen}
+\RequirePackage{hopatch}
+\hopatch@AfterPackage{makecmds}{
+	\makecommand*\renewlength[2]{\setlength#1{#2}}
+	\makecommand*\makelength[2]{
+		\providelength{#1}
+		\renewlength{#1}{#2}
+	}
+}
+\RequirePackage{makecmds}
+\RequirePackage[usenames]{xcolor}
+
+\newbox\wm@currentbox
+
+\DeclareDocumentCommand{\wm@putbox}{}{
+	\makelength{\wm@boxvspace}{\ht\wm@currentbox + \dp\wm@currentbox}
+	\ifthenelse{\lengthtest{\pagegoal = \maxdimen}}{
+		\makelength{\wm@freevspace}{\vsize}
+	}{
+		\makelength{\wm@freevspace}{\pagegoal - \pagetotal}
+	}
+	\addtolength{\wm@freevspace}{-\pageshrink -\1.8\baselineskip}
+	\addtolength{\wm@freevspace}{-2cm}
+	
+	\ifthenelse{\lengthtest{\wm@boxvspace < \wm@freevspace}}{
+		\wm@box{yellow}{black}{\wm@currentbox}
+	}{
+		\wm@box{yellow}{black}{\vsplit\wm@currentbox to \wm@freevspace}
+		\clearpage
+		\wm@putbox
+	}
+}
+
+\DeclareDocumentCommand{\wmbox}{m}{
+	\addtolength{\hsize}{-3cm}
+	\setbox\wm@currentbox=\vbox{#1}
+	\wm@putbox
+	\addtolength{\hsize}{3cm}
+}
+
+\DeclareDocumentCommand{\wm@box}{mmm}{
+	\vspace*{-\baselineskip}
+	\noindent
+	\colorbox{#1}{
+		\color{#2}
+		\vbox{
+			\vspace*{1cm}
+			\hbox{
+				\hspace*{1cm}
+				\box#3
+				\hspace*{1cm}
+			}
+			\vspace*{1cm}
+		}
+	}
+}
