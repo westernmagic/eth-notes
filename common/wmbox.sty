@@ -13,48 +13,91 @@
 }
 \RequirePackage{makecmds}
 \RequirePackage[usenames]{xcolor}
+\RequirePackage{boites}
 
+\newbox\wm@inputbox
 \newbox\wm@currentbox
 
-\DeclareDocumentCommand{\wm@putbox}{}{
-	\makelength{\wm@boxvspace}{\ht\wm@currentbox + \dp\wm@currentbox}
+\DeclareDocumentCommand{\wm@putbox}{m}{
+	\makelength{\wm@boxvspace}{\ht#1 + \dp#1}
+	\addtolength{\wm@boxvspace}{2cm}
+	
 	\ifthenelse{\lengthtest{\pagegoal = \maxdimen}}{
 		\makelength{\wm@freevspace}{\vsize}
 	}{
 		\makelength{\wm@freevspace}{\pagegoal - \pagetotal}
 	}
-	\addtolength{\wm@freevspace}{-\pageshrink -\1.8\baselineskip}
-	\addtolength{\wm@freevspace}{-2cm}
 	
 	\ifthenelse{\lengthtest{\wm@boxvspace < \wm@freevspace}}{
+		\setbox\wm@currentbox=\vbox{\unvbox#1}
 		\wm@box{yellow}{black}{\wm@currentbox}
 	}{
-		\wm@box{yellow}{black}{\vsplit\wm@currentbox to \wm@freevspace}
+		\makelength{\wm@boxht}{\wm@freevspace}
+		\addtolength{\wm@boxht}{-2cm}
+		\addtolength{\wm@boxht}{-\pageshrink}
+		\boxmaxdepth=\z@
+		\splittopskip=\z@
+		\splitmaxdepth=\z@
+		\setbox\wm@currentbox=\vsplit#1 to \wm@boxht
+		\setbox\wm@currentbox=\vbox{\unvbox\wm@currentbox}
+		\wm@box{yellow}{black}{\wm@currentbox}
 		\clearpage
-		\wm@putbox
+		\wm@putbox{#1}
 	}
 }
 
 \DeclareDocumentCommand{\wmbox}{m}{
-	\addtolength{\hsize}{-3cm}
-	\setbox\wm@currentbox=\vbox{#1}
-	\wm@putbox
-	\addtolength{\hsize}{3cm}
+	\addtolength{\hsize}{-2cm}
+%	\addtolength{\linewidth}{-2cm}
+%	\addtolength{\columnwidth}{-2cm}
+	\setbox\wm@inputbox=\vbox{\advance\linewidth -2cm \advance\columnwidth -2cm\relax #1}
+	\wm@putbox{\wm@inputbox}
+	\addtolength{\hsize}{2cm}
+%	\addtolength{\linewidth}{2cm}
+%	\addtolength{\columnwidth}{2cm}
 }
 
 \DeclareDocumentCommand{\wm@box}{mmm}{
-	\vspace*{-\baselineskip}
-	\noindent
-	\colorbox{#1}{
-		\color{#2}
-		\vbox{
-			\vspace*{1cm}
-			\hbox{
-				\hspace*{1cm}
-				\box#3
-				\hspace*{1cm}
-			}
-			\vspace*{1cm}
+	\leftline{
+%		\null
+		\hspace*{-12pt}
+		\rlap{
+			\color{#1}
+			\rule[-1cm]{\wd#3+2cm}{\ht#3+\dp#3+2cm}
+		}
+		\hspace*{1cm}
+		{
+			\noindent
+			\box#3
 		}
 	}
 }
+
+\newenvironment{wmbox2}{
+	\def\bkvz@before@breakbox{
+		\ifhmode
+			\par
+		\fi
+		\vskip\breakboxskip\relax
+	}
+	\def\bkvz@set@linewidth{
+		\advance\linewidth -10pt
+	}
+	\def\bk@line{
+		\hbox to \linewidth{
+			\colorbox{Yellow}{%
+				\hskip\fboxsep
+				\box\bk@bxa
+				\hskip\fboxsep
+			}
+		}
+	}
+	\let\bkvz@top\relax
+	\let\bkvz@bottom\relax
+	\let\bkvz@left\relax
+	\let\bkvz@right\relax
+	\begin{breakbox}
+}{
+	\end{breakbox}
+}
+
