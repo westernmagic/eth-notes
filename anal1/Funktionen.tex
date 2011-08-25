@@ -7,7 +7,7 @@ Funktionsterm = Formel \\
 		f(x) - f(x) \overset{?}{=} g(x)
 	\end{gather*}
 	Definitionsbereich?
-\end{bsp*}\marginpar{$[a,b) = [a,b[$ halb-offenes Intervall\\\\ $\mapsto$ wird abgebildet auf\\\\ $\{\} = \varnothing$}
+\end{bsp*}\marginpar{$[a,b) = [a,b[$ halb-offenes Intervall\\\\ $\mapsto$ wird abgebildet auf\\\\ $\{\} = \emptyset$}
 \begin{def*}[note = Funktion , index = Funktion]
 	Eine Funktion $f: A \rightarrow B$ besteht aus: \\
 	\qquad Definitionsbereich $A$, \\
@@ -24,13 +24,13 @@ Funktionsterm = Formel \\
 %			\end{cases}
 %		\]
 %	\end{def*}
-	\todo{Fix}
 \end{bem}
+\todo{Fix}
 \begin{bsp*}
 	\[ f: [0,\infty [ \rightarrow \R , x \mapsto 0 \]
 \end{bsp*}
 \begin{bsp*}
-	\[ f: \varnothing \rightarrow \R , x \mapsto 0 \qquad B = \varnothing \]
+	\[ f: \emptyset \rightarrow \R , x \mapsto 0 \qquad B = \varnothing \]
 \end{bsp*}
 
 \section{Beschreibung von Funktionen}
@@ -39,7 +39,7 @@ Funktionsterm = Formel \\
 	\[ \graph(f) \coloneqq \{ ( a , f(a) ) | a \in A \} \supset A \times B \]
 \end{def*}
 \begin{def*}[note = Kreuzmenge , index = Kreuzmenge]
-	\[ A \times B \coloneqq \{ (a , b ) | a \in A , b \in B \} \]
+	\[ A \times B \coloneqq \{ ( a , b ) | a \in A , b \in B \} \]
 \end{def*}
 
 \subsubsection{Fallunterscheidung}
@@ -177,7 +177,7 @@ Anfangswerte, um die Funktion zu bestimmen
 \begin{bem}
 	\begin{gather*}
 		\forall x \in X : f^{-1}(f(x)) = x \\
-		\forall y \ in Y : f(f^{-1}(y)) = y
+		\forall y \in Y : f(f^{-1}(y)) = y
 	\end{gather*}
 \end{bem}
 \begin{bem}
@@ -189,15 +189,15 @@ Anfangswerte, um die Funktion zu bestimmen
 \begin{bsp*}
 	\begin{tabular}{l l l r r}
 		a.)	&$\R \rightarrow \R$						&,$x \mapsto \sin x$	&nicht injektiv,	&nicht surjektiv		\\
-		b.)	&$\R \rightarrow [-1,1]$					&,$x \mapsto \sin x$	&nicht injektiv,	&surjektiv			\\
-		c.)	&$[-\frac{\pi}{2},\frac{\pi}{2} \rightarrow \R$		&,$x \mapsto \sin x$	&injektiv,		&nicht surjektiv		\\
-		d.)	&$[-\frac{\pi}{2},\frac{\pi}{2} \rightarrow [-1,1]$	&,$x \mapsto \sin x$	&injektiv,		&surjektiv			\\
+		b.)	&$\R \rightarrow [ -1 , 1 ]$					&,$x \mapsto \sin x$	&nicht injektiv,	&surjektiv			\\
+		c.)	&$[ -\frac{\pi}{2} , \frac{\pi}{2} [ \rightarrow \R$		&,$x \mapsto \sin x$	&injektiv,		&nicht surjektiv		\\
+		d.)	&$[ -\frac{\pi}{2} , \frac{\pi}{2} [ \rightarrow [-1,1]$	&,$x \mapsto \sin x$	&injektiv,		&surjektiv			\\
 			&									&				&			&$\implies$ bijektiv	
 	\end{tabular}
 \end{bsp*}
-\begin{def*}[note = arcsin , index = arcsin]
-	Umkehrfunktion von $[-\frac{\pi}{2},\frac{\pi}{2} \rightarrow [-1,1], x \mapsto \sin x$ ist $\arcsin: [-1,1] \rightarrow [-\frac{\pi}{2},\frac{\pi}{2}$\\
-	analog ist $\arccos: [-1,1] \rightarrow [0,\pi]$\index{arccos} die Umkehrfunktion von $[0,\pi] \rightarrow [-1,1], x \mapsto \cos x$
+\begin{def*}[note = arcsin , index = arcsin arccos , indexformat = {1 2}]
+	Umkehrfunktion von $[ -\frac{\pi}{2} , \frac{\pi}{2} [ \rightarrow [-1,1], x \mapsto \sin x$ ist $\arcsin: [-1,1] \rightarrow [ -\frac{\pi}{2} , \frac{\pi}{2} [$ \\
+	analog ist $\arccos: [-1,1] \rightarrow [0,\pi]$ die Umkehrfunktion von $[0,\pi] \rightarrow [-1,1], x \mapsto \cos x$
 \end{def*}
 \begin{bsp*}
 	\begin{gather*}
@@ -256,11 +256,10 @@ Anfangswerte, um die Funktion zu bestimmen
 \begin{bsp*}
 	\begin{gather*}
 		\text{Seien } x, x' \in [0,\infty[ , x < x' \implies x' > 0 \wedge x \geq 0 \\
-		x'^n - x^n = ( \underbrace{x' - x}_{>0} )( \underbrace{\underbrace{x'^{n-1}}_{>0} + \underbrace{x'^{n-2} \cdot x}_{>0} + \dots + \underbrace{x^{n-1}}_{>0}}_{>0} ) \\
-		x'^n - x^n > 0 \\
-		x'^n > x^n
+		{x'}^n - x^n = ( \underbrace{x' - x}_{>0} )( \underbrace{\underbrace{{x'}^{n-1}}_{>0} + \underbrace{{x'}^{n-2} \cdot x}_{>0} + \dots + \underbrace{x^{n-1}}_{>0}}_{>0} ) \\
+		{x'}^n - x^n > 0 \\
+		{x'}^n > x^n
 	\end{gather*}
-	\todo{Double Superscript}
 \end{bsp*}
 
 \section{Spezielle Definitions- und Zielbereiche, Bedeutung von Funktionen}
@@ -308,8 +307,8 @@ $(n=2)$ Visualisierung durch Höhenlinien\\
 $\{ (x,y) | f(x,y) = h \}$ für festes $h$.\\
 \begin{bsp*}
 	\[ f: \R^2 \rightarrow \R , (x,y) \mapsto xy \]
-	GRAPH
 \end{bsp*}
+\todo{Graph}
 
 $\R^n = \{ (x_1 , \dotsc , x_n ) | x_i \in \R \}$\\
 mögliche Bedeutungen:
@@ -332,7 +331,7 @@ parametrisierte Kurve in $\R^n$ gibt eine Bildmenge (kein Graph!)\\
 			x \\
 			y \\
 			z
-		\end{pmatrix} \in \R^3 | x = r \cos\left( \frac{2 \pi z}{h} \right) , y = r \sin\left( \frac{2 \pi z}{h} \right) \right\}
+		\end{pmatrix} \in \R^3 \middle| x = r \cos\left( \frac{2 \pi z}{h} \right) , y = r \sin\left( \frac{2 \pi z}{h} \right) \right\}
 	\end{gather*}
 \end{bsp*}
 
@@ -375,7 +374,7 @@ Umparametriesierung eines Bereichs\\
 
 Richtungsvektoren:
 $\R^2 \supset X \rightarrow \R^2$\\
-\textbf{Vektorfeld}: jedem Punkt in $X$ wird ein Richtungsvektoe zugeordnet.\\
+\textbf{Vektorfeld}: jedem Punkt in $X$ wird ein Richtungsvektor zugeordnet.\\
 \begin{bsp*}[note = Geschwindigkeitsvektoe einer fliessender Flüssigkeit $\rightarrow$ Differentialgleichung]
 \end{bsp*}
 
@@ -504,7 +503,7 @@ Unstetige Beispiele\\
 	$f$ ist in $x_0$ stetig $\iff$ $f$ ist in $x_0$ rechts- und linksseitigstetig
 \end{def*}
 
-\section{Grundeigenschaften von $\R$}
+\section{Grundeigenschaften von \texorpdfstring{$\R$}{R}}
 Jede nichtleere endliche Teilmenge $S \subset \R$ hat ein eindeutiges Maximum $\max(S)$.\\
 \begin{tabular}{lll}
 	falls nichtleer nicht endlich:	&entweder	&$\forall a \in \R \exists x \in S : x > a$ \\
@@ -561,7 +560,7 @@ Dann gibt es eine eindeutige kleinste obere Schranke.\\
 	\end{gather*}
 \end{bsp*}
 
-\subsubsection{Charakteririerung von $\sup X$}
+\subsubsection{Charakteririerung von \texorpdfstring{$\sup X$}{sup X}}
 Eine $a \in \R$ mit:\\
 \begin{gather*}
 	\forall x \in X : x \leq a, \\
@@ -712,26 +711,25 @@ $\abs{x} = \sqrt{x_1^2 + \dots + x_n^2}$ Betrag / euklidische Norm von $x$\\
 \begin{def*}[note = Norm , index = Norm]
 	Eine \textbf{Norm} auf $\R^n$ ist eine Funktion $\R^n \rightarrow \R , x \mapsto ||x||$ sodass:
 	\begin{enumerate}
-		\item $\forall x \in \R^n : ||x|| \geq 0$ und $||x|| = 0$ \gdw $x=0$
-		\item $\forall x \in \R^n \forall \lambda \in \R: ||\lambda \cdot x|| = \abs{\lambda} \cdot ||x||$
-		\item $\forall x , y \in \R^n : ||x + y|| \leq ||x|| + ||y||$
+		\item $\forall x \in \R^n : \norm{x} \geq 0$ und $\norm{x} = 0$ \gdw $x=0$
+		\item $\forall x \in \R^n \forall \lambda \in \R: \norm{\lambda \cdot x} = \abs{\lambda} \cdot \norm{x}$
+		\item $\forall x , y \in \R^n : \norm{x + y} \leq \norm{x} + \norm{y}$
 	\end{enumerate}
-	\todo{Use \textbackslash norm}
 \end{def*}
 \begin{bsp*}
 	\begin{tabular}{ll}
-		$||\cdot|| = \abs{\cdot}$								&Standard-euklidische Norm			\\
-		$||x||_1 \coloneqq \abs{x_1} + \dots + \abs{x_n}$				&''Taxifahrernorm'' (Weg entlang Quadrate)	\\
-		$||x||_\infty \coloneqq \max\{ \abs{x_1}, \dotsc , \abs{x_n} \}$	&Maximumumsnorm					
+		$\norm{\cdot} = \abs{\cdot}$								&Standard-euklidische Norm			\\
+		$\norm{x}_1 \coloneqq \abs{x_1} + \dots + \abs{x_n}$				&''Taxifahrernorm'' (Weg entlang Quadrate)	\\
+		$\norm{x}_\infty \coloneqq \max\{ \abs{x_1}, \dotsc , \abs{x_n} \}$	&Maximumumsnorm					
 	\end{tabular}
 \end{bsp*}
 \begin{fakt}
-	\[ ||x||_\infty \leq \abs{x} \leq ||x|_1 \leq n \cdot ||x||_\infty \]
+	\[ \norm{x}_{\infty} \leq \abs{x} \leq \norm{x}_1 \leq n \cdot \norm{x}_{\infty} \]
 	Folge: In der Definition von Stetigkeit und $\lim$ und $\sum$ kann man eine beliebige Norm auf $\R^n$ nehmen anstatt $\abs{\cdot}$
 \end{fakt}
 
-\subsubsection{Standardskalarprodukt auf $\R^n$}
+\subsubsection{Standardskalarprodukt auf \texorpdfstring{$\R^n$}{R^n}}
 \begin{gather*}
-	\langle x,y \rangle \coloneqq x_1 y_1 + \dots + x_n y_n \\
-	\langle x,x \rangle = \abs{x}^2
+	\scal{x,y} \coloneqq x_1 y_1 + \dots + x_n y_n \\
+	\scal{x,x} = \abs{x}^2
 \end{gather*}

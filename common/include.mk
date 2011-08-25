@@ -81,7 +81,7 @@ rerun = \
 	$(1) $(2) <<< s &> $(NULL) ; \
 	while ! ( \
 		( $(LS) | $(GREP) $(2).log  &> $(NULL) ) && \
-		( ! $(GREP) -E "(Rerun to get (cross-references|the bars) right)" $(2).log ) \
+		( ! $(GREP) -E "(Rerun to get (cross-references|the bars) right)" $(2).log &> $(NULL) ) \
 	) ; do \
 		$(1) $(2) <<< s &> $(NULL) \
 	; done

@@ -25,11 +25,18 @@ Icon?
 *.nlo
 *.out
 *.toc
+*.tdo
 *.fdb_latexmk
 *.pdfsync
 *.synctex.gz
 *.nav
 *.snm
 *.vrb
+
+Anal1.*
+Anal2.*
+CAnal.*
+DM.*
+!*.tex
 
 tmp/*
