@@ -91,7 +91,7 @@ Betrachte eine Telmenge $X \subset \R^n$.\\
 \end{bsp*}
 \begin{bsp*}
 	\[ \begin{split}
-		f(t)	&\coloneqq \frac{t^3 - 3t^2 -3t + 10}{t^2 - 5t + 6} \qquad \text{rationale Funktion } ; \R \setminus \{ 2,3 \} \rightarrow \R \\
+		f(t)	&\coloneqq \frac{t^3 - 3t^2 -3t + 10}{t^2 - 5t + 6} \qquad \begin{matrix*}[l] \text{rationale Funktion } ; \\ \R \setminus \{ 2,3 \} \rightarrow \R \end{matrix*} \\
 			&= \frac{(t-2) \cdot (t^2 - t -5)}{(t-2) \cdot (t-3)} \\
 			&= \frac{t^2 - t - 5}{t-3} \\
 			&\rightsquigarrow f \text{ hat eine stetige Fortsetzung } \R \setminus \{ 3 \} \rightarrow \R
@@ -123,10 +123,10 @@ Varianten:\\
 \end{bsp*}
 \begin{def*}[note = Einseitige Grenzwerte , index = Grenzwert!einseitiger]
 	\begin{gather*}
-		\lim_{x \searrow x_0} f(x) = \lim_{x \rightarrow x_0 +} f(x) = y_0 \\
-		\iff \forall \epsilon > 0 \exists \delta > 0 \forall x \in X : 0 < x - x_0 < \delta \implies \abs{f(x) - y_0} < \epsilon \\
-		\lim_{x \nearrow x_0} f(x) = \lim_{x \rightarrow x_0 +} f(x) = y_0 \\
-		\iff \forall \epsilon > 0 \exists \delta > 0 \forall x \in X : 0 < x_0 - x < \delta \implies \abs{f(x) - y_0} < \epsilon
+		\lim_{x \searrow x_0} f(x) = \lim_{x \rightarrow x_0 +} f(x) = y_0 \iff \\
+		\forall \epsilon > 0 \exists \delta > 0 \forall x \in X : 0 < x - x_0 < \delta \implies \abs{f(x) - y_0} < \epsilon \\
+		\lim_{x \nearrow x_0} f(x) = \lim_{x \rightarrow x_0 +} f(x) = y_0 \iff \\
+		\forall \epsilon > 0 \exists \delta > 0 \forall x \in X : 0 < x_0 - x < \delta \implies \abs{f(x) - y_0} < \epsilon
 	\end{gather*}
 \end{def*}
 \begin{bem}
@@ -139,8 +139,14 @@ Varianten:\\
 		$\abs{f(x) - y_0} < \epsilon$	&''nahe'' $y_0$	
 	\end{tabular}\\
 	\begin{gather*}
-		\lim_{x \rightarrow x_0} f(x) = \infty, \text{ falls } \forall N > 0 \exists \delta > 0 \forall x \in X : 0 < \abs{x-x_0} < \delta \implies f(x) > N \\
-		\lim_{x \rightarrow x_0} f(x) = -\infty, \text{ falls } \forall N > 0 \exists \delta > 0 \forall x \in X : 0 < \abs{x-x_0} < \delta \implies f(x) < -N \\
+		\begin{split}
+			&\lim_{x \rightarrow x_0} f(x) = \infty, \text{ falls } \\
+			&\forall N > 0 \exists \delta > 0 \forall x \in X : 0 < \abs{x-x_0} < \delta \implies f(x) > N
+		\end{split} \\
+		\begin{split}
+			&\lim_{x \rightarrow x_0} f(x) = -\infty, \text{ falls } \\
+			&\forall N > 0 \exists \delta > 0 \forall x \in X : 0 < \abs{x-x_0} < \delta \implies f(x) < -N
+		\end{split}
 	\end{gather*}
 	Analog: einseitge Grenzwerte
 \end{def*}
@@ -199,18 +205,27 @@ Seien $X \xrightarrow{f} Y \xrightarrow{g} Z$ und  $\lim_{x \rightarrow a} f(x) 
 	Dabei dürfen $a, b, c$ auch $\pm \infty$ sein.
 \end{bem}
 \begin{bsp*}
-	\begin{gather*}
-		\begin{split}
-			\text{a)} \quad \lim_{x \rightarrow \infty} \frac{x^2 + 5x + 7}{2x^2 - 3x - 5} &= \lim_{x \rightarrow \infty} \frac{ 1 + \frac{5}{x} + \frac{7}{x^2}}{2 - \frac{3}{x} - \frac{5}{x^2}} \\
+	\begin{enumerate}[label=\alph*)]
+		\item \[ \begin{split}
+			\lim_{x \rightarrow \infty} \frac{x^2 + 5x + 7}{2x^2 - 3x - 5} &= \lim_{x \rightarrow \infty} \frac{ 1 + \frac{5}{x} + \frac{7}{x^2}}{2 - \frac{3}{x} - \frac{5}{x^2}} \\
 				&= \lim_{t \rightarrow 0+} \frac{1 + 5t + 7t^2}{2 - 3t - 5t^2} \\
 				&= \frac{1 + 5 \cdot 0 + 7 \cdot 0^2}{2 - 3 \cdot 0 - 5 \cdot 0^2} \\
 				&= \frac{1}{2} \quad \text{Da die Funktion stetig ist.}
-		\end{split} \\
-		\text{b)} \quad \lim_{x \rightarrow \infty} e^{\frac{1}{x}} = \lim_{t \rightarrow 0+} e^t = e^0 = 1 \quad \text{Da } \lim_{x \rightarrow \infty} \frac{1}{x} = 0 \text{ und } \frac{1}{x} > 0 \\
-		\text{c)} \quad \lim_{x \rightarrow 0+} e^{\frac{1}{x}} = \lim_{t \rightarrow \infty} e^t = \infty \quad \text{Da } \lim_{x \rightarrow 0+} \frac{1}{x} = \infty \\
-		\text{d)} \quad \lim_{x \rightarrow 0-} e^{\frac{1}{x}} = \lim_{t \rightarrow -\infty} e^t = \lim_{s \rightarrow \infty} \frac{1}{e^s} = \lim_{u \rightarrow \infty} \frac{1}{u} = 0 \\
-		\text{Da } \lim_{x \rightarrow 0-} \frac{1}{x} = -\infty \quad t=-s \quad e^t = e^{-s} = \frac{1}{e^s} \quad \lim_{s \rightarrow e^s} = \infty \quad u = e^s
-	\end{gather*}
+		\end{split} \]
+		\item \[ \lim_{x \rightarrow \infty} e^{\frac{1}{x}} = \lim_{t \rightarrow 0+} e^t = e^0 = 1 \quad \text{Da } \lim_{x \rightarrow \infty} \frac{1}{x} = 0 \text{ und } \frac{1}{x} > 0 \]
+		\item \[ \lim_{x \rightarrow 0+} e^{\frac{1}{x}} = \lim_{t \rightarrow \infty} e^t = \infty \quad \text{Da } \lim_{x \rightarrow 0+} \frac{1}{x} = \infty \]
+		\item \begin{gather*}
+			\lim_{x \rightarrow 0-} e^{\frac{1}{x}} = \lim_{t \rightarrow -\infty} e^t = \lim_{s \rightarrow \infty} \frac{1}{e^s} = \lim_{u \rightarrow \infty} \frac{1}{u} = 0 \\
+			\begin{split}
+				\text{Da }
+					&\lim_{x \rightarrow 0-} \frac{1}{x} = -\infty \\
+					&t=-s \\
+					&e^t = e^{-s} = \frac{1}{e^s} \\
+					&\lim_{s \rightarrow e^s} = \infty \\
+					&u = e^s
+			\end{split}
+		\end{gather*}
+	\end{enumerate}
 \end{bsp*}
 \begin{fakt}
 	Für jede vektorwertige Funktion $f = (f_1, f_2, \dotsc , f_n)$ gilt:
@@ -218,8 +233,10 @@ Seien $X \xrightarrow{f} Y \xrightarrow{g} Z$ und  $\lim_{x \rightarrow a} f(x) 
 \end{fakt}
 \begin{bsp*}
 	\[ \begin{split}
-		\lim_{x \rightarrow 0+} \frac{\sin x}{\sqrt{5x^2 + x^4}}	&= \lim_{x \rightarrow 0+} \frac{\sin x}{\abs{x}} \cdot \frac{1}{\sqrt{5 + x^2}} = \lim_{x \rightarrow 0+} \frac{\sin x}{x} \cdot \lim_{x \rightarrow 0+} \frac{1}{\sqrt{5 + x^2}} \\
-												&= 1 \cdot \frac{1}{\sqrt{5}} = \frac{1}{\sqrt{5}}
+		\lim_{x \rightarrow 0+} \frac{\sin x}{\sqrt{5x^2 + x^4}}
+			&= \lim_{x \rightarrow 0+} \frac{\sin x}{\abs{x}} \cdot \frac{1}{\sqrt{5 + x^2}} \\
+			&= \lim_{x \rightarrow 0+} \frac{\sin x}{x} \cdot \lim_{x \rightarrow 0+} \frac{1}{\sqrt{5 + x^2}} \\
+			&= 1 \cdot \frac{1}{\sqrt{5}} = \frac{1}{\sqrt{5}}
 	\end{split} \]
 \end{bsp*}
 \begin{def*}[note = Majorantenkriterium , index = Majorantenkriterium]

@@ -16,16 +16,15 @@ Funktionsterm = Formel \\
 \end{def*}
 \begin{bem}
 	Zielbereich $B$ nicht mit Bildmenge verwechseln! \\
-%	\begin{def*}[note = Bildmenge , index = Bildmenge]
-%		\[
-%			\text{Bildmenge } = \begin{cases}
-%				\{ f(a)  | a \in A \} \subset B \\
-%				\{ b \in B | \exists a \in A : f(a) = b \}
-%			\end{cases}
-%		\]
-%	\end{def*}
+	\begin{def*}[note = Bildmenge , index = Bildmenge]
+		\[
+			\text{Bildmenge } = \begin{cases}
+				\{ f(a)  | a \in A \} \subset B \\
+				\{ b \in B | \exists a \in A : f(a) = b \}
+			\end{cases}
+		\]
+	\end{def*}
 \end{bem}
-\todo{Fix}
 \begin{bsp*}
 	\[ f: [0,\infty [ \rightarrow \R , x \mapsto 0 \]
 \end{bsp*}
@@ -375,7 +374,8 @@ Umparametriesierung eines Bereichs\\
 Richtungsvektoren:
 $\R^2 \supset X \rightarrow \R^2$\\
 \textbf{Vektorfeld}: jedem Punkt in $X$ wird ein Richtungsvektor zugeordnet.\\
-\begin{bsp*}[note = Geschwindigkeitsvektoe einer fliessender Flüssigkeit $\rightarrow$ Differentialgleichung]
+\begin{bsp*}
+	Geschwindigkeitsvektor einer fliessender Flüssigkeit $\rightarrow$ Differentialgleichung
 \end{bsp*}
 
 \section{Stetigkeit}
@@ -387,11 +387,11 @@ $\R^2 \supset X \rightarrow \R^2$\\
 	f(x), f(x') \text{ ''nahe'' } \iff \abs{f(x) - f(x')} < \epsilon
 \end{gather*}
 \begin{def*}[note = Stetigkeit , index = Stetigkeit]
-	\begin{tabular}{ll}
-		(a)	&$f$ ist stetig in $x_0 \in X$ falls gilt:															\\
-			&$\forall \epsilon > 0 \exists \delta > 0 : \forall x \in X : \abs{x-x_0} < \delta \implies \abs{f(x) - f(x')} < \epsilon$	\\
-		(b)	&$f$ ist stetig, falls $f$ stetig in jedem $x_0 \in X$ ist.
-	\end{tabular}
+	\begin{enumerate}[label=(\alph*)]
+		\item $f$ ist stetig in $x_0 \in X$ falls gilt:
+			\[ \forall \epsilon > 0 \exists \delta > 0 : \forall x \in X : \abs{x-x_0} < \delta \implies \abs{f(x) - f(x')} < \epsilon \]
+		\item $f$ ist stetig, falls $f$ stetig in jedem $x_0 \in X$ ist.
+	\end{enumerate}
 \end{def*}
 \begin{fakt}
 	Jede Polynomfunktion ist stetig. \\
@@ -399,70 +399,70 @@ $\R^2 \supset X \rightarrow \R^2$\\
 \end{fakt}
 
 \subsubsection{Grundeigenschaften}
-(a)\\
-$f: X \rightarrow Y$ stetig \\
-$g: Y \rightarrow Y$ stetig \\
-$\implies$ die zusammengesetzte Funktion $g \circ f: X \rightarrow Z , x \mapsto g(f(x))$ ist stetig.\\
-\begin{bew}
-	\begin{gather*}
-		\text{Sei } x_0 \in X, \text{ sei } \epsilon > 0 \\
-		g \text{ stetig in } f(x_0) \rightsquigarrow \exists \delta > 0 : \forall z \in Y: \\
-		\abs{y - f(x_0)} < \delta \implies \abs{g(y) - g(f(x_0))} < \epsilon \\
-		f \text{ stetig in } x_0 \implies \gamma > 0 : \forall x \in X \\
-		\abs{x - x_0} < \gamma \implies \abs{f(x) - f(x_0)} < \delta \\
-		\text{Zusammen:} \\
-		\abs{x - x_0} < \gamma \implies \abs{g(f(x)) - g(f(x_0))} < \epsilon \\
-		\text{d.h. } g \circ f \text{ stetig in } x_0 \quad \blacksquare
-	\end{gather*}
-\end{bew}
-
-(b)\\
-$f = (f_1 , \dotsc , f_n)$\\
-$f_1 , \dotsc , f_n : X \rightarrow \R$\\
-$\drsh f$ stetig $\iff$ jedes $f_i$ stetig
-
-(c)\\
-Die Grundrechenarten sind stetig.\\
-\begin{bew}
-	$+ : \R^2 \rightarrow \R , (x,y) \mapsto x + y$\\
-	Sei $(x_0 , y_0 ) \in \R^2$. Sei $\epsilon > 0$. Setze $\delta \coloneqq \frac{\epsilon}{2}$\\
-	Dann gilt für alle $(x,y) \in \R^2$:
-	\begin{gather*}
-		\abs{ (x,y) - (x_0,y_0) } < \delta \\
-		\implies \abs{x-x_0} < \delta \wedge \abs{y-y_0} < \delta \\
-		\implies \abs{ (x-x_0) + (y-y_0) } \leq \abs{x-x_0} + \abs{y-y_0} < 2 \delta = \epsilon \\
-		\implies \abs{ (x+y) - (x_0+y_0)} < \epsilon
-	\end{gather*}
-	analog $-$
-\end{bew}
-\begin{bew}
-	$\cdot : \R^2 \rightarrow \R , (x,y) \mapsto x \cdot y$\\
-	Sei $(x_0,y_0) \in \R^2 , \epsilon > 0$\\
-	\begin{gather*}
-		\abs{x} = \abs{ (x-x_0) + x_0 } \leq \abs{x-x_0} + \abs{x_0} < \delta + \abs{x} \\%% ORLY?
-		\delta = \frac{\min\{\epsilon,1\}}{1 + \abs{x_0} + \abs{y_0}} \implies \delta \leq 1 \\
-		\begin{split}
-		\abs{x \cdot y - x_0 \cdot y_0}	&= \abs{x \cdot (y-y_0) + (x-x_0) \cdot y_0}					\\
-								&\leq \abs{x \cdot (y-y_0)} + \abs{(x-x_0) \cdot y_0}			\\
-								&= \abs{x} \cdot \abs{(y-y_0)} + \abs{(x-x_0)} \cdot \abs{y_0}	\\
-								&\leq \abs{x} \cdot \delta + \abs{y_0} \cdot \delta				\\
-								&< ( ( \delta + \abs{x_0} ) + \abs{y_0} ) \cdot \delta			\\
-								&= (\delta + \abs{x_0} + \abs{y_0}) \cdot \delta				\\
-								&\leq (1 + \abs{x_0} + \abs{y_0}) \cdot \delta				\\
-								&\leq \epsilon										
-		\end{split}
-	\end{gather*}
-	Dann gilt $\forall (x,y) \ in \R^2 : \abs{ (x,y) - (x_0,y_0) } < \delta \implies \abs{ x \cdot y - x_0 \cdot y_0 } < \epsilon$\\
-	analog $:$
-\end{bew}
-
-(d)\\
-\begin{folge}
-	jede Rationale Funktion ist stetig, wo definiert.
-\end{folge}
-
-(e)\\
-$f$: Intervall $\rightarrow$ Intervall bijektiv, stetig $\implies f^{-1}$ stetig\\
+\begin{enumerate}[label=(\alph*)]
+	\item
+		$f: X \rightarrow Y$ stetig \\
+		$g: Y \rightarrow Y$ stetig \\
+		$\implies$ die zusammengesetzte Funktion $g \circ f: X \rightarrow Z , x \mapsto g(f(x))$ ist stetig.\\
+		\begin{bew}
+			\begin{gather*}
+				\text{Sei } x_0 \in X, \text{ sei } \epsilon > 0 \\
+				g \text{ stetig in } f(x_0) \rightsquigarrow \exists \delta > 0 : \forall z \in Y: \\
+				\abs{y - f(x_0)} < \delta \implies \abs{g(y) - g(f(x_0))} < \epsilon \\
+				f \text{ stetig in } x_0 \implies \gamma > 0 : \forall x \in X \\
+				\abs{x - x_0} < \gamma \implies \abs{f(x) - f(x_0)} < \delta \\
+				\text{Zusammen:} \\
+				\abs{x - x_0} < \gamma \implies \abs{g(f(x)) - g(f(x_0))} < \epsilon \\
+				\text{d.h. } g \circ f \text{ stetig in } x_0 \quad \blacksquare
+			\end{gather*}
+		\end{bew}
+	\item
+		$f = (f_1 , \dotsc , f_n)$\\
+		$f_1 , \dotsc , f_n : X \rightarrow \R$\\
+		$\drsh f$ stetig $\iff$ jedes $f_i$ stetig
+	
+	\item
+		Die Grundrechenarten sind stetig.\\
+		\begin{bew}
+			$+ : \R^2 \rightarrow \R , (x,y) \mapsto x + y$\\
+			Sei $(x_0 , y_0 ) \in \R^2$. Sei $\epsilon > 0$. Setze $\delta \coloneqq \frac{\epsilon}{2}$\\
+			Dann gilt für alle $(x,y) \in \R^2$:
+			\begin{gather*}
+				\abs{ (x,y) - (x_0,y_0) } < \delta \\
+				\implies \abs{x-x_0} < \delta \wedge \abs{y-y_0} < \delta \\
+				\implies \abs{ (x-x_0) + (y-y_0) } \leq \abs{x-x_0} + \abs{y-y_0} < 2 \delta = \epsilon \\
+				\implies \abs{ (x+y) - (x_0+y_0)} < \epsilon
+			\end{gather*}
+			analog $-$
+		\end{bew}
+		\begin{bew}
+			$\cdot : \R^2 \rightarrow \R , (x,y) \mapsto x \cdot y$\\
+			Sei $(x_0,y_0) \in \R^2 , \epsilon > 0$\\
+			\begin{gather*}
+				\abs{x} = \abs{ (x-x_0) + x_0 } \leq \abs{x-x_0} + \abs{x_0} < \delta + \abs{x} \\%% ORLY?
+				\delta = \frac{\min\{\epsilon,1\}}{1 + \abs{x_0} + \abs{y_0}} \implies \delta \leq 1 \\
+				\begin{split}
+				\abs{x \cdot y - x_0 \cdot y_0}	&= \abs{x \cdot (y-y_0) + (x-x_0) \cdot y_0}					\\
+										&\leq \abs{x \cdot (y-y_0)} + \abs{(x-x_0) \cdot y_0}			\\
+										&= \abs{x} \cdot \abs{(y-y_0)} + \abs{(x-x_0)} \cdot \abs{y_0}	\\
+										&\leq \abs{x} \cdot \delta + \abs{y_0} \cdot \delta				\\
+										&< ( ( \delta + \abs{x_0} ) + \abs{y_0} ) \cdot \delta			\\
+										&= (\delta + \abs{x_0} + \abs{y_0}) \cdot \delta				\\
+										&\leq (1 + \abs{x_0} + \abs{y_0}) \cdot \delta				\\
+										&\leq \epsilon										
+				\end{split}
+			\end{gather*}
+			Dann gilt $\forall (x,y) \ in \R^2 : \abs{ (x,y) - (x_0,y_0) } < \delta \implies \abs{ x \cdot y - x_0 \cdot y_0 } < \epsilon$\\
+			analog $:$
+		\end{bew}
+	\item
+		\begin{folge}
+			jede Rationale Funktion ist stetig, wo definiert.
+		\end{folge}
+	\item
+		$f$: Intervall $\rightarrow$ Intervall bijektiv, stetig $\implies f^{-1}$ stetig
+\end{enumerate}
+\todo{Fix vertical spacing}
 \begin{bsp*}
 	Für $n \in \Z^{\geq 0} : [0,\infty[ \rightarrow [0,\infty[, x \mapsto x^n$\\
 	ist $[0,\infty[ \rightarrow [0,\infty[, y \mapsto \sqrt[n]{y}$
@@ -502,6 +502,7 @@ Unstetige Beispiele\\
 	\[ \forall \epsilon > 0 \exists \delta > 0 : \forall x \in X : x < x_0 \wedge \abs{x-x_0} < \delta \implies \abs{f(x)-f(x_0)} < \epsilon \]	
 	$f$ ist in $x_0$ stetig $\iff$ $f$ ist in $x_0$ rechts- und linksseitigstetig
 \end{def*}
+\todo{Overfull}
 
 \section{Grundeigenschaften von \texorpdfstring{$\R$}{R}}
 Jede nichtleere endliche Teilmenge $S \subset \R$ hat ein eindeutiges Maximum $\max(S)$.\\
@@ -672,6 +673,7 @@ Eine $a \in \R$ mit:\\
 		\end{bsp*}
 	\end{bew}
 \end{satz*}
+\todo{Not broken}
 \begin{bsp*}
 	$a > 1 \rightsquigarrow \R \rightarrow \R^{>0} ,x \mapsto a^x$ ist stetig und streng monoton wachsend. Denn:\\
 	Für $x < x'$ ist $a^x - a^{x'} = \underbrace{a^x}_{>0} \cdot (\underbrace{a^{x-x'}}_{>0} - 1 )$ \\
@@ -723,6 +725,7 @@ $\abs{x} = \sqrt{x_1^2 + \dots + x_n^2}$ Betrag / euklidische Norm von $x$\\
 		$\norm{x}_\infty \coloneqq \max\{ \abs{x_1}, \dotsc , \abs{x_n} \}$	&Maximumumsnorm					
 	\end{tabular}
 \end{bsp*}
+\todo{Overfull}
 \begin{fakt}
 	\[ \norm{x}_{\infty} \leq \abs{x} \leq \norm{x}_1 \leq n \cdot \norm{x}_{\infty} \]
 	Folge: In der Definition von Stetigkeit und $\lim$ und $\sum$ kann man eine beliebige Norm auf $\R^n$ nehmen anstatt $\abs{\cdot}$
