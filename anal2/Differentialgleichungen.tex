@@ -295,6 +295,7 @@ homogen falls $r(x) = 0$
 		\end{split}
 	\end{gather*}
 \end{bsp*}
+\todo{Too long}
 \begin{bsp*}[note = für Lösung mit Potenzreihenansatz]
 	Besselsche DGL:
 	\begin{gather*}
@@ -996,6 +997,7 @@ Also ist $f$ in jede Richtung $e$ differenzierbar, und $D_e f = (\grad f) \under
 		\text{Also } F(\alpha) = \log( \alpha + 1 )
 	\end{gather*}
 \end{bsp}
+\todo{Too long}
 \begin{bsp}
 	Berechne
 	\[ \int_0^\infty \frac{\sin x}{x} \dd x \]
@@ -1042,6 +1044,7 @@ Also ist $f$ in jede Richtung $e$ differenzierbar, und $D_e f = (\grad f) \under
 		\text{Antwort: } \int_0^\infty \frac{\sin x}{x} \dd x = \frac{\pi}{2}
 	\end{gather*}
 \end{bsp}
+\todo{Too long}
 
 \subsubsection{Höhere Ableitungen}
 Sei $U \subset \R^n$ offen; $f: U \rightarrow \R$ \\
@@ -1121,6 +1124,7 @@ $m$-tes Taylorpolynom von $f$ an der Stelle $\begin{pmatrix} x_0 \\ y_0 \end{pma
 			&= 1 + (x+y) + \frac{2xy + y^2}{2} + \frac{(x+y)(-2x^2 + 2xy + y^2)}{6} + o\left( \abs{\begin{pmatrix} x \\ y \end{pmatrix}}^3 \right)
 	\end{split} \]
 \end{bsp*}
+\todo{Overfull}
 Analog: $n$ Variablen \\
 Fall $m=2$
 \begin{gather*}
@@ -1183,8 +1187,8 @@ $x_0$ kritischer Punkt $\iff f(x) = f(x_0) + \frac{1}{2} (x-x_0)^T \nabla^2 f(x_
 		f_{xy} = -2\cos(x + 2y) - 6\cos(2x + 3y) \\
 		f_{yy} = -4\cos(x + 2y) - 9\cos(2x + 3y) \\
 		\begin{array}{ l | c | c | c | c }
-			\text{kritischer Punkt}	&\begin{pmatrix} 0 \\ 0 \end{pmatrix}	&\begin{pmatrix} \pi \\ 0 \end{pmatrix}	&\begin{pmatrix} 0 \\ \pi \end{pmatrix}	&\begin{pmatrix} \pi \\ \pi \end{pmatrix} \\
-			\nabla^2 f	\begin{pmatrix} -5 &-8 \\ -8 &-13 \end{pmatrix}	&\begin{pmatrix} -3 &-4 \\ -4 &-3 \end{pmatrix}	&\begin{pmatrix} 3 &4 \\ 4 &5 \end{pmatrix}	&\begin{pmatrix} 5 &8 \\ 8 &13 \end{pmatrix} \\
+			\text{kritischer Punkt}	&\begin{pmatrix} 0 \\ 0 \end{pmatrix}	&\begin{pmatrix} \pi \\ 0 \end{pmatrix}	&\begin{pmatrix} 0 \\ \pi \end{pmatrix}	&\begin{pmatrix} \pi \\ \pi \end{pmatrix} \\ \hline
+			\nabla^2 f	\begin{pmatrix} -5 &-8 \\ -8 &-13 \end{pmatrix}	&\begin{pmatrix} -3 &-4 \\ -4 &-3 \end{pmatrix}	&\begin{pmatrix} 3 &4 \\ 4 &5 \end{pmatrix}	&\begin{pmatrix} 5 &8 \\ 8 &13 \end{pmatrix} \\ \hline
 			\det( \nabla^2 f)	&1	&-1	&-1	&1
 		\end{array}
 		\intertext{Antwort:}
@@ -1301,7 +1305,9 @@ Methode:
 			f\begin{pmatrix} x \\ y \end{pmatrix} &68 &108 &0 &\underbrace{-432}_{\text{eindeutiges Minimum}} &\underbrace{260}_{\text{eindeutiges Maximum}} &0 &10 &-240
 		\end{array}
 	\end{gather*}
-\end{bsp*}\todo{Fix table}
+\end{bsp*}
+\todo{Too long}
+\todo{Fix table}
 \begin{bsp*}
 	Säge aus einem Baumstamm von Radius $R$ einen rechteckigen Balken mit maximalem Widerstandsmoment $W = \frac{b \cdot h^2}{6}$ ($b \geq h$) \\
 	Lösung:
@@ -1369,6 +1375,7 @@ Gesucht: lokale Extrema von $f$ auf $B \coloneqq \{ x \in U \mid g(x) = 0 \}$
 		\iff \underbrace{\sqrt[n]{x_1 \cdots x_n}}_{\text{geometrisches Mittel}} \leq \underbrace{\frac{x_1 + \dotsb + x_n}{n}}_{\text{arithmetisches Mittel}}
 	\end{gather*}
 \end{bsp*}
+\todo{Too long}
 
 \subsubsection{Lagrange-Ansatz}
 Betrachte die Funktion
@@ -1376,7 +1383,7 @@ Betrachte die Funktion
 	L: \begin{pmatrix} x_1 \\ \vdots \\ x_n \\ \lambda \end{pmatrix} \mapsto f\begin{pmatrix} x_1 \\ \vdots x_n \end{pmatrix} - \lambda \cdot g\begin{pmatrix} x_1 \\ \vdots \\ x_n \end{pmatrix} \\
 	\nabla f = ( \nabla f - \lambda\nabla g , g )
 \end{gather*}
-Also: Bedingt kritische Punkte vom Typ (b)\todo{link} sind genau die kritischen Punkte von $L$
+Also: Bedingt kritische Punkte vom Typ (b) \todo{link} sind genau die kritischen Punkte von $L$
 \begin{bsp*}
 	Bestimme die Extrema von $f\begin{pmatrix} x \\ y \\ z \end{pmatrix} = \sqrt{3} x + 3y + 2z$ auf der Einheitssphäre
 	\[ B \coloneqq \left\{ \begin{pmatrix} x \\ y \\ z \end{pmatrix} \in \R^3 \middle| x^2 + y^2 + z^2 = 1 \right\} \]
@@ -1401,7 +1408,9 @@ Also: Bedingt kritische Punkte vom Typ (b)\todo{link} sind genau die kritischen 
 		\text{Max. } = 4 \text{ in } \begin{pmatrix} -\frac{\sqrt{3}}{4} \\ \frac{3}{4} \\ \frac{1}{2} \end{pmatrix} \\
 		\text{Min. } = -4 \text{ in } \begin{pmatrix} \frac{\sqrt{3}}{4} \\ -\frac{3}{4} \\ -\frac{1}{2} \end{pmatrix}
 	\end{gather*}
-\end{bsp*}\todo{link (b)}
+\end{bsp*}
+\todo{Too long}
+\todo{link (b)}
 
 \subsubsection{Extrema mit mehreren NB}
 Sei $U \subset \R^n$ offen, $f , g_1 , \dotsc , g_m : U \rightarrow \R$ differenzierbar.
@@ -1445,7 +1454,9 @@ $\rightarrow$ Typ (b)\todo{link} $\iff$ kritische Punkte von $L$
 		\intertext{Antwort:}
 		\text{Max. } = \frac{\sqrt{2}}{2} \text{ bei } \frac{\sqrt{2}}{10} \begin{pmatrix} 5 \\ -4 \\ 3 \end{pmatrix}
 	\end{gather*}
-\end{bsp*}\todo{link (a)}
+\end{bsp*}
+\todo{Too long}
+\todo{link (a)}
 
 \section{Implizite Funktionen}
 Sei $U \subset \R^2$ offen und $f: U \rightarrow \R$ eine $C^1$-Funktion und $L \coloneqq \{ \begin{pmatrix} x \\ y \end{pmatrix} \in U \mid f\begin{pmatrix} x \\ y \end{pmatrix} = 0 \}$. $L$ heisst regulär in $\begin{pmatrix} x_0 \\ y_0 \end{pmatrix}$, falls $\nabla f\begin{pmatrix} x_0 \\ y_0 \end{pmatrix} \neq ( 0 , 0 )$. Sonst \textbf{singulär}
@@ -1503,6 +1514,7 @@ $\rightsquigarrow$ Tangente an $L$ in $\begin{pmatrix} x_0 \\ y_0 \end{pmatrix}$
 	$\implies$ Satz überall anwendbar und $\varphi'(x) = -\frac{f_x\begin{pmatrix} x \\ \varphi(x) \end{pmatrix}}{f_y\begin{pmatrix} x \\ \varphi(x) \end{pmatrix}} < 0$ \\
 	$\implies$ $\varphi$ streng monoton fallend
 \end{bsp}
+\todo{Overfull}
 \begin{bsp}
 	Sei $x \mapsto g(x)$ eine $C^1$-Funktion einer Variable mit $g'(x_0) \neq 0$. Dann gilt für $f\begin{pmatrix} x \\ y \end{pmatrix} \coloneqq g(x) - y$
 	\begin{gather*}

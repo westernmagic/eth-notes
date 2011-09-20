@@ -106,8 +106,16 @@ $\rightsquigarrow$ DGL:
 	\begin{gather*}
 		\frac{\partial f}{\partial x} = 2xy + yz \iff f = \int (2xy + yz) \dd x + g\begin{pmatrix} y \\ z \end{pmatrix} \\
 		f = x^2 y + xyz + g\begin{pmatrix} y \\ z \end{pmatrix} \\
-		\frac{\partial f}{\partial y} = \cancel{x^2} + \cancel{xz} + z = \cancel{x^2} + \cancel{xz} + \frac{\partial g}{\partial y} \iff \frac{\partial g}{\partial y} = z \iff g\begin{pmatrix} y \\ z \end{pmatrix} = yz + h(z) \\
-		\frac{\partial f}{\partial z} = axy + by + cz = xy + y + \frac{\dd h}{\dd z} \iff \frac{\dd h}{\dd z} = (a-1) xy + (b-1) y + cz
+		\begin{split}
+			\frac{\partial f}{\partial y} = \cancel{x^2} + \cancel{xz} + z = \cancel{x^2} + \cancel{xz} + \frac{\partial g}{\partial y} \\
+			&\iff \frac{\partial g}{\partial y} = z \\
+			&\iff g\begin{pmatrix} y \\ z \end{pmatrix} = yz + h(z)
+		\end{split} \\
+		\begin{split}
+			\frac{\partial f}{\partial z}
+				&= axy + by + cz = xy + y + \frac{\dd h}{\dd z} \\
+				&\iff \frac{\dd h}{\dd z} = (a-1) xy + (b-1) y + cz
+		\end{split}
 		\intertext{Hat eine Lösung $h(z)$ (von $x , y$ unabhängig) g.d.w. $a = 1$ und $b = 1$}
 		h(z) = c \frac{z^2}{2} + d
 		\intertext{Antwort: $K$ hat ein Potential g.d.w. $a=b=1$, und dann}
@@ -131,7 +139,15 @@ $\rightsquigarrow$ DGL:
 		\begin{gather*}
 			\frac{\partial K_1}{\partial x_2} = \frac{\partial K_2}{\partial x_1} \\
 			\frac{\partial f}{\partial x_1} = K_1 \iff f\begin{pmatrix} x_1 \\ x_2 \end{pmatrix} = \underbrace{\int K_1\begin{pmatrix} x_1 \\ x_2 \end{pmatrix} \dd x_1}_{=f_1\begin{pmatrix} x_1 \\ x_2 \end{pmatrix}} + g(x_2) \\
-			\frac{\partial f}{\partial x_2} = K_2\begin{pmatrix} x_1 \\ x_2 \end{pmatrix} = \frac{\partial f_1}{\partial x_2} + \frac{\dd g}{\dd x_2} \iff \frac{\dd g}{\dd x_2} = K_2 - \frac{\partial f_1}{\partial x_2} = K_2 - \int \frac{\partial K_1}{\partial x_2} \dd x_1 = K_2 - \int \frac{\partial K_1}{\partial x_1} \dd x_1 = \text{ const.}(x_2) \quad \checkmark \blacksquare
+			\begin{split}
+				\frac{\partial f}{\partial x_2}
+					&= K_2\begin{pmatrix} x_1 \\ x_2 \end{pmatrix} = \frac{\partial f_1}{\partial x_2} + \frac{\dd g}{\dd x_2} \iff \\
+				\frac{\dd g}{\dd x_2}
+					&= K_2 - \frac{\partial f_1}{\partial x_2} \\
+					&= K_2 - \int \frac{\partial K_1}{\partial x_2} \dd x_1 \\
+					&= K_2 - \int \frac{\partial K_1}{\partial x_1} \dd x_1 \\
+					&= \text{ const.}(x_2) \quad \checkmark \blacksquare
+			\end{split}
 		\end{gather*}
 	\end{bew}
 \end{satz*}
@@ -168,22 +184,35 @@ $\rightsquigarrow$ DGL:
 	Hängt nur ab von Bild von $\gamma$, mit Orientierung (Vorzeichenwechsel).
 	\[ \int_{\gamma} \langle K(x) , \dd x \rangle = \int_{\gamma} K(x) \cdot \dd x \coloneqq \int_a^b \langle K(\gamma(t)) , \gamma'(t) \rangle \dd t \]
 	Hängt nur ab von Bild von $\gamma$, mit Orientierung (Vorzeichenwechsel).
-%	\begin{bew}[note = Invarianz]
-%		Sei $[a',b'] \overset{\psi}{\rightarrow} [a,b] \overset{\gamma}{\rightarrow} U$ bijektiv, $C^1$, orientierung erhaltend:
-%		\begin{gather*}
-%			\int_a^b \langle K(\gamma(t)) , \gamma'(t) \rangle \dd t = \int_{a'}^{b'} \langle K(\gamma(\psi(s))) , \gamma'(\psi(s)) \rangle \psi'(s) \dd s = \int_{a'}^{b'} \langle K((\gamma \circ \psi)(s)) , (\gamma \circ \psi)'(s) \rangle \dd s
-%			\intertext{Falls $\psi$ Orientierung umkehrt, ist}
-%			\int_a^b \langle K(\gamma(t)) , \gamma'(t) \rangle = \int_{b'}^{a'} \langle K(\gamma(\psi(s))) , \gamma'(\psi(s)) \rangle \psi'(s) \dd s = - \int_{a'}^{b'} \langle K(\gamma(\psi(s))) , \gamma'(\psi(s)) \rangle \psi'(s) \dd s
-%		\end{gather*}
-%	\end{bew}
-\end{def*}\todo{Fix}
+	\begin{bew}[note = Invarianz]
+		Sei $[a',b'] \overset{\psi}{\rightarrow} [a,b] \overset{\gamma}{\rightarrow} U$ bijektiv, $C^1$, orientierung erhaltend:
+		\begin{gather*}
+			\begin{split}
+				\int_a^b \langle K(\gamma(t)) , \gamma'(t) \rangle \dd t
+					&= \int_{a'}^{b'} \langle K(\gamma(\psi(s))) , \gamma'(\psi(s)) \rangle \psi'(s) \dd s \\
+					&= \int_{a'}^{b'} \langle K((\gamma \circ \psi)(s)) , (\gamma \circ \psi)'(s) \rangle \dd s
+			\end{split}
+			\intertext{Falls $\psi$ Orientierung umkehrt, ist}
+			\begin{split}
+				\int_a^b \langle K(\gamma(t)) , \gamma'(t) \rangle
+					&= \int_{b'}^{a'} \langle K(\gamma(\psi(s))) , \gamma'(\psi(s)) \rangle \psi'(s) \dd s \\
+					&= - \int_{a'}^{b'} \langle K(\gamma(\psi(s))) , \gamma'(\psi(s)) \rangle \psi'(s) \dd s
+			\end{split}
+		\end{gather*}
+	\end{bew}
+\end{def*}
+\todo{Too long}
 \begin{satz*}
 	Sei $f: U \rightarrow \R$ $C^1$ und $\gamma$ ein $C^1$-Weg von $P$ nach $Q$. Dann gilt:
 	\[ \int_{\gamma} \nabla f(x) \cdot \dd x = f(Q) - f(P) \]
 	\begin{bew}
-		\begin{gather*}
-			\text{Linke Seite } = \int_a^b [ (\nabla f)(\gamma t) \cdot \gamma'(t) ] \dd t = \int_a^b (f \circ \gamma)'(t) \dd t \overset{\text{\scriptsize{Hauptsatz}}}{=} (f \circ \gamma)(b) - (f \circ \gamma)(a) = \text{ Rechte Seite} \quad \blacksquare
-		\end{gather*}
+		\[ \begin{split}
+			\text{Linke Seite }
+				&= \int_a^b [ (\nabla f)(\gamma t) \cdot \gamma'(t) ] \dd t \\
+				&= \int_a^b (f \circ \gamma)'(t) \dd t \\
+				&\overset{\text{\scriptsize{Hauptsatz}}}{=} (f \circ \gamma)(b) - (f \circ \gamma)(a) \\
+				&= \text{ Rechte Seite} \quad \blacksquare
+		\end{split} \]
 	\end{bew}
 	Also: vektorielle Linienintegral eines Gradientenvektorfelds ist die Differenz der Potenzreihe an den Endpunkten.
 \end{satz*}
@@ -211,7 +240,13 @@ $\rightsquigarrow$ DGL:
 	Linienintegral entlang einer Feldlinie:
 	\begin{gather*}
 		\gamma(t) = \begin{pmatrix} r \cos t \\ r \sin t \\ 0 \end{pmatrix} : [0 , 2\pi] \rightarrow \R^3 \\
-		\int_{\gamma} K_3(x) \dd x = \int_0^{2\pi} K_3\begin{pmatrix} r \cos t \\ r \sin t \\ 0 \end{pmatrix} \cdot \begin{pmatrix} -r \sin t \\ r \cos t \\ 0 \end{pmatrix} \dd t = \int_0^{2\pi} \left\langle \begin{pmatrix} r \cos t \\ r \sin t \\ 0 \end{pmatrix} , \begin{pmatrix} -r \sin t \\ r \cos t \\ 0 \end{pmatrix} \right\rangle \dd t = \int_0^{2\pi} r^2 \dd t = 2\pi r^2 
+		\begin{split}
+			\int_{\gamma} K_3(x) \dd x
+				&= \int_0^{2\pi} K_3\begin{pmatrix} r \cos t \\ r \sin t \\ 0 \end{pmatrix} \cdot \begin{pmatrix} -r \sin t \\ r \cos t \\ 0 \end{pmatrix} \dd t \\
+				&= \int_0^{2\pi} \left\langle \begin{pmatrix} r \cos t \\ r \sin t \\ 0 \end{pmatrix} , \begin{pmatrix} -r \sin t \\ r \cos t \\ 0 \end{pmatrix} \right\rangle \dd t \\
+				&= \int_0^{2\pi} r^2 \dd t \\
+				&= 2\pi r^2
+		\end{split}
 	\end{gather*}
 \end{bsp*}
 \begin{bsp*}[note = 4]
@@ -263,6 +298,7 @@ Ist $\gamma$ eine eindliche ''Summe'' (\textbf{Kette}) von Wegen $\gamma_1 , \do
 	Zusammensetzen $\rightsquigarrow$ Satz für $B$ = endliche Vereinigung von Rechtecken \\
 	$B$ beliebig: Nähere an durch Vereinigung von Recktecken; Beide Seiten konvergieren
 \end{satz*}
+\todo{Too long}
 
 \subsection{Anwendung}
 Zu gegebenem Skalarfeld $f: B \rightarrow \R$ suche $K$ Vektorfeld mit $\rot K = f$
@@ -355,6 +391,7 @@ BILD \todo{Bild}
 		\end{split}
 	\end{gather*}
 \end{bsp*}
+\todo{Overfull}
 \begin{satz*}[note = Divergenzsatz im $\R^3$]% , index = Divergenz satz im $\R^3$ , indexformat = {1.2!~34 2!1-~!~34}]
 	Sei $B \subset \R^2 , F \subset \R^3 , \phi : B \rightarrow F$ eine reguläre Parametriesierung eines Flächenstücks $F$
 	\[ n \coloneqq \frac{\phi_u \times \phi_v}{\abs{\phi_u \times \phi_v}} \qquad \text{Normaleneinheitsvektor} \]
@@ -400,7 +437,9 @@ Sei jetzt $B \subset \R^3$ kompakt mit stückweise $C^1$ parametrisierten Rand $
 		\int_{F_2} K \cdot n \cdot \abs{\dd \omega} = \int_{\substack{x^2 + y^2 \leq 1 \\ z = 1}} K\begin{pmatrix} x \\ y \\ z \end{pmatrix} \cdot \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix} \dd x \dd y = \dots = -\pi \\
 		\int_{\partial B} = \int_{F_1} + \int_{F_2} = \frac{7\pi}{3} - \pi = \frac{4\pi}{3}
 	\end{gather*}
-\end{bsp*}\todo{Bild}
+\end{bsp*}
+\todo{Too long}
+\todo{Bild}
 \begin{bsp*}
 	\begin{gather*}
 		K(x) \coloneqq c \cdot \frac{x}{\abs{x}^3} \\
