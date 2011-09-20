@@ -383,13 +383,17 @@
 	]{folge}
 }
 
+\newcommand{\authoremail}[1]{\makecommand{\MyAuthorEmail}{#1}}
+\newcommand{\editoremail}[1]{\makecommand{\MyEditorEmail}{#1}}
 \newcommand{\editor}[1]{\makecommand{\MyEditor}{#1}}
 \newcommand{\lecture}[1]{\makecommand{\MyLecture}{#1}}
 \newcommand{\subtitle}[1]{\makecommand{\MySubtitle}{#1}}
 \newcommand{\professor}[1]{\makecommand{\MyProfessor}{#1}}
 \newcommand{\semester}[1]{\makecommand{\MySemester}{#1}}
 \author{}
+\authoremail{}
 \editor{}
+\editoremail{}
 \lecture{}
 \subtitle{}
 \professor{}
@@ -407,9 +411,15 @@
 			\large{\MySemester}
 			\vskip 3em
 			\Large{\MyAuthor} \\
+			\ifthenelse{\expandafter\isempty\expandafter{\MyAuthorEmail}}{}{
+				\large{\href{mailto:\MyAuthorEmail}{\texttt{\MyAuthorEmail}}} \\
+			}
 			\ifthenelse{\expandafter\isempty\expandafter{\MyEditor}}{}{
 				\footnotesize{(Mitschrift)} \\
 				\Large{\MyEditor} \\
+				\ifthenelse{\expandafter\isempty\expandafter{\MyEditorEmail}}{}{
+					\large{\href{mailto:\MyAuthorEmail}{\texttt{\MyEditorEmail}}} \\
+				}
 				\footnotesize{(Korrektur \& Ergänzung)}
 			}
 			\vskip 1.5em
