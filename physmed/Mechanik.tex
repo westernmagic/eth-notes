@@ -1,0 +1,70 @@
+\chapter{Mechanik}
+
+\section{Kinematik}
+Beschreibung von Bewegungen \\
+einfachster Fall:
+\begin{itemize}
+	\item geradlinige Bahn (1D)
+	\item gleichförmige Bewegung
+\end{itemize}
+\todo{Diagram}
+
+\subsection{Weg-Zeit-Diagramm}
+\todo{Graph}
+\[ \tan \alpha = \frac{\Delta s}{\Delta t} \overset{!}{=} v \]
+konst. Steigung von $s(t) \implies$ konst. $v$
+
+\subsection{Geschwindigkeit}
+\begin{def*}[ note = Geschwindigkeit , index = Geschwindigkeit ]
+	\begin{gather*}
+		v = \frac{\Delta s}{\Delta t} \\
+		[v] = \frac{m}{s}
+	\end{gather*}
+\end{def*}
+
+\subsection{Geschwindigkeits-Zeit Diagramm}
+\todo{Graph}
+\begin{gather*}
+	v(t) = \frac{\Delta s}{\Delta t} \\
+	\text{Fläche} = v \cdot \Delta t = \Delta s \text{ ! } = \text{ zurückgelegter Weg}
+\end{gather*}
+
+\subsection{Nicht-gleichförmige Bewegungen}
+\todo{Graph}
+Geschwindigkeit $v(t)$
+\begin{gather*}
+	\overline{v} = \frac{\Delta s}{\Delta t} = \text{ mittlere Geschwindigkeit zw. $t_1$ und $t_2$} \\
+	v(t_1) = \lim_{t_1 \rightarrow t_2} \frac{\Delta s}{\Delta t} \underset{\text{\scriptsize{Math.}}}{=} s'(t) \\
+	v(t) = s'(t) \\
+\end{gather*}
+
+\subsubsection{Schreibweise}
+\begin{gather*}
+	\Delta t \rightsquigarrow \dd t \\
+	v(t) = s'(t) \eqqcolon \frac{\dd s}{\dd t}
+\end{gather*}
+1. Ableitung \\
+$v(t)$: Momentangeschwindigkeit
+\begin{bsp*}[ note = $v$ nimmt gleichmässig zu ]
+	Graph
+	\[ \text{Fläche } \underset{\text{\scriptsize{Math.}}}{\overset{!}{=}} \int_{t_1}^{t_2} v(t) \dd t \]
+\end{bsp*}
+\todo{Graph}
+Änderung der Geschwindigkeit mit der Zeit:
+\begin{def*}[ note = Beschleunigung , index = Beschleunigung ]
+	\begin{gather*}
+		a = \frac{\Delta v}{\Delta t} \\
+		[a] = \frac{m}{s^2}
+	\end{gather*}
+\end{def*}
+Fall:
+\begin{itemize}
+	\item gleichförmige Beschleunigung: $a =$ konst.
+	\item beliebige Funktion $a(t)$
+\end{itemize}
+\todo{Graph}
+analog:
+\begin{gather*}
+	a(t) = \frac{\dd v}{\dd t} \\
+	a(t) = \frac{\dd}{\dd t} \left( \frac{\dd s}{\dd t} \right) = s''(t) \eqqcolon \frac{\dd^2 s}{\dd t^2}
+\end{gather*}
