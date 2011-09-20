@@ -126,6 +126,7 @@ Notation:\\
 		\end{folge}
 	\end{bew}
 \end{satz*}
+\todo{Too long}
 \begin{bsp*}
 	\begin{gather*}
 		f(x) \coloneqq \sum_{k=1}^\infty \frac{x^k}{k} : ]-1,1[ \rightarrow \R \text{ differenzierbar} \\
@@ -374,7 +375,7 @@ $f$ stetig in $x_0 \iff f(x) = f(x_0) + o(1)$. \\
 $f$ differenzierbar in $x_0 \iff f(x) = f(x_0) + f'(x_0) \cdot (x - x_0) + o(x-x_0)$ für $x \rightarrow x_0$\\
 Allgemein: Gesucht $P(x)$ Polynom von Grad $\leq n$, sodass $f(x) = P(x) + o((x-x_0)^n)$
 
-\subsubsection{Wie $P(x)$ finden?}
+\subsubsection{Wie \texorpdfstring{$P(x)$}{P(x)} finden?}
 \begin{gather*}
 	P(x) = a_0 + a_1 (x-x_0) + \dots + a_n (x-x_0)^n \\
 	\implies P^{(k)}(x) = a_k k (k-1) \dots 1 (x-x_0)^0 + \dots \\
@@ -407,26 +408,26 @@ Ab jetzt sei $f$ beliebig oft differenzeirbar. \\
 	
 	\[ n=0 : R_n(x) = f(x) - f(x_0) \overset{?}{=} f'(t) \cdot (x-x_0) \]
 	Das ist der MWS! \\
-%	\begin{bew}
-%		Ersetze $f$ durch $R_n$. Dann ist $f^{(k)}(x_0) = 0$ für alle $0 \leq k \leq n$ und dadurch $j_{x_0}^n f = 0$, also jetzt $f = R_n$.
-%	\end{bew}
-%	\begin{beh}
-%		Für alle $0 \leq k \leq n$: existiert $t$ zwischen $x$ und $x_0$ mit $f(x) = \frac{^{(n+1)}(t)}{(n+1)!} (x-x_0)^k$ \\
-%		\begin{bew}
-%			$k=0$: MWS siehe oben \\
-%			$k-1 \curvearrowright k$, für $k \geq 1$:
-%			\begin{align*}
-%				\frac{f(x)}{(x-x_0)^{k+1}}	&= \frac{f(x) - f(x_0)}{g(x) - g(x_0)} \\
-%									&= \frac{f'(t)}{g'(t)} \\
-%									&= \frac{1}{k+1} \frac{f'(t)}{(t-x_0)^k} \\
-%									&\overset{\text{IA}}{=} \frac{1}{k+1} \frac{f^{(k+1)}(t')}{k!} \\
-%									&= \frac{f^{(k+1)}(t')}{(k+1)!} \quad \blacksquare
-%			\end{align*}
-%			für ein $t'$ zwischen $x_0$ und $t$
-%		\end{bew}
-%	\end{beh}
+	\begin{bew}
+		Ersetze $f$ durch $R_n$. Dann ist $f^{(k)}(x_0) = 0$ für alle $0 \leq k \leq n$ und dadurch $j_{x_0}^n f = 0$, also jetzt $f = R_n$.
+	\end{bew}
+	\begin{beh}
+		Für alle $0 \leq k \leq n$: existiert $t$ zwischen $x$ und $x_0$ mit $f(x) = \frac{^{(n+1)}(t)}{(n+1)!} (x-x_0)^k$ \\
+		\begin{bew}
+			$k=0$: MWS siehe oben \\
+			$k-1 \curvearrowright k$, für $k \geq 1$:
+			\begin{align*}
+				\frac{f(x)}{(x-x_0)^{k+1}}	&= \frac{f(x) - f(x_0)}{g(x) - g(x_0)} \\
+									&= \frac{f'(t)}{g'(t)} \\
+									&= \frac{1}{k+1} \frac{f'(t)}{(t-x_0)^k} \\
+									&\overset{\text{IA}}{=} \frac{1}{k+1} \frac{f^{(k+1)}(t')}{k!} \\
+									&= \frac{f^{(k+1)}(t')}{(k+1)!} \quad \blacksquare
+			\end{align*}
+			für ein $t'$ zwischen $x_0$ und $t$
+		\end{bew}
+	\end{beh}
 \end{satz*}
-\todo{Fix}
+\todo{Too long}
 \begin{bsp}
 	Berechne $\sqrt[5]{1023}$ näherungsweise mittels Taylorapproximation von Grad 1 und schätze den Fehler ab.
 	$\sqrt[5]{1024} = 4$. Sei $f(x) = x^{\frac{1}{5}}$ und $x_0 = 1024$
@@ -641,9 +642,9 @@ Sei $I \subset \R$ ein Intervall und $f: I \rightarrow \R$ differenzierbar.\\
 \end{bsp*}
 \begin{def*}[note = Wendepunkt , index = Wendepunkt]
 	Ein Punkt, in dem $f$ von konkav zu konvex wechselt (oder umgekehrt), heisst \textbf{Wendepunkt}. \\
-%	\begin{bem}
-%		Falls $f$ zweimal differenzierbar: wo $f''$ sein Vorzeichen wechselt
-%	\end{bem}
+	\begin{bem}
+		Falls $f$ zweimal differenzierbar: wo $f''$ sein Vorzeichen wechselt
+	\end{bem}
 \end{def*}
 \begin{bsp*}
 	\[ \R \rightarrow \R , x \mapsto \abs{x} \]
@@ -717,7 +718,7 @@ Probleme: \\
 $f'(x_n) = 0$ \\
 $f'(x_n)$ sehr klein \\
 $x_{n+1}$ nicht mehr im Definitionsbereich \\
-$\vdots$
+$\vdots$ \\
 $\implies$ Muss nicht konvergieren! \\
 \begin{beh}
 	Falls $(x_n)$ gegen $x$ konvergiert mit $x \in I$ und $f'(x) \neq 0$, dann ist $f(x) = 0$ ($f: I \rightarrow \R$ differenzierbar, $I$ Intervall, $f'$ stetig) \\
@@ -773,6 +774,7 @@ Ab jetzt sei $f$ zweimal differenzierbar und $f''$ stetig \\
 		\end{gather*}
 	\end{bew}
 \end{beh}
+\todo{Too long}
 \begin{bsp*}
 	Finde $\sqrt{a} , a > 0 \iff$ \\
 	Finde Nullstellen von $f(x) = x^2 - a$ auf $[0,\infty[$ \\

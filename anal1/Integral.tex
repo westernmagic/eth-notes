@@ -459,6 +459,7 @@ Vereinfachung von $\sqrt{ax^2+bx+c}$ kann führen zu:
 		\log\abs{x} - \frac{x^2}{2} + \frac{1}{2} \log(x^2+1) + \frac{1}{x^2+1} + c
 	\end{gather*}
 \end{bsp*}
+\todo{Too long}
 \begin{bsp*}
 	\begin{gather*}
 		\int \frac{x^2-1}{(x^2+1)^2} dx \\
@@ -569,8 +570,12 @@ $f$ auf $[,a\infty[$ definiert auf jedem $[a,b]$ integrierbar, und $f(x) \geq \f
 	Vorsicht! \\
 	\begin{gather*}
 		\int_0^\infty \frac{\sin x}{x} dx \\
-		\intertext{Kein Problem bei 0, da stetige Fortsetzung =1} %FIXME
-		\int_1^t \underbrace{\sin x}_{\uparrow} \underbrace{\frac{1}{x}}_{\downarrow} dx = \underbrace{\left. -\cos x \cdot \frac{1}{x} \right|_1^t}_{\frac{\cos 1}{1} - \frac{\cos t}{t}} - \underbrace{-\int_1^t \cos x \cdot \frac{-1}{x^2} dx}_{\substack{\text{konvergiert für}\\t \rightarrow \infty\\\text{nach Majorantenkriterium!}}} = \text{ konvergiert für } t \rightarrow \infty \\
+		\intertext{Kein Problem bei 0, da stetige Fortsetzung =1}
+		\begin{split}
+			\int_1^t \underbrace{\sin x}_{\uparrow} \underbrace{\frac{1}{x}}_{\downarrow} dx
+				&= \underbrace{\left. -\cos x \cdot \frac{1}{x} \right|_1^t}_{\frac{\cos 1}{1} - \frac{\cos t}{t}} - \underbrace{-\int_1^t \cos x \cdot \frac{-1}{x^2} dx}_{\substack{\text{konvergiert für}\\t \rightarrow \infty\\\text{nach Majorantenkriterium!}}} \\
+				&= \text{ konvergiert für } t \rightarrow \infty
+		\end{split} \\
 		\int_0^t = \int_0^1 + \int_1^t \implies \int_0^\infty \frac{\sin x}{x} dx \text{ konvergiert}
 	\end{gather*}
 \end{bsp*}
@@ -581,7 +586,11 @@ Analog für $\int_{-\infty}^\cdot \dots$
 	\begin{gather*}
 		a < b \\
 		\int_a^b \frac{dx}{(x-a)^s} = \lim_{c \rightarrow a+} \int_c^b \frac{dx}{(x-a)^s} \\
-		s < 1 \implies \lim_{c \rightarrow a+} \left. \frac{(x-a)^{1-s}}{1-s} \right|_c^b =  \lim_{c \rightarrow a+} \frac{(b-a)^{1-s} - (c-a)^{1-s}}{1-s} \text{ konvergiert} \\
+		\begin{split}
+			s < 1 \implies
+				&\lim_{c \rightarrow a+} \left. \frac{(x-a)^{1-s}}{1-s} \right|_c^b = \\
+				&\lim_{c \rightarrow a+} \frac{(b-a)^{1-s} - (c-a)^{1-s}}{1-s} \text{ konvergiert}
+		\end{split} \\
 		s > 1 \text{ divergiert} \\
 		s = 1 :  \lim_{c \rightarrow a+} \log(x-a)|_c^b =  \lim_{c \rightarrow a+} [\log(b-a) - \log(c-a)] \text{ divergiert}
 	\end{gather*}
