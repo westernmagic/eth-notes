@@ -24,6 +24,7 @@ Icon?
 *.lot
 *.nlo
 *.out
+*.tdo
 *.toc
 *.fdb_latexmk
 *.pdfsync

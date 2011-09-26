@@ -2,6 +2,7 @@
 \ProvidesPackage{wmbox}
 
 \RequirePackage{xparse}
+\RequirePackage{xkeyval}
 \RequirePackage{xifthen}
 \RequirePackage{hopatch}
 \hopatch@AfterPackage{makecmds}{
@@ -46,58 +47,87 @@
 	}
 }
 
-\DeclareDocumentCommand{\wmbox}{m}{
-	\addtolength{\hsize}{-2cm}
-%	\addtolength{\linewidth}{-2cm}
-%	\addtolength{\columnwidth}{-2cm}
-	\setbox\wm@inputbox=\vbox{\advance\linewidth -2cm \advance\columnwidth -2cm\relax #1}
-	\wm@putbox{\wm@inputbox}
-	\addtolength{\hsize}{2cm}
-%	\addtolength{\linewidth}{2cm}
-%	\addtolength{\columnwidth}{2cm}
+\newlength{\wmbox@totaltopskip}
+\newlength{\wmbox@totalbottomskip}
+\wmbox@totaltopskip=\z@
+\wmbox@totalbottomskip=\z@
+
+
+\define@cmdkeys{wmbox}{
+	innerleftmargin ,
+	innerrightmargin ,
+	innertopmargin ,
+	innerbottommargin ,
+	leftmargin ,
+	rightmargin ,
+	skipabove ,
+	skipbelow ,
+	splittopskip ,
+	splitbottomskip ,
+	backgroundcolor ,
+	fontcolor
+}{}
+
+\setkeys{wmbox}{
+	innerleftmargin   = 1cm ,
+	innerrightmargin  = 1cm ,
+	innertopmargin    = 1cm ,
+	innerbottommargin = 1cm ,
+	leftmargin        = 0cm ,
+	rightmargin       = 0cm ,
+	skipabove         = 0cm ,
+	skipbelow         = 0cm ,
+	splittopskip      = 0cm ,
+	splitbottomskip   = 0cm ,
+	backgroundcolor   = white ,
+	fontcolor         = black
 }
 
-\DeclareDocumentCommand{\wm@box}{mmm}{
+\DeclareDocumentCommand{\wm@box}{O{} m m m}{
+	\setkeys{wmbox}{#1}
+	\setlength{\hsize}{#2}
 	\leftline{
 %		\null
 		\hspace*{-12pt}
 		\rlap{
-			\color{#1}
-			\rule[-1cm]{\wd#3+2cm}{\ht#3+\dp#3+2cm}
+			\color{\cmdKV@wmbox@backgroundcolor}
+			\rule[-\cmdKV@wmbox@innertopmargin]{\wd#4+\cmdKV@wmbox@innerleftmargin+\cmdKV@wmbox@innerleftmargin}{\ht#4+\cmdKV@wmbox@innertopmargin+\cmdKV@wmbox@innerbottommargin}
 		}
-		\hspace*{1cm}
+		\hspace*{\cmdKV@wmbox@innerleftmargin}
 		{
+			\setlength{\hsize}{#3}
+			\color{\cmdKV@wmbox@fontcolor}
 			\noindent
-			\box#3
+			\box#4
 		}
 	}
 }
 
-\newenvironment{wmbox2}{
-	\def\bkvz@before@breakbox{
-		\ifhmode
-			\par
-		\fi
-		\vskip\breakboxskip\relax
+\DeclareDocumentCommand{\wmbox}{O{} +m}{
+	\setkeys{wmbox}{#1}
+	\advance\wmbox@totaltopskip \cmdKV@wmbox@innertopmargin
+	\advance\wmbox@totalbottomskip \cmdKV@wmbox@innerbottommargin
+	\makelength{\oldhsize}{\hsize}
+	\makelength{\newhsize}{\hsize}
+	\setlength{\newhsize}{\newhsize - \cmdKV@wmbox@innerleftmargin - \cmdKV@wmbox@innerrightmargin}
+	\setlength{\hsize}{\newhsize}
+	\setbox\wm@inputbox = \vbox{#2}
+	\ifthenelse{\lengthtest{\pagegoal = \maxdimen}}{
+		\makelength{\wm@freevspace}{\vsize}
+	}{
+		\makelength{\wm@freevspace}{\pagegoal - \pagetotal}
 	}
-	\def\bkvz@set@linewidth{
-		\advance\linewidth -10pt
+	\whiledo{\lengthtest{\wm@freevspace < \ht\wm@inputbox}}{
+		\addtolength{\wm@freevspace}{-\wmbox@totaltopskip - \wmbox@totalbottomskip}
+		\setlength{\hsize}{\newhsize}
+		\setbox\wm@currentbox = \vsplit\wm@inputbox to \wm@freevspace
+		\wm@box[#1]{\oldhsize}{\newhsize}{\wm@currentbox}
+		\penalty0
+		\makelength{\wm@freevspace}{\vsize - \wmbox@totaltopskip - \wmbox@totalbottomskip }
 	}
-	\def\bk@line{
-		\hbox to \linewidth{
-			\colorbox{Yellow}{%
-				\hskip\fboxsep
-				\box\bk@bxa
-				\hskip\fboxsep
-			}
-		}
-	}
-	\let\bkvz@top\relax
-	\let\bkvz@bottom\relax
-	\let\bkvz@left\relax
-	\let\bkvz@right\relax
-	\begin{breakbox}
-}{
-	\end{breakbox}
+	\wm@box[#1]{\oldhsize}{\newhsize}{\wm@inputbox}
+	\advance\wmbox@totaltopskip -\cmdKV@wmbox@innertopmargin
+	\advance\wmbox@totalbottomskip -\cmdKV@wmbox@innerbottommargin
+	\setlength{\hsize}{\oldhsize}
 }
 
