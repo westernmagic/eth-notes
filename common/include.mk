@@ -23,7 +23,6 @@ BIBTEX := bibtex
 KPSEWHICH := kpsewhich -all 
 
 PIPEALL := 2>&1 |
-LOGFILTER := $(GREP) -E "^\./"
 
 #CMDIR := /usr/local/texlive/texmf-local/circuit_macros/
 #CM := m4 $(CMDIR)pgf.m4 $(CMDIR)libcct.m4 $(CMDIR)liblog.m4 $(CMDIR)libgen.m4
@@ -32,6 +31,10 @@ LOGFILTER := $(GREP) -E "^\./"
 NULL := /dev/null
 
 VPATH =  ../common
+
+logfilter = \
+	$(GREP) -E "^\./" $(1).log | \
+	$(SED) -e '/Package enumitem Error: name undefined/d' -e '/Package zref Error: Property/d'
 
 get-deps-tex = \
 	$(shell \
@@ -97,7 +100,7 @@ $(foreach \
 		$(shell $(FIND) . -type f -name '*.tex' ), \
 		$(shell $(GREP) -E -l '^[^%]*\\begin\{document\}' $(candidate) ) \
 	), \
-	$(eval $(call all,$(basename $(main))) : $(call get-deps,$(main)) ) \
+	$(eval $(call all,$(basename $(main))) : ../common/include.mk $(call get-deps,$(main)) ) \
 )
 
 .PHONY: cleanhelp
@@ -125,7 +128,7 @@ cleanhelp :
 	@- $(BIBTEX) $*_bw &> $(NULL)
 	@- $(INDEX) $(INDEXFLAGS) $*_bw.ilg $*_bw.idx &> $(NULL)
 	@- $(call rerun,$(PDF),$*_bw)
-	@- $(LOGFILTER) $*_bw.log
+	@- $(call logfilter,$*_bw)
 
 %.pdf :
 	$(info Making $*.pdf...)
@@ -133,7 +136,7 @@ cleanhelp :
 	@- $(BIBTEX) $* &> $(NULL)
 	@- $(INDEX) $(INDEXFLAGS) $*.ilg $*.idx &> $(NULL)
 	@- $(call rerun,$(PDF),$*)
-	@- $(LOGFILTER) $*.log
+	@- $(call logfilter,$*)
 
 %_bw.dvi : %_bw.tex
 	$(info Making $*_bw.dvi...)
@@ -141,7 +144,7 @@ cleanhelp :
 	@- $(BIBTEX) $*_bw &> $(NULL)
 	@- $(INDEX) $(INDEXFLAGS) $*_bw.ilg $*_bw.idx &> $(NULL)
 	@- $(call rerun,$(DVI),$*_bw)
-	@- $(LOGFILTER) $*_bw.log
+	@- $(call logfilter,$*_bw)
 
 %.dvi :
 	$(info Making $*.dvi...)
@@ -149,7 +152,7 @@ cleanhelp :
 	@- $(BIBTEX) $* &> $(NULL)
 	@- $(INDEX) $(INDEXFLAGS) $*.ilg $*.idx &> $(NULL)
 	@- $(call rerun,$(DVI),$*)
-	@- $(LOGFILTER) $*.log
+	@- $(call logfilter,$*)
 
 %_bw.xdv : %_bw.tex
 	$(info Making $*_bw.xdv...)
@@ -157,7 +160,7 @@ cleanhelp :
 	@- $(BIBTEX) $*_bw &> $(NULL)
 	@- $(INDEX) $(INDEXFLAGS) $*_bw.ilg $*_bw.idx &> $(NULL)
 	@- $(call rerun,$(XDV),$*_bw)
-	@- $(LOGFILTER) $*_bw.log
+	@- $(call logfilter,$*_bw)
 
 %.xdv :
 	$(info Making $*.xdv...)
@@ -165,7 +168,7 @@ cleanhelp :
 	@- $(BIBTEX) $* &> $(NULL)
 	@- $(INDEX) $(INDEXFLAGS) $*.ilg $*.idx &> $(NULL)
 	@- $(call rerun,$(XDV),$*)
-	@- $(LOGFILTER) $*.log
+	@- $(call logfilter,$*)
 
 %.ps: %.dvi
 	$(info Making $*.ps...)
