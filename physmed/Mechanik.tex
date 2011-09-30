@@ -7,10 +7,10 @@ einfachster Fall:
 	\item geradlinige Bahn (1D)
 	\item gleichförmige Bewegung
 \end{itemize}
-\todo{Diagram}
+\includegraphics{Bild1}
 
 \subsection{Weg-Zeit-Diagramm}
-\todo{Graph}
+\includegraphics{Bild2}
 \[ \tan \alpha = \frac{\Delta s}{\Delta t} \overset{!}{=} v \]
 konst. Steigung von $s(t) \implies$ konst. $v$
 
@@ -23,14 +23,14 @@ konst. Steigung von $s(t) \implies$ konst. $v$
 \end{def*}
 
 \subsection{Geschwindigkeits-Zeit Diagramm}
-\todo{Graph}
+\includegraphics{Bild3}
 \begin{gather*}
 	v(t) = \frac{\Delta s}{\Delta t} \\
 	\text{Fläche} = v \cdot \Delta t = \Delta s \text{ ! } = \text{ zurückgelegter Weg}
 \end{gather*}
 
 \subsection{Nicht-gleichförmige Bewegungen}
-\todo{Graph}
+\includegraphics{Bild4}
 Geschwindigkeit $v(t)$
 \begin{gather*}
 	\overline{v} = \frac{\Delta s}{\Delta t} = \text{ mittlere Geschwindigkeit zw. $t_1$ und $t_2$} \\
@@ -46,10 +46,10 @@ Geschwindigkeit $v(t)$
 1. Ableitung \\
 $v(t)$: Momentangeschwindigkeit
 \begin{bsp*}[ note = $v$ nimmt gleichmässig zu ]
-	Graph
+	\includegraphics{Bild5}
 	\[ \text{Fläche } \underset{\text{\scriptsize{Math.}}}{\overset{!}{=}} \int_{t_1}^{t_2} v(t) \dd t \]
 \end{bsp*}
-\todo{Graph}
+\todo{Undefined seq.}
 Änderung der Geschwindigkeit mit der Zeit:
 \begin{def*}[ note = Beschleunigung , index = Beschleunigung ]
 	\begin{gather*}
@@ -62,9 +62,248 @@ Fall:
 	\item gleichförmige Beschleunigung: $a =$ konst.
 	\item beliebige Funktion $a(t)$
 \end{itemize}
-\todo{Graph}
+\includegraphics{Bild6}
 analog:
 \begin{gather*}
 	a(t) = \frac{\dd v}{\dd t} \\
 	a(t) = \frac{\dd}{\dd t} \left( \frac{\dd s}{\dd t} \right) = s''(t) \eqqcolon \frac{\dd^2 s}{\dd t^2}
 \end{gather*}
+
+\begin{rep*}[note = Kinematik (1D-Fall)]
+	\includegraphics{Bild7}
+\end{rep*}
+\begin{bsp*}[note = Der freie Fall]
+	\includegraphics{Bild8} \\
+	auf der Erdoberfläche
+	\[ a(t) = a_{\text{Fall}} = g = 9.81 \frac{\text{m}}{{\text{s}}^2} \]
+	\includegraphics{Bild9}
+	\[ \text{Fläche } = g( t - t_0 ) \]
+	\includegraphics{Bild10}
+	\begin{gather*}
+		v(t) = v_0 + g( t - t_0 ) \\
+		\Delta v = g( t - t_0 ) \
+		\text{Fläche } = v_0 ( t - t_0 ) + \frac{1}{2} g( t - t_0 )^2 = \Delta S
+	\end{gather*}
+	\includegraphics{Bild11}
+	\[ s(t) = s_0 + v_0 ( t - t_0 ) + \frac{1}{2} g( t - t_0 ) \]
+	
+	einfachster Fall:
+	\includegraphics{Bild12}
+	\begin{gather*}
+		s(0) = 0 \\
+		t_0 = 0 \\
+		s_0 = 0 \\
+		v_0 = 0 \\
+		\implies s(t) = \frac{1}{2} gt^2
+	\end{gather*}
+\end{bsp*}
+
+\subsection{Bewegungen in der Ebene}
+\subsubsection{Ortsvektor \texorpdfstring{$\vec{r}(t)$}{r(t)}}
+\includegraphics{Bild13}
+\begin{itemize}[label = $\rightarrow$]
+	\item Länge (Betrag)
+	\item Richtung
+\end{itemize}
+
+Geschwindigkeit: $\frac{\text{Weg}}{\text{Zeit}}$
+Weg: $\Delta \vec{r} = \vec{r}(t) - \vec{r}(t_0)$ \\
+$\vec{v} = \frac{\Delta \vec{r}}{\Delta t}$ mittlere Geschwindigkeit \\
+Momentangeschwindigkeit: $\vec{v}(t) = \lim_{\Delta t \rightarrow 0} \frac{\Delta \vec{r}}{\Delta t} \overset{\text{\scriptsize{Math.}}}{=} \frac{\dd \vec{r}}{\dd t}$ \\
+\includegraphics{Bild14}
+\begin{gather*}
+	\vec{r}(t) = \vec{x}(t) + \vec{y}(t) \\
+	\implies \text{ Komponentenschreibweise} \\
+	\vec{r}(t) = ( x(t) , y(t) ) \\
+	\frac{\dd \vec{r}}{\dd t} = \left( \frac{\dd x}{\dd t} , \frac{\dd y}{\dd t} \right)
+\end{gather*}
+$v(t)$:
+\begin{itemize}
+	\item Betrag (Schnelligkeit)
+	\item Richtung! (tangential zu Bahn)
+\end{itemize}
+\subsubsection{Schnelligkeit}
+\[ \abs{\vec{v}(t)} = v(t) = \sqrt{{v_1}^2(t) + {v_2}^2(t)} \]
+\includegraphics{Bild15}
+
+\subsubsection{Momentanbeschleunigung}
+\[ \vec{a}(t) = \frac{\dd \vec{v}}{\dd t} = \frac{\dd^2 \vec{s}}{\dd t^2} \]
+
+\subsection{Wann ist eine Bewegung beschleunigt?}
+Wenn $\vec{v}$ sich ändert!
+\begin{itemize}[label = $\rightarrow$]
+	\item Betrag
+	\item Richtung!
+\end{itemize}
+\begin{bsp*}[note = Kreisbewegung mit konstante Umlaufgeschwindigkeit]
+	\includegraphics{Bild16}\\
+	$\implies v =$ konst., $\vec{v}$ dreht $\implies$ Zentripetalbeschleunigung
+	\[ a = \frac{v^2}{r} \]
+\end{bsp*}
+\begin{bsp*}[note = beliebige Kreisbewegung ($v \neq$ konst.)]
+	\includegraphics{Bild17} \\
+	\[ \begin{matrix*}[l]
+		a_Z(t) = \frac{v^2(t)}{r}		&\text{Zentripetalbeschleunigung} \\
+		a_T(t) = \frac{\dd v}{\dd t}	&\text{Tangentialbeschleunigung}
+	\end{matrix*} \]
+\end{bsp*}
+
+\subsection{Bewegungen im 3D-Raum}
+\includegraphics{Bild18} \\
+nicht Neues!
+\[ \vec{r}(t) = ( x(t) , y(t) , z(t) ) \]
+
+\section{Dynamik}
+$\implies$ Ursache der Bewegung
+\subsection{Kraft/Masse}
+\begin{def*}[ note = Kraft , index = Kraft ]
+	\dots Wirkung!
+\end{def*}
+\begin{bsp*}
+	\begin{itemize}
+		\item Gewicht heben
+		\item Deformation (Messung!)
+		\item Bewegung
+	\end{itemize}
+\end{bsp*}
+\begin{def*}[ note = Masse , index = Masse ]
+	''Trägheit'' (''\dots schwieriger in Bewegung zu setzen'')
+\end{def*}
+Kraft: Vektor! \\
+\includegraphics{Bild19} \\
+Länge, Richtung, Angriffspunkt
+
+\subsection{Die Newtonschen Prinzipien (1686)}
+\begin{gather*}
+	\underbrace{\vec{F}}_{\text{Ursache}} = \underbrace{m \cdot \vec{a}}_{\text{Wirkung}} \\
+	[F] = \text{kg} \frac{\text{m}}{\text{s}^2} = \text{N} \quad ( \text{Newton} )
+\end{gather*}
+$\implies$ 2. Newtonsche Prinzip (Axiom) (Aktionsprinzip) \\
+Anwendung: \\
+\begin{itemize}
+	\item Mann kennt Kraft $\implies$ Beschleunigung + Bahn berechnen
+	\item Ich sehe Beschleunigung $\implies$ Was für Kräfte wirken
+\end{itemize}
+\subsubsection{1. Newtonsches Prinzip (Trägheitsprinzip)}
+kräftefreie Körper ( $\vec{F} = \vec{0}$ , $\sum_i \vec{F_i} = \vec{0}$ )
+\begin{itemize}[ label = $\rightarrow$ ]
+	\item Körper in Ruhe (ist + bleibt)
+	\item bewegt sich mit konst. Geschwindigkeit $\vec{v} =$ konst.
+\end{itemize}
+$\implies$ Bewegungszustände
+
+\subsubsection{Newtonsches Prinzip (Reaktionsprinzip)}
+(action = reactio) \\
+Kräfte rühren immer von Wechselwirkungen (WW)
+\begin{bsp*}[note = Feder]
+	\includegraphics{Bild20}
+	\[ \vec{F_{21}} = -\vec{F_{12}} \]
+	Reaktionspartner $\rightarrow$ greifen immer an verschiedenen Körper an
+\end{bsp*}
+\begin{rep*}[ note = Dynamik ]
+	Kraft: erzeugt Bewegung \\
+	Masse: Trägheit \\
+	Newtonsche Prinzipien \\
+	\begin{enumerate}
+		\item kräftefreier Körper: $\vec{v} =$ konst. (z.B. $\vec{v} = \vec{0}$)
+		\item $\vec{F} = m \vec{a}$ Ursache \& Wirkung
+		\item Kräfte rühren \textbf{immer} von WW her \\
+			\includegraphics{Bild21} \\
+			$\vec{F_{21}} = -\vec{F_12}$
+	\end{enumerate}
+\end{rep*}
+\begin{bsp*}[ note = Hammer \& Nagel ]
+	\includegraphics{Bild22}
+	\begin{enumerate}[start = 2]
+		\item $\vec{F_{NH}} = M \vec{a_H}$
+		\item $\vec{F_HN} = -\vec{NH}$
+	\end{enumerate}
+\end{bsp*}
+
+\subsection{Arten von Kräften}
+\subsubsection{Gravitationskraft}
+(Anziehung von Massen) \\
+auf Erdoberfläche Gewichtskraft $\vec{G}$ \\
+\begin{tabular}{ll}
+	Betrag:			&$mg$ \\
+	Richtung:			&zum Erdmittelpunkt \\
+	Angriffspunkt:	&Schwerpunkt \\
+	Reaktionspartner:	&\includegraphics{Bild23}
+\end{tabular}
+
+\subsubsection{Elektromagnetische Kräfte}
+(Anziehung / Abstossung von Ladungen)
+\begin{itemize}[ label = $\rightarrow$ ]
+	\item Coulombkraft (elektrische Kraft; verschiedene Erscheingungsformen)
+	\item magnetische Kraft
+	\item Lorentzkraft
+\end{itemize}
+
+\subsubsection{starke Kraft}
+\begin{itemize}[ label = $\rightarrow$ ]
+	\item Stabilität der Atomkeime
+\end{itemize}
+
+\subsubsection{schwache Kraft}
+\begin{itemize}[ label = $\rightarrow$ ]
+	\item Radioaktivität
+\end{itemize}
+
+\subsection{Coulombkraft und ihre Erscheinungsformen}
+\begin{itemize}
+	\item elastische Kräfte im festen Körpern (Kohäsion)
+	\item Berührungskräfte - Die Normalkraft
+		\begin{bsp*}[ note = Quader auf Tisch in Ruhe ]
+			\includegraphics{Bild24}
+			\begin{gather*}
+				\sum \vec{F_a} = \vec{0} \\
+				\implies \vec{G} + \sum \vec{\dd F} = \vec{0}
+			\end{gather*}
+		\end{bsp*}
+\end{itemize}
+
+\subsubsection{Coulombgesetz}
+\includegraphics{Bild25}
+\[ F_{21} = F_{12} = \frac{1}{4 \pi \epsilon_0} \frac{Q_1 Q_2}{r^2} \]
+elektirsche Feldkonstante $\epsilon_0 = 8.85 \cdot 10^{-12} \frac{As}{Vm}$
+
+\subsubsection{Kraftgesetz zwischen zwei Atomen}
+\includegraphics{Bild26}
+
+\subsubsection{Kraftkurve}
+\includegraphics{Bild27} \\
+GGW-Abstand (chemische Bindung)
+
+\subsection{Reibungskräfte}
+(parallel zur Berührungsfläche)
+
+\subsubsection{Haftreibung}
+\includegraphics{Bild28} \\
+Quader unbewegt \\
+\[ \vec{F_H} = -\vec{F_F} \]
+
+maximale Haftreibung:
+\[ F_H \leq \underbrace{\mu_H}_{\text{Haftreibungszahl}} F_N \]
+
+\subsection{Gleitreibung \texorpdfstring{$\vec{F_R}$}{F_R}}
+\includegraphics{Bild29}
+\begin{itemize}
+	\item Richtung: versucht immer Relativbewegung zu bremsen.
+	\item unabhängig von $v$
+\end{itemize}
+\[ F_R = \mu_G \cdot F_N \]
+
+\subsection{Kraftstösse}
+\includegraphics{Bild30}
+
+
+
+
+
+
+
+
+
+
+
+
