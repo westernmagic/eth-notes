@@ -216,7 +216,7 @@ Kräfte rühren immer von Wechselwirkungen (WW)
 	\includegraphics{Bild22}
 	\begin{enumerate}[start = 2]
 		\item $\vec{F_{NH}} = M \vec{a_H}$
-		\item $\vec{F_HN} = -\vec{NH}$
+		\item $\vec{F_HN} = -\vec{F_{NH}}$
 	\end{enumerate}
 \end{bsp*}
 
@@ -265,7 +265,7 @@ auf Erdoberfläche Gewichtskraft $\vec{G}$ \\
 \subsubsection{Coulombgesetz}
 \includegraphics{Bild25}
 \[ F_{21} = F_{12} = \frac{1}{4 \pi \epsilon_0} \frac{Q_1 Q_2}{r^2} \]
-elektirsche Feldkonstante $\epsilon_0 = 8.85 \cdot 10^{-12} \frac{As}{Vm}$
+elektirsche Feldkonstante $\epsilon_0 = 8.85 \cdot 10^{-12} \frac{\text{As}}{\text{Vm}}$
 
 \subsubsection{Kraftgesetz zwischen zwei Atomen}
 \includegraphics{Bild26}
@@ -295,15 +295,87 @@ maximale Haftreibung:
 
 \subsection{Kraftstösse}
 \includegraphics{Bild30}
+\begin{rep*}
+	Atomic Force Microscope (AFM) \\
+	BILD
+	\[ \dd F =  -D ( r - r_0 ) = -\underbrace{D}_{\text{Federkonstante}} \cdot \underbrace{x}_{\text{Auslenkung}} \]
+	BILD
+	\[ D( \ce{O2} ) \approx 1200 \frac{\text{N}}{\text{m}} \]
+\end{rep*}
+BILD
+\[ \Delta p = -\int_0^\tau F_n(t) \cdot \dd t \]
+$\tau$ Stosszeit \\
+kleine Kräfte $F_N$:
+\begin{itemize}
+	\item wenn $\tau$ gross
+	\item wenn $\Delta p$ klein
+\end{itemize}
 
+\subsubsection{Experiment}
+BILD
 
+\subsubsection{Kraftrechung}
+BILD
+\[ \Delta \vec{p} = m \vec{v} = - \scal{\vec{F_N}} \tau = - \int_0^\tau F_N(t) \dd t \]
 
+\subsection{Das Drehmoment}
+\begin{def*}[ note = Drehmoment , index = Drehmoment ]
+	\[ \vec{M_0} = \vec{r} \times \vec{F} \]
+\end{def*}
+(Hebelgesetz) \\
+BILD
+\[ M_0 = r \cdot F_N \cdot \sin \alpha = \dd F_N \]
+Rechte-Hand-Regel: \\
+BILD \\
 
+\subsection{Gleichgewicht starrer Körper}
+keine Bewegung:
+\begin{gather*}
+	\sum \vec{F_i} = 0 \quad \text{Translation} \\
+	\sum \vec{M_i} = 0 \quad \text{Rotation}
+\end{gather*}
 
+\subsection{Der Schwerpunkt SP}
+\begin{def*}[ note = Schwerpunkt , index = Schwerpunkt ]
+	\[ \vec{r_s} = \frac{\sum \overbrace{m_i}^{\text{Massenelement}} r_i}{\sum m_i} \]
+\end{def*}
+gewichtetes  Mittel aller Orte der Körpermassen und ist der Angriffspunkt der Gewichtskraft
 
+\subsubsection{Denkexperiment Spazierstock}
+Schwerpunkt des \\
+BILD \\
+wenn $F_{R_1} > F_{R_2}$ bewegt sich Finger 2.
 
+\section{Festigkeitslehre (Elastizitätslehre)}
+Reale Körper sind deformierbar (reversibel und/oder irreversibel). Festigkeit hängt vom Material und Form ab. \\
+BILD
 
+\subsection{Materialverhalten}
+BILD \\
+\begin{def*}[ note = Dehnung , index = Dehnung ]
+	\begin{gather*}
+		\epsilon = \frac{\Delta L}{L} \\
+		[ \epsilon ] = 1
+	\end{gather*}
+\end{def*}
+\begin{def*}[ note = Querkontraktion , index = Querkontraktion ]
+	\[ \beta = \frac{\Delta B}{B} \]
+\end{def*}
+\begin{def*}[ note = Normalspannung , index = Normalspannung ]
+	\begin{gather*}
+		\sigma = \frac{F_N}{A} \\
+		[ \sigma ] = \text{Pa}
+	\end{gather*}
+	Zugspannung $\sigma > 0$ \\
+	Druckspannung $\sigma < 0$
+\end{def*}
 
-
-
-
+\subsubsection{Das Spannungs=Dehnungs Diagramm}
+BILD \\
+\begin{enumerate}
+	\item linearer Bereich $\sigma = E \epsilon$\footnote{$E$ Elastizitätsmodul, z.B. Stahl 200 GPa , Nanotubes 1TPa}
+	\item nichtlinearer Bereich
+	\item plastischer Bereich
+	\item Fliessen
+	\item Bruch
+\end{enumerate}
