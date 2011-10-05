@@ -1,0 +1,20 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{wmpatch}[2011/10/03]
+\RequirePackage{hopatch}
+\hopatch@AfterPackage{makecmds}{
+	\makecommand*\renewlength[2]{\setlength#1{#2}}
+	\makecommand*\makelength[2]{
+		\providelength{#1}
+		\renewlength{#1}{#2}
+	}
+}
+\hopatch@AfterPackage{graphicx}{
+	\ifthenelse{\boolean{pdf} \OR \boolean{xetex}}{
+		\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+	}{
+		\renewcommand{\includegraphics}[2][]{\\}
+	}
+}
+\hopatch@AfterPackage{amsmath}{
+	\def\[#1\]{\begin{gather*}#1\end{gather*}}
+}

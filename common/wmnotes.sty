@@ -1,23 +1,9 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{wmnotes}[2011/05/02]
 
+\RequirePackage{wmpatch}
 \RequirePackage{silence}
 \RequirePackage{scrlfile}
-\RequirePackage{hopatch}
-\hopatch@AfterPackage{makecmds}{
-	\makecommand*\renewlength[2]{\setlength#1{#2}}
-	\makecommand*\makelength[2]{
-		\providelength{#1}
-		\renewlength{#1}{#2}
-	}
-}
-\hopatch@AfterPackage{graphicx}{
-	\ifthenelse{\boolean{pdf} \OR \boolean{xetex}}{
-		\DeclareGraphicsExtensions{.pdf,.png,.jpg}
-	}{
-		\renewcommand{\includegraphics}[2][]{\\}
-	}
-}
 
 \RequirePackage{fixltx2e}
 \RequirePackage{etextools}
@@ -252,17 +238,6 @@
 \newlength{\skak}
 \settowidth{\skak}{\BlackEmptySquare}
 
-\newcommand{\bspbackground}{SkyBlue}
-\newcommand{\bspcolor}{Black}
-\newcommand{\satzbackground}{Orange}
-\newcommand{\satzcolor}{Black}
-\newcommand{\defbackground}{Red}
-\newcommand{\defcolor}{Yellow}
-\newcommand{\bewbackground}{Yellow}
-\newcommand{\bewcolor}{Black}
-\newcommand{\otherbackground}{Purple}
-\newcommand{\othercolor}{Yellow}
-
 \ifthenelse{\boolean{bw}}{	
 	\maketheorem[
 		head            = Bsp. ,
@@ -423,48 +398,4 @@
 \professor{}
 \semester{}
 
-\AtBeginDocument{
-	\begin{titlepage}
-		\begin{center}
-			\null\vfil
-			\Huge{\MyLecture} \\
-			\ifthenelse{\expandafter\isempty\expandafter{\MySubtitle}}{}{
-				\normalsize{\MySubtitle} \\
-			}
-			\Large{\MyProfessor} \\
-			\large{\MySemester}
-			\vskip 3em
-			\Large{\MyAuthor} \\
-			\ifthenelse{\expandafter\isempty\expandafter{\MyAuthorEmail}}{}{
-				\large{\href{mailto:\MyAuthorEmail}{\texttt{\MyAuthorEmail}}} \\
-			}
-			\ifthenelse{\expandafter\isempty\expandafter{\MyEditor}}{}{
-				\footnotesize{(Mitschrift)} \\
-				\Large{\MyEditor} \\
-				\ifthenelse{\expandafter\isempty\expandafter{\MyEditorEmail}}{}{
-					\large{\href{mailto:\MyAuthorEmail}{\texttt{\MyEditorEmail}}} \\
-				}
-				\footnotesize{(Korrektur \& Ergänzung)}
-			}
-			\vskip 1.5em
-			\vfil\null
-			\normalsize{Geschrieben in} \\
-			\normalsize{\XeLaTeX}
-		\end{center}
-	\end{titlepage}
-	
-	\clearpage
-	\tableofcontents
-	\clearpage
-}
-\AtEndDocument{
-	\clearpage
-	\phantomsection
-	\addcontentsline{toc}{chapter}{Index}
-	\printindex
-	\clearpage
-	\phantomsection
-	\addcontentsline{toc}{chapter}{ToDo}
-	\listoftodos
-}
 \endinput
