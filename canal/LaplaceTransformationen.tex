@@ -223,7 +223,7 @@ Aus der Linearität des Integrals folgt
 		s X(s) - \underbrace{x(0)}_{=a} + 2 X(s) = \frac{1}{s^2} \\
 		(s + 2) X(s) = \frac{1}{s^2} + a \\
 		X(s) = \underbrace{\frac{1}{s+2}}_{\text{Übertragungsfunktion}} \left( \underbrace{\frac{1}{s^2} + a}_{\text{input}} \right)
-		\intertext{Gesucht die inverse Laplacetransformierte (''Originalfunktion''). Partialbruchzerlegung}
+		\intertext{Gesucht die inverse Laplacetransformierte (\enquote{Originalfunktion}). Partialbruchzerlegung}
 		\begin{split}
 			\frac{1}{s+2} \frac{1}{s^2}
 				&= \frac{A}{s+2} + \frac{B}{s} + \frac{C}{s^2} \\
@@ -296,27 +296,27 @@ Aus der Linearität des Integrals folgt
 		\frac{1}{s^2 + 2ks + \omega^2} = \frac{1}{(s+k)^2 + \omega^2 - k^2}
 	\end{gather*}
 	\begin{enumerate}[label = \alph*)]
-		\item $k < \omega$ ''Schwache Dämpfung''
+		\item $k < \omega$ \enquote{Schwache Dämpfung}
 			\begin{gather*}
 				\overline{\omega} \coloneqq \sqrt{\omega^2 - k^2} > 0 \\
 				\sin at \laplace \frac{a}{s^2 + a^2} \\
 				h(t) = \L^{-1}\left[ \frac{1}{(s+k)^2 + \overline{\omega}^2} \right] = e^{-kt} \frac{\sin \overline{\omega}t}{\overline{\omega}}
 			\end{gather*}
-		\item $k > \omega$ ''Starke Dämpfung''
+		\item $k > \omega$ \enquote{Starke Dämpfung}
 			\begin{gather*}
 				a = \sqrt{k^2 - \omega^2} > 0 \\
 				\frac{1}{(s+k)^2 - a^2} = \left( \frac{1}{s + k - a} - \frac{1}{s + k + a} \right) \frac{1}{2a} \\
 				h(t) = \frac{1}{2a} ( e^{-(k-a)t} - e^{-(k+a)t} ) \\
 				h(t) = \frac{1}{2 \sqrt{k^2 - \omega^2}} ( e^{\overbrace{-(k - \sqrt{k^2 - \omega^2}}^{>0}) t} - e^{\overbrace{-(k + \sqrt{k^2 - \omega^2}) t}^{>0}} )
 			\end{gather*}
-		\item $\omega = k$ ''kritische Dämpfung''
+		\item $\omega = k$ \enquote{kritische Dämpfung}
 			\[ h(t) = \L^{-1}\left[ \frac{1}{(s+k)^2} \right] = t e^{-kt} \]
 	\end{enumerate}
 \end{bsp*}
 \todo{Too long}
 
 \subsection{Dirac \texorpdfstring{$\delta$}{delta}-Funktion}
-Dirac: $\delta(t-a)$ soll eine ''Funktion'' sein, die $0$ für alle $t \neq a$, $\infty$ für $t=a$, so dass $\int_{-\infty}^{\infty} \delta(t-a) \dd t = 1$. $\delta(t-a)$ ist nicht definiert, doch aber
+Dirac: $\delta(t-a)$ soll eine \enquote{Funktion} sein, die $0$ für alle $t \neq a$, $\infty$ für $t=a$, so dass $\int_{-\infty}^{\infty} \delta(t-a) \dd t = 1$. $\delta(t-a)$ ist nicht definiert, doch aber
 \[ \int_{-\infty}^{\infty} \delta(t-a) \phi(t) \dd t = \phi(a) \]
 für alle Funktionen (in $\C^{\infty}$) $\phi(t)$
 
@@ -325,10 +325,10 @@ $\delta$-Funktion als Limes:
 	\delta_{\epsilon}(t-a) = \begin{cases} \frac{1}{\epsilon} &-\frac{\epsilon}{2} \leq t-a \leq \frac{\epsilon}{2} \\ 0 &\text{sonst} \end{cases} \quad (\epsilon > 0) \\
 	\int_{-\infty}^{\infty} \delta_{\epsilon}(t-a) \dd t = 1 \\
 	\delta(t-a) \coloneqq \lim_{\epsilon \rightarrow 0^{+}} \delta_{\epsilon}(t-a)
-	\intertext{''im Sinne der verallgemeinerten Funktionen'' bedeutet}
+	\intertext{\enquote{im Sinne der verallgemeinerten Funktionen} bedeutet}
 	\int_{-\infty}^{\infty} \delta(t-a) \phi(t) \dd t = \lim_{\epsilon \rightarrow 0^{+}} \int_{-\infty}^{\infty} \delta_{\epsilon}(t-a) \phi(t) \dd t
 \end{gather*}
-Reaktion auf einem ''$\delta$-Stoss'' zur Zeit $t_0$
+Reaktion auf einem \enquote{$\delta$-Stoss} zur Zeit $t_0$
 \begin{gather*}
 	\left\{ \begin{matrix*}[l]
 		\ddot{x}(t) + 2k\dot{x}(t) + \omega^2 x(t) = \delta(t-t_0) \quad (*) \quad (\text{ oder zunächst } \delta_{\epsilon}(t-a)) \\
@@ -376,7 +376,7 @@ $T > 0$ ist die Periode.
 $f \in L^1$ d.h. $\int_{-\infty}^{\infty} \abs{f(t)} \dd t < \infty$ \\
 $L^1 = L^1(\R)$ besteht aus alle Funktionen $f: \R \rightarrow \C$ die integrierbar sind (d.h. $\int_{-\infty}^{\infty} \abs{f(t)} \dd t < \infty$; Funktionen, die sich auf Mengen der Länge $0$ unterscheiben, werden als gleich betrachtet.
 \begin{bsp*}
-	\[ f(t) = \begin{cases} 1 &t > 0 \\ 0 &t \leq 0 \end{cases} \text{ ist ''gleich'' der Funktion } \tilde{f}(t) = \begin{cases} 1 &t \geq 0 \\ 0 &t < 0 \end{cases} \]
+	\[ f(t) = \begin{cases} 1 &t > 0 \\ 0 &t \leq 0 \end{cases} \text{ ist \enquote{gleich} der Funktion } \tilde{f}(t) = \begin{cases} 1 &t \geq 0 \\ 0 &t < 0 \end{cases} \]
 \end{bsp*}
 $\tilde{f}(\omega) = \int_{-\infty}^{\infty} f(t) e^{-\imath\omega t} \dd t$ stetige Funktion von $\omega \tilde{f}(\omega) \rightarrow 0 , \omega \rightarrow \infty$ \\
 Falls $\tilde{f} \in L^1$ dann gilt die Fourrier-Umkehrformel

@@ -18,3 +18,8 @@
 \hopatch@AfterPackage{amsmath}{
 	\def\[#1\]{\begin{gather*}#1\end{gather*}}
 }
+\hopatch@AfterPackage{csquotes}{
+	\DeclareQuoteStyle{double}{\text{\textquotedbl}}{\text{\textquotedbl}}[0.05em]{\text{\textquotesingle}}{\text{\textquotesingle}}
+	\DeclareQuoteStyle{single}{\text{\textquotesingle}}{\text{\textquotesingle}}[0.05em]{\text{\textquotedbl}}{\text{\textquotedbl}}
+	\DeclareQuoteAlias{double}{ngerman}
+}

@@ -7,7 +7,7 @@
 	$n=0 : F(x,y) = 0$ \\
 	Eine Funktion $x \mapsto y(x)$ mit $F(x,y(x)) = 0$ heisst \textbf{implizite Funktion}. So heisst sie auch \textbf{implizite Differentialgleichung}.
 	
-	''explizite'' Differentialgleichung $n$-ter Ordnung:
+	\enquote{explizite} Differentialgleichung $n$-ter Ordnung:
 	\[ y^(n) = G( x , y , \dotsc , y^{(n-1)} \]
 	für eine Funktion $G$.
 \end{def*}
@@ -22,7 +22,7 @@ Graph einer Lösung = Kurve, die überall tangential zum Richtungsfeld ist.
 	\begin{enumerate}[label=(\alph*)]
 		\item Die Gleichung $y^{(n)} = F( x , y , \dotsc , y^{(n-1)} )$ hat eine Lösung $y : [x_0 , x_0 + \epsilon [ \rightarrow \R$ mit $y^{(i)}(x_0) = y_0^{(i)}$ für alle $0 \leq i \leq n-1$ für ein $\epsilon > 0$.
 		\item Zwei solche Lösungen stimmen auf dem Durchschnitt ihrer Existenzintervalle überein.
-		\item Es existiert eine eindeutige ''maximale'' Lösung, d.h. mit $\epsilon$ maximal, d.h. auf $[ x_0 , x_1 [$ mit $x_1$ maximal
+		\item Es existiert eine eindeutige \enquote{maximale} Lösung, d.h. mit $\epsilon$ maximal, d.h. auf $[ x_0 , x_1 [$ mit $x_1$ maximal
 		\item Diese maximale Lösung verlässt jede kompakte Teilmenge $K \subset U$, d.h. $\exists \xi \in [ x_0 , x_1 [$ mit $\forall x \in [ \xi , x_1 [ : ( x , y(x) , \dotsc , y^{(n-1)}(x) \notin K$
 	\end{enumerate}
 	Analog auf $] x_2 , x_1 ]$ nach hinten!
@@ -366,7 +366,7 @@ ist bijektiv nach dem Existenz- und Eindeutigkeitssatz \\
 Folgen: 
 \begin{enumerate}[label=(\alph*)]
 	\item Sind $y_1 , \dotsc , y_n$ linear unabhängige Lösungen, so ist jede Lösung gleich $\lambda_1 y_1 + \dots + \lambda_n y_n$ für Konstanten $\lambda_1 , \dotsc , \lambda_n$
-	\item Ist $y_p$ eine ''partikuläre'' Lösung von $Ly_p = g$, so hat die allgemeine Lösung $Ly=g$ die Gestalt $y_p + \lambda_1 y_1 + \dots + \lambda_n y_n$ , $\lambda_i$ Konstanten.
+	\item Ist $y_p$ eine \enquote{partikuläre} Lösung von $Ly_p = g$, so hat die allgemeine Lösung $Ly=g$ die Gestalt $y_p + \lambda_1 y_1 + \dots + \lambda_n y_n$ , $\lambda_i$ Konstanten.
 \end{enumerate}
 d.h. $y_1 , \dotsc , y_n$ sind Basis des Lösungsraumes \\
 Ab jetzt: $f_0 , \dotsc , f_{n-1}$ konstant.
@@ -751,7 +751,7 @@ D.h.:
 		h =  \begin{pmatrix} h_1 \\ \vdots \\ h_n \end{pmatrix}
 	\end{multlined}
 \end{gather*}
-Dabei heisst $(A_1 , \dotsc , A_n) = \grad f = \nabla f$ (''nabla'') der \textbf{Gradient} von $f$ in $x$ oder die (totale) Ableitung von $f$ in $x$
+Dabei heisst $(A_1 , \dotsc , A_n) = \grad f = \nabla f$ (\enquote{nabla}) der \textbf{Gradient} von $f$ in $x$ oder die (totale) Ableitung von $f$ in $x$
 Ist $f$ total differenzierbar, dann ist
 \[ \begin{split}
 	f(x+te)
@@ -923,7 +923,7 @@ Also ist $f$ in jede Richtung $e$ differenzierbar, und $D_e f = (\grad f) \under
 \end{bsp}
 \todo{Copy from Simon}
 \begin{satz*}
-	Sei $f: U \rightarrow \R$ , $U \subset \R^n$ offen, mit $\frac{\partial f}{\partial x_1} = 0$ überall. Sei $U$ ''$x_1$-einfach'', d.h. für alle $x_2 , \dotsc , x_n \in \R$: ist $\{ x_1 \in \R | \begin{pmatrix} x_1 \\ \vdots \\ x_n \end{pmatrix} \in U \}$ leer oder ein Intervall. Dann ist $f\begin{pmatrix} x_1 \\ \vdots \\ x_n \end{pmatrix}$ von $x_1$ unabhängig, d.h.
+	Sei $f: U \rightarrow \R$ , $U \subset \R^n$ offen, mit $\frac{\partial f}{\partial x_1} = 0$ überall. Sei $U$ \enquote{$x_1$-einfach}, d.h. für alle $x_2 , \dotsc , x_n \in \R$: ist $\{ x_1 \in \R | \begin{pmatrix} x_1 \\ \vdots \\ x_n \end{pmatrix} \in U \}$ leer oder ein Intervall. Dann ist $f\begin{pmatrix} x_1 \\ \vdots \\ x_n \end{pmatrix}$ von $x_1$ unabhängig, d.h.
 	\[ U = \left\{ \begin{pmatrix} x_1 \\ \vdots \\ x_n \end{pmatrix} | \begin{pmatrix} x_2 \\ \vdots \\ x_n \end{pmatrix} \in V : \varphi\begin{pmatrix} x_2 \\ \vdots \\ x_n \end{pmatrix} < x_1 < \Phi\begin{pmatrix} x_2 \\ \vdots \\ x_n \end{pmatrix} \right\} \]
 	für $V \subset \R^{n-1}$ offen und Funktionen $\varphi , \Phi : V \rightarrow \R$
 	
@@ -1581,11 +1581,11 @@ Dabei
 	\vdots					&\ddots	&\vdots					\\
 	\frac{\partial f_m}{\partial x_1}	&\dots	&\frac{\partial f_m}{\partial x_n}	
 \end{pmatrix} \]
-''nabla $f$'' die  \textbf{Funktionalmatrix von $\mathbf{f}$} \\
+\enquote{nabla $f$} die  \textbf{Funktionalmatrix von $\mathbf{f}$} \\
 \begin{bem}[note = Vorsicht]
 	Nicht verwechseln mit
 	\[ P : U \rightarrow \R \quad C^2\text{-Funktion} \]
-	$\implies \nabla^2 P$ symmetrische $n \times n$-Matrix ''Hesse''-Matrix
+	$\implies \nabla^2 P$ symmetrische $n \times n$-Matrix \enquote{Hesse}-Matrix
 	
 	Dann ist $(\nabla P)^T : U \rightarrow \R^n$ eine $C^0$-Funktion, und deren Funktionalmatrix $\nabla^2 P$ ist.
 \end{bem}

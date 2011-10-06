@@ -28,7 +28,7 @@
 Fragen:
 \begin{itemize}
 	\item Für welche Funktionen gilt das?
-	\item Wie bestimmit man die ''Fourierkoeffizienten'' $a_i, b_i$?
+	\item Wie bestimmit man die \enquote{Fourierkoeffizienten} $a_i, b_i$?
 \end{itemize}
 \begin{def*}[note = Fourierreihe , index = Fourier reihe , indexformat = {1!~.2 2!1.~}]
 	Eine \textbf{Fourierreihe} ist eine Reihe der Form
@@ -163,7 +163,7 @@ $f$ reelle $T$-periodische Lipschitzstegige Funktion. Dann gilt:
 wobei $a_n = c_n + c_{-n} = \frac{2}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} f(t) \cos\left( \frac{2\pi}{T} nt \right) \dd t$, $b_n = -\frac{c_n - c_{-n}}{\imath} = \frac{2}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} f(t) \sin\left( \frac{2\pi}{T} nt \right) \dd t$ \\
 \begin{bem}
 	Wenn $f$ eine gerade Funktion ist, d.h. $f(t) = f(-t)$, dann $b_n \frac{2}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} \underbrace{f(t) \sin\left( \frac{2\pi}{T} nt \right)}_{\text{ungerade Funktion}} \dd t = 0$ \\
-	Man erhält eine ''Kosinusreihe''
+	Man erhält eine \enquote{Kosinusreihe}
 	\[ \frac{a_0}{2} + \sum_{n=1}^\infty a_n \cos\left( \frac{2\pi}{T} nt \right) \]
 	Analog: Falls $f$ ungerade ist (d.h $f(-t) = -f(t)$), dann hat $f$ eine Sinusreihe
 	\[ f(t) = \sum_{n=1}^\infty b_n \sin\left( \frac{2\pi}{T} nt \right) \]
@@ -207,7 +207,7 @@ erfüllt $\lim_{N \rightarrow \infty} s_N(t) = f(t)$ für alle $t \in \R$
 	\end{gather*}
 \end{bsp*}
 \begin{bsp*}
-	Fourier-Reihe einer nicht stetigen Funktion, ''Rechtecksignal''
+	Fourier-Reihe einer nicht stetigen Funktion, \enquote{Rechtecksignal}
 	\begin{gather*}
 		f(t) = \begin{cases}
 			1	& 0 \leq t < \frac{T}{2}		\\
@@ -263,7 +263,7 @@ erfüllt $\lim_{N \rightarrow \infty} s_N(t) = f(t)$ für alle $t \in \R$
 		s_N\left( \frac{a}{N} \right) = \frac{4}{\pi} \sum_{\substack{n=1\\n \text{ ungerade}}}^N \frac{1}{n} \sin\left( n \frac{a}{N} \right) = \frac{2}{\pi} \sum_{\substack{n=1\\n \text{ ungerade}}}^N \frac{\sin\left( \frac{na}{N} \right)}{\frac{na}{N}} \cdot 2\frac{2}{N}
 		\intertext{Riemannsumme für das Integral $\frac{2}{\pi} \int_0^a \frac{\sin x}{x} \dd x$}
 		\lim_{N \rightarrow \infty} s_N\left( \frac{a}{N} \right) = \frac{2}{\pi} \int_0^a \frac{\sin x}{x} \dd x = \frac{2}{\pi} Si(a) \\
-		Si(a) = \int_0^a \frac{\sin x}{x} \dd x \qquad \text{''Integralsinus''} \\
+		Si(a) = \int_0^a \frac{\sin x}{x} \dd x \qquad \text{\enquote{Integralsinus}} \\
 		Si'(a) = \frac{\sin a}{a} = 0 \text{ für } a = n\pi , n \in \Z^{>0}
 		\intertext{Für grosse $N$ sieht also die Partialsumme $s_N(t)$ für $t \approx 0$ folgendermassen}
 		\frac{2}{\pi} Si(\pi) \approx 1.8

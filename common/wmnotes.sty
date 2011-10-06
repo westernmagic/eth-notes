@@ -84,7 +84,7 @@
 \RequirePackage{xr}
 \RequirePackage{xr-hyper}
 \RequirePackage{enumitem}
-\RequirePackage{enumitem-zref}
+\RequirePackage{enumitem-zref} % causes "Package enumitem: name undefined error"
 \RequirePackage{refcheck}
 \RequirePackage{hyperref}
 \RequirePackage{listings}
@@ -107,7 +107,7 @@
 \RequirePackage{breqn}
 \RequirePackage{mathtools}
 
-%\RequirePackage{mychemistry}
+%\RequirePackage{mychemistry} % clashes with pdfpages
 \RequirePackage{mhchem}
 \RequirePackage{chemfig}
 
@@ -122,6 +122,8 @@
 \setcounter{tocdepth}{4}
 
 \makeindex
+
+\selectlanguage{ngerman}
 
 \reversemarginpar
 \changenotsign

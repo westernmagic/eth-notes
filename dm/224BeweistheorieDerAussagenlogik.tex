@@ -21,7 +21,7 @@
 	\begin{gather*}
 		\begin{array}{ l l }
 			F = \bigvee_{i=1}^n ( \bigwedge_{j=1}^{m_i} L_{ij} )		& \text{Ist } F \text{ Tautologie?} \\
-			F = F_1 \vee \dotsb \vee F_n					& \text{nicht ''lokalisierbar''}
+			F = F_1 \vee \dotsb \vee F_n					& \text{nicht \enquote{lokalisierbar}}
 		\end{array}
 	\end{gather*}
 	Offensichtliche Methode: Wahrheitstabelle. \\
@@ -164,11 +164,11 @@ Mengen:
 
 \subsubsection{Was wollen wir von einem Beweiskalkül?}
 \begin{description}
-	\item[Korrektheit:] ''nichts falsches beweisbar''.
+	\item[Korrektheit:] \enquote{nichts falsches beweisbar}.
 	\begin{itemize}
 		\item $F \rightsquigarrow \{\}$, dann $F$ unerfüllbar.
 	\end{itemize}
-	\item[Vollständigkeit:] ''alles richtige bewiesbar''.
+	\item[Vollständigkeit:] \enquote{alles richtige bewiesbar}.
 	\begin{itemize}
 		\item $F$ unerfüllbar, dann $F \rightsquigarrow \{\}$.
 	\end{itemize}
@@ -188,11 +188,11 @@ Dann $\Res( F ) \equiv F$\\
 	\begin{itemize}
 		\item
 			\begin{bew}
-				$''\Leftarrow'' \Box \text{ aus } \{ L \} \{ \neg L \} \: \text{\lightning}$
+				$\enquote{\Leftarrow} \Box \text{ aus } \{ L \} \{ \neg L \} \: \text{\lightning}$
 			\end{bew}
 		\item
 			\begin{bew}
-				$''\Rightarrow'' \text{ Induktion über Anzahl } n \text{ Atomformeln}$
+				$\enquote{\Rightarrow} \text{ Induktion über Anzahl } n \text{ Atomformeln}$
 				\begin{itemize}
 					\item Verankerung $n=1$ \\
 					\begin{gather*}
@@ -251,9 +251,9 @@ Dann $\Res( F ) \equiv F$\\
 	\STATE $F \coloneqq \Res( F )$
 \UNTIL{ $\Box \in F$ or $F = G$}
 \IF{ $\Box \in F$ }
-	\PRINT ''unerfüllbar''
+	\PRINT \enquote{unerfüllbar}
 \ELSE
-	\PRINT ''erfüllbar''
+	\PRINT \enquote{erfüllbar}
 \ENDIF
 \end{algorithmic}
 
