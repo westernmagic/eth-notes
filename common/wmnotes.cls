@@ -1,6 +1,8 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{wmnotes}[2011/10/03]
 
+\ExecuteOptions{a4paper,12pt,onecolumn,oneside}
+\LoadClassWithOptions{report}
 \RequirePackage{wmnotes}
 
 \DeclareOption{titlepage}{
@@ -62,8 +64,32 @@
 	}
 }
 
-\ExecuteOptions{a4paper,12pt,onecolumn,oneside,titlepage,toc,index,todo}
+\DeclareOption{eth}{}
+\DeclareOption{uzh}{}
+
+\ExecuteOptions{titlepage,toc,index,todo}
 \ProcessOptions\relax
-\LoadClassWithOptions{report}
+
+\abovedisplayshortskip=1ex
+\belowdisplayshortskip=1ex
+\abovedisplayskip=1ex
+\belowdisplayskip=1ex
+\setlength{\parindent}{0cm}
+\setlength{\hangindent}{0cm}
+\setlength{\mathindent}{0.5cm}
+\frenchspacing
+\sloppy
+
+\fancypagestyle{plain}{
+	\setlength{\headheight}{46pt}
+	\fancyhf{}
+	\fancyhf[HL]{\leftmark\vspace{25pt}}
+	\fancyhf[HC]{}
+	\fancyhf[HR]{\rightmark}
+	\fancyhf[FL]{\MyAuthor\\Stand: \today}
+	\fancyhf[FC]{\thepage}
+	\fancyhf[FR]{\ccbyncsaeu}
+}
+\pagestyle{plain}
 
 \endinput

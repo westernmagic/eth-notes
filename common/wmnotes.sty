@@ -123,15 +123,6 @@
 
 \makeindex
 
-\abovedisplayshortskip=1ex
-\belowdisplayshortskip=1ex
-\abovedisplayskip=1ex
-\belowdisplayskip=1ex
-\setlength{\parindent}{0cm}
-\setlength{\hangindent}{0cm}
-\setlength{\mathindent}{0.5cm}
-\frenchspacing
-\sloppy
 \reversemarginpar
 \changenotsign
 \allowdisplaybreaks[1]
@@ -161,18 +152,6 @@
 %	detect-all ,
 %	per-mode = fraction
 %}
-
-\fancypagestyle{plain}{
-	\setlength{\headheight}{46pt}
-	\fancyhf{}
-	\fancyhf[HL]{\leftmark\vspace{25pt}}
-	\fancyhf[HC]{}
-	\fancyhf[HR]{\rightmark}
-	\fancyhf[FL]{\MyAuthor\\Stand: \today}
-	\fancyhf[FC]{\thepage}
-	\fancyhf[FR]{\ccbyncsaeu}
-}
-\pagestyle{plain}
 
 \let\oldepsilon\epsilon
 \renewcommand*{\epsilon}{\ensuremath{\varepsilon}}
