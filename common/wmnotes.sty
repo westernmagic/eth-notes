@@ -84,7 +84,7 @@
 \RequirePackage{xr}
 \RequirePackage{xr-hyper}
 \RequirePackage{enumitem}
-\RequirePackage{enumitem-zref} % causes "Package enumitem: name undefined error"
+\RequirePackage{enumitem-zref} % causes zref Error: undefined property
 \RequirePackage{refcheck}
 \RequirePackage{hyperref}
 \RequirePackage{listings}
@@ -154,6 +154,8 @@
 %	detect-all ,
 %	per-mode = fraction
 %}
+
+\setlist{name* = list\arabic{section}.\arabic{subsection}}
 
 \let\oldepsilon\epsilon
 \renewcommand*{\epsilon}{\ensuremath{\varepsilon}}

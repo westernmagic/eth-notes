@@ -23,3 +23,7 @@
 	\DeclareQuoteStyle{single}{\text{\textquotesingle}}{\text{\textquotesingle}}[0.05em]{\text{\textquotedbl}}{\text{\textquotedbl}}
 	\DeclareQuoteAlias{double}{ngerman}
 }
+\hopatch@AfterPackage{enumitem-zref}{
+	\enitkv@key{enumitem}{name}[]{\zen@namelist{#1}}
+	\enitkv@key{enumitem}{name*}[]{\zen@starnamelist{#1}}
+}

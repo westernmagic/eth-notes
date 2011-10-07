@@ -33,8 +33,8 @@ NULL := /dev/null
 VPATH =  ../common
 
 logfilter = \
-	$(GREP) -E "^\./" $(1).log | \
-	$(SED) -e '/Package enumitem Error: name undefined/d' -e '/Package zref Error: Property/d'
+	$(GREP) -E "^\./" $(1).log #| \
+#	$(SED) -e '/Package enumitem Error: name undefined/d' -e '/Package zref Error: Property/d'
 
 get-deps-tex = \
 	$(shell \
