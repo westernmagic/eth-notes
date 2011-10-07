@@ -103,7 +103,7 @@ $(foreach \
 	$(eval $(call all,$(basename $(main))) : ../common/include.mk $(call get-deps,$(main)) ) \
 )
 
-.PHONY: cleanhelp
+.PHONY : cleanhelp
 
 cleanhelp :
 	$(info Cleaning auxillary files...)
