@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{wmnotes}[2011/05/02]
+\ProvidesPackage{wmnotes}[2011/10/07]
 
 \RequirePackage{wmpatch}
 \RequirePackage{silence}
@@ -26,6 +26,9 @@
 	\setboolean{#1}{false}
 	\DeclareOption{#1}{
 		\setboolean{#1}{true}
+	}
+	\DeclareOption{no#1}{
+		\setboolean{#1}{false}
 	}
 }
 

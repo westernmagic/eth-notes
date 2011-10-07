@@ -1,11 +1,22 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{wmnotes}[2011/10/03]
+\ProvidesClass{wmnotes}[2011/10/07]
 
 \ExecuteOptions{a4paper,12pt,onecolumn,oneside}
 \LoadClassWithOptions{report}
 \RequirePackage{wmnotes}
 
-\DeclareOption{titlepage}{
+\OptionSwitch{titlepage}
+\OptionSwitch{toc}
+\OptionSwitch{index}
+\OptionSwitch{todo}
+
+\DeclareOption{eth}{}
+\DeclareOption{uzh}{}
+
+\ExecuteOptions{titlepage,toc,index,todo}
+\ProcessOptions\relax
+
+\ifthenelse{\boolean{titlepage}}{
 	\AtBeginDocument{
 		\begin{titlepage}
 			\begin{center}
@@ -37,16 +48,16 @@
 		\end{titlepage}
 		\clearpage
 	}
-}
+}{}
 
-\DeclareOption{toc}{
+\ifthenelse{\boolean{toc}}{
 	\AtBeginDocument{
 		\tableofcontents
 		\clearpage
 	}
-}
+}{}
 
-\DeclareOption{index}{
+\ifthenelse{\boolean{index}}{
 	\AtEndDocument{
 		\clearpage
 		\phantomsection
@@ -54,21 +65,15 @@
 		\printindex
 		\clearpage
 	}
-}
+}{}
 
-\DeclareOption{todo}{
+\ifthenelse{\boolean{todo}}{
 	\AtEndDocument{
 		\phantomsection
 		\addcontentsline{toc}{chapter}{ToDo}
 		\listoftodos
 	}
-}
-
-\DeclareOption{eth}{}
-\DeclareOption{uzh}{}
-
-\ExecuteOptions{titlepage,toc,index,todo}
-\ProcessOptions\relax
+}{}
 
 \abovedisplayshortskip=1ex
 \belowdisplayshortskip=1ex
