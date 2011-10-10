@@ -62,7 +62,7 @@ Fall:
 	\item gleichförmige Beschleunigung: $a =$ konst.
 	\item beliebige Funktion $a(t)$
 \end{itemize}
-\includegraphics{Bild6}
+\includegraphics{Bild6} \\
 analog:
 \begin{gather*}
 	a(t) = \frac{\dd v}{\dd t} \\
@@ -70,7 +70,7 @@ analog:
 \end{gather*}
 
 \begin{rep*}[note = Kinematik (1D-Fall)]
-	\includegraphics{Bild7}
+	\includegraphics[ width = \textwidth ]{Bild7}
 \end{rep*}
 \begin{bsp*}[note = Der freie Fall]
 	\includegraphics{Bild8} \\
@@ -477,18 +477,68 @@ Diskussion:
 	\item $I_z = \frac{1}{12} BH^3$ \\
 		\includegraphics{Bild51}
 \end{itemize}
+\begin{rep*}[ note = Verteilung von Spannungen in festen Körper ]
+	\begin{bsp*}[ note = Biegebelastung von Balken ]
+		BILD \\
+		Koordinatensystem \\
+		BILD \\
+		Querschnitt $A$
+		\[ I_z = \frac{1}{12} BH^3 \]
+		Flächenträgheitsmoment $I_z$
+		\[ \text{allg.:} \quad I_z = \int_A {\underbrace{z}_{\text{Abstand von $n$}}}^2 \dd z \]
+	\end{bsp*}
+\end{rep*}
 
+\section{Hydrostatik}
+\subsection{Der Hydrostatische Druck \texorpdfstring{$p$}{p}}
+\begin{bsp*}[ note = Flüssigkeit ]
+	BILD \\
+	\[
+		\text{Druck } p = \frac{\sum \dd F}{A}  \\
+		[ p ] = \frac{\text{N}}{\text{m^2}}
+	\]
+	Druck ist isotop!
+\end{bsp*}
 
+\subsection{Der Luftdruck (Gase)}
+BILD
 
+\subsubsection{Experiment: Bierglas}
+BILD
 
+\subsubsection{Magdeburger Halbkugeln}
+BILD
+\[
+	p_L \approx 1 \text{bar} = 10^5 \text{Pa} \\
+	A \approx 100 \text{cm}^2 \\
+	F = p_L \cdot A = 10^3 \text{N} \approx 100 \text{kg}
+\]
 
+\begin{bsp*}[ note = Dehnung eines Blutgefässes ]
+	BILD
+	\[
+		\underbrace{p \cdot 2 \cdot R \cdot L}_{\color{Red}\downarrow\downarrow\downarrow} = \underbrace{2 \cdot \sigma \cdot d \cdot L}_{\color{Blue}\uparrow\uparrow} \\
+		\implies \text{ Spannung } \sigma = \frac{R}{d} \cdot p \text{ mit } \epsilon = \frac{\sigma}{E} \\
+		\implies V \text{ nimmt zu} \\
+		\vdots \\
+		\frac{\Delta V}{V} = \frac{2 \cdot R}{E \cdot d} \cdot \Delta p \eqqcolon \overbrace{D}^{\text{Dehnbarkeit}} \cdot \Delta p
+	\]
+\end{bsp*}
 
+Physiologie oft:
+\[
+	\frac{\Delta V}{V} = \frac{\Delta p}{\underbrace{k}_{\text{Volumenelastizitätsmodul}}} \\
+	k = \frac{1}{D}
+\]
 
-
-
-
-
-
+\subsubsection{Aneurisma}
+BILD
+\[
+	D = \frac{2R}{Ed} \\
+	D' = \frac{2R'}{Ed'} > D \\
+	\text{altendes Blutgefäss } E \nearrow \implies D \searrow
+\]
+$\implies$ krakhafte Gefässerweiterung
 
 
 
