@@ -10,10 +10,32 @@
 \OptionSwitch{index}
 \OptionSwitch{todo}
 
-\DeclareOption{eth}{}
-\DeclareOption{uzh}{}
+\OptionSwitch{eth}
+\OptionSwitch{uzh}
 
-\ExecuteOptions{titlepage,toc,index,todo}
+\DeclareOption{english}{
+	\@ifpackageloaded{babel}{
+		\selectlanguage{english}
+	}{}
+	\@ifpackageloaded{polyglossia}{
+		\setdefaultlanguage[variant=british]{english}
+		\setotherlanguage[spelling = new , latesthyphen = true , babelshorthands = false]{german}
+	}{}
+}
+
+\DeclareOption{german}{
+	\@ifpackageloaded{babel}{
+		\selectlanguage{ngerman}
+	}{}
+	\@ifpackageloaded{polyglossia}{
+		\setdefaultlanguage[spelling = new , latesthyphen = true]{german}
+		\setotherlanguage[variant=british]{english}
+	}{}
+}
+
+\DeclareOption{ngerman}{\ExecuteOptions{german}}
+
+\ExecuteOptions{titlepage,toc,index,todo,german}
 \ProcessOptions\relax
 
 \ifthenelse{\boolean{titlepage}}{
@@ -33,16 +55,16 @@
 					\large{\href{mailto:\MyAuthorEmail}{\texttt{\MyAuthorEmail}}} \\
 				}
 				\ifthenelse{\expandafter\isempty\expandafter{\MyEditor}}{}{
-					\footnotesize{(Mitschrift)} \\
+					\footnotesize{(\translate{Notekeeping})} \\
 					\Large{\MyEditor} \\
 					\ifthenelse{\expandafter\isempty\expandafter{\MyEditorEmail}}{}{
 						\large{\href{mailto:\MyAuthorEmail}{\texttt{\MyEditorEmail}}} \\
 					}
-					\footnotesize{(Korrektur \& Ergänzung)}
+					\footnotesize{(\translate{Corrections} \& \translate{Completions})}
 				}
 				\vskip 1.5em
 				\vfil\null
-				\normalsize{Geschrieben in} \\
+				\normalsize{\translate{Written in}} \\
 				\normalsize{\XeLaTeX}
 			\end{center}
 		\end{titlepage}
@@ -58,10 +80,9 @@
 }{}
 
 \ifthenelse{\boolean{index}}{
+	\makeindex
 	\AtEndDocument{
 		\clearpage
-		\phantomsection
-		\addcontentsline{toc}{chapter}{Index}
 		\printindex
 		\clearpage
 	}
@@ -91,7 +112,7 @@
 	\fancyhf[HL]{\leftmark\vspace{25pt}}
 	\fancyhf[HC]{}
 	\fancyhf[HR]{\rightmark}
-	\fancyhf[FL]{\MyAuthor\\Stand: \today}
+	\fancyhf[FL]{\MyAuthor\\\translate{Status}: \today}
 	\fancyhf[FC]{\thepage}
 	\fancyhf[FR]{\ccbyncsaeu}
 }

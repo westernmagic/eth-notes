@@ -1,9 +1,9 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{wmnotes}[2011/10/07]
+\ProvidesPackage{wmnotes}[2011/11/09]
 
+%\RequirePackage{catoptions}
 \RequirePackage{wmpatch}
 \RequirePackage{silence}
-\RequirePackage{scrlfile}
 
 \RequirePackage{fixltx2e}
 \RequirePackage{etextools}
@@ -19,54 +19,52 @@
 \RequirePackage{iftex}
 \RequirePackage{ifpdf}
 \RequirePackage{ifxetex}
+\RequirePackage{ifluatex}
 \RequirePackage{ifplatform}
 
-\newcommand*\OptionSwitch[1]{
-	\newboolean{#1}
-	\setboolean{#1}{false}
-	\DeclareOption{#1}{
-		\setboolean{#1}{true}
-	}
-	\DeclareOption{no#1}{
-		\setboolean{#1}{false}
-	}
-}
+% Polyglossia currently clashes with varindex
+\RequirePackage{babeltools}
+\RequirePackage[english,german,ngerman]{babel}
+\RequirePackage{babelbib}
 
-\OptionSwitch{bw}
+\RequirePackage[english,german]{translator}
+\usedictionary{wmnotes}
 
-\ProcessOptions\relax
+\RequirePackage[fleqn,sumlimits,intlimits,namelimits]{amsmath}
 
-\RequirePackage{amssymb}
+\RequirePackage[clock]{ifsym}
+\RequirePackage{ccicons}
+\RequirePackage{skak}
+\RequirePackage{ellipsis}
 
-\ifthenelse{\boolean{xetex}}{
-	\RequirePackage{fontspec}
+\ifthenelse{\boolean{xetex} \OR \boolean{luatex}}{
+	\RequirePackage[no-math]{fontspec}
+	\RequirePackage{xltxtra}
 	\setmainfont{ETH Light}
+	
+%	\RequirePackage{polyglossia} % errors package varindex
 }{
 	\RequirePackage{ucs}
 	\RequirePackage[utf8x]{inputenc}
 	\RequirePackage[T1]{fontenc}
 	\renewcommand{\familydefault}{let}
 	\renewcommand{\sfdefault}{let}
+	
+	\RequirePackage{babeltools}
+	\RequirePackage[english,german,ngerman]{babel}
+	\RequirePackage{babelbib}
 }
 
-\RequirePackage[english,german,ngerman]{babel}
-\RequirePackage{babelbib}
-
-\RequirePackage[fleqn,sumlimits,intlimits,namelimits]{amsmath}
-\RequirePackage{amsfonts}
-\RequirePackage[mathb]{mathabx}
-\RequirePackage[nointegrals]{wasysym}
-\RequirePackage{trfsigns}
-\RequirePackage[clock]{ifsym}
-\RequirePackage{ccicons}
-\RequirePackage{skak}
-\RequirePackage{ellipsis}
+\RequirePackage{metalogo}
 \RequirePackage{hologo}
 
 \RequirePackage[usenames,dvipsnames]{xcolor}
 \RequirePackage{pdfpages}
 \RequirePackage{graphicx}
 \RequirePackage{grffile}
+\RequirePackage{grfpaste}
+\RequirePackage{gincltex}
+\RequirePackage{grfext}
 \RequirePackage{epstopdf}
 \RequirePackage[3D]{movie15}
 \RequirePackage{pgf}
@@ -75,7 +73,6 @@
 \RequirePackage{egplot}
 %\RequirePackage[all]{xy}
 \RequirePackage{marginnote}
-\RequirePackage{mdframed}
 \RequirePackage{colortbl}
 \RequirePackage{tabularx}
 \RequirePackage{longtable}
@@ -100,15 +97,16 @@
 \RequirePackage{fnbreak}
 \RequirePackage[defaultlines=3,all]{nowidow}
 \RequirePackage{todonotes}
-\RequirePackage{attachfile}
+\RequirePackage{attachfile2}
+\RequirePackage{pdfcomment}
 
-\RequirePackage{esint}
 \RequirePackage{cancel}
 \RequirePackage{delarray}
 \RequirePackage{gauss}
 \RequirePackage{maybemath}
 \RequirePackage{breqn}
 \RequirePackage{mathtools}
+\RequirePackage{permute}
 
 %\RequirePackage{mychemistry} % clashes with pdfpages
 \RequirePackage{mhchem}
@@ -116,20 +114,36 @@
 
 \RequirePackage{authoraftertitle}
 
-\RequirePackage{csquotes}
+\RequirePackage{csquotes} % causes \@gobble errors in combination with polyglossia
 \RequirePackage{siunitx}
 \RequirePackage{lipsum}
 
 %\RequirePackage{nath}
+\ifthenelse{\boolean{xetex} \OR \boolean{luatex}}{
+	\RequirePackage[math-style = ISO , bold-style = ISO , vargreek-shape = unicode]{unicode-math}
+	\setmathfont{xits-math.otf}
+}{
+	\RequirePackage{amssymb}
+	\RequirePackage{amsfonts}
+	\RequirePackage[mathb]{mathabx}
+	\RequirePackage[nointegrals]{wasysym}
+	\RequirePackage{trfsigns}
+	\RequirePackage{esint}
+	
+	\changenotsign
+	\let\oldepsilon\epsilon
+	\renewcommand*{\epsilon}{\ensuremath{\varepsilon}}
+	\let\oldphi\phi
+	\renewcommand*{\phi}{\ensuremath{\varphi}}
+	\let\oldemptyset\emptyset
+	\renewcommand*{\emptyset}{\ensuremath{\varnothing}}
+
+	\let\increment\Delta
+}
 
 \setcounter{tocdepth}{4}
 
-\makeindex
-
-\selectlanguage{ngerman}
-
 \reversemarginpar
-\changenotsign
 \allowdisplaybreaks[1]
 \hypersetup{
 	hyperindex = false , 
@@ -153,21 +167,73 @@
 	extendedchars     = true
 }
 
-%\sisetup{
-%	detect-all ,
-%	per-mode = fraction
-%}
+\sisetup{
+	detect-all
+	mode = text
+	locale = DE ,
+	power-font = unit ,
+	output-decimal-marker = . ,
+	copy-decimal-marker ,
+	sticky-per ,
+	per-mode = fraction ,
+	quotient-mode = fraction ,
+	literal-superscript-as-power ,
+	binary-units ,
+	complex-root-position = after-number ,
+	exponent-product = \cdot ,
+	inter-unit-product = {}\cdot{} ,
+	group-digits = integer ,
+	group-minimum-digits = 4 ,
+	group-separator = ' ,
+	input-complex-roots = \imath ,
+	output-complex-root = \imath ,
+	copy-complex-root ,
+	range-units = single ,
+	range-phrase = --
+}
+\DeclareSIUnit\poise{P}
 
 \setlist{name* = list\arabic{section}.\arabic{subsection}}
 
-\let\oldepsilon\epsilon
-\renewcommand*{\epsilon}{\ensuremath{\varepsilon}}
-\let\oldphi\phi
-\renewcommand*{\phi}{\ensuremath{\varphi}}
-\let\oldemptyset\emptyset
-\renewcommand*{\emptyset}{\ensuremath{\varnothing}}
 \let\olddiv\div
 \renewcommand*{\div}{\operatorname{div}}
+
+\let\oldoverbrace\overbrace
+\let\oldunderbrace\underbrace
+\DeclareDocumentCommand{\underbrace}{ s g t_ +g }{
+	\IfNoValueTF{#2}{
+		\oldunderbrace
+	}{
+		\IfBooleanTF{#3}{
+			\IfNoValueTF{#4}{}{
+				\IfBooleanTF{#1}{
+					\oldunderbrace{#2}_{#4}
+				}{
+					\oldunderbrace{#2}_{\mathclap{\substack{#4}}}
+				}
+			}
+		}{
+			\oldunderbrace{#2}
+		}
+	}
+}
+\DeclareDocumentCommand{\overbrace}{ s g t^ +g }{
+	\IfNoValueTF{#2}{
+		\oldoverbrace
+	}{
+		\IfBooleanTF{#3}{
+			\IfNoValueTF{#4}{}{
+				\IfBooleanTF{#1}{
+					\oldoverbrace{#2}^{#4}
+				}{
+					\oldoverbrace{#2}_{\mathclap{\substack{#4}}}
+				}
+			}
+		}{
+			\oldoverbrace{#2}
+		}
+	}
+}
 
 \newcommand{\gdw}{g.d., w. }
 \newcommand{\R}{\ensuremath{\mathbb{R}}}
@@ -219,154 +285,100 @@
 \newcommand*\Dashv{\mathrel{\mathpalette\m@thr@fl@ct{\mathord\vDash}}}
 \newcommand*\m@thr@fl@ct[2]{\reflectbox{$\m@th#1#2$}}
 
-\newcommand{\XeLaTeX}{\begingroup\fontspec{lmroman10-regular.otf}\Hologo{XeLaTeX}\endgroup}
+\let\xelatex@logo\XeLaTeX
+\makecommand{\XeLaTeX}{\begingroup\fontspec{lmroman10-regular.otf}\xelatex@logo\endgroup}
+\let\xelatex@logo\relax
 
 \newlength{\skak}
 \settowidth{\skak}{\BlackEmptySquare}
 
-\ifthenelse{\boolean{bw}}{	
-	\maketheorem[
-		head            = Bsp. ,
-		counter         = bspcounter
-	]{bsp}
-	\maketheorem[
-		head            = Bsp.
-	]{bsp*}
-	\maketheorem[
-		head            = Satz ,
-		counter         = satzcounter
-	]{satz}
-	\maketheorem[
-		head            = Satz
-	]{satz*}
-	\maketheorem[
-		head            = Korrolar ,
-		counter         = satzcounter
-	]{korr}
-	\maketheorem[
-		head            = Korrolar
-	]{korr*}
-	\maketheorem[
-		head            = Lemma ,
-		counter         = satzcounter
-	]{lem}
-	\maketheorem[
-		head            = Lemma
-	]{lem*}
-	\maketheorem[
-		head            = Repetition ,
-		counter         = repcounter
-	]{rep}
-	\maketheorem[
-		head            = Repetition
-	]{rep*}
-	\maketheorem[
-		head            = Def. ,
-		indexstyle      = def
-	]{def*}
-	\maketheorem[
-		head            = Bew.
-	]{bew}
-	\maketheorem[
-		head            = Bem.
-	]{bem}
-	\maketheorem[
-		head            = Fakt
-	]{fakt}
-	\maketheorem[
-		head            = Beh.
-	]{beh}
-	\maketheorem[
-		head            = Folge
-	]{folge}
-}{
-	\maketheorem[
-		head            = Bsp. ,
-		counter         = bspcounter ,
-		backgroundcolor = SkyBlue ,
-		fontcolor       = Black
-	]{bsp}
-	\maketheorem[
-		head            = Bsp. ,
-		backgroundcolor = SkyBlue ,
-		fontcolor       = Black
-	]{bsp*}
-	\maketheorem[
-		head            = Satz ,
-		counter         = satzcounter ,
-		backgroundcolor = Orange ,
-		fontcolor       = Black
-	]{satz}
-	\maketheorem[
-		head            = Satz ,
-		backgroundcolor = Orange ,
-		fontcolor       = Black
-	]{satz*}
-	\maketheorem[
-		head            = Korrolar ,
-		counter         = satzcounter ,
-		backgroundcolor = Orange ,
-		fontcolor       = Black
-	]{korr}
-	\maketheorem[
-		head            = Korrolar ,
-		backgroundcolor = Orange ,
-		fontcolor       = Black
-	]{korr*}
-	\maketheorem[
-		head            = Lemma ,
-		counter         = satzcounter ,
-		backgroundcolor = Orange ,
-		fontcolor       = Black
-	]{lem}
-	\maketheorem[
-		head            = Lemma ,
-		backgroundcolor = Orange ,
-		fontcolor       = Black
-	]{lem*}
-	\maketheorem[
-		head            = Repetition ,
-		counter         = repcounter ,
-		backgroundcolor = Green ,
-		fontcolor       = Yellow
-	]{rep}
-	\maketheorem[
-		head            = Repetition ,
-		backgroundcolor = Green ,
-		fontcolor       = Yellow
-	]{rep*}
-	\maketheorem[
-		head            = Def. ,
-		backgroundcolor = Red ,
-		fontcolor       = Yellow ,
-		indexstyle      = def ,
-	]{def*}
-	\maketheorem[
-		head            = Bew. ,
-		backgroundcolor = Yellow ,
-		fontcolor       = Black
-	]{bew}
-	\maketheorem[
-		head            = Bem. ,
-		backgroundcolor = Purple ,
-		fontcolor       = Yellow
-	]{bem}
-	\maketheorem[
-		head            = Fakt ,
-		backgroundcolor = Purple ,
-		fontcolor       = Yellow
-	]{fakt}
-	\maketheorem[
-		head             = Beh. ,
-		backgroundcolor = Purple ,
-		fontcolor        = Yellow
-	]{beh}
-	\maketheorem[
-		head            = Folge ,
-		backgroundcolor = Purple ,
-		fontcolor       = Yellow
-	]{folge}
-}
+\maketheorem[
+	head            = Bsp. ,
+	counter         = bspcounter ,
+	backgroundcolor = SkyBlue ,
+	fontcolor       = Black
+]{bsp}
+\maketheorem[
+	head            = Bsp. ,
+	backgroundcolor = SkyBlue ,
+	fontcolor       = Black
+]{bsp*}
+\maketheorem[
+	head            = Satz ,
+	counter         = satzcounter ,
+	backgroundcolor = Orange ,
+	fontcolor       = Black
+]{satz}
+\maketheorem[
+	head            = Satz ,
+	backgroundcolor = Orange ,
+	fontcolor       = Black
+]{satz*}
+\maketheorem[
+	head            = Korrolar ,
+	counter         = satzcounter ,
+	backgroundcolor = Orange ,
+	fontcolor       = Black
+]{kor}
+\maketheorem[
+	head            = Korrolar ,
+	backgroundcolor = Orange ,
+	fontcolor       = Black
+]{kor*}
+\maketheorem[
+	head            = Lemma ,
+	counter         = satzcounter ,
+	backgroundcolor = Orange ,
+	fontcolor       = Black
+]{lem}
+\maketheorem[
+	head            = Lemma ,
+	backgroundcolor = Orange ,
+	fontcolor       = Black
+]{lem*}
+\maketheorem[
+	head            = Repetition ,
+	counter         = repcounter ,
+	backgroundcolor = Green ,
+	fontcolor       = Yellow
+]{rep}
+\maketheorem[
+	head            = Repetition ,
+	backgroundcolor = Green ,
+	fontcolor       = Yellow
+]{rep*}
+\maketheorem[
+	head            = Def. ,
+	backgroundcolor = Red ,
+	fontcolor       = Yellow ,
+	indexstyle      = def ,
+]{def*}
+\maketheorem[
+	head            = Bew. ,
+	backgroundcolor = Yellow ,
+	fontcolor       = Black
+]{bew}
+\maketheorem[
+	head            = Bem. ,
+	backgroundcolor = Purple ,
+	fontcolor       = Yellow
+]{bem}
+\maketheorem[
+	head            = Fakt ,
+	backgroundcolor = Purple ,
+	fontcolor       = Yellow
+]{fakt}
+\maketheorem[
+	head             = Beh. ,
+	backgroundcolor  = Purple ,
+	fontcolor        = Yellow
+]{beh}
+\maketheorem[
+	head            = Folge ,
+	backgroundcolor = Purple ,
+	fontcolor       = Yellow
+]{folge}
+
 
 \newcommand{\authoremail}[1]{\makecommand{\MyAuthorEmail}{#1}}
 \newcommand{\editoremail}[1]{\makecommand{\MyEditorEmail}{#1}}
@@ -383,5 +395,29 @@
 \subtitle{}
 \professor{}
 \semester{}
+
+\AtEndPreamble{
+	\ifthenelse{\expandafter\isempty\expandafter{\MyAuthor}}{
+		\ifthenelse{\expandafter\isempty\expandafter{\MyAuthorEmail}}{}{
+			\hypersetup{pdfauthor = \MyAuthorEmail}
+		}
+	}{
+		\ifthenelse{\expandafter\isempty\expandafter{\MyAuthorEmail}}{
+			\hypersetup{pdfauthor = \MyAuthor}
+		}{
+			\hypersetup{pdfauthor = {\MyAuthor\ <\MyAuthorEmail>}}
+		}
+	}
+	\ifthenelse{\expandafter\isempty\expandafter{\MyProfessor}}{}{
+		\hypersetup{pdfproducer = \MyProfessor}
+	}
+	\ifthenelse{\expandafter\isempty\expandafter{\MyLecture}}{}{
+		\ifthenelse{\expandafter\isempty\expandafter{\MySubtitle}}{
+			\hypersetup{pdftitle = \MyLecture}
+		}{
+			\hypersetup{pdftitle = {\MyLecture\ - \MySubtitle}}
+		}
+	}
+}
 
 \endinput

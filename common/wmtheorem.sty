@@ -1,22 +1,16 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{wmtheorem}[2011/05/02]
+\ProvidesPackage{wmtheorem}[2011/11/09]
 
+\RequirePackage{wmpatch}
 \RequirePackage{xifthen}
-\RequirePackage{scrlfile}
-\RequirePackage{hopatch}
-\hopatch@AfterPackage{makecmds}{
-	\makecommand*\renewlength[2]{\setlength#1{#2}}
-	\makecommand*\makelength[2]{
-		\providelength{#1}
-		\renewlength{#1}{#2}
-	}
-}
-
 \RequirePackage{makecmds}
 \RequirePackage{xkeyval}
 \RequirePackage[usenames,dvipsnames]{xcolor}
-\RequirePackage{mdframed}
+\RequirePackage[framemethod=tex]{mdframed}
 \RequirePackage{wmref}
+
+\OptionSwitch{bw}
+\ProcessOptions\relax
 
 \newboolean{wmthm@numbered}
 
@@ -80,8 +74,8 @@
 	splittopskip      = 0.75cm ,
 	splitbottomskip   = 0.75cm ,
 	linewidth         = 0pt ,
-	backgroundcolor   = white ,
-	fontcolor         = black ,
+	backgroundcolor   = White ,
+	fontcolor         = Black ,
 	indent            = 0.5cm ,
 	headfont          = \normalfont\bfseries ,
 	notefont          = \normalfont\bfseries , 
@@ -104,9 +98,16 @@
 		\setkeys{wmthm}{##1}
 		
 		\makelength{\wmthm@mdinnerleftmargin}{\cmdKV@wmthm@innerleftmargin + \cmdKV@wmthm@indent}
+		\ifthenelse{\boolean{bw}}{
+			\makecommand{\wmthm@backgroundcolor}{White}
+			\makecommand{\wmthm@fontcolor}{Black}
+			\setkeys{wmthm}{linewidth=1pt}
+		}{
+			\makecommand{\wmthm@backgroundcolor}{\cmdKV@wmthm@backgroundcolor}
+			\makecommand{\wmthm@fontcolor}{\cmdKV@wmthm@fontcolor}
+		}
 		
 		\begin{mdframed}[
-			style             = 0 ,
 			innerleftmargin   = \the\wmthm@mdinnerleftmargin ,
 			innerrightmargin  = \cmdKV@wmthm@innerrightmargin ,
 			innertopmargin    = \cmdKV@wmthm@innertopmargin ,
@@ -118,8 +119,8 @@
 			splittopskip      = \cmdKV@wmthm@splittopskip ,
 			splitbottomskip   = \cmdKV@wmthm@splitbottomskip ,
 			linewidth         = \cmdKV@wmthm@linewidth ,
-			backgroundcolor   = \cmdKV@wmthm@backgroundcolor ,
-			fontcolor         = \cmdKV@wmthm@fontcolor
+			backgroundcolor   = \wmthm@backgroundcolor ,
+			fontcolor         = \wmthm@fontcolor
 		]
 			\hbox{
 				\hskip-\cmdKV@wmthm@indent%

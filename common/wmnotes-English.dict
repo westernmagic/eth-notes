@@ -1,0 +1,26 @@
+\ProvidesDictionary{wmnotes}{English}
+\providetranslation{Notekeeping}{Notekeeping}
+\providetranslation{Corrections}{Corrections}
+\providetranslation{Completion}{Completions}
+\providetranslation{Written in}{Written in}
+\providetranslation{Status}{Status}
+\providetranslation{Bold (indexnote)}{Bold}
+\providetranslation{indexnote (body)}{page numbers reference term definitions.}
+
+\providetranslation{Ex.}{Ex.}
+\providetranslation{Example}{Example}
+\providetranslation{Theorem}{Theorem}
+\providetranslation{Cor.}{Cor.}
+\providetranslation{Corollary}{Corollary}
+\providetranslation{Lemma}{Lemma}
+\providetranslation{Repetition}{Repetition}
+\providetranslation{Def.}{Def.}
+\providetranslation{Definition}{Definition}
+\providetranslation{Proof.}{Proof}
+\providetranslation{Proof}{Proof}
+\providetranslation{Remark.}{Remark}
+\providetranslation{Remark}{Remark}
+\providetranslation{Fact}{Fakt}
+\providetranslation{Ass.}{Ass.}
+\providetranslation{Assertion}{Assertion}
+\providetranslation{Consequence}{Consequence}

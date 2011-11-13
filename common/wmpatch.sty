@@ -1,6 +1,9 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{wmpatch}[2011/10/03]
+\ProvidesPackage{wmpatch}[2011/11/09]
+
+\RequirePackage{scrlfile}
 \RequirePackage{hopatch}
+
 \hopatch@AfterPackage{makecmds}{
 	\makecommand*\renewlength[2]{\setlength#1{#2}}
 	\makecommand*\makelength[2]{
@@ -8,21 +11,43 @@
 		\renewlength{#1}{#2}
 	}
 }
-\hopatch@AfterPackage{graphicx}{
-	\ifthenelse{\boolean{pdf} \OR \boolean{xetex}}{
-		\DeclareGraphicsExtensions{.pdf,.png,.jpg}
-	}{
-		\renewcommand{\includegraphics}[2][]{\\}
+
+\hopatch@AfterPackage{xifthen}{
+	\newcommand*\OptionSwitch[1]{
+		\newboolean{#1}
+		\setboolean{#1}{false}
+		\DeclareOption{#1}{
+			\setboolean{#1}{true}
+		}
+		\DeclareOption{no#1}{
+			\setboolean{#1}{false}
+		}
 	}
 }
+
 \hopatch@AfterPackage{amsmath}{
 	\def\[#1\]{\begin{gather*}#1\end{gather*}}
+	
+	\hopatch@AfterPackage{unicode-math}{
+		\long\def\@declmathop#1#2#3{
+			\@ifdefinable{#2}{
+				\DeclareRobustCommand{#2}{\qopname\relax #1{#3}}
+			}
+		}
+		\def\[#1\]{\begin{gather*}#1\end{gather*}}
+	}
 }
+
+\hopatch@AfterPackage{unicode-math}{
+	\DeclareDocumentCommand{\corresponds}{}{\arceq}
+}
+
 \hopatch@AfterPackage{csquotes}{
 	\DeclareQuoteStyle{double}{\text{\textquotedbl}}{\text{\textquotedbl}}[0.05em]{\text{\textquotesingle}}{\text{\textquotesingle}}
 	\DeclareQuoteStyle{single}{\text{\textquotesingle}}{\text{\textquotesingle}}[0.05em]{\text{\textquotedbl}}{\text{\textquotedbl}}
 	\DeclareQuoteAlias{double}{ngerman}
 }
+
 \hopatch@AfterPackage{enumitem-zref}{
 	\enitkv@key{enumitem}{name}[]{\zen@namelist{#1}}
 	\enitkv@key{enumitem}{name*}[]{\zen@starnamelist{#1}}

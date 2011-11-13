@@ -41,4 +41,7 @@ DM.*
 PhysMed.*
 !*.tex
 
+ETHlogo.*
+uzh_logo_*
+
 tmp/*

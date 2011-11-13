@@ -119,8 +119,9 @@ cleanhelp :
 
 
 %_bw.tex : %.tex
-	$(SED) -e '/\\usepackage.*{wmnotes}/ i\
-	\\PassOptionsToPackage{bw}{wmnotes}' $*.tex > $*_bw.tex
+	$(info Making $*_bw.tex...)
+	@ echo '\PassOptionsToPackage{bw}{wmtheorem}' > $*_bw.tex
+	@ $(CAT) $*.tex >> $*_bw.tex
 
 %_bw.pdf : %_bw.tex
 	$(info Making $*_bw.pdf...)
