@@ -22,11 +22,6 @@
 \RequirePackage{ifluatex}
 \RequirePackage{ifplatform}
 
-% Polyglossia currently clashes with varindex
-\RequirePackage{babeltools}
-\RequirePackage[english,german,ngerman]{babel}
-\RequirePackage{babelbib}
-
 \RequirePackage[english,german]{translator}
 \usedictionary{wmnotes}
 
@@ -42,7 +37,7 @@
 	\RequirePackage{xltxtra}
 	\setmainfont{ETH Light}
 	
-%	\RequirePackage{polyglossia} % errors package varindex
+	\RequirePackage{polyglossia}
 }{
 	\RequirePackage{ucs}
 	\RequirePackage[utf8x]{inputenc}
@@ -168,8 +163,8 @@
 }
 
 \sisetup{
-	detect-all
-	mode = text
+	detect-all ,
+	mode = text ,
 	locale = DE ,
 	power-font = unit ,
 	output-decimal-marker = . ,

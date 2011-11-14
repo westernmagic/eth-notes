@@ -15,9 +15,11 @@
 \RequirePackage[english,german]{translator}
 
 \usedictionary{wmnotes}
-\setindexprenote{\textbf{\translate{bold (indexnote)}} \translate{indexnote (body)}}
+\setindexprenote{\textbf{\translate{Bold (indexnote)}} \translate{indexnote (body)}}
 
-\catcode`\~=11\relax
+\AtBeginDocument{
+	\catcode`\~=11\relax
+}
 
 \hypersetup{
 	pdfborder = 0 0 0 ,

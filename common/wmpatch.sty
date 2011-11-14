@@ -27,7 +27,6 @@
 
 \hopatch@AfterPackage{amsmath}{
 	\def\[#1\]{\begin{gather*}#1\end{gather*}}
-	
 	\hopatch@AfterPackage{unicode-math}{
 		\long\def\@declmathop#1#2#3{
 			\@ifdefinable{#2}{
@@ -52,3 +51,5 @@
 	\enitkv@key{enumitem}{name}[]{\zen@namelist{#1}}
 	\enitkv@key{enumitem}{name*}[]{\zen@starnamelist{#1}}
 }
+
+\endinput

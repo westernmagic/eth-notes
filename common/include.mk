@@ -33,8 +33,8 @@ NULL := /dev/null
 VPATH =  ../common
 
 logfilter = \
-	$(GREP) -E "^\./" $(1).log #| \
-#	$(SED) -e '/Package enumitem Error: name undefined/d' -e '/Package zref Error: Property/d'
+	$(CAT) $(1).log | \
+	$(SED) -n -E -e '/\/.*\.[a-z]{3}:[0-9]+: /,/l\.[0-9]+ / {/l\.[0-9]+ / N;p;s/.*\n//gp;}'
 
 get-deps-tex = \
 	$(shell \
@@ -87,7 +87,8 @@ rerun = \
 		( ! $(GREP) -E "(Rerun to get (cross-references|the bars) right)" $(2).log &> $(NULL) ) \
 	) ; do \
 		$(1) $(2) <<< s &> $(NULL) \
-	; done
+	; done ; \
+	$(1) $(2) <<< s &> $(NULL) ;
 
 
 suff = $(addprefix $(1),.pdf .dvi .xdv .ps)
