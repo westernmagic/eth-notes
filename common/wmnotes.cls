@@ -21,6 +21,7 @@
 		\setdefaultlanguage[variant=british]{english}
 		\setotherlanguage[spelling = new , latesthyphen = true , babelshorthands = false]{german}
 	}{}
+	\setquotestyle{double}
 }
 
 \DeclareOption{german}{
@@ -31,6 +32,7 @@
 		\setdefaultlanguage[spelling = new , latesthyphen = true]{german}
 		\setotherlanguage[variant=british]{english}
 	}{}
+	\setquotestyle{double}
 }
 
 \DeclareOption{ngerman}{\ExecuteOptions{german}}

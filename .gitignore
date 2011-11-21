@@ -8,6 +8,7 @@ Icon?
 .Spotlight-V100
 .Trashes
 
+*.atfi
 *.aux
 *.bbl
 *.blg
@@ -40,6 +41,7 @@ CAnal.*
 DM.*
 PhysMed.*
 !*.tex
+!*.pdf
 
 ETHlogo.*
 uzh_logo_*

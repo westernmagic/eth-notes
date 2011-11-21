@@ -3,7 +3,7 @@
 
 %\RequirePackage{catoptions}
 \RequirePackage{wmpatch}
-\RequirePackage{silence}
+%\RequirePackage{silence}
 
 \RequirePackage{fixltx2e}
 \RequirePackage{etextools}
@@ -30,7 +30,6 @@
 \RequirePackage[clock]{ifsym}
 \RequirePackage{ccicons}
 \RequirePackage{skak}
-\RequirePackage{ellipsis}
 
 \ifthenelse{\boolean{xetex} \OR \boolean{luatex}}{
 	\RequirePackage[no-math]{fontspec}
@@ -50,6 +49,7 @@
 	\RequirePackage{babelbib}
 }
 
+\RequirePackage{ellipsis}
 \RequirePackage{metalogo}
 \RequirePackage{hologo}
 
@@ -62,7 +62,7 @@
 \RequirePackage{grfext}
 \RequirePackage{epstopdf}
 \RequirePackage[3D]{movie15}
-\RequirePackage{pgf}
+%\RequirePackage{pgf}
 \RequirePackage{tikz}
 \RequirePackage{pgfplots}
 \RequirePackage{egplot}
@@ -99,17 +99,18 @@
 \RequirePackage{delarray}
 \RequirePackage{gauss}
 \RequirePackage{maybemath}
-\RequirePackage{breqn}
+%\RequirePackage{breqn} % breaks chemfig
 \RequirePackage{mathtools}
 \RequirePackage{permute}
 
-%\RequirePackage{mychemistry} % clashes with pdfpages
-\RequirePackage{mhchem}
-\RequirePackage{chemfig}
+\PassOptionsToPackage{version=3}{mhchem}
+\RequirePackage[nochemexec]{mychemistry}
+\RequirePackage{mhchem} % loaded by mychemistry
+\RequirePackage{chemfig} % loaded by mychemistry
 
 \RequirePackage{authoraftertitle}
 
-\RequirePackage{csquotes} % causes \@gobble errors in combination with polyglossia
+\RequirePackage{csquotes}
 \RequirePackage{siunitx}
 \RequirePackage{lipsum}
 
@@ -117,6 +118,12 @@
 \ifthenelse{\boolean{xetex} \OR \boolean{luatex}}{
 	\RequirePackage[math-style = ISO , bold-style = ISO , vargreek-shape = unicode]{unicode-math}
 	\setmathfont{xits-math.otf}
+	
+	\let\lightning\downzigzagarrow
+	\let\ulsh\Lsh
+	\let\ursh\Rsh
+	\let\dlsh\Ldsh
+	\let\drsh\Rdsh
 }{
 	\RequirePackage{amssymb}
 	\RequirePackage{amsfonts}
@@ -134,6 +141,7 @@
 	\renewcommand*{\emptyset}{\ensuremath{\varnothing}}
 
 	\let\increment\Delta
+	\let\qed\blacksquare
 }
 
 \setcounter{tocdepth}{4}
@@ -221,7 +229,7 @@
 				\IfBooleanTF{#1}{
 					\oldoverbrace{#2}^{#4}
 				}{
-					\oldoverbrace{#2}_{\mathclap{\substack{#4}}}
+					\oldoverbrace{#2}^{\mathclap{\substack{#4}}}
 				}
 			}
 		}{
