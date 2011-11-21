@@ -178,14 +178,183 @@ $\vec{E}$-Feld beschleunigt Ladungen \\
 Reibung an Ionen bremst sie \\
 $\implies \vec{v} =$ konst.
 
+\begin{rep*}[ note = Elekrische Spannung - elektrisches Potential ]
+	\includegraphics{Bild172}
+	\[ U_{21} = - \int_1^2 \vec{E} \cdot \vec{\dd r} \]
+	\begin{bsp*}[ note = Punktladung ]
+		\includegraphics{Bild173}
+	\end{bsp*}
+\end{rep*}
 
+\includegraphics{Bild174}
+\[ U_{21} = U \]
+\begin{itemize}[ label = $\implies$ ]
+	\item $\vec{E} \neq \vec{0}$ im Leiter
+	\item Ladungsträger beschleunigt
+\end{itemize}
++ Reibung $\implies$ $\vec{v} = $ konst. \\
+\includegraphics{Bild175} \\
+pos. Stromrichtung in Feldrichtung
+\begin{def*}[ note = Stromstärke , index = Stromstärke ]
+	\[ \boxed{ I = \frac{\increment Q}{\increment t} } \quad [ \si{\ampere} ] \]
+\end{def*}
+\begin{def*}[ note = Stromdichte , index = Stromdichte ]
+	\[
+		\boxed{ \vec{j} = \rho \cdot \vec{v} } \quad \left[ \si{\ampere\per\metre\squared} \right] \\
+		\text{mit Ladungsdichte } \rho = \underbrace*{n}_{\text{Teilchendichte}} \cdot \underbrace*{z}_{\text{Ladung pro Teilchen}} \cdot \underbrace*{e}_{\text{Elementarladung } \approx \SI{1.6E-19}{\coulomb}}
+	\]
+\end{def*}
 
+\subsubsection{Metalle}
+i.A. Elektronen: $z = -1$
 
+\subsubsection{Elektrolyt}
+\[ \vec{j} = \vec{j_{+}} + \vec{j_{-}} = n_{+} z_{+} e \vec{v_{+}} + n_{-} z_{-} e \vec{v_{-}} \]
+\begin{bsp*}[ head = z.B. ]
+	\ce{Mg2+}-Ionen: $z = +2$
+\end{bsp*}
 
+In zylindrischem Leiter: \\
+homogene Stromdichte \\
+\includegraphics{Bild176}
+\[ I = A j \implies j = \frac{I}{A} \]
 
+\subsubsection{Inhomogenes \texorpdfstring{$\vec{j}(\vec{r})$}{j(r)}}
+\begin{bsp*}[ note = Elektrolyt ]
+	\includegraphics{Bild177}
+	\[ I = \iint_A \vec{j} \cdot \vec{\dd A} \]
+\end{bsp*}
 
+\subsection{Strömungsgesetze}
+\[ \begin{matrix*}[l]
+	\text{\uline{Hyrdo:} } & I_V = \frac{p_1 - p_2}{\underbrace{R_V}_{\text{innere}\\\text{Reibung}}} \\
+	\text{\uline{el. Strom:} } & I = \frac{U}{\underbrace{R}_{\text{Reibung}\\\text{an Ionen,}\\\text{Elektronen}}}
+\end{matrix*} \implies \]
+\begin{def*}[ note = elekrischer Widerstand , index = elektrischer Widerstand , indexformat = {12 2!1~} ]
+	\[ \boxed{ R = \frac{U}{I} } \quad [ \si{\ohm} ] \]
+	hängt ab von
+	\begin{itemize}
+		\item Material ($\rightarrow$ spez. Widerstand $\rho_W$)
+		\item Form \\
+			\includegraphics{Bild178}
+			\[ R = \rho_W \frac{l}{A} \]
+	\end{itemize}
+\end{def*}
 
+\subsection{Strom-Spannung-Charakteristik}
+\subsubsection{Metall}
+\includegraphics{Bild179} \\
+\includegraphics{Bild180} \\
+Steigung: $\frac{I}{U}$ \\
+$\implies R = \frac{U}{I} = $ konst. \\
+Ohmsches Gesetz
 
+\subsection{Joulsche Wärme}
+\includegraphics{Bild181} \\
+$\vec{E}$-Feld leistet Arbeit (Batterie!)
+\[ \dd W_{1 \rightarrow 2} = \dd Q \cdot U_{21} \]
+$\implies$ \uline{elektrische Leistung}:
+\[
+	\boxed{ P = U \cdot I } \\
+	P = \frac{\dd W_{1 \rightarrow 2}}{\dd t} = \underbrace{\frac{\dd Q}{\dd t}}_{I} \cdot U_{21} \\
+	[ W ] = \si{\volt\ampere}
+\]
 
+\subsection{Elektrische Leitfähigkeit}
+\[ I = \frac{1}{R} \cdot U \rightarrow \boxed{ \vec{j} = \sigma \cdot \vec{E} } \quad (\text{von } \vec{j} = \rho \cdot \vec{v}) \]
+Bilanzgewinnung im ganzen Leiter \\
+vektorielles Gesetz gilt überall im Leiter \\
+\begin{def*}[note = elektrische Leitfähigkeit , index = elektrische Leitfähigkeit , indexformat = {12 2!1~} ]
+	\[ \sigma = \frac{1}{\underbrace{\rho_W}_{\text{spez. Widerstand}}} \]
+\end{def*}
 
+\subsection{Elektrokardiogramm}
+\includegraphics{Bild182}
 
+\subsection{Spannungsquellen}
+\begin{bsp*}[ note = Batterie ]
+	\includegraphics{Bild183}
+\end{bsp*}
+\enquote{Elektromotorische Kraft} (EMK)
+\[ E_m = \frac{W_{1 \rightarrow 2}}{q} \]
+Leerlaufspannung $U_0 = E_m$
+\begin{bsp*}[ note = Das Ruhepotential einer Zelle ]
+	\includegraphics{Bild184} \\
+	\includegraphics{Bild185}
+	\begin{bsp*}
+		\ce{K+}-Ionen \\
+		innen Konz. $c_i$ \\
+		aussen Konz. $c_a$ \\
+		Im GGW sorgt Körper für $c_i > c_a$
+		
+		\uline{Lösung:} Konzentration in der Zellwand
+		\[
+			c(x) = c_i e^{-\frac{z e \cdot E \cdot x}{kT} }
+			\intertext{am äusseren Rand}
+			c(\delta) = c_a = c_i e^{-\frac{z e \cdot \overbrace{E \cdot \delta}^{\text{Diff. Spannung}}}{kT}}
+			\intertext{Diff'spannung $U_D= E \delta$}
+			\boxed{ U_D = \frac{kT}{z \cdot e} \ln \frac{c_i}{c_a} }
+		\]
+		Ruhepotential $U_D \approx \SI{90}{\milli\electronvolt}$
+	\end{bsp*}
+\end{bsp*}
+
+\begin{rep*}[ note = El. Gleichströme ]
+	\[
+		\begin{matrix*}[l]
+			\text{\uline{Stromstärke:} } &\boxed{ I = \frac{\increment Q}{\increment t} } \\
+			\text{\uline{Stromdichte:} } &\boxed{ \vec{j} = \rho \cdot \vec{v} }
+		\end{matrix*}
+		\intertext{Strömungsgesetze:}
+		\boxed{ I = \frac{U}{R} } \quad \boxed{ \vec{j} = \sigma \cdot \vec{E} }
+	\]
+	
+	\uline{Spannungsquellen}
+	\includegraphics{Bild186} \\
+	$E_m$: elektromotorische \enquote{Kraft} \\
+	$\implies$ Arbeit, um Ladung gegen E-Feld zu verschieben
+	\begin{bsp*}[ note = Zellmembran ]
+		\includegraphics{Bild187} \\
+		$c_i > c_a$ \\
+		\ce{K+}-Konzentration \\
+		$\delta = \SI{5}{\milli\metre}$ \\
+		Diffusion transportiert Ladungen (\ce{K+}) gegen E-Feld
+		\[
+			\implies U_D = \frac{kT}{ze} \ln \frac{c_i}{c_a} \\
+			\text{Ruhepotential } \approx \SI{90}{\milli\volt} \\
+			E = \frac{U_D}{\delta} = \frac{\SI{90E-3}{\volt}}{\SI{5E-9}{\metre}} = \SI{2E7}{\volt\per\metre}
+		\]
+	\end{bsp*}
+\end{rep*}
+
+\subsubsection{Reale Spannungsquellen}
+\includegraphics{Bild188} \\
+Innenwiderstand $R_i$
+Spannungsabfall am $R_i$
+\[ U_i = I \cdot R_i \]
+Klemmanspannung
+\[ U_{21} = E_m - I \cdot R_i = U_0 - I \cdot R_i \]
+\includegraphics{Bild189} \\
+\includegraphics{Bild190} \\
+Kurzschluss:
+\[ I_{\text{max}} = \frac{U_0}{R_i} \]
+
+\subsection{Kirchhoffsche Maschenregel}
+\[ \boxed{ \sum E_m = \underbrace{\sum U_i}_{\text{alle Spannungsabfälle}} } \]
+
+\subsubsection{Kirchoffsche Knotenregel}
+\includegraphics{Bild191} \\
+Hier $I_1 = I_2 + I_3$
+\[ \boxed{ \sum I_{\text{zufl.}} = \sum I_{\text{abfl.}} } \]
+(Kontinuitätsgleichung)
+
+\uline{Wichtig: Vorzeichen}
+\includegraphics{Bild192} $E_M$ positiv \\
+\includegraphics{Bild193} $I \cdot R$ negativ \\
+\uline{Rezept:}
+\begin{enumerate}[ label = \arabic*) ]
+	\item Stromrichtungen einzeichnen (beliebig)
+	\item Knotenregel anwenden
+	\item Maschenregel anwenden
+	\item Gleichungen nach $I_1 , I_2, \dots$ auflösen
+\end{enumerate}
