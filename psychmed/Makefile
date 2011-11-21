@@ -1,7 +1,7 @@
-include ../common/include.mk
+include ../common/Makefile.pdf
 
 .PHONY: all clean
 
-all: clean 2.pdf
+all: clean 2.pdf 4.pdf
 
-clean: cleanhelp 2_clean
+clean: cleanhelp 2_clean 4_clean
