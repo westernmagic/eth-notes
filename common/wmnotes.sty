@@ -119,11 +119,11 @@
 	\RequirePackage[math-style = ISO , bold-style = ISO , vargreek-shape = unicode]{unicode-math}
 	\setmathfont{xits-math.otf}
 	
-	\let\lightning\downzigzagarrow
-	\let\ulsh\Lsh
-	\let\ursh\Rsh
-	\let\dlsh\Ldsh
-	\let\drsh\Rdsh
+	\newcommand*\lightning{\downzigzagarrow}
+	\newcommand*\ulsh{\Lsh}
+	\newcommand*\ursh{\Rsh}
+	\newcommand*\dlsh{\Ldsh}
+	\newcommand*\drsh{\Rdsh}
 }{
 	\RequirePackage{amssymb}
 	\RequirePackage{amsfonts}
@@ -140,8 +140,8 @@
 	\let\oldemptyset\emptyset
 	\renewcommand*{\emptyset}{\ensuremath{\varnothing}}
 
-	\let\increment\Delta
-	\let\qed\blacksquare
+	\newcommand*\increment{\Delta}
+	\newcommand*\qed{\blacksquare}
 }
 
 \setcounter{tocdepth}{4}
@@ -288,9 +288,9 @@
 \newcommand*\Dashv{\mathrel{\mathpalette\m@thr@fl@ct{\mathord\vDash}}}
 \newcommand*\m@thr@fl@ct[2]{\reflectbox{$\m@th#1#2$}}
 
-\let\xelatex@logo\XeLaTeX
-\makecommand{\XeLaTeX}{\begingroup\fontspec{lmroman10-regular.otf}\xelatex@logo\endgroup}
-\let\xelatex@logo\relax
+%\let\xelatex@logo\XeLaTeX
+%\makecommand{\XeLaTeX}{\begingroup\fontspec{lmroman10-regular.otf}\xelatex@logo\endgroup}
+%\let\xelatex@logo\relax
 
 \newlength{\skak}
 \settowidth{\skak}{\BlackEmptySquare}
@@ -385,6 +385,7 @@
 
 \newcommand{\authoremail}[1]{\makecommand{\MyAuthorEmail}{#1}}
 \newcommand{\editoremail}[1]{\makecommand{\MyEditorEmail}{#1}}
+\newcommand{\professoremail}[1]{\makecommand{\MyProfessorEmail}{#1}}
 \newcommand{\editor}[1]{\makecommand{\MyEditor}{#1}}
 \newcommand{\lecture}[1]{\makecommand{\MyLecture}{#1}}
 \newcommand{\subtitle}[1]{\makecommand{\MySubtitle}{#1}}
@@ -397,6 +398,7 @@
 \lecture{}
 \subtitle{}
 \professor{}
+\professoremail{}
 \semester{}
 
 \AtEndPreamble{
@@ -411,8 +413,16 @@
 			\hypersetup{pdfauthor = {\MyAuthor\ <\MyAuthorEmail>}}
 		}
 	}
-	\ifthenelse{\expandafter\isempty\expandafter{\MyProfessor}}{}{
-		\hypersetup{pdfproducer = \MyProfessor}
+	\ifthenelse{\expandafter\isempty\expandafter{\MyProfessor}}{
+		\ifthenelse{\expandafter\isempty\expandafter{\MyProfessorEmail}}{}{
+			\hypersetup{pdfproducer = \MyProfessorEmail}
+		}
+	}{
+		\ifthenelse{\expandafter\isempty\expandafter{\MyProfessorEmail}}{
+			\hypersetup{pdfproducer = \MyProfessor}
+		}{
+			\hypersetup{pdfproducer = {\MyProfessor\ <\MyProfessorEmail>}}
+		}
 	}
 	\ifthenelse{\expandafter\isempty\expandafter{\MyLecture}}{}{
 		\ifthenelse{\expandafter\isempty\expandafter{\MySubtitle}}{

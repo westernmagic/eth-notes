@@ -50,6 +50,9 @@
 					\normalsize{\MySubtitle} \\
 				}
 				\Large{\MyProfessor} \\
+				\ifthenelse{\expandafter\isempty\expandafter{\MyProfessorEmail}}{}{
+					\large{\href{mailto:\MyProfessorEmail}{\texttt{\MyProfessorEmail}}} \\
+				}
 				\large{\MySemester}
 				\vskip 3em
 				\Large{\MyAuthor} \\
