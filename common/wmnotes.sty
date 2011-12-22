@@ -25,6 +25,8 @@
 \RequirePackage[english,german]{translator}
 \usedictionary{wmnotes}
 
+\RequirePackage{geometry}
+
 \RequirePackage[fleqn,sumlimits,intlimits,namelimits]{amsmath}
 
 \RequirePackage[clock]{ifsym}
@@ -71,7 +73,8 @@
 \RequirePackage{colortbl}
 \RequirePackage{tabularx}
 \RequirePackage{longtable}
-\RequirePackage{ltxtable}
+\RequirePackage{ltabptch}
+\RequirePackage{tabu}
 \RequirePackage{multirow}
 \RequirePackage[normalem]{ulem}
 \PassOptionsToPackage{unicode,hyperindex=false}{hyperref}
@@ -107,6 +110,7 @@
 \RequirePackage[nochemexec]{mychemistry}
 \RequirePackage{mhchem} % loaded by mychemistry
 \RequirePackage{chemfig} % loaded by mychemistry
+\RequirePackage[EZ=cool]{chemmacros}
 
 \RequirePackage{authoraftertitle}
 
@@ -195,7 +199,23 @@
 	range-phrase = --
 }
 \DeclareSIUnit\poise{P}
+\DeclareSIUnit\dioptre{dpt}
 
+\DeclareDocumentEnvironment{enumeratet}{ O{} }{
+	\begin{enumerate}[ leftmargin = * , #1 ]
+}{
+	\end{enumerate}
+}
+\DeclareDocumentEnvironment{itemizet}{ O{} }{
+	\begin{itemize}[ leftmargin = * , #1 ]
+}{
+	\end{itemize}
+}
+\DeclareDocumentEnvironment{descriptiont}{ O{} }{
+	\begin{description}[ leftmargin = * , #1 ]
+}{
+	\end{description}
+}
 \setlist{name* = list\arabic{section}.\arabic{subsection}}
 
 \let\olddiv\div
@@ -238,11 +258,16 @@
 	}
 }
 
+\let\cR\R
+\let\cS\S
+\let\cE\Ent
+\let\cZ\Zus
+
 \newcommand{\gdw}{g.d., w. }
-\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\makecommand{\R}{\ensuremath{\mathbb{R}}}
 \newcommand{\Q}{\ensuremath{\mathbb{Q}}}
 \newcommand{\N}{\ensuremath{\mathbb{N}}}
-\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\makecommand{\Z}{\ensuremath{\mathbb{Z}}}
 \makecommand{\C}{\ensuremath{\mathbb{C}}}
 \newcommand{\I}{\ensuremath{\mathbb{I}}}
 \makecommand{\L}{\ensuremath{\mathcal{L}}}
