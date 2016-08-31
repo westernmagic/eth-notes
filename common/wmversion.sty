@@ -1,0 +1,104 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{wmversion}[2015/01/14]
+
+\RequirePackage{xparse}
+\RequirePackage{xkeyval}
+\RequirePackage{texsort}
+\RequirePackage{xstring}
+\RequirePackage{xcolor}
+\RequirePackage{pgffor}
+\RequirePackage{etoolbox}
+\RequirePackage{wmtext}
+\RequirePackage{etextools}
+\RequirePackage{enumitem}
+\RequirePackage{xifthen}
+\RequirePackage{ifthenx}
+\RequirePackage{hyperref}
+
+
+\newboolean{final}
+\setboolean{final}{false}
+\DeclareOption{final}{
+	\setboolean{final}{true}
+}
+
+\DeclareOption*{
+	\StrLeft{\CurrentOption}{8}[\wmver@temp]
+	\ifthenelse{\isinteger{\wmver@temp}}{
+		\xdef\wmver@VersionDate{\wmver@temp}
+	}{}
+}
+
+\ProcessOptions\relax
+
+\define@cmdkeys{wmver}{
+	color,
+	name
+}
+
+\def\wmver@VersionListUnsorted{}
+
+\newlist{versions}{enumerate}{1}
+\setlist[versions]{label={\textsuperscript{\arabic*}}, ref={\textsuperscript{\arabic*}}}
+
+\newtest{\beforedate}[1]{
+	\isundefined{\wmver@VersionDate} \OR \cnttest{#1}{<=}{\wmver@VersionDate}
+}
+
+\DeclareDocumentCommand\DeclareVersion{m o}{
+	\define@key{wmver}{#1}[]{\setkeys{wmver}{#2}}
+	\xdef\wmver@VersionListUnsorted{\wmver@VersionListUnsorted,#1}
+}
+
+\DeclareDocumentCommand\PrintVersions{}{
+	\StrGobbleLeft{\wmver@VersionListUnsorted}{1}[\wmver@VersionListUnsorted]
+	\sortlist{\wmver@VersionListUnsorted}\to{wmver@VersionListSorted}\sep{,}
+	
+	\section*{Versionen}
+	\begin{versions}
+		\foreach \@i in \wmver@VersionListSorted {
+			{
+				\ExpandNextTwo\setkeys{wmver}{\@i}
+				\ifthenelse{\boolean{final}}{}{\color{\cmdKV@wmver@color}}
+				\item \label{\@i}\cmdKV@wmver@name
+			}
+		}
+	\end{versions}
+}	
+
+\DeclareDocumentCommand\added{o m+}{%
+	\ifthenelse{\beforedate{#1}}{%
+		\ifthenelse{\boolean{final}}{%
+			#2\ref{#1}%
+		}{%
+			\setkeys{wmver}{#1}%
+			\textcolor{\cmdKV@wmver@color}{#2\ref{#1}}%
+		}%
+	}{}%
+}
+
+\DeclareDocumentCommand\replaced{o m+ m+}{%
+	\ifthenelse{\beforedate{#1}}{%
+		\ifthenelse{\boolean{final}}{%
+			#3\ref{#1}%
+		}{%
+			\setkeys{wmver}{#1}%
+			\textst[\cmdKV@wmver@color]{#2} \textcolor{\cmdKV@wmver@color}{#3\ref{#1}}%
+		}%
+	}{#2}%
+}
+
+\DeclareDocumentCommand\deleted{s o m+}{%
+	\ifthenelse{\beforedate{#2}}{%
+		\IfBooleanTF{#1}{%
+			\replaced[#2]{#3}{\textellipsis}%
+		}{%
+			\ifthenelse{\boolean{final}}{%
+				\ref{#2}%
+			}{%
+				\setkeys{wmver}{#2}%
+				\textst[\cmdKV@wmver@color]{#3}\textcolor{\cmdKV@wmver@color}{\ref{#2}}%
+			}%
+		}%
+	}{#3}%
+}

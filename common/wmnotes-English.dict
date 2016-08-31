@@ -3,9 +3,15 @@
 \providetranslation{Corrections}{Corrections}
 \providetranslation{Completion}{Completions}
 \providetranslation{Written in}{Written in}
+\providetranslation{Compiled with}{Compiled with}
 \providetranslation{Status}{Status}
 \providetranslation{Bold (indexnote)}{Bold}
 \providetranslation{indexnote (body)}{page numbers reference term definitions.}
+\providetranslation{Page}{Page}
+\providetranslation{of}{of}
+
+\providetranslation{ETHZ}{Swiss Federal Institute of Technology Zürich}
+\providetranslation{UZH}{University of Zürich}
 
 \providetranslation{Ex.}{Ex.}
 \providetranslation{Example}{Example}

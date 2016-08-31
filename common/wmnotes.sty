@@ -1,12 +1,19 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{wmnotes}[2011/11/09]
+\RequirePackage{expl3}
+\ProvidesExplPackage{wmnotes}{2016/04/06}{}{}
+\makeatletter
+\ExplSyntaxOff
 
+%\RequirePackage{texdepends}
+%\RequirePackage{pkgloader}
 %\RequirePackage{catoptions}
 \RequirePackage{wmpatch}
+\RequirePackage[aux]{rerunfilecheck}
 %\RequirePackage{silence}
 
 \RequirePackage{fixltx2e}
 \RequirePackage{etextools}
+\RequirePackage{morewrites} %etextools > etex-pkg redefines \newwrites
 \RequirePackage{makecmds}
 \RequirePackage{inlinedef}
 \RequirePackage{versions}
@@ -16,43 +23,68 @@
 %\RequirePackage{checklab}
 
 \RequirePackage{xifthen}
+\RequirePackage{ifthenx}
 \RequirePackage{iftex}
 \RequirePackage{ifpdf}
 \RequirePackage{ifxetex}
 \RequirePackage{ifluatex}
-\RequirePackage{ifplatform}
+%\RequirePackage{ifplatform}
+
+\ifthenelse{\boolean{luatex}}{\RequirePackage{luatex85}}{}
 
 \RequirePackage[english,german]{translator}
 \usedictionary{wmnotes}
 
 \RequirePackage{geometry}
 
-\RequirePackage[fleqn,sumlimits,intlimits,namelimits]{amsmath}
-
 \RequirePackage[clock]{ifsym}
 \RequirePackage{ccicons}
 \RequirePackage{skak}
+\RequirePackage{metalogo}
+
+\ifthenelse{\boolean{luatex}}{
+	\let\CompilerLogo\LuaLaTeX
+}{
+	\ifthenelse{\boolean{xetex}}{
+		\let\CompilerLogo\XeLaTeX
+	}{
+		\ifthenelse{\boolean{pdftex}}{
+			\let\CompilerLogo\pdfLaTeX
+		}{
+			\let\CompilerLogo\LaTeX
+		}
+	}
+}
 
 \ifthenelse{\boolean{xetex} \OR \boolean{luatex}}{
-	\RequirePackage[no-math]{fontspec}
-	\RequirePackage{xltxtra}
-	\setmainfont{ETH Light}
-	
-	\RequirePackage{polyglossia}
+	\PassOptionsToPackage{no-math}{fontspec}
+	\RequirePackage{fontspec}
+	\ifthenelse{\boolean{xetex}}{\RequirePackage{xltxtra}}{}
+	%\setmainfont{ETH Light}
+	\newfontfamily{\ComputerModern}{cmunrm.otf}
+	\everylogo{\ComputerModern}
 }{
 	\RequirePackage{ucs}
-	\RequirePackage[utf8x]{inputenc}
+	\ifthenelse{\boolean{luatex}}{
+		\RequirePackage[lutf8x]{luainputenc}
+	}{
+		\RequirePackage[utf8x]{inputenc}
+	}
 	\RequirePackage[T1]{fontenc}
-	\renewcommand{\familydefault}{let}
-	\renewcommand{\sfdefault}{let}
-	
+%	\renewcommand{\familydefault}{let}
+%	\renewcommand{\sfdefault}{let}
+}
+
+\ifthenelse{\boolean{xetex} \OR \boolean{luatex}}{
+	\RequirePackage{polyglossia}
+}{
 	\RequirePackage{babeltools}
 	\RequirePackage[english,german,ngerman]{babel}
 	\RequirePackage{babelbib}
 }
 
 \RequirePackage{ellipsis}
-\RequirePackage{metalogo}
+
 \RequirePackage{hologo}
 
 \RequirePackage[usenames,dvipsnames]{xcolor}
@@ -63,90 +95,72 @@
 \RequirePackage{gincltex}
 \RequirePackage{grfext}
 \RequirePackage{epstopdf}
-\RequirePackage[3D]{movie15}
+\RequirePackage{media9}
 %\RequirePackage{pgf}
 \RequirePackage{tikz}
+\usetikzlibrary{arrows,intersections,patterns,hobby}
 \RequirePackage{pgfplots}
 \RequirePackage{egplot}
 %\RequirePackage[all]{xy}
 \RequirePackage{marginnote}
+\RequirePackage{changes}
+
+\ifthenelse{\classloaded{beamer}}{}{
+	%\RequirePackage{titlesec}
+}
+
+\RequirePackage{wmmath}
+
 \RequirePackage{colortbl}
 \RequirePackage{tabularx}
 \RequirePackage{longtable}
 \RequirePackage{ltabptch}
 \RequirePackage{tabu}
 \RequirePackage{multirow}
-\RequirePackage[normalem]{ulem}
+\RequirePackage{bigdelim}
+\PassOptionsToPackage{normalem}{ulem}
+\RequirePackage{ulem}
+\RequirePackage{soulutf8}
+\RequirePackage{wmtext}
 \PassOptionsToPackage{unicode,hyperindex=false}{hyperref}
 \RequirePackage{zref}
 \RequirePackage{xr}
 \RequirePackage{xr-hyper}
+\PassOptionsToPackage{inline}{enumitem}
 \RequirePackage{enumitem}
-\RequirePackage{enumitem-zref} % causes zref Error: undefined property
-\RequirePackage{refcheck}
+\ifthenelse{\boolean{luatex}}{}{\RequirePackage{enumitem-zref}} % catcode errors in lualatex
+%\RequirePackage{refcheck}
 \RequirePackage{hyperref}
 \RequirePackage{listings}
 \RequirePackage{wmtheorem}
+\RequirePackage{tocloft}
+\PassOptionsToPackage{xindy,acronym,shortcuts,toc}{glossaries}
+\RequirePackage{glossaries}
 \RequirePackage{algorithm}
 \RequirePackage{algorithmic}
 %\RequirePackage{xesearch}
-\RequirePackage{wmref}
+\ifthenelse{\classloaded{beamer}}{}{\RequirePackage{wmref}}
 \RequirePackage{fancyhdr}
 \RequirePackage{fnbreak}
 \RequirePackage[defaultlines=3,all]{nowidow}
-\RequirePackage{todonotes}
+\RequirePackage[obeyFinal]{todonotes}
+%\RequirePackage[nothing]{todo}
 \RequirePackage{attachfile2}
+\RequirePackage{embedfile}
+%\RequirePackage{hypgotoe} %breaks xr-hyper
 \RequirePackage{pdfcomment}
+%\RequirePackage{minutes} %breaks toc
 
-\RequirePackage{cancel}
-\RequirePackage{delarray}
-\RequirePackage{gauss}
-\RequirePackage{maybemath}
-%\RequirePackage{breqn} % breaks chemfig
-\RequirePackage{mathtools}
-\RequirePackage{permute}
-
-\PassOptionsToPackage{version=3}{mhchem}
-\RequirePackage[nochemexec]{mychemistry}
+\PassOptionsToPackage{version=4}{mhchem}
+\RequirePackage{mychemistry}
 \RequirePackage{mhchem} % loaded by mychemistry
 \RequirePackage{chemfig} % loaded by mychemistry
-\RequirePackage[EZ=cool]{chemmacros}
+\RequirePackage{chemmacros}
 
 \RequirePackage{authoraftertitle}
 
 \RequirePackage{csquotes}
-\RequirePackage{siunitx}
 \RequirePackage{lipsum}
-
-%\RequirePackage{nath}
-\ifthenelse{\boolean{xetex} \OR \boolean{luatex}}{
-	\RequirePackage[math-style = ISO , bold-style = ISO , vargreek-shape = unicode]{unicode-math}
-	\setmathfont{xits-math.otf}
-	
-	\newcommand*\lightning{\downzigzagarrow}
-	\newcommand*\ulsh{\Lsh}
-	\newcommand*\ursh{\Rsh}
-	\newcommand*\dlsh{\Ldsh}
-	\newcommand*\drsh{\Rdsh}
-}{
-	\RequirePackage{amssymb}
-	\RequirePackage{amsfonts}
-	\RequirePackage[mathb]{mathabx}
-	\RequirePackage[nointegrals]{wasysym}
-	\RequirePackage{trfsigns}
-	\RequirePackage{esint}
-	
-	\changenotsign
-	\let\oldepsilon\epsilon
-	\renewcommand*{\epsilon}{\ensuremath{\varepsilon}}
-	\let\oldphi\phi
-	\renewcommand*{\phi}{\ensuremath{\varphi}}
-	\let\oldemptyset\emptyset
-	\renewcommand*{\emptyset}{\ensuremath{\varnothing}}
-
-	\newcommand*\increment{\Delta}
-	\newcommand*\qed{\blacksquare}
-}
 
 \setcounter{tocdepth}{4}
 
@@ -174,33 +188,6 @@
 	extendedchars     = true
 }
 
-\sisetup{
-	detect-all ,
-	mode = text ,
-	locale = DE ,
-	power-font = unit ,
-	output-decimal-marker = . ,
-	copy-decimal-marker ,
-	sticky-per ,
-	per-mode = fraction ,
-	quotient-mode = fraction ,
-	literal-superscript-as-power ,
-	binary-units ,
-	complex-root-position = after-number ,
-	exponent-product = \cdot ,
-	inter-unit-product = {}\cdot{} ,
-	group-digits = integer ,
-	group-minimum-digits = 4 ,
-	group-separator = ' ,
-	input-complex-roots = \imath ,
-	output-complex-root = \imath ,
-	copy-complex-root ,
-	range-units = single ,
-	range-phrase = --
-}
-\DeclareSIUnit\poise{P}
-\DeclareSIUnit\dioptre{dpt}
-
 \DeclareDocumentEnvironment{enumeratet}{ O{} }{
 	\begin{enumerate}[ leftmargin = * , #1 ]
 }{
@@ -216,246 +203,19 @@
 }{
 	\end{description}
 }
-\setlist{name* = list\arabic{section}.\arabic{subsection}}
-
-\let\olddiv\div
-\renewcommand*{\div}{\operatorname{div}}
-
-\let\oldoverbrace\overbrace
-\let\oldunderbrace\underbrace
-\DeclareDocumentCommand{\underbrace}{ s g t_ +g }{
-	\IfNoValueTF{#2}{
-		\oldunderbrace
-	}{
-		\IfBooleanTF{#3}{
-			\IfNoValueTF{#4}{}{
-				\IfBooleanTF{#1}{
-					\oldunderbrace{#2}_{#4}
-				}{
-					\oldunderbrace{#2}_{\mathclap{\substack{#4}}}
-				}
-			}
-		}{
-			\oldunderbrace{#2}
-		}
-	}
+\hopatch@AfterPackage{enumitem-zref}{
+	\setlist{name* = list\arabic{section}.\arabic{subsection}}
 }
-\DeclareDocumentCommand{\overbrace}{ s g t^ +g }{
-	\IfNoValueTF{#2}{
-		\oldoverbrace
-	}{
-		\IfBooleanTF{#3}{
-			\IfNoValueTF{#4}{}{
-				\IfBooleanTF{#1}{
-					\oldoverbrace{#2}^{#4}
-				}{
-					\oldoverbrace{#2}^{\mathclap{\substack{#4}}}
-				}
-			}
-		}{
-			\oldoverbrace{#2}
-		}
-	}
-}
-
-\let\cR\R
-\let\cS\S
-\let\cE\Ent
-\let\cZ\Zus
-
-\newcommand{\gdw}{g.d., w. }
-\makecommand{\R}{\ensuremath{\mathbb{R}}}
-\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
-\newcommand{\N}{\ensuremath{\mathbb{N}}}
-\makecommand{\Z}{\ensuremath{\mathbb{Z}}}
-\makecommand{\C}{\ensuremath{\mathbb{C}}}
-\newcommand{\I}{\ensuremath{\mathbb{I}}}
-\makecommand{\L}{\ensuremath{\mathcal{L}}}
-
-\newcommand*{\abs}[1]{\left\lvert #1 \right\rvert}
-\newcommand*{\norm}[1]{\left\lVert #1 \right\rVert}
-\newcommand*{\scal}[1]{\left\langle #1 \right\rangle}
-\newcommand*{\ciel}[1]{\left\lciel #1 \right\rciel}
-\newcommand*{\floor}[1]{\left\lfloor #1 \right\rfloor}
-\newcommand*{\round}[1]{\left( #1 \right)}
-\newcommand*{\bracket}[1]{\left[ #1 \right]}
-\newcommand*{\curly}[1]{\left\{ #1 \right\}}
-\newcommand*{\set}[2]{\left\{ #1 \middle| #2 \right\}}
-\newcommand*{\icc}[2]{\left[ #1 , #2 \right]}
-\newcommand*{\ico}[2]{\left[ #1 , #2 \right[}
-\newcommand*{\ioc}[2]{\left] #1 , #2 \right]}
-\newcommand*{\ioo}[2]{\left] #1 , #2 \right[}
-
-\DeclareMathOperator{\Res}{Res}
-\DeclareMathOperator{\Resf}{Res*}
-\DeclareMathOperator{\Prim}{Prim}
-\DeclareMathOperator{\ggt}{ggT}
-\DeclareMathOperator{\kgv}{kgV}
-\DeclareMathOperator{\sgn}{sgn}
-\DeclareMathOperator{\graph}{graph}
-\DeclareMathOperator{\dom}{dom}
-\DeclareMathOperator{\range}{range}
-\DeclareMathOperator{\image}{image}
-\DeclareMathOperator{\arsinh}{arsinh}
-\DeclareMathOperator{\arcosh}{arcosh}
-\DeclareMathOperator{\artanh}{artanh}
-\DeclareMathOperator{\grad}{grad}
-\DeclareMathOperator{\ord}{ord}
-\DeclareMathOperator{\dd}{d\!}
-\DeclareMathOperator{\Kern}{Kern}
-\DeclareMathOperator{\Bild}{Bild}
-\DeclareMathOperator{\ch}{ch}
-\DeclareMathOperator{\Log}{Log}
-\DeclareMathOperator{\rang}{rang}
-\DeclareMathOperator*{\res}{res}
-\DeclareMathOperator{\rot}{rot}
-
-\newcommand*\Dashv{\mathrel{\mathpalette\m@thr@fl@ct{\mathord\vDash}}}
-\newcommand*\m@thr@fl@ct[2]{\reflectbox{$\m@th#1#2$}}
-
-%\let\xelatex@logo\XeLaTeX
-%\makecommand{\XeLaTeX}{\begingroup\fontspec{lmroman10-regular.otf}\xelatex@logo\endgroup}
-%\let\xelatex@logo\relax
 
 \newlength{\skak}
 \settowidth{\skak}{\BlackEmptySquare}
 
-\maketheorem[
-	head            = Bsp. ,
-	counter         = bspcounter ,
-	backgroundcolor = SkyBlue ,
-	fontcolor       = Black
-]{bsp}
-\maketheorem[
-	head            = Bsp. ,
-	backgroundcolor = SkyBlue ,
-	fontcolor       = Black
-]{bsp*}
-\maketheorem[
-	head            = Satz ,
-	counter         = satzcounter ,
-	backgroundcolor = Orange ,
-	fontcolor       = Black
-]{satz}
-\maketheorem[
-	head            = Satz ,
-	backgroundcolor = Orange ,
-	fontcolor       = Black
-]{satz*}
-\maketheorem[
-	head            = Korrolar ,
-	counter         = satzcounter ,
-	backgroundcolor = Orange ,
-	fontcolor       = Black
-]{kor}
-\maketheorem[
-	head            = Korrolar ,
-	backgroundcolor = Orange ,
-	fontcolor       = Black
-]{kor*}
-\maketheorem[
-	head            = Lemma ,
-	counter         = satzcounter ,
-	backgroundcolor = Orange ,
-	fontcolor       = Black
-]{lem}
-\maketheorem[
-	head            = Lemma ,
-	backgroundcolor = Orange ,
-	fontcolor       = Black
-]{lem*}
-\maketheorem[
-	head            = Repetition ,
-	counter         = repcounter ,
-	backgroundcolor = Green ,
-	fontcolor       = Yellow
-]{rep}
-\maketheorem[
-	head            = Repetition ,
-	backgroundcolor = Green ,
-	fontcolor       = Yellow
-]{rep*}
-\maketheorem[
-	head            = Def. ,
-	backgroundcolor = Red ,
-	fontcolor       = Yellow ,
-	indexstyle      = def ,
-]{def*}
-\maketheorem[
-	head            = Bew. ,
-	backgroundcolor = Yellow ,
-	fontcolor       = Black
-]{bew}
-\maketheorem[
-	head            = Bem. ,
-	backgroundcolor = Purple ,
-	fontcolor       = Yellow
-]{bem}
-\maketheorem[
-	head            = Fakt ,
-	backgroundcolor = Purple ,
-	fontcolor       = Yellow
-]{fakt}
-\maketheorem[
-	head             = Beh. ,
-	backgroundcolor  = Purple ,
-	fontcolor        = Yellow
-]{beh}
-\maketheorem[
-	head            = Folge ,
-	backgroundcolor = Purple ,
-	fontcolor       = Yellow
-]{folge}
+\DeclareDocumentCommand{\attachtex}{ O{} g}{
+	\marginpar{\attachfile[#1]{#2.tex}}
+}
 
-
-\newcommand{\authoremail}[1]{\makecommand{\MyAuthorEmail}{#1}}
-\newcommand{\editoremail}[1]{\makecommand{\MyEditorEmail}{#1}}
-\newcommand{\professoremail}[1]{\makecommand{\MyProfessorEmail}{#1}}
-\newcommand{\editor}[1]{\makecommand{\MyEditor}{#1}}
-\newcommand{\lecture}[1]{\makecommand{\MyLecture}{#1}}
-\newcommand{\subtitle}[1]{\makecommand{\MySubtitle}{#1}}
-\newcommand{\professor}[1]{\makecommand{\MyProfessor}{#1}}
-\newcommand{\semester}[1]{\makecommand{\MySemester}{#1}}
-\author{}
-\authoremail{}
-\editor{}
-\editoremail{}
-\lecture{}
-\subtitle{}
-\professor{}
-\professoremail{}
-\semester{}
-
-\AtEndPreamble{
-	\ifthenelse{\expandafter\isempty\expandafter{\MyAuthor}}{
-		\ifthenelse{\expandafter\isempty\expandafter{\MyAuthorEmail}}{}{
-			\hypersetup{pdfauthor = \MyAuthorEmail}
-		}
-	}{
-		\ifthenelse{\expandafter\isempty\expandafter{\MyAuthorEmail}}{
-			\hypersetup{pdfauthor = \MyAuthor}
-		}{
-			\hypersetup{pdfauthor = {\MyAuthor\ <\MyAuthorEmail>}}
-		}
-	}
-	\ifthenelse{\expandafter\isempty\expandafter{\MyProfessor}}{
-		\ifthenelse{\expandafter\isempty\expandafter{\MyProfessorEmail}}{}{
-			\hypersetup{pdfproducer = \MyProfessorEmail}
-		}
-	}{
-		\ifthenelse{\expandafter\isempty\expandafter{\MyProfessorEmail}}{
-			\hypersetup{pdfproducer = \MyProfessor}
-		}{
-			\hypersetup{pdfproducer = {\MyProfessor\ <\MyProfessorEmail>}}
-		}
-	}
-	\ifthenelse{\expandafter\isempty\expandafter{\MyLecture}}{}{
-		\ifthenelse{\expandafter\isempty\expandafter{\MySubtitle}}{
-			\hypersetup{pdftitle = \MyLecture}
-		}{
-			\hypersetup{pdftitle = {\MyLecture\ - \MySubtitle}}
-		}
-	}
+\DeclareDocumentCommand{\attachboard}{ O{} g}{
+	\marginpar{\attachfile[#1]{#2.pdf}}
 }
 
 \endinput

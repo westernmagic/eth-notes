@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{wmtheorem}[2011/11/09]
+\ProvidesPackage{wmtheorem}[2016/03/31]
 
 \RequirePackage{wmpatch}
 \RequirePackage{xifthen}
@@ -7,7 +7,7 @@
 \RequirePackage{xkeyval}
 \RequirePackage[usenames,dvipsnames]{xcolor}
 \RequirePackage[framemethod=tex]{mdframed}
-\RequirePackage{wmref}
+\ifthenelse{\classloaded{beamer}}{}{\RequirePackage{wmref}}
 
 \OptionSwitch{bw}
 \ProcessOptions\relax
@@ -96,7 +96,6 @@
 		\setkeys{wmthm}{note={}}
 		\setkeys{wmthm}{#1}
 		\setkeys{wmthm}{##1}
-		
 		\makelength{\wmthm@mdinnerleftmargin}{\cmdKV@wmthm@innerleftmargin + \cmdKV@wmthm@indent}
 		\ifthenelse{\boolean{bw}}{
 			\makecommand{\wmthm@backgroundcolor}{White}
@@ -106,7 +105,6 @@
 			\makecommand{\wmthm@backgroundcolor}{\cmdKV@wmthm@backgroundcolor}
 			\makecommand{\wmthm@fontcolor}{\cmdKV@wmthm@fontcolor}
 		}
-		
 		\begin{mdframed}[
 			innerleftmargin   = \the\wmthm@mdinnerleftmargin ,
 			innerrightmargin  = \cmdKV@wmthm@innerrightmargin ,
@@ -147,8 +145,97 @@
 					\cmdKV@wmthm@headnotesep\cmdKV@wmthm@notefont\cmdKV@wmthm@noteleftsep\cmdKV@wmthm@note\cmdKV@wmthm@noterightsep\cmdKV@wmthm@notebodysep%
 				}%
 			}%
-			\\\cmdKV@wmthm@bodyfont%
+			\cmdKV@wmthm@bodyfont%
 	}{%
 		\end{mdframed}%
 	}%
 }
+
+\maketheorem[
+	head            = Bsp. ,
+	counter         = bspcounter ,
+	backgroundcolor = SkyBlue ,
+	fontcolor       = Black
+]{bsp}
+\maketheorem[
+	head            = Bsp. ,
+	backgroundcolor = SkyBlue ,
+	fontcolor       = Black
+]{bsp*}
+\maketheorem[
+	head            = Satz ,
+	counter         = satzcounter ,
+	backgroundcolor = Orange ,
+	fontcolor       = Black
+]{satz}
+\maketheorem[
+	head            = Satz ,
+	backgroundcolor = Orange ,
+	fontcolor       = Black
+]{satz*}
+\maketheorem[
+	head            = Korrolar ,
+	counter         = satzcounter ,
+	backgroundcolor = Orange ,
+	fontcolor       = Black
+]{kor}
+\maketheorem[
+	head            = Korrolar ,
+	backgroundcolor = Orange ,
+	fontcolor       = Black
+]{kor*}
+\maketheorem[
+	head            = Lemma ,
+	counter         = satzcounter ,
+	backgroundcolor = Orange ,
+	fontcolor       = Black
+]{lem}
+\maketheorem[
+	head            = Lemma ,
+	backgroundcolor = Orange ,
+	fontcolor       = Black
+]{lem*}
+\maketheorem[
+	head            = Repetition ,
+	counter         = repcounter ,
+	backgroundcolor = Green ,
+	fontcolor       = Yellow
+]{rep}
+\maketheorem[
+	head            = Repetition ,
+	backgroundcolor = Green ,
+	fontcolor       = Yellow
+]{rep*}
+\maketheorem[
+	head            = Def. ,
+	backgroundcolor = Red ,
+	fontcolor       = Yellow ,
+	indexstyle      = def ,
+]{def*}
+\maketheorem[
+	head            = Bew. ,
+	backgroundcolor = Yellow ,
+	fontcolor       = Black
+]{bew}
+\maketheorem[
+	head            = Bem. ,
+	backgroundcolor = Purple ,
+	fontcolor       = Yellow
+]{bem}
+\maketheorem[
+	head            = Fakt ,
+	backgroundcolor = Purple ,
+	fontcolor       = Yellow
+]{fakt}
+\maketheorem[
+	head             = Beh. ,
+	backgroundcolor  = Purple ,
+	fontcolor        = Yellow
+]{beh}
+\maketheorem[
+	head            = Folge ,
+	backgroundcolor = Purple ,
+	fontcolor       = Yellow
+]{folge}
+
+\endinput

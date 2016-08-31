@@ -1,8 +1,17 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{wmpatch}[2011/11/09]
+\ProvidesPackage{wmpatch}[2016/04/06]
 
+\RequirePackage{xifthen}
+\RequirePackage{ifluatex}
 \RequirePackage{scrlfile}
 \RequirePackage{hopatch}
+\RequirePackage{xpatch}
+
+\ifthenelse{\boolean{luatex}}{
+	\hopatch@AfterPackage{amsmath}{\RequirePackage{lualatex-math}}
+	\hopatch@AfterPackage{mathtools}{\RequirePackage{lualatex-math}}
+	\hopatch@AfterPackage{icomma}{\RequirePackage{lualatex-math}}
+}
 
 \hopatch@AfterPackage{makecmds}{
 	\makecommand*\renewlength[2]{\setlength#1{#2}}
@@ -26,7 +35,6 @@
 }
 
 \hopatch@AfterPackage{amsmath}{
-	\def\[#1\]{\begin{gather*}#1\end{gather*}}
 	\hopatch@AfterPackage{unicode-math}{
 		\long\def\@declmathop#1#2#3{
 			\@ifdefinable{#2}{
@@ -35,6 +43,31 @@
 		}
 		\def\[#1\]{\begin{gather*}#1\end{gather*}}
 	}
+	\gdef\[#1\]{\begin{gather*}#1\end{gather*}}
+	\gdef\bracevspacing{\vphantom{ }}
+	\makeatletter
+	\xpatchcmd{\math@cr}{\@ifstar}{\bracevspacing\gdef\bracevspacing{\vphantom{ }}\@ifstar}{}{}
+	\let\oldvphantom\vphantom
+	\renewcommand{\vphantom}[1]{{%
+		\xpatchcmd{\math@cr}{\bracevspacing\gdef\bracevspacing{\vphantom{ }}\@ifstar}{\@ifstar}{}{}
+		\oldvphantom{#1}
+		\xpatchcmd{\math@cr}{\@ifstar}{\bracevspacing\gdef\bracevspacing{\vphantom{ }}\@ifstar}{}{}
+	}}%
+	\xpretocmd{\substack}{%
+		\xpatchcmd{\math@cr}{\bracevspacing\gdef\bracevspacing{\vphantom{ }}\@ifstar}{\@ifstar}{}{}%
+	}{}{}
+	\xapptocmd{\substack}{%
+		\xpatchcmd{\math@cr}{\@ifstar}{\bracevspacing\gdef\bracevspacing{\vphantom{ }}\@ifstar}{}{}%
+	}{}{}
+	%\def\resetMathstrut@{%
+	%	\setbox\z@\hbox{%
+	%		\mathchardef\@tempa\mathcode`\[\relax%
+	%		\def\@tempb##1"##2##3{\the\textfont"##3\char"}%
+	%		\expandafter\@tempb\meaning\@tempa \relax%
+	%	}%
+	%	\ht\Mathstrutbox@\ht\z@%
+	%	\dp\Mathstrutbox@\dp\z@%
+	%}
 }
 
 \hopatch@AfterPackage{unicode-math}{
@@ -42,8 +75,14 @@
 }
 
 \hopatch@AfterPackage{csquotes}{
-	\DeclareQuoteStyle{double}{\text{\textquotedbl}}{\text{\textquotedbl}}[0.05em]{\text{\textquotesingle}}{\text{\textquotesingle}}
-	\DeclareQuoteStyle{single}{\text{\textquotesingle}}{\text{\textquotesingle}}[0.05em]{\text{\textquotedbl}}{\text{\textquotedbl}}
+	\DeclareQuoteStyle{double}{\text{\textquotedblleft}}{\text{\textquotedblright}}[0.05em]{\text{\textquoteleft}}{\text{\textquoteright}}
+	\DeclareQuoteStyle{single}{\text{\textquoteleft}}{\text{\textquoteright}}[0.05em]{\text{\textquotedblleft}}{\text{\textquotedblright}}
+}
+
+\hopatch@AfterPackage{polyglossia}{
+	\AtBeginDocument{
+		\catcode`"=12
+	}
 }
 
 \hopatch@AfterPackage{enumitem-zref}{

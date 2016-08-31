@@ -1,0 +1,158 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{wmtext}[2015/01/14]
+
+\RequirePackage{zref-abspage}
+\RequirePackage{zref-user}
+\RequirePackage{tikz}
+\RequirePackage{atbegshi}
+\RequirePackage{xparse}
+\usetikzlibrary{calc,decorations.pathmorphing}
+
+%% http://tex.stackexchange.com/questions/5959/cool-text-highlighting-in-latex/24279#24279
+
+\newcommand{\currentsidemargin}{%
+  \ifodd\zref@extract{textarea-\thetextarea}{abspage}%
+    \oddsidemargin%
+  \else%
+    \evensidemargin%
+  \fi%
+}
+
+\newcounter{textarea}
+\newcommand{\settextarea}{%
+   \stepcounter{textarea}%
+   \zlabel{textarea-\thetextarea}%
+   \begin{tikzpicture}[overlay,remember picture]
+    % Helper nodes
+    \path (current page.north west) ++(\hoffset, -\voffset)
+        node[anchor=north west, shape=rectangle, inner sep=0, minimum width=\paperwidth, minimum height=\paperheight]
+        (pagearea) {};
+    \path (pagearea.north west) ++(1in+\currentsidemargin,-1in-\topmargin-\headheight-\headsep)
+        node[anchor=north west, shape=rectangle, inner sep=0, minimum width=\textwidth, minimum height=\textheight]
+        (textarea) {};
+  \end{tikzpicture}%
+}
+
+
+
+\tikzset{tikzul/.style={yshift=-.75\dp\strutbox}}
+
+\newcounter{tikzul}%
+\newcommand\tikzul[1][]{%
+    \begingroup
+    \global\tikzullinewidth\linewidth
+    \def\tikzulsetting{[#1]}%
+    \stepcounter{tikzul}%
+    \settextarea
+    \zlabel{tikzul-begin-\thetikzul}%
+    \tikz[overlay,remember picture,tikzul] \coordinate (tikzul-\thetikzul) at (0,0);% Modified \tikzmark macro
+    \ifnum\zref@extract{tikzul-begin-\thetikzul}{abspage}=\zref@extract{tikzul-end-\thetikzul}{abspage}
+    \else
+        \AtBeginShipoutNext{\tikzul@endpage{#1}}%
+    \fi
+    \bgroup
+    \def\par{\ifhmode\unskip\fi\egroup\par\@ifnextchar\noindent{\noindent\tikzul[#1]}{\tikzul[#1]\bgroup}}%
+    \aftergroup\endtikzul
+    \let\@let@token=%
+}
+
+\newlength\tikzullinewidth
+
+\def\tikzul@endpage#1{%
+\setbox\AtBeginShipoutBox\hbox{%
+\box\AtBeginShipoutBox
+\hbox{%
+\begin{tikzpicture}[overlay,remember picture,tikzul]
+\draw[#1]
+    let \p1 = (tikzul-\thetikzul), \p2 = ([xshift=\tikzullinewidth+\@totalleftmargin]textarea.south west) in
+    \ifdim\dimexpr\y1-\y2<.5\baselineskip
+        (\x1,\y1) -- (\x2,\y1)
+    \else
+        let \p3 = ([xshift=\@totalleftmargin]textarea.west) in
+        (\x1,\y1) -- +(\tikzullinewidth-\x1+\x3,0)
+        % (\x3,\y2) -- (\x2,\y2)
+        (\x3,\y1)
+       \myloop{\y1-\y2+.5\baselineskip}{%
+           ++(0,-\baselineskip) -- +(\tikzullinewidth,0)
+       }%
+    \fi
+;
+\end{tikzpicture}%
+}}%
+}%
+
+\def\endtikzul{%
+    \zlabel{tikzul-end-\thetikzul}%
+    \ifnum\zref@extract{tikzul-begin-\thetikzul}{abspage}=\zref@extract{tikzul-end-\thetikzul}{abspage}
+    \begin{tikzpicture}[overlay,remember picture,tikzul]
+        \expandafter\draw\tikzulsetting
+            let \p1 = (tikzul-\thetikzul), \p2 = (0,0) in
+            \ifdim\y1=\y2
+                (\x1,\y1) -- (\x2,\y2)
+            \else
+                let \p3 = ([xshift=\@totalleftmargin]textarea.west), \p4 = ([xshift=-\rightmargin]textarea.east) in
+                (\x1,\y1) -- +(\tikzullinewidth-\x1+\x3,0)
+                (\x3,\y2) -- (\x2,\y2)
+                (\x3,\y1)
+                \myloop{\y1-\y2}{%
+                    ++(0,-\baselineskip) -- +(\tikzullinewidth,0)
+                }%
+            \fi
+        ;
+    \end{tikzpicture}%
+    \else
+    \settextarea
+    \begin{tikzpicture}[overlay,remember picture,tikzul]
+        \expandafter\draw\tikzulsetting
+            let \p1 = ([xshift=\@totalleftmargin,yshift=-.5\baselineskip]textarea.north west), \p2 = (0,0) in
+            \ifdim\dimexpr\y1-\y2<.5\baselineskip
+                (\x1,\y2) -- (\x2,\y2)
+            \else
+                let \p3 = ([xshift=\@totalleftmargin]textarea.west), \p4 = ([xshift=-\rightmargin]textarea.east) in
+                (\x3,\y2) -- (\x2,\y2)
+                (\x3,\y2)
+                \myloop{\y1-\y2}{%
+                    ++(0,+\baselineskip) -- +(\tikzullinewidth,0)
+                }
+            \fi
+        ;
+    \end{tikzpicture}%
+    \fi
+    \endgroup
+}
+
+\def\myloop#1#2#3{%
+    #3%
+    \ifdim\dimexpr#1>1.1\baselineskip
+        #2%
+        \expandafter\myloop\expandafter{\the\dimexpr#1-\baselineskip\relax}{#2}%
+    \fi
+}
+
+\ExplSyntaxOn
+\DeclareDocumentCommand\textul{ o +m }{
+    \IfNoValueTF{#1}{
+        \tikzul{#2}
+    }{
+        \tikzul[#1]{#2}
+    }
+}
+
+\DeclareDocumentCommand\textst{ o +m }{
+    {
+        \tikzset{tikzul/.style={yshift=.5ex}}
+        \IfNoValueTF{#1}{
+            \tikzul{#2}
+        }{
+            \tikzul[#1]{#2}
+        }
+    }
+}
+
+\DeclareDocumentCommand\texthl{ o +m }{
+    {
+        \tikzset{tikzul/.style={yshift=1ex}}
+        \textul[line width=1.5\ht\strutbox,semitransparent,yellow \IfNoValueF{#1}{,#1}]{#2}
+    }
+}
+\ExplSyntaxOff

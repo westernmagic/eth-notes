@@ -3,9 +3,15 @@
 \providetranslation{Corrections}{Korrektur}
 \providetranslation{Completions}{Ergänzung}
 \providetranslation{Written in}{Geschrieben in}
+\providetranslation{Compiled with}{Kompiliert mit}
 \providetranslation{Status}{Stand}
 \providetranslation{Bold (indexnote)}{Fettgedrückte}
 \providetranslation{indexnote (body)}{Seitenzahlen weisen auf Definitionen hin.}
+\providetranslation{Page}{Seite}
+\providetranslation{of}{von}
+
+\providetranslation{ETHZ}{Eidgenössische Technische Hochschule Zürich}
+\providetranslation{UZH}{Universität Zürich}
 
 \providetranslation{Ex.}{Bsp.}
 \providetranslation{Example}{Beispiel}
