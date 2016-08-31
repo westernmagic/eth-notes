@@ -1,0 +1,279 @@
+\NeedsTeXFormat{LaTeX2e}
+\RequirePackage{expl3}
+\RequirePackage{wmpatch}
+\ProvidesExplPackage{wmmath}{2016/03/31}{}{}
+\makeatletter
+
+\RequirePackage{xifthen}
+\RequirePackage{ifxetex}
+\RequirePackage{ifluatex}
+\RequirePackage{makecmds}
+
+\RequirePackage[fleqn,sumlimits,intlimits,namelimits]{amsmath}
+
+\RequirePackage{cancel}
+\RequirePackage{delarray}
+\RequirePackage{gauss}
+\RequirePackage{maybemath}
+%\RequirePackage{breqn} % breaks chemfig
+\RequirePackage{mathtools}
+\RequirePackage{permute}
+\RequirePackage{mleftright}
+
+%\RequirePackage{nath} % breaks things
+\ifthenelse{\boolean{xetex} \OR \boolean{luatex}}{
+	\RequirePackage[math-style = ISO , bold-style = ISO , vargreek-shape = unicode]{unicode-math}
+	%\setmathfont{xits-math.otf}
+	\setmathfont{XITS Math}
+	
+	\newcommand*\lightning{\downzigzagarrow}
+	\newcommand*\ulsh{\Lsh}
+	\newcommand*\ursh{\Rsh}
+	\newcommand*\dlsh{\Ldsh}
+	\newcommand*\drsh{\Rdsh}
+}{
+	\RequirePackage{amssymb}
+	\RequirePackage{amsfonts}
+	\RequirePackage[mathb]{mathabx}
+	\RequirePackage[nointegrals]{wasysym}
+	\RequirePackage{trfsigns}
+	\RequirePackage{esint}
+	
+	\changenotsign
+	\let\oldepsilon\epsilon
+	\renewcommand*{\epsilon}{\ensuremath{\varepsilon}}
+	\let\oldphi\phi
+	\renewcommand*{\phi}{\ensuremath{\varphi}}
+	\let\oldemptyset\emptyset
+	\renewcommand*{\emptyset}{\ensuremath{\varnothing}}
+
+	\newcommand*\increment{\Delta}
+	\newcommand*\qed{\blacksquare}
+}
+
+\RequirePackage{physics}
+\RequirePackage{siunitx}
+
+\sisetup{
+	detect-all ,
+	mode                  = text ,
+	locale                = DE ,
+	power-font            = unit ,
+	output-decimal-marker = . ,
+	copy-decimal-marker ,
+	sticky-per ,
+	per-mode              = fraction ,
+	quotient-mode         = fraction ,
+	literal-superscript-as-power ,
+	binary-units ,
+	complex-root-position = after-number ,
+	exponent-product      = \cdot ,
+	inter-unit-product    = {}\cdot{} ,
+	group-digits          = integer ,
+	group-minimum-digits  = 4 ,
+	group-separator       = ' ,
+	input-complex-roots   = \imath ,
+	output-complex-root   = \imath ,
+	copy-complex-root ,
+	range-units           = single ,
+	range-phrase          = \textendash
+}
+\DeclareSIUnit\poise{P}
+\DeclareSIUnit\dioptre{dpt}
+\DeclareSIUnit\svedberg{S}
+%\DeclareSIUnit\mmH2O{mmH2O}
+
+
+\let\oldimplies\implies
+\def\implies{\ensuremath{\oldimplies}{ }}
+
+% unicode-math sets \rightarrow in a \AtBeginDocument, so we have to as well
+\AtBeginDocument{
+	\let\oldrightarrow\rightarrow
+	\def\rightarrow{\oldrightarrow{}~}
+}
+
+%refactor
+\let\oldoverbrace\overbrace
+\let\oldunderbrace\underbrace
+
+\ExplSyntaxOff % fix
+\DeclareDocumentCommand{\underbrace}{ s g t_ +g }{
+	\IfNoValueTF{#2}{
+		\oldunderbrace
+	}{
+		\IfBooleanTF{#3}{
+			\IfNoValueTF{#4}{}{
+				\IfBooleanTF{#1}{
+					\smash{\oldunderbrace{#2}_{#4}}
+					\vphantom{#2}
+					\gappto{\bracevspacing}{\vphantom{\oldunderbrace{#2}_{#4}}}
+				}{
+					\smash{\oldunderbrace{#2}_{\mathclap{\substack{#4}}}}
+					\vphantom{#2}
+					\gappto{\bracevspacing}{\vphantom{\oldunderbrace{#2}_{\mathclap{\substack{#4}}}}}
+				}
+			}
+		}{
+			\smash{\oldunderbrace{#2}}
+			\vphantom{#2}
+			\gappto{\bracevspacing}{\vphantom{\oldunderbrace{#2}}}
+		}
+	}
+}
+\DeclareDocumentCommand{\overbrace}{ s g t^ +g }{
+	\IfNoValueTF{#2}{
+		\oldoverbrace
+	}{
+		\IfBooleanTF{#3}{
+			\IfNoValueTF{#4}{}{
+				\IfBooleanTF{#1}{
+					\smash{\oldoverbrace{#2}^{#4}}
+					\vphantom{#2}
+					\gappto{\bracevspacing}{\vphantom{\oldoverbrace{#2}^{#4}}}
+				}{
+					\smash{\oldoverbrace{#2}^{\mathclap{\substack{#4}}}}
+					\vphantom{#2}
+					\gappto{\bracevspacing}{\vphantom{\oldoverbrace{#2}^{\mathclap{\substack{#4}}}}}
+				}
+			}
+		}{
+			\smash{\oldoverbrace{#2}}
+			\vphantom{#2}
+			\gappto{\bracevspacing}{\vphantom{\oldoverbrace{#2}}}
+		}
+	}
+}
+\ExplSyntaxOn
+
+\let\cR\R
+\let\cS\S
+\let\cE\Ent
+\let\cZ\Zus
+
+\newcommand{\gdw}{g.d., w. }
+\makecommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\makecommand{\Z}{\ensuremath{\mathbb{Z}}}
+\makecommand{\C}{\ensuremath{\mathbb{C}}}
+\newcommand{\I}{\ensuremath{\mathbb{I}}}
+\makecommand{\L}{\ensuremath{\mathcal{L}}}
+
+%\newcommand*{\abs}[1]{\left\lvert #1 \right\rvert}
+%\newcommand*{\norm}[1]{\left\lVert #1 \right\rVert}
+%\newcommand*{\scal}[1]{\left\langle #1 \right\rangle}
+\newcommand*{\ciel}[1]{\left\lciel #1 \right\rciel}
+\newcommand*{\floor}[1]{\left\lfloor #1 \right\rfloor}
+%\newcommand*{\round}[1]{\left( #1 \right)}
+%\newcommand*{\bracket}[1]{\left[ #1 \right]}
+%\newcommand*{\curly}[1]{\left\{ #1 \right\}}
+\newcommand*{\set}[2]{\left\{ #1 \middle| #2 \right\}}
+\newcommand*{\icc}[2]{\left[ #1 , #2 \right]}
+\newcommand*{\ico}[2]{\left[ #1 , #2 \right[}
+\newcommand*{\ioc}[2]{\left] #1 , #2 \right]}
+\newcommand*{\ioo}[2]{\left] #1 , #2 \right[}
+
+\mleftright
+
+\ExplSyntaxOn
+\begingroup
+	\catcode`(\active
+	\xdef({\left\string(}
+
+	\catcode`)\active
+	\xdef){\right\string)}
+
+	\catcode`[\active
+	\xdef[{\left\string[}
+
+	\catcode`]\active
+	\xdef]{\right\string]}
+
+	%\mathcode`<=12348
+	\catcode`<\active
+	\gdef<{
+		\peek_charcode_remove:NTF{<}{\ll}{
+			\peek_charcode_remove:NTF{=}{\leq}{
+				{\mathcode`<=12348 {}\mathrel{\string<}{}}
+			}
+		}
+	}
+
+	%\mathcode`>=12350
+	\catcode`>\active
+	\gdef>{
+		\peek_charcode_remove:NTF{>}{\gg}{
+			\peek_charcode_remove:NTF{=}{\geq}{
+				{\mathcode`>=12350 {}\mathrel{\string>}{}}
+			}
+		}
+	}
+
+	%\mathcode`!=24609
+	\catcode`!\active
+	\gdef!{
+		\peek_charcode_remove:NTF{=}{\musteq}{
+			{\mathcode`!=24609 \string!}
+		}
+	}
+
+	\global\let\peek_charcode_remove\peek_charcode_remove:NTF
+	%\Umathcodenum`:=6300214
+	\catcode`:\active
+	\gdef:{
+		\peek_charcode_remove{=}{\coloneq}{
+			{\Umathcodenum`:=6300214 \string:}
+		}
+	}
+\endgroup
+
+\mathcode`(="8000
+\mathcode`)="8000
+\mathcode`[="8000
+\mathcode`]="8000
+\mathcode`<="8000
+\mathcode`>="8000
+\mathcode`!="8000
+\mathcode`:="8000
+
+\ExplSyntaxOff
+
+\gdef\{{\relax\ifmmode\left\fi\lbrace}
+\gdef\}{\ifmmode\right\fi\rbrace}
+\gdef\<{\relax\ifmmode\left\fi\langle}
+\gdef\>{\ifmmode\right\fi\rangle}
+
+%\DeclareMathOperator{\Res}{Res}
+\DeclareMathOperator{\Resf}{Res*}
+\DeclareMathOperator{\Prim}{Prim}
+\DeclareMathOperator{\ggt}{ggT}
+\DeclareMathOperator{\kgv}{kgV}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\graph}{graph}
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\range}{range}
+\DeclareMathOperator{\image}{image}
+\DeclareMathOperator{\arsinh}{arsinh}
+\DeclareMathOperator{\arcosh}{arcosh}
+\DeclareMathOperator{\artanh}{artanh}
+%\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\ord}{ord}
+%\DeclareMathOperator{\dd}{d\!}
+\DeclareMathOperator{\Kern}{Kern}
+\DeclareMathOperator{\Bild}{Bild}
+%\DeclareMathOperator{\ch}{ch} %breaks chemformula
+\DeclareMathOperator{\Log}{Log}
+\DeclareMathOperator{\rang}{rang}
+\DeclareMathOperator*{\res}{res}
+\DeclareMathOperator{\rot}{rot}
+
+%\let\olddiv\div
+%\renewcommand*{\div}{\operatorname{div}}
+
+\newcommand*\musteq{\mathrel{\overset{!}{=}}}
+%\newcommand*\corresponds{\mathrel{\hat{=}}}
+\newcommand*\Dashv{\mathrel{\mathpalette\m@thr@fl@ct{\mathord\vDash}}}
+\newcommand*\m@thr@fl@ct[2]{\reflectbox{$\m@th#1#2$}}
+
+\endinput
