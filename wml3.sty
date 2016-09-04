@@ -3,18 +3,26 @@
 \RequirePackage{wmpatch}
 \ProvidesExplPackage{wml3}{2016/09/04}{}{LaTeX 3 conveniance functions (WM)}
 
+\prg_new_conditional:Nnn \sys_if_feature_utf: { p , T , F , TF } {
+	\bool_if:nTF { \sys_if_engine_luatex_p: || \sys_if_engine_xetex_p: } {
+		\prg_return_true:
+	} {
+		\prg_return_false:
+	}
+}
+
 \cs_new:Nn \char_gset_active:Nn {
-	\cs_set:Nn \l_tempa_cs: { #2 }
+	\cs_set:Nx \l_tempa_cs: { #2 }
 	\char_gset_active_eq:NN #1 \l_tempa_cs:
 }
 
-\cs_new:Nn \char_set_mathcode_active:n {
-	\char_set_mathcode:nn { #1 } { "8000 }
+\cs_new_protected:Npn \char_set_mathcode_active:N #1 {
+	\char_set_mathcode:nn { `#1 } { "8000 }
 }
 
 \cs_new:Nn \char_gset_mathactive:Nn {
-	\char_gset_active:Nn { #1 } { #2 }
-	\char_set_mathcode_active:n { `#1 }
+	\char_gset_active:Nn #1 { #2 }
+	\char_set_mathcode_active:N #1
 }
 
 \endinput

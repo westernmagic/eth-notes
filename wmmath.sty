@@ -2,7 +2,6 @@
 \RequirePackage{expl3}
 \RequirePackage{wmpatch}
 \ProvidesExplPackage{wmmath}{2016/03/31}{}{}
-\makeatletter
 
 \RequirePackage{xifthen}
 \RequirePackage{ifxetex}
@@ -22,16 +21,22 @@
 \RequirePackage{mleftright}
 
 %\RequirePackage{nath} % breaks things
-\ifthenelse{\boolean{xetex} \OR \boolean{luatex}}{
+\sys_if_feature_utf:TF {
 	\RequirePackage[math-style = ISO , bold-style = ISO , vargreek-shape = unicode]{unicode-math}
 	\setmathfont{XITS Math}
 	
-	\newcommand*\lightning{\downzigzagarrow}
-	\newcommand*\ulsh{\Lsh}
-	\newcommand*\ursh{\Rsh}
-	\newcommand*\dlsh{\Ldsh}
-	\newcommand*\drsh{\Rdsh}
-}{
+	\NewDocumentCommand \lightning {} { \downzigzagarrow }
+	\NewDocumentCommand \ulsh      {} { \Lsh }
+	\NewDocumentCommand \ursh      {} { \Rsh }
+	\NewDocumentCommand \dlsh      {} { \Ldsh }
+	\NewDocumentCommand \drsh      {} { \Rdsh }
+
+	% \newcommand*\lightning{\downzigzagarrow}
+	% \newcommand*\ulsh{\Lsh}
+	% \newcommand*\ursh{\Rsh}
+	% \newcommand*\dlsh{\Ldsh}
+	% \newcommand*\drsh{\Rdsh}
+} {
 	\RequirePackage{amssymb}
 	\RequirePackage{amsfonts}
 	\RequirePackage[mathb]{mathabx}
@@ -259,7 +264,7 @@
 }
 
 
-\ExplSyntaxOff
+%\ExplSyntaxOff
 
 %\DeclareMathOperator{\Res}{Res}
 \DeclareMathOperator{\Resf}{Res*}
@@ -289,7 +294,9 @@
 %\renewcommand*{\div}{\operatorname{div}}
 
 %\newcommand*\corresponds{\mathrel{\hat{=}}}
+\char_set_catcode_letter:N @
 \newcommand*\Dashv{\mathrel{\mathpalette\m@thr@fl@ct{\mathord\vDash}}}
 \newcommand*\m@thr@fl@ct[2]{\reflectbox{$\m@th#1#2$}}
+\char_set_catcode_other:N @
 
 \endinput
