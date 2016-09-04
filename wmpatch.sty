@@ -94,9 +94,10 @@
 	\definesubmol\nobond{-[,0.2,,,draw=none]}
 }
 
-\BeforePackage{etextools}{
-	\RequirePackage{pdftexcmds}
-	\let\pdfstrcmp\pdf@strcmp
-}
+% TODO: fix - maybe using pkgloader?
+%\BeforePackage{etextools}{
+	%\RequirePackage{pdftexcmds}
+	%\let\pdfstrcmp\pdf@strcmp
+%}
 
 \endinput
