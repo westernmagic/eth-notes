@@ -40,6 +40,7 @@
 
 \makecommand{\VSUZHLogo}[1][]{\includegraphics[#1]{Logo_VSUZH_positiv}}
 \makecommand{\ETHLogo}{\includegraphics{ETHLogo}}
+\makecommand{\KostaLogo}[1][]{\includegraphics[#1]{kosta}}
 
 \DeclareOption{english}{
 	\@ifpackageloaded{babel}{
@@ -70,6 +71,18 @@
 \ExecuteOptions{german}
 \ProcessOptions\relax
 
+\setlength\headheight{35pt}
+
+\newlength{\logoheight}
+\newlength{\wm@temp}
+\setlength{\logoheight}{\baselinestretch\baselineskip}
+\AtBeginDocument{
+	\settoheight{\wm@temp}{\@title}
+	\addtolength{\logoheight}{\wm@temp}
+	\settoheight{\wm@temp}{\@date, \MyPlace}
+	\addtolength{\logoheight}{\wm@temp}
+}
+
 \ifthenelse{\boolean{toc}}{
 	\AtBeginDocument{
 		\tableofcontents
@@ -99,52 +112,26 @@
 }{}
 
 \ifthenelse{\boolean{xetex} \OR \boolean{luatex}}{
-	\newfontfamily\HelveticaNeue{HelveticaNeue}[
-		Path = /Users/westernmagic/Library/Fonts/,
-		Extension = .otf ,
-		UprightFont = *-Roman,
-		ItalicFont = *-Italic,
-		BoldFont = *-Bold,
-		BoldItalicFont = *-BoldItalic
+	\setmainfont{SwissBT}[
+		Path           = /Users/westernmagic/Library/Fonts/,
+		Extension      = .otf,
+		UprightFont    = *LigCon,
+		ItalicFont     = *LigConIta,
+		BoldFont       = *BlaCon,
+		BoldItalicFont = *BlaConIta
 	]
-	\newfontfamily\HelveticaNeueCond{HelveticaNeue}[
-		Path = /Users/westernmagic/Library/Fonts/,
-		Extension = .otf ,
-		UprightFont = *-Condensed,
-		ItalicFont = *-CondensedObl,
-		BoldFont = *-BoldCond,
-		BoldItalicFont = *-BoldCondObl
-	]
-
-	\renewcommand*{\rmdefault}{HelveticaNeue(0)}
-	\renewcommand*{\sfdefault}{HelveticaNeue(0)}
-
-}{
-	% \renewcommand{\familydefault}{let}
-	% \renewcommand{\sfdefault}{let}
-	% \DeclareFixedFont{\x}{T1}{let}{m}{n}{10}
-	% \DeclareFixedFont{\xb}{T1}{let}{b}{n}{10}
-	% \newfont{\xiiiv}{letr8t at 8.5pt}
-	% \newfont{\xiiivb}{letb8t at 8.5pt}
-}
+}{}
 
 \KOMAoptions{
-	parskip = full,
+	parskip   = full,
 	footnotes = multiple
 }
 
-\newlength{\logoheight}
-\newlength{\wm@temp}
-\setlength{\logoheight}{\baselinestretch\baselineskip}
-\AtBeginDocument{
-	\settoheight{\wm@temp}{\@title}
-	\addtolength{\logoheight}{\wm@temp}
-	\settoheight{\wm@temp}{\@date, \MyPlace}
-	\addtolength{\logoheight}{\wm@temp}
-}
+\includepdfset{pages=-}
+
 
 \lohead*{\@title\\\@date\ifthenelse{\equal{\MyPlace}{}}{}{, \MyPlace}}
-\rohead*{\VSUZHLogo[keepaspectratio, height=\logoheight]}
+\rohead*{\KostaLogo[keepaspectratio, height=\logoheight]}
 \cofoot*{\thepage}
 \setkomafont{pageheadfoot}{\normalcolor}
 
@@ -222,7 +209,7 @@
 \setlist{noitemsep,topsep=0pt}
 
 \newlist{personen}{itemize*}{1}
-\setlist[personen]{itemjoin={, }, label={}}
+\setlist[personen]{itemjoin={, {}}, label={}, afterlabel={}}
 \newlist{personen*}{itemize*}{1}
 \setlist[personen*]{itemjoin={, {}}, itemjoin*={{} und {}}, label={}, afterlabel={}}
 
@@ -233,27 +220,9 @@
 \newlist{letters}{enumerate}{1}
 \setlist[letters]{label={\protect\label{§\arabic{articlesi}.\arabic{paragraphsi}.\alph*}\alph*.}, ref={lit. \alph*.}}
 
-
 \setdeletedmarkup{\delete{#1}}
 \setauthormarkuptext{name}
 \setauthormarkup{\footnote{#1}}
-
-% #1 : skip first ref
-% #2 : skip second ref
-% #3 : Reglement-Kürzel
-% #4 : Text
-% #5 : §
-% #6 : Abs. ggf. lit.
-% #7 : lit.
-\DeclareDocumentCommand\artref{t- t- o o m o o}{%
-	\hyperref[\IfNoValueF{#3}{#3}§#5\IfNoValueF{#6}{.#6\IfNoValueF{#7}{.#7}}]{%
-		\IfNoValueTF{#4}{%
-			\IfBooleanF{#1}{\ref*{\IfNoValueF{#3}{#3}§#5}}\IfBooleanF{#2}{%
-					\IfNoValueF{#6}{\IfBooleanF{#1}{ }\ref*{\IfNoValueF{#3}{#3}§#5.#6}}%
-				}\IfNoValueF{#7}{ \ref*{\IfNoValueF{#3}{#3}§#5.#6.#7}}%
-		}{#4}%
-	}%
-}
 
 \noindexprenote
 
