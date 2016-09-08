@@ -30,12 +30,6 @@
 	\NewDocumentCommand \ursh      {} { \Rsh }
 	\NewDocumentCommand \dlsh      {} { \Ldsh }
 	\NewDocumentCommand \drsh      {} { \Rdsh }
-
-	% \newcommand*\lightning{\downzigzagarrow}
-	% \newcommand*\ulsh{\Lsh}
-	% \newcommand*\ursh{\Rsh}
-	% \newcommand*\dlsh{\Ldsh}
-	% \newcommand*\drsh{\Rdsh}
 } {
 	\RequirePackage{amssymb}
 	\RequirePackage{amsfonts}
@@ -88,68 +82,79 @@
 \DeclareSIUnit\svedberg{S}
 %\DeclareSIUnit\mmH2O{mmH2O}
 
-
-\let\oldimplies\implies
-\def\implies{\ensuremath{\oldimplies}{ }}
+\cs_gset_eq:NN \wmmath_original_implies \implies
+\DeclareDocumentCommand \implies {} {
+	\mode_if_math:TF {
+		\wmmath_original_implies
+	} {
+		$\wmmath_original_implies$~
+	}
+}
 
 % unicode-math sets \rightarrow in a \AtBeginDocument, so we have to as well
 \AtBeginDocument{
-	\let\oldrightarrow\rightarrow
-	\def\rightarrow{\oldrightarrow{}~}
+	\cs_gset_eq:NN \wmmath_original_rightarrow \rightarrow
+	\DeclareDocumentCommand \rightarrow {} {
+		\wmmath_original_rightarrow \mode_if_math:F {~}
+	}
 }
 
 %refactor
-\let\oldoverbrace\overbrace
-\let\oldunderbrace\underbrace
+\cs_gset_eq:NN \oldoverbrace  \overbrace
+\cs_gset_eq:NN \oldunderbrace \underbrace
 
-\ExplSyntaxOff % due to using _ ; fix?
-\DeclareDocumentCommand{\underbrace}{ s g t_ +g }{
-	\IfNoValueTF{#2}{
-		\oldunderbrace
-	}{
-		\IfBooleanTF{#3}{
-			\IfNoValueTF{#4}{}{
-				\IfBooleanTF{#1}{
-					\smash{\oldunderbrace{#2}_{#4}}
-					\vphantom{#2}
-					\gappto{\bracevspacing}{\vphantom{\oldunderbrace{#2}_{#4}}}
-				}{
-					\smash{\oldunderbrace{#2}_{\mathclap{\substack{#4}}}}
-					\vphantom{#2}
-					\gappto{\bracevspacing}{\vphantom{\oldunderbrace{#2}_{\mathclap{\substack{#4}}}}}
-				}
-			}
+
+{
+	\char_set_catcode_math_superscript:N ^
+	\char_set_catcode_math_subscript:N _
+	\DeclareDocumentCommand{\underbrace}{ s g t_ +g }{
+		\IfNoValueTF{#2}{
+			\oldunderbrace
 		}{
-			\smash{\oldunderbrace{#2}}
-			\vphantom{#2}
-			\gappto{\bracevspacing}{\vphantom{\oldunderbrace{#2}}}
+			\IfBooleanTF{#3}{
+				\IfNoValueTF{#4}{}{
+					\IfBooleanTF{#1}{
+						\smash{\oldunderbrace{#2}_{#4}}
+						\vphantom{#2}
+						\gappto{\bracevspacing}{\vphantom{\oldunderbrace{#2}_{#4}}}
+					}{
+						\smash{\oldunderbrace{#2}_{\mathclap{\substack{#4}}}}
+						\vphantom{#2}
+						\gappto{\bracevspacing}{\vphantom{\oldunderbrace{#2}_{\mathclap{\substack{#4}}}}}
+					}
+				}
+			}{
+				\smash{\oldunderbrace{#2}}
+				\vphantom{#2}
+				\gappto{\bracevspacing}{\vphantom{\oldunderbrace{#2}}}
+			}
+		}
+	}
+
+	\DeclareDocumentCommand{\overbrace}{ s g t^ +g }{
+		\IfNoValueTF{#2}{
+			\oldoverbrace
+		}{
+			\IfBooleanTF{#3}{
+				\IfNoValueTF{#4}{}{
+					\IfBooleanTF{#1}{
+						\smash{\oldoverbrace{#2}^{#4}}
+						\vphantom{#2}
+						\gappto{\bracevspacing}{\vphantom{\oldoverbrace{#2}^{#4}}}
+					}{
+						\smash{\oldoverbrace{#2}^{\mathclap{\substack{#4}}}}
+						\vphantom{#2}
+						\gappto{\bracevspacing}{\vphantom{\oldoverbrace{#2}^{\mathclap{\substack{#4}}}}}
+					}
+				}
+			}{
+				\smash{\oldoverbrace{#2}}
+				\vphantom{#2}
+				\gappto{\bracevspacing}{\vphantom{\oldoverbrace{#2}}}
+			}
 		}
 	}
 }
-\DeclareDocumentCommand{\overbrace}{ s g t^ +g }{
-	\IfNoValueTF{#2}{
-		\oldoverbrace
-	}{
-		\IfBooleanTF{#3}{
-			\IfNoValueTF{#4}{}{
-				\IfBooleanTF{#1}{
-					\smash{\oldoverbrace{#2}^{#4}}
-					\vphantom{#2}
-					\gappto{\bracevspacing}{\vphantom{\oldoverbrace{#2}^{#4}}}
-				}{
-					\smash{\oldoverbrace{#2}^{\mathclap{\substack{#4}}}}
-					\vphantom{#2}
-					\gappto{\bracevspacing}{\vphantom{\oldoverbrace{#2}^{\mathclap{\substack{#4}}}}}
-				}
-			}
-		}{
-			\smash{\oldoverbrace{#2}}
-			\vphantom{#2}
-			\gappto{\bracevspacing}{\vphantom{\oldoverbrace{#2}}}
-		}
-	}
-}
-\ExplSyntaxOn
 
 \let\cR\R
 \let\cS\S
