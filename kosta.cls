@@ -127,6 +127,9 @@
 	footnotes = multiple
 }
 
+\setkomafont{disposition}{\normalfont\bfseries}
+\setkomafont{descriptionlabel}{\normalfont\bfseries}
+
 \includepdfset{pages=-}
 
 
@@ -143,6 +146,12 @@
 
 \DeclareDocumentCommand\beschluss{s m}{%
 	\textul{Beschluss: #2}\IfBooleanF{#1}{\phantomsection\addcontentsline{beschl}{subsection}{#2}}%
+}
+
+%TODO: ponder and implement
+\DeclareDocumentCommand\pendenz{m m o}{%
+	\textbf{#1}%
+	\marginpar{\Square #2 \IfBooleanT{Deadline: #3}}%
 }
 
 %%TODO
@@ -186,7 +195,8 @@
 		\IfBooleanF{#2}{#3 }\ztitleref{trakt:#3}%
 	}{%
 		\hyperref[trakt:#3]{\IfBooleanF{#2}{#3 }\ztitleref{trakt:#3}}%
-	}
+	}%
+	\unskip%
 }
 
 \DeclareDocumentCommand\add{o +m}{%
