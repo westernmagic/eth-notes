@@ -1,0 +1,23 @@
+\Load {ifthen}                    before {glossaries} if {glossaries}
+\Load {xkeyval}[2006/11/18]       before {glossaries} if {glossaries}
+\Load {mfirstuc}                  before {glossaries} if {glossaries}
+\Load {textcase}                  before {glossaries} if {glossaries}
+\Load {xfor}                      before {glossaries} if {glossaries}
+\Load {datatool-base}             before {glossaries} if {glossaries}
+\Load {amsgen}                    before {glossaries} if {glossaries}
+\Load {etoolbox}                  before {glossaries} if {glossaries}
+%\Load {translator} before {glossaries} if {glossaries && babel} %if available
+\Load {glossaries-compatible-307} before {glossaries} if {glossaries}
+%\Load {tracklang} %sometimes
+\Load {glossary-hypernav}         before {glossaries} if {glossaries}
+%\Load {glossaries-compatible-207} %sometimes
+
+%% from documentation
+% glossaries-user.pdf
+\Load {hyperref}    before {glossaries}
+\Load {doc}         before {glossaries}
+% glossariesbegin.pdf
+\Load {babel}       before {glossaries}
+\Load {polyglossia} before {glossaries}
+\Load {inputenc}    before {glossaries}
+\Load {fontenc}     before {glossaries}

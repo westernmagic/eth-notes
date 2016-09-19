@@ -1,0 +1,7 @@
+\Load {expl3}[2012/08/14]    before {morewrites} if {morewrites}
+\Load {primargs}[2013/01/08] before {morewrites} if {morewrites}
+
+%\Load {atbegshi} %if exists
+
+\Load {morewrites} early because {so that we don't run out of writes}
+\Load {morewrites} after {etex} because {etex redefines \token_to_str:N \newwrites}

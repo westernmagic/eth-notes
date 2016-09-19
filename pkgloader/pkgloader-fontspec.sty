@@ -1,0 +1,9 @@
+\Load {expl3}  before {fontspec} if {fontspec}
+\Load {xparse} before {fontspec} if {fontspec}
+\sys_if_engine_luatex:T {
+    \Load {luaotfload} %if luatex
+    \Load {fontspec-luatex} %if luatex
+}
+\sys_if_engine_xetex:T {
+    \Load {fontspec-xetex} %if xetex
+}

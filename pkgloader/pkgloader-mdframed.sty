@@ -1,0 +1,11 @@
+\Load {kvoptions}            before {mdframed} if {mdframed}
+\Load {xparse}               before {mdframed} if {mdframed}
+\Load {etoolbox}[2011/01/03] before {mdframed} if {mdframed}
+\Load {zref-abspage}         before {mdframed} if {mdframed}
+\Load {needspace}            before {mdframed} if {mdframed}
+\Load {color}                before {mdframed} if {mdframed}
+%\Load {xcolor} %if option xcolor
+%\Load {tikz} %if option framemethod == pgf | tikz | 1
+%\Load {pst-node} %if option framemethod == pstricks | ps | 2 | postscript
+
+\Load {xcolor}               before {mdframed} if {mdframed} because {the documentation recommends it}

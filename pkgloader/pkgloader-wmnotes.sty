@@ -1,0 +1,96 @@
+\Load {wmpatch}                                 before {wmnotes} if {wmnotes}
+\PassOptionsToPackage{aux}{rerunfilecheck}
+\Load {rerunfilecheck}                          before {wmnotes} if {wmnotes}
+\Load {pdftexcmds}                              before {wmnotes} if {wmnotes}
+\Load {etextools}                               before {wmnotes} if {wmnotes}
+\Load {morewrites}                              before {wmnotes} if {wmnotes}
+\Load {makecmds}                                before {wmnotes} if {wmnotes}
+\Load {inlinedef}                               before {wmnotes} if {wmnotes}
+\Load {versions}                                before {wmnotes} if {wmnotes}
+\Load {extract}                                 before {wmnotes} if {wmnotes}
+\Load {sphack}                                  before {wmnotes} if {wmnotes}
+\Load {checkend}                                before {wmnotes} if {wmnotes}
+\Load {xifthen}                                 before {wmnotes} if {wmnotes}
+\Load {ifthenx}                                 before {wmnotes} if {wmnotes}
+\Load {iftex}                                   before {wmnotes} if {wmnotes}
+\Load {ifpdf}                                   before {wmnotes} if {wmnotes}
+\Load {ifxetex}                                 before {wmnotes} if {wmnotes}
+\Load {ifluatex}                                before {wmnotes} if {wmnotes}
+\sys_if_engine_luatex:T {
+    \Load {luatex85} before {wmnotes} if {wmnotes}
+}
+%\ifthenelse{\boolean{luatex}}{\RequirePackage{luatex85}}{}
+\Load [english,german]{translator}              before {wmnotes} if {wmnotes}
+\Load {geometry}                                before {wmnotes} if {wmnotes}
+\Load [clock]{ifsym}                            before {wmnotes} if {wmnotes}
+\Load {ccicons}                                 before {wmnotes} if {wmnotes}
+\Load {skak}                                    before {wmnotes} if {wmnotes}
+\Load {metalogo}                                before {wmnotes} if {wmnotes}
+\Load [no-math]{fontspec}                       before {wmnotes} if {wmnotes}
+\sys_if_engine_xetex:T {
+    \Load {xltxtra} before {wmnotes} if {wmnotes}
+}
+%\ifthenelse{\boolean{xetex}}{\RequirePackage{xltxtra}}{}
+\Load {polyglossia}                             before {wmnotes} if {wmnotes}
+%\Load {ellipsis}                                before {wmnotes} if {wmnotes}
+\Load {hologo}                                  before {wmnotes} if {wmnotes}
+\Load [usenames,dvipsnames]{xcolor}             before {wmnotes} if {wmnotes}
+\Load {pdfpages}                                before {wmnotes} if {wmnotes}
+\Load {graphicx}                                before {wmnotes} if {wmnotes}
+\Load {grffile}                                 before {wmnotes} if {wmnotes}
+% error \Load {grfpaste}                                before {wmnotes} if {wmnotes}
+\Load {gincltex}                                before {wmnotes} if {wmnotes}
+\Load {grfext}                                  before {wmnotes} if {wmnotes}
+\Load {epstopdf}                                before {wmnotes} if {wmnotes}
+\Load {media9}                                  before {wmnotes} if {wmnotes}
+\Load {tikz}                                    before {wmnotes} if {wmnotes}
+%\usetikzlibrary{arrows,intersections,patterns,hobby}
+\Load {pgfplots}                                before {wmnotes} if {wmnotes}
+\Load {egplot}                                  before {wmnotes} if {wmnotes}
+\Load {marginnote}                              before {wmnotes} if {wmnotes}
+\Load {changes}                                 before {wmnotes} if {wmnotes}
+\Load {wmmath}                                  before {wmnotes} if {wmnotes}
+\Load {microtype}                               before {wmnotes} if {wmnotes}
+\Load {colortbl}                                before {wmnotes} if {wmnotes}
+\Load {tabularx}                                before {wmnotes} if {wmnotes}
+\Load {longtable}                               before {wmnotes} if {wmnotes}
+\Load {ltabptch}                                before {wmnotes} if {wmnotes}
+\Load {tabu}                                    before {wmnotes} if {wmnotes}
+\Load {multirow}                                before {wmnotes} if {wmnotes}
+\Load {bigdelim}                                before {wmnotes} if {wmnotes}
+\PassOptionsToPackage{normalem}{ulem}
+\Load {ulem}                                    before {wmnotes} if {wmnotes}
+\Load {soulutf8}                                before {wmnotes} if {wmnotes}
+\Load {wmtext}                                  before {wmnotes} if {wmnotes}
+\Load {zref}                                    before {wmnotes} if {wmnotes}
+\Load {xr}                                      before {wmnotes} if {wmnotes}
+\Load {xr-hyper}                                before {wmnotes} if {wmnotes}
+\Load [inline]{enumitem}                        before {wmnotes} if {wmnotes}
+\sys_if_engine_luatex:F {
+    \Load {enumitem-zref} before {wmnotes} if {wmnotes}
+}
+%\ifthenelse{\boolean{luatex}}{}{\RequirePackage{enumitem-zref}} % catcode errors in lualatex
+%\PassOptionsToPackage{unicode,hyperindex=false}{hyperref}
+\Load {hyperref}                                before {wmnotes} if {wmnotes}
+\Load {listings}                                before {wmnotes} if {wmnotes}
+\Load {wmtheorem}                               before {wmnotes} if {wmnotes}
+\Load {tocloft}                                 before {wmnotes} if {wmnotes}
+\Load [xindy,acronym,shortcuts,toc]{glossaries} before {wmnotes} if {wmnotes}
+\Load {algorithm}                               before {wmnotes} if {wmnotes}
+\Load {algorithmic}                             before {wmnotes} if {wmnotes}
+%\ifthenelse{\classloaded{beamer}}{}{\RequirePackage{wmref}} before {wmnotes} if {wmnotes}
+\Load {scrlayer-scrpage}                        before {wmnotes} if {wmnotes}
+\Load {fnbreak}                                 before {wmnotes} if {wmnotes}
+\Load [defaultlines=3,all]{nowidow}             before {wmnotes} if {wmnotes}
+\Load [obeyFinal]{todonotes}                    before {wmnotes} if {wmnotes}
+\Load {attachfile2}                             before {wmnotes} if {wmnotes}
+\Load {embedfile}                               before {wmnotes} if {wmnotes}
+\Load {pdfcomment}                              before {wmnotes} if {wmnotes}
+%\PassOptionsToPackage{version=4}{mhchem}
+\Load {mychemistry}                             before {wmnotes} if {wmnotes}
+%\RequirePackage{mhchem} % loaded by mychemistry
+%\RequirePackage{chemfig} % loaded by mychemistry
+\Load {chemmacros}                              before {wmnotes} if {wmnotes}
+\Load {authoraftertitle}                        before {wmnotes} if {wmnotes}
+\Load {csquotes}                                before {wmnotes} if {wmnotes}
+\Load {lipsum}                                  before {wmnotes} if {wmnotes}

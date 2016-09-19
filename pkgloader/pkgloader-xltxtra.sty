@@ -1,0 +1,6 @@
+\Load {ifluatex}    before {xltxtra} if {xltxtra}
+%\Load error if {luatex} because {xltxtra is only meant to be used under XeTeX}
+\Load {ifxetex}     before {xltxtra} if {xltxtra}
+\Load {fontspec}    before {xltxtra} if {xltxtra}
+\Load {realscripts} before {xltxtra} if {xltxtra}
+\Load {metalogo}    before {xltxtra} if {xltxtra}

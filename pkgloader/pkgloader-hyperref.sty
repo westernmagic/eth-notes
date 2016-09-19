@@ -1,0 +1,74 @@
+\Load {hobsub-hyperref}[2011/01/30] before {hyperrref} if {hyperref}
+\Load {ltxcmds}[2010/11/12]         before {hyperrref} if {hyperref}
+\Load {ifpdf}[2006/02/20]           before {hyperrref} if {hyperref}
+\Load {pdftexcmds}[2009/04/10]      before {hyperrref} if {hyperref}
+\Load {infwarerr}[2010/04/08]       before {hyperrref} if {hyperref}
+\Load {keyval}[1997/11/10]          before {hyperrref} if {hyperref}
+\Load {kvsetkeys}[2007/09/29]       before {hyperrref} if {hyperref}
+\Load {kvdefinekeys}[2011/04/07]    before {hyperrref} if {hyperref}
+\Load {pdfescape}[2007/11/11]       before {hyperrref} if {hyperref}
+\Load {ifvtex}                      before {hyperrref} if {hyperref}
+\Load {ifxetex}[2006/08/21]         before {hyperrref} if {hyperref}
+\Load {hycolor}                     before {hyperrref} if {hyperref}
+\Load {letltxmacro}[2008/06/13]     before {hyperrref} if {hyperref}
+\Load {auxhook}[2009/12/14]         before {hyperrref} if {hyperref}
+\Load {kvoptions}[2009/07/21]       before {hyperrref} if {hyperref}
+\Load {intcalc}[2007/09/27]         before {hyperrref} if {hyperref}
+\Load {etexcmds}[2007/09/09]        before {hyperrref} if {hyperref}
+
+%\Load {memhfixc} after {hyperref} if {hyperref && memoir}
+%\Load {stringenc}[2009/12/15]
+%\Load {color} % if tex4ht
+%\Load {color} after {hyperref} if {hyperref} % if typexml
+%\Load {nameref}[2012/07/28] after {hyperref} if {hyperref} %if typexml
+%\Load {color} %if colorlinks
+%\Load {nameref}[2012/07/28] %if something special...
+%\Load {backref} %if backref
+\Load {url}                         before {hyperrref} if {hyperref}
+\Load {bitset}                      before {hyperrref} if {hyperref}
+\Load {atbegshi}[2007/09/09]        before {hyperrref} if {hyperref}
+
+%% from documentation
+% from manual.pdf
+\Load {hyperref} late
+% from README.pdf
+\Load {float}     before {hyperref} if {hyperref && algorithm}
+\Load {algorithm} after  {hyperref} if {hyperref && algorithm}
+\Load {amsrefs}   after  {hyperref} if {hyperref && amsrefs}
+\Load {longtable} before {hyperref} if {hyperref && longtable && arydshln}
+\Load {arydshln}  after  {hyperref} if {hyperref && longtable && arydshln}
+\Load {chappg}    after  {hyperref} if {hyperref && chappg}
+\Load {dblaccnt}  after  {hyperref} if {hyperref && dblaccnt}
+\Load error                         if {hyperref && easyeqn}
+\Load {ellipsis}  after  {hyperref} if {hyperref && ellipsis}
+\Load {float}     before {hyperref} if {hyperref && float}
+%\Load error                         if {hyperref && endnotes}
+\Load {linguex}   after  {hyperref} if {hyperref && linguex}
+\Load {longtable} before {ltabptch} if {hyperref && ltabptch}
+\Load {ltabptch}  before {hyperref} if {hyperref && ltabptch}
+%\Load error                         if {hyperref && mathenv}
+\Load error                         if {minitoc-hyper} because {it's obsolete—use an up-to-date version of minitoc instead}
+\Load {multind}   before {hyperref} if {hyperref && minind}
+\Load {natbib}    before {hyperref} if {hyperref && natbib}
+\Load {parskip}   before {hyperref} if {hyperref && parskip}
+\Load {prettyref} before {hyperref} if {hyperref && prettyref}
+\Load {ntheorem}  after  {hyperref} if {hyperref && ntheorem}
+\Load {setspace}  before {hyperref} if {hyperref && setspace}
+%subfigure?
+\Load {nameref}   before {titleref} if {hyperref && titleref}
+\Load {titleref}  before {hyperref} if {hyperref && titleref}
+%ucs/utf8x
+%varioref unsupported, but...
+\Load {nameref}   before {varioref} if {hyperref && varioref}
+\Load {varioref}  before {hyperref} if {hyperref && varioref}
+\Load {fontenc}   before {vietnam}  if {hyperref && vietnam}
+\Load {vietnam}   before {hyperref} if {hyperref && vietnam}
+%xetex
+
+%% from web
+%TODO: move to cmap
+%http://tex.stackexchange.com/questions/64585/incompatibilities-of-cmap-with-fontenc-hyperref/64605#64605
+\Load {cmap}      after {hyperref} because {hyperref cannot write pdf settings if cmap already wrote to pdf}
+%http://www.macfreek.nl/memory/LaTeX_package_conflicts#
+\Load {fancyhdr}  before {hyperref}
+\Load {fncychap}  before {hyperref}

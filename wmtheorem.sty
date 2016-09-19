@@ -7,7 +7,7 @@
 \RequirePackage{xkeyval}
 \RequirePackage[usenames,dvipsnames]{xcolor}
 \RequirePackage[framemethod=tex]{mdframed}
-\ifthenelse{\classloaded{beamer}}{}{\RequirePackage{wmref}}
+%\ifthenelse{\classloaded{beamer}}{}{\RequirePackage{wmref}}
 
 \OptionSwitch{bw}
 \ProcessOptions\relax
@@ -56,7 +56,7 @@
 		innerleftmargin   = #1 ,
 		innerrightmargin  = #1 ,
 		innertopmargin    = #1 ,
-		innerbottommargin = #1 , 
+		innerbottommargin = #1 ,
 		splittopskip      = #1 ,
 		splitbottomskip   = #1
 	}
@@ -78,7 +78,7 @@
 	fontcolor         = Black ,
 	indent            = 0.5cm ,
 	headfont          = \normalfont\bfseries ,
-	notefont          = \normalfont\bfseries , 
+	notefont          = \normalfont\bfseries ,
 	bodyfont          = \normalfont ,
 	headnotesep       = {: } ,
 	notebodysep       = : ,

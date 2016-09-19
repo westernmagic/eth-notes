@@ -1,0 +1,22 @@
+\Load {expl3}      before {wmmath} if {wmmath}
+\Load {wmpatch}    before {wmmath} if {wmmath}
+\Load {xifthen}    before {wmmath} if {wmmath}
+\Load {ifxetex}    before {wmmath} if {wmmath}
+\Load {ifluatex}   before {wmmath} if {wmmath}
+\Load {makecmds}   before {wmmath} if {wmmath}
+\Load {wml3}       before {wmmath} if {wmmath}
+\PassOptionsToPackage{fleqn,sumlimits,intlimits,namelimits}{amsmath}
+\Load {amsmath}    before {wmmath} if {wmmath}
+\Load {cancel}     before {wmmath} if {wmmath}
+\Load {delarray}   before {wmmath} if {wmmath}
+\Load {gauss}      before {wmmath} if {wmmath}
+\Load {maybemath}  before {wmmath} if {wmmath}
+%\Load {breqn} % breaks chemfig
+\Load {mathtools}  before {wmmath} if {wmmath}
+\Load {permute}    before {wmmath} if {wmmath}
+\Load {mleftright} before {wmmath} if {wmmath}
+%\Load {nath} % breaks things
+\Load [math-style = ISO , bold-style = ISO , vargreek-shape = unicode]{unicode-math} before {wmmath} if {wmmath}
+%skipped non-UTF branch
+\Load {physics}    before {wmmath} if {wmmath}
+\Load {siunitx}    before {wmmath} if {wmmath}

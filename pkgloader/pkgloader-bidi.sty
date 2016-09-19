@@ -1,0 +1,88 @@
+\Load {iftex}        before {bidi} if {bidi}
+\Load {biditools}    before {bidi} if {bidi}
+\Load {zref-abspage} before {bidi} if {bidi}
+\Load {auxhook}      before {bidi} if {bidi}
+\Load {ltxcmds}      before {bidi} if {bidi}
+\Load {xkeyval}      before {bidi} if {bidi}
+
+%from loadingorder-xetex-bidi.def
+\Load {amsmath}        before {bidi}
+\Load {amstext}        before {bidi}
+\Load {amsthm}         before {bidi}
+\Load {animate}        before {bidi}
+\Load {breqn}          before {bidi}
+\Load {cals}           before {bidi}
+\Load {caption}        before {bidi}
+\Load {crop}           before {bidi}
+\Load {cuted}          before {bidi}
+\Load {cutwin}         before {bidi}
+\Load {color}          before {bidi}
+\Load {dblfnote}       before {bidi}
+\Load {xcolor}         before {bidi}
+\Load {colortbl}       before {bidi}
+\Load {float}          before {bidi}
+\Load {floatrow}       before {bidi}
+\Load {flowfram}       before {bidi}
+\Load {framed}         before {bidi}
+\Load {ftnright}       before {bidi}
+\Load {xltxtra}        before {bidi}
+\Load {xunicode}       before {bidi}
+\Load {wrapfig}        before {bidi}
+\Load {graphicx}       before {bidi}
+\Load {geometry}       before {bidi}
+\Load {hvfloat}        before {bidi}
+\Load {mdframed}       before {bidi}
+\Load {midfloat}       before {bidi}
+\Load {ntheorem}       before {bidi}
+\Load {ntheorem-hyper} before {bidi}
+\Load {hyperref}       before {bidi}
+\Load {fancybox}       before {bidi}
+\Load {fancyhdr}       before {bidi}
+\Load {fix2col}        before {bidi}
+\Load {draftwatermark} before {bidi}
+\Load {empheq}         before {bidi}
+\Load {overpic}        before {bidi}
+\Load {pdfpages}       before {bidi}
+\Load {listings}       before {bidi}
+\Load {lettrine}       before {bidi}
+\Load {media9}         before {bidi}
+\Load {pstricks}       before {bidi}
+\Load {pgf}            before {bidi}
+\Load {picinpar}       before {bidi}
+\Load {quotchap}       before {bidi}
+\Load {tikz}           before {bidi}
+\Load {titlesec}       before {bidi}
+\Load {titletoc}       before {bidi}
+\Load {array}          before {bidi}
+\Load {soul}           before {bidi}
+\Load {stabular}       before {bidi}
+\Load {subfig}         before {bidi}
+\Load {subfigure}      before {bidi}
+\Load {supertabular}   before {bidi}
+\Load {xtab}           before {bidi}
+\Load {longtable}      before {bidi}
+\Load {arydshln}       before {bidi}
+\Load {multicol}       before {bidi}
+\Load {multienum}      before {bidi}
+\Load {minitoc}        before {bidi}
+\Load {natbib}         before {bidi}
+\Load {newfloat}       before {bidi}
+\Load {ragged2e}       before {bidi}
+\Load {rotating}       before {bidi}
+\Load {tabls}          before {bidi}
+\Load {tabulary}       before {bidi}
+\Load {tocstyle}       before {bidi}
+\Load {tocbibind}      before {bidi}
+\Load {fontspec}       before {bidi}
+\Load {arabxetex}      before {bidi}
+\Load {polyglossia}    before {bidi}
+\Load {fancyvrb}       before {bidi}
+
+%from latex-xelatex-bidi.def
+\sys_if_engine_xetex:T {
+    \Load {graphicx}    if {bidi && mathtools}
+    \Load {graphicx}    if {bidi && crop}
+    \Load {ragged2e}    if {bidi && sidecap}
+    \Load {color}       if {bidi && floatrow}
+    \Load {bidi-media9} if {bidi && media9}
+}

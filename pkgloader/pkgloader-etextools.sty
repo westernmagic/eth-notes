@@ -1,0 +1,5 @@
+\Load {etex}        before {etextools} if {etextools}
+\Load {etoolbox}    before {etextools} if {etextools}
+\Load {letltxmacro} before {etextools} if {etextools}
+
+\Load {pdftexcmds}  before {etextools} because {to make \token_to_str:N \pdfstrcmp available}
