@@ -3,6 +3,7 @@ A 'bundle' of miscellaneous packages that I have developped—first for taking l
  - `Makefile` and the accompanying `Variables.ini` are up-to-date versions from my version of [`latex-makefile`](https://github.com/westernmagic/latex-makefile)
  - `wmnotes.sty` is the master file, that over the years has accumulated a lot of different packages, with a loading order that works miraculously—it's held by duct tape, really...
  - `wmnotes.cls` is the accompanying class file that should be split in at least 3 files...
+ - `wmpkgloader.sty` uses [`pkgloader`](https://github.com/mhelvens/latex-pkgloader) to load the packages (in the hopes that someday we can succesfully load a subset of them...)
  - `wmpatch.sty` contains an amalgamation of patches for the packages we load
  - `wmref.sty` is a handy referencing scheme
  - `wmtext.sty` implements text decorations
