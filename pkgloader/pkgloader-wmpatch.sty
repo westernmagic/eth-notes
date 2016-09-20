@@ -1,7 +1,18 @@
-\Load {xifthen}  before {wmpatch} if {wmpatch}
-\Load {ifluatex} before {wmpatch} if {wmpatch}
-\Load {scrlfile} before {wmpatch} if {wmpatch}
-\Load {hopatch}  before {wmpatch} if {wmpatch}
-\Load {xpatch}   before {wmpatch} if {wmpatch}
+\sys_if_engine_luatex:T {
+    \Load {luatex-math} after {amsmath}   if {amsmath}
+    \Load {luatex-math} after {mathtools} if {mathtools}
+    \Load {luatex-math} after {icomma}    if {icomma}
+}
 
-%TODO: maybe some patches can be parsed as loading rules?
+\Load {wmpatch-makecmds}             after  {makecmds}             if {makecmds}
+\Load {wmpatch-xifthen}              after  {xifthen}              if {xifthen}
+\Load {wmpatch-unicode-math}         after  {unicode-math}         if {unicode-math}
+\Load {wmpatch-csquotes}             after  {csquotes}             if {csquotes}
+\Load {wmpatch-polyglossia}          after  {polyglosia}           if {polyglossia}
+\Load {wmpatch-chemfig}              after  {chemfig}              if {chemfig}
+\Load {wmpatch-etextools-pdftexcmds} after  {pdftexcmds}           if {etextools && pdftexcmds}
+\Load {wmpatch-etextools-pdftexcmds} before {etextools}            if {etextools && pdftexcmds}
+\Load {wmpatch-enumitem-zref}        after  {enumitem-zref}        if {enumitem-zref}
+\Load {wmpatch-amsmath-unicode-math} after  {amsmath,unicode-math} if {amsmath && unicode-math}
+\Load {xpatch}                       before {wmpatch-amsmath}      if {wmpatch-amsmath}
+\Load {wmpatch-amsmath}              after  {amsmath}              if {amsmath}

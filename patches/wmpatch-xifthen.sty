@@ -1,0 +1,12 @@
+\ProvidesExplPackage{wmpatch-xifthen}{2016/09/20}{}{Provide \token_to_str:N \OptionSwitch}
+
+\newcommand*\OptionSwitch[1]{
+    \newboolean{#1}
+    \setboolean{#1}{false}
+    \DeclareOption{#1}{
+        \setboolean{#1}{true}
+    }
+    \DeclareOption{no-#1}{
+        \setboolean{#1}{false}
+    }
+}

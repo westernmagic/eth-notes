@@ -1,0 +1,7 @@
+\ProvidesExplPackage{wmpatch-makecmds}{2016/09/20}{}{Provide macros \token_to_str:N \renewlength and \token_to_str:N \makelength}
+
+\makecommand*\renewlength[2]{\setlength#1{#2}}
+\makecommand*\makelength[2]{
+    \providelength{#1}
+    \renewlength{#1}{#2}
+}

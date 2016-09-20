@@ -1,0 +1,8 @@
+\ProvidesExplPackage{wmpatch-etextools-pdftexcmds}{2016/09/20}{}{Provide \token_to_str:N \pdfstrcmp}
+
+\cs_if_exist:NF \pdfstrcmp {
+	\group_begin:
+		\char_set_catcode_letter:N @
+		\cs_gset_eq:NN \pdfstrcmp \pdf@strcmp
+	\group_end:
+}

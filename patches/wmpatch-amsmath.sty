@@ -1,0 +1,28 @@
+\ProvidesExplPackage{wmpatch-amsmath}{2016/09/20}{}{}
+
+%TODO: use expl3 syntax
+\gdef\[#1\]{\begin{gather*}#1\end{gather*}}
+\gdef\bracevspacing{\vphantom{ }}
+\makeatletter
+\xpatchcmd{\math@cr}{\@ifstar}{\bracevspacing\gdef\bracevspacing{\vphantom{ }}\@ifstar}{}{}
+\let\oldvphantom\vphantom
+\renewcommand{\vphantom}[1]{{%
+    \xpatchcmd{\math@cr}{\bracevspacing\gdef\bracevspacing{\vphantom{ }}\@ifstar}{\@ifstar}{}{}
+    \oldvphantom{#1}
+    \xpatchcmd{\math@cr}{\@ifstar}{\bracevspacing\gdef\bracevspacing{\vphantom{ }}\@ifstar}{}{}
+}}%
+\xpretocmd{\substack}{%
+    \xpatchcmd{\math@cr}{\bracevspacing\gdef\bracevspacing{\vphantom{ }}\@ifstar}{\@ifstar}{}{}%
+}{}{}
+\xapptocmd{\substack}{%
+    \xpatchcmd{\math@cr}{\@ifstar}{\bracevspacing\gdef\bracevspacing{\vphantom{ }}\@ifstar}{}{}%
+}{}{}
+%\def\resetMathstrut@{%
+%	\setbox\z@\hbox{%
+%		\mathchardef\@tempa\mathcode`\[\relax%
+%		\def\@tempb##1"##2##3{\the\textfont"##3\char"}%
+%		\expandafter\@tempb\meaning\@tempa \relax%
+%	}%
+%	\ht\Mathstrutbox@\ht\z@%
+%	\dp\Mathstrutbox@\dp\z@%
+%}
