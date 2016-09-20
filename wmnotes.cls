@@ -12,13 +12,8 @@
 \OptionSwitch{glossary}
 \OptionSwitch{impressum}
 
-\OptionSwitch{eth}
-\OptionSwitch{uzh}
-
-\OptionSwitch{cv}
-
 \DeclareOption{nothing}{
-	\ExecuteOptions{no-titlepage,no-toc,no-index,no-todo,no-glossary,no-eth,no-uzh,no-cv}
+	\ExecuteOptions{no-titlepage,no-toc,no-index,no-todo,no-glossary}
 }
 
 \makecommand{\ETHLogo}{\inlcudegraphics{ETHLogo}}
@@ -144,6 +139,7 @@
 }{}
 
 \savegeometry{wmnotes}
+%TODO: move to koma-script implementation
 \fancypagestyle{wmnotes}{
 	\setlength{\headheight}{53pt}
 	\fancyhf{}
