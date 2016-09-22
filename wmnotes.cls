@@ -144,15 +144,20 @@
 }{}
 
 \savegeometry{wmnotes}
-\fancypagestyle{wmnotes}{
-	\setlength{\headheight}{53pt}
-	\fancyhf{}
-	\fancyhf[HL]{\leftmark\vspace{25pt}}
-	\fancyhf[HR]{\rightmark}
-	\fancyhf[FL]{\ifthenelse{\expandafter\isempty\expandafter{\MyAuthor}}{}{\MyAuthor\\}\translate{Status}: \today}
-	\fancyhf[FC]{\thepage}
-	\fancyhf[FR]{\ccbyncsaeu}
-}
+% \fancypagestyle{wmnotes}{
+% 	\setlength{\headheight}{53pt}
+% 	\fancyhf{}
+% 	\fancyhf[HL]{\leftmark\vspace{25pt}}
+% 	\fancyhf[HR]{\rightmark}
+% 	\fancyhf[FL]{\ifthenelse{\expandafter\isempty\expandafter{\MyAuthor}}{}{\MyAuthor\\}\translate{Status}: \today}
+% 	\fancyhf[FC]{\thepage}
+% 	\fancyhf[FR]{\ccbyncsaeu}
+% }
+\lohead*{\leftmark\vspace{25pt}}
+\rohead*{\rightmark}
+\lofoot*{\ifthenelse{\expandafter\isempty\expandafter{\MyAuthor}}{}{\MyAuthor\\}\translate{Status}: \today}
+\cofoot*{\thepage}
+\rofoot*{\ccbyncsaeu}
 
 \geometry{
 	a4paper              ,
@@ -165,15 +170,15 @@
 	inner      =    -3mm ,
 	outer      =    -3mm ,
 	hoffset    =     0cm ,
-	footskip   =    15mm 
+	footskip   =    15mm
 }
 \savegeometry{eth}
 %\loadgeometry{wmnotes}
-\fancypagestyle{eth}{
-	\fancyhf{}
-	%\fancyhf[HL]{\ETHLogo}
-	\fancyhf[FL]{\translate{Page} \thepage / \pageref{LastPage}}
-}
+% \fancypagestyle{eth}{
+% 	\fancyhf{}
+% 	%\fancyhf[HL]{\ETHLogo}
+% 	\fancyhf[FL]{\translate{Page} \thepage / \pageref{LastPage}}
+% }
 
 \geometry{
 	a4paper         ,
@@ -189,14 +194,14 @@
 }
 \savegeometry{uzh}
 %\loadgeometry{wmnotes}
-\fancypagestyle{uzh}{
-	\fancyhf{}
-	\fancyhf[HL]{\ifthenelse{\expandafter\isempty\expandafter{\MyLecture}}{}{\MyLecture\\}\leftmark\\\rightmark}
-	%\fancyhf[HR]{\UZHLogo}
-	\fancyhf[FL]{\ifthenelse{\expandafter\isempty\expandafter{\MyAuthor}}{}{\MyAuthor\\}\translate{Status}: \today}
-	\fancyhf[FC]{\thepage}
-	%\fancyhf[FR]{\ccbyncsaeu}
-}
+% \fancypagestyle{uzh}{
+% 	\fancyhf{}
+% 	\fancyhf[HL]{\ifthenelse{\expandafter\isempty\expandafter{\MyLecture}}{}{\MyLecture\\}\leftmark\\\rightmark}
+% 	%\fancyhf[HR]{\UZHLogo}
+% 	\fancyhf[FL]{\ifthenelse{\expandafter\isempty\expandafter{\MyAuthor}}{}{\MyAuthor\\}\translate{Status}: \today}
+% 	\fancyhf[FC]{\thepage}
+% 	%\fancyhf[FR]{\ccbyncsaeu}
+% }
 
 \geometry{
 	a4paper          ,
@@ -209,22 +214,22 @@
 	footskip = 10mm
 }
 \savegeometry{cv}
-\fancypagestyle{cv}{
-	\fancyhf{}
-	\fancyhf[HL]{}
-	\fancyhf[HC]{}
-	\fancyhf[HR]{\MyAuthor ~-~\MyTitle}
-	\fancyhf[FL]{}
-	\fancyhf[FC]{\thepage}
-	\fancyhf[FR]{}
-	}
+% \fancypagestyle{cv}{
+% 	\fancyhf{}
+% 	\fancyhf[HL]{}
+% 	\fancyhf[HC]{}
+% 	\fancyhf[HR]{\MyAuthor ~-~\MyTitle}
+% 	\fancyhf[FL]{}
+% 	\fancyhf[FC]{\thepage}
+% 	\fancyhf[FR]{}
+% 	}
 
 \loadgeometry{wmnotes}
-\pagestyle{wmnotes}
+% \pagestyle{wmnotes}
 
 \ifthenelse{\boolean{eth}}{
 	\loadgeometry{eth}
-	
+
 	\ifthenelse{\boolean{xetex} \OR \boolean{luatex}}{
 		\setmainfont{ETH Light}
 	}{
@@ -235,22 +240,22 @@
 		\newfont{\xiiiv}{letr8t at 8.5pt}
 		\newfont{\xiiivb}{letb8t at 8.5pt}
 	}
-	
-	\pagestyle{eth}
+
+	% \pagestyle{eth}
 }{
 	\ifthenelse{\boolean{uzh}}{
 		\loadgeometry{uzh}
-		
+
 		\ifthenelse{\boolean{xetex} \OR \boolean{luatex}}{
 			\setmainfont{Palatino}
 		}{}
-		
-		\pagestyle{uzh}
+
+		% \pagestyle{uzh}
 	}{
 		\ifthenelse{\boolean{cv}}{
 			\loadgeometry{cv}
-			\pagestyle{cv}
-			
+			% \pagestyle{cv}
+
 			\setlength{\headheight}{30pt}
 			\setlength{\headwidth}{\textwidth}
 			%\usepackage{setspace}
@@ -263,7 +268,7 @@
 			\title{CV}
 		}{
 				%\loadgeometry{wmnotes}
-				\pagestyle{wmnotes}
+				% \pagestyle{wmnotes}
 			}
 	}
 }
