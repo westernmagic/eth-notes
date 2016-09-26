@@ -42,6 +42,13 @@
 \makecommand{\ETHLogo}{\includegraphics{ETHLogo}}
 \makecommand{\KostaLogo}[1][]{\includegraphics[#1]{kosta}}
 
+\newacronym{eth}{ETH}{Eidgenössiche Technische Hochschule}
+\newacronym{ethz}{ETHZ}{\glstext{eth} Zürich}
+\newacronym{vseth}{VSETH}{Verband der Studierenden an der \glstext{ethz}}
+\newacronym{uzh}{UZH}{Universität Zürich}
+\newacronym{vsuzh}{VSUZH}{Verband der Studierenden der \glsfirst{uzh}}
+%\newacronym{kosta}{KOSTA}{Stiftung KOSTA}
+
 \DeclareOption{english}{
 	\@ifpackageloaded{babel}{
 		\selectlanguage{english}
