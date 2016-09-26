@@ -36,5 +36,3 @@
 	\newfont{\xiiiv}{letr8t at 8.5pt}
 	\newfont{\xiiivb}{letb8t at 8.5pt}
 }
-
-\pagestyle{eth}

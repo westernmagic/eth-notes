@@ -28,5 +28,3 @@
 \ifthenelse{\boolean{xetex} \OR \boolean{luatex}}{
 	\setmainfont{Palatino}
 }{}
-
-\pagestyle{uzh}

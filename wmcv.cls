@@ -22,7 +22,6 @@
 \rofoot*{}
 
 \loadgeometry{cv}
-\pagestyle{cv}
 
 \setlength{\headheight}{30pt}
 \setlength{\headwidth}{\textwidth}
