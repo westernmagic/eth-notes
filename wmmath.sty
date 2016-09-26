@@ -24,7 +24,7 @@
 \sys_if_feature_utf:TF {
 	\RequirePackage[math-style = ISO , bold-style = ISO , vargreek-shape = unicode]{unicode-math}
 	\setmathfont{XITS Math}
-	
+
 	\NewDocumentCommand \lightning {} { \downzigzagarrow }
 	\NewDocumentCommand \ulsh      {} { \Lsh }
 	\NewDocumentCommand \ursh      {} { \Rsh }
@@ -37,7 +37,7 @@
 	\RequirePackage[nointegrals]{wasysym}
 	\RequirePackage{trfsigns}
 	\RequirePackage{esint}
-	
+
 	\changenotsign
 	\let\oldepsilon\epsilon
 	\renewcommand*{\epsilon}{\ensuremath{\varepsilon}}
@@ -156,19 +156,21 @@
 	}
 }
 
-\let\cR\R
-\let\cS\S
-\let\cE\Ent
-\let\cZ\Zus
+\AtBeginDocument{
+	%\let\cR\R
+	%\let\cS\S
+	%\let\cE\Ent
+	%\let\cZ\Zus
 
-\newcommand{\gdw}{g.d., w. }
-\makecommand{\R}{\ensuremath{\mathbb{R}}}
-\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
-\newcommand{\N}{\ensuremath{\mathbb{N}}}
-\makecommand{\Z}{\ensuremath{\mathbb{Z}}}
-\makecommand{\C}{\ensuremath{\mathbb{C}}}
-\newcommand{\I}{\ensuremath{\mathbb{I}}}
-\makecommand{\L}{\ensuremath{\mathcal{L}}}
+	\newcommand{\gdw}{g.d., w. }
+	\makecommand{\R}{\ensuremath{\mathbb{R}}}
+	%\makecommand{\Q}{\ensuremath{\mathbb{Q}}}
+	\makecommand{\N}{\ensuremath{\mathbb{N}}}
+	\makecommand{\Z}{\ensuremath{\mathbb{Z}}}
+	\makecommand{\C}{\ensuremath{\mathbb{C}}}
+	\newcommand{\I}{\ensuremath{\mathbb{I}}}
+	\makecommand{\L}{\ensuremath{\mathcal{L}}}
+}
 
 %\newcommand*{\abs}[1]{\left\lvert #1 \right\rvert}
 %\newcommand*{\norm}[1]{\left\lVert #1 \right\rVert}
