@@ -2,7 +2,7 @@
 \ProvidesClass{wmnotes}[2016/04/06]
 
 \ExecuteOptions{a4paper,12pt,onecolumn,oneside}
-\LoadClassWithOptions{report}
+\LoadClassWithOptions{scrreprt}
 \RequirePackage{wmnotes}
 
 \OptionSwitch{titlepage}
