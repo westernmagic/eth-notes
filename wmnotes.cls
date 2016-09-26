@@ -139,6 +139,7 @@
 }{}
 
 \lohead*{\leftmark\vspace{25pt}}
+\cohead*{}
 \rohead*{\rightmark}
 \lofoot*{\ifthenelse{\expandafter\isempty\expandafter{\MyAuthor}}{}{\MyAuthor\\}\translate{Status}: \today}
 \cofoot*{\thepage}

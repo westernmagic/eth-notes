@@ -1,5 +1,6 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{eth}[2016/04/06]
+\LoadClassWithOptions{wmnotes}
 
 \geometry{
 	a4paper              ,
@@ -12,18 +13,19 @@
 	inner      =    -3mm ,
 	outer      =    -3mm ,
 	hoffset    =     0cm ,
-	footskip   =    15mm 
+	footskip   =    15mm
 }
 \savegeometry{eth}
-%\loadgeometry{wmnotes}
-\fancypagestyle{eth}{
-	\fancyhf{}
-	%\fancyhf[HL]{\ETHLogo}
-	\fancyhf[FL]{\translate{Page} \thepage / \pageref{LastPage}}
-}
+
+\lohead*{}
+\cohead*{}
+\rohead*{}
+\lofoot*{\translate{Page} \thepage / \pageref{LastPage}}
+\cofoot*{}
+\rofoot*{}
 
 \loadgeometry{eth}
-	
+
 \ifthenelse{\boolean{xetex} \OR \boolean{luatex}}{
 	\setmainfont{ETH Light}
 }{
