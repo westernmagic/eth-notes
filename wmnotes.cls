@@ -12,13 +12,8 @@
 \OptionSwitch{glossary}
 \OptionSwitch{impressum}
 
-\OptionSwitch{eth}
-\OptionSwitch{uzh}
-
-\OptionSwitch{cv}
-
 \DeclareOption{nothing}{
-	\ExecuteOptions{no-titlepage,no-toc,no-index,no-todo,no-glossary,no-eth,no-uzh,no-cv}
+	\ExecuteOptions{no-titlepage,no-toc,no-index,no-todo,no-glossary}
 }
 
 \makecommand{\ETHLogo}{\inlcudegraphics{ETHLogo}}
@@ -51,7 +46,7 @@
 
 \DeclareOption{ngerman}{\ExecuteOptions{german}}
 
-\ExecuteOptions{titlepage,toc,index,glossary,todo,german}
+\ExecuteOptions{titlepage,toc,index,glossary,todo}
 \ProcessOptions\relax
 
 \ifthenelse{\boolean{titlepage}}{
@@ -143,130 +138,16 @@
 	}
 }{}
 
-\savegeometry{wmnotes}
-\fancypagestyle{wmnotes}{
-	\setlength{\headheight}{53pt}
-	\fancyhf{}
-	\fancyhf[HL]{\leftmark\vspace{25pt}}
-	\fancyhf[HR]{\rightmark}
-	\fancyhf[FL]{\ifthenelse{\expandafter\isempty\expandafter{\MyAuthor}}{}{\MyAuthor\\}\translate{Status}: \today}
-	\fancyhf[FC]{\thepage}
-	\fancyhf[FR]{\ccbyncsaeu}
-}
+\lohead*{\leftmark\vspace{25pt}}
+\cohead*{}
+\rohead*{\rightmark}
+\lofoot*{\ifthenelse{\expandafter\isempty\expandafter{\MyAuthor}}{}{\MyAuthor\\}\translate{Status}: \today}
+\cofoot*{\thepage}
+\rofoot*{\ccbyncsaeu}
 
-\geometry{
-	a4paper              ,
-	textwidth  =  16.6cm ,
-	textheight =  23.5cm ,
-	voffset    = -0.49cm ,
-	top        =     0cm ,
-	headheight =     0cm ,
-	headsep    =  1.45cm ,
-	inner      =    -3mm ,
-	outer      =    -3mm ,
-	hoffset    =     0cm ,
-	footskip   =    15mm 
-}
-\savegeometry{eth}
-%\loadgeometry{wmnotes}
-\fancypagestyle{eth}{
-	\fancyhf{}
-	%\fancyhf[HL]{\ETHLogo}
-	\fancyhf[FL]{\translate{Page} \thepage / \pageref{LastPage}}
-}
-
-\geometry{
-	a4paper         ,
-	top       = 38mm ,
-	left      = 20mm ,
-	right     = 20mm ,
-	bottom    = 24mm ,
-	headsep   = 26mm ,
-	footskip  = 15mm ,
-	columnsep =  5mm ,
-	marginpar = 15mm ,
-	marginparsep = 2.5mm
-}
-\savegeometry{uzh}
-%\loadgeometry{wmnotes}
-\fancypagestyle{uzh}{
-	\fancyhf{}
-	\fancyhf[HL]{\ifthenelse{\expandafter\isempty\expandafter{\MyLecture}}{}{\MyLecture\\}\leftmark\\\rightmark}
-	%\fancyhf[HR]{\UZHLogo}
-	\fancyhf[FL]{\ifthenelse{\expandafter\isempty\expandafter{\MyAuthor}}{}{\MyAuthor\\}\translate{Status}: \today}
-	\fancyhf[FC]{\thepage}
-	%\fancyhf[FR]{\ccbyncsaeu}
-}
-
-\geometry{
-	a4paper          ,
-	top       = 35mm ,
-	left      = 15mm ,
-	right     = 15mm ,
-	bottom    = 15mm ,
-	headheight = 10mm ,
-	headsep = 5mm ,
-	footskip = 10mm
-}
-\savegeometry{cv}
-\fancypagestyle{cv}{
-	\fancyhf{}
-	\fancyhf[HL]{}
-	\fancyhf[HC]{}
-	\fancyhf[HR]{\MyAuthor ~-~\MyTitle}
-	\fancyhf[FL]{}
-	\fancyhf[FC]{\thepage}
-	\fancyhf[FR]{}
-	}
-
-\loadgeometry{wmnotes}
-\pagestyle{wmnotes}
-
-\ifthenelse{\boolean{eth}}{
-	\loadgeometry{eth}
-	
-	\ifthenelse{\boolean{xetex} \OR \boolean{luatex}}{
-		\setmainfont{ETH Light}
-	}{
-		\renewcommand{\familydefault}{let}
-		\renewcommand{\sfdefault}{let}
-		\DeclareFixedFont{\x}{T1}{let}{m}{n}{10}
-		\DeclareFixedFont{\xb}{T1}{let}{b}{n}{10}
-		\newfont{\xiiiv}{letr8t at 8.5pt}
-		\newfont{\xiiivb}{letb8t at 8.5pt}
-	}
-	
-	\pagestyle{eth}
-}{
-	\ifthenelse{\boolean{uzh}}{
-		\loadgeometry{uzh}
-		
-		\ifthenelse{\boolean{xetex} \OR \boolean{luatex}}{
-			\setmainfont{Palatino}
-		}{}
-		
-		\pagestyle{uzh}
-	}{
-		\ifthenelse{\boolean{cv}}{
-			\loadgeometry{cv}
-			\pagestyle{cv}
-			
-			\setlength{\headheight}{30pt}
-			\setlength{\headwidth}{\textwidth}
-			%\usepackage{setspace}
-			%\setstretch{1.5}
-
-			\setlist{nosep}
-			\tabulinesep=4pt
-			\setmainfont{Roboto}
-
-			\title{CV}
-		}{
-				%\loadgeometry{wmnotes}
-				\pagestyle{wmnotes}
-			}
-	}
-}
+\setkomafont{pageheadfoot}{\normalcolor}
+%\setkomafont{disposition}{\normalfont\bfseries}
+%\setkomafont{descriptionlabel}{\normalfont\bfseries}
 
 \abovedisplayshortskip=1ex
 \belowdisplayshortskip=1ex
@@ -275,7 +156,7 @@
 \setlength{\parindent}{0cm}
 \setlength{\hangindent}{0cm}
 \setlength{\mathindent}{0.5cm}
-\frenchspacing
+%\frenchspacing
 %\sloppy
 
 % used to solve many problems with h- and vboxes, which are over- and underfull
