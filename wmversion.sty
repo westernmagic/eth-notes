@@ -1,21 +1,6 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{wmversion}[2015/01/14]
 
-\RequirePackage{xparse}
-\RequirePackage{xkeyval}
-\RequirePackage{texsort}
-\RequirePackage{xstring}
-\RequirePackage{xcolor}
-\RequirePackage{pgffor}
-\RequirePackage{etoolbox}
-\RequirePackage{wmtext}
-\RequirePackage{etextools}
-\RequirePackage{enumitem}
-\RequirePackage{xifthen}
-\RequirePackage{ifthenx}
-\RequirePackage{hyperref}
-
-
 \newboolean{final}
 \setboolean{final}{false}
 \DeclareOption{final}{
@@ -53,7 +38,7 @@
 \DeclareDocumentCommand\PrintVersions{}{
 	\StrGobbleLeft{\wmver@VersionListUnsorted}{1}[\wmver@VersionListUnsorted]
 	\sortlist{\wmver@VersionListUnsorted}\to{wmver@VersionListSorted}\sep{,}
-	
+
 	\section*{Versionen}
 	\begin{versions}
 		\foreach \@i in \wmver@VersionListSorted {
@@ -64,7 +49,7 @@
 			}
 		}
 	\end{versions}
-}	
+}
 
 \DeclareDocumentCommand\added{o m+}{%
 	\ifthenelse{\beforedate{#1}}{%

@@ -1,56 +1,13 @@
 \NeedsTeXFormat{LaTeX2e}
-\RequirePackage{expl3}
 \ProvidesExplPackage{wmmath}{2016/03/31}{}{}
 
-\RequirePackage{xifthen}
-\RequirePackage{ifxetex}
-\RequirePackage{ifluatex}
-\RequirePackage{makecmds}
-\RequirePackage{wml3}
+\setmathfont{XITS Math}
 
-\RequirePackage[fleqn,sumlimits,intlimits,namelimits]{amsmath}
-
-\RequirePackage{cancel}
-\RequirePackage{delarray}
-\RequirePackage{gauss}
-\RequirePackage{maybemath}
-%\RequirePackage{breqn} % breaks chemfig
-\RequirePackage{mathtools}
-\RequirePackage{permute}
-\RequirePackage{mleftright}
-
-%\RequirePackage{nath} % breaks things
-\sys_if_feature_utf:TF {
-	\RequirePackage[math-style = ISO , bold-style = ISO , vargreek-shape = unicode]{unicode-math}
-	\setmathfont{XITS Math}
-
-	\NewDocumentCommand \lightning {} { \downzigzagarrow }
-	\NewDocumentCommand \ulsh      {} { \Lsh }
-	\NewDocumentCommand \ursh      {} { \Rsh }
-	\NewDocumentCommand \dlsh      {} { \Ldsh }
-	\NewDocumentCommand \drsh      {} { \Rdsh }
-} {
-	\RequirePackage{amssymb}
-	\RequirePackage{amsfonts}
-	\RequirePackage[mathb]{mathabx}
-	\RequirePackage[nointegrals]{wasysym}
-	\RequirePackage{trfsigns}
-	\RequirePackage{esint}
-
-	\changenotsign
-	\let\oldepsilon\epsilon
-	\renewcommand*{\epsilon}{\ensuremath{\varepsilon}}
-	\let\oldphi\phi
-	\renewcommand*{\phi}{\ensuremath{\varphi}}
-	\let\oldemptyset\emptyset
-	\renewcommand*{\emptyset}{\ensuremath{\varnothing}}
-
-	\newcommand*\increment{\Delta}
-	\newcommand*\qed{\blacksquare}
-}
-
-\RequirePackage{physics}
-\RequirePackage{siunitx}
+\NewDocumentCommand \lightning {} { \downzigzagarrow }
+\NewDocumentCommand \ulsh      {} { \Lsh }
+\NewDocumentCommand \ursh      {} { \Rsh }
+\NewDocumentCommand \dlsh      {} { \Ldsh }
+\NewDocumentCommand \drsh      {} { \Rdsh }
 
 \sisetup{
 	detect-all ,

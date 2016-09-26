@@ -1,48 +1,7 @@
 \NeedsTeXFormat{LaTeX2e}
-\PassOptionsToPackage{log-functions=false}{expl3}
-\PassOptionsToPackage{log-declarations=false}{xparse}
-\RequirePackage{expl3}
 \ProvidesExplPackage{wmnotes}{2016/04/06}{}{}
 \makeatletter
 \ExplSyntaxOff
-
-%\RequirePackage{texdepends}
-%\RequirePackage{pkgloader}
-%\RequirePackage{catoptions}
-\RequirePackage[aux]{rerunfilecheck}
-%\RequirePackage{silence}
-
-%\RequirePackage{fixltx2e}
-\RequirePackage{pdftexcmds}
-\RequirePackage{etextools}
-\RequirePackage{morewrites} %etextools > etex-pkg redefines \newwrites
-\RequirePackage{makecmds}
-\RequirePackage{inlinedef}
-\RequirePackage{versions}
-\RequirePackage{extract}
-\RequirePackage{sphack}
-\RequirePackage{checkend}
-%\RequirePackage{checklab}
-
-\RequirePackage{xifthen}
-\RequirePackage{ifthenx}
-\RequirePackage{iftex}
-\RequirePackage{ifpdf}
-\RequirePackage{ifxetex}
-\RequirePackage{ifluatex}
-%\RequirePackage{ifplatform}
-
-\ifthenelse{\boolean{luatex}}{\RequirePackage{luatex85}}{}
-
-\RequirePackage[english,german]{translator}
-\usedictionary{wmnotes}
-
-\RequirePackage{geometry}
-
-\RequirePackage[clock]{ifsym}
-\RequirePackage{ccicons}
-\RequirePackage{skak}
-\RequirePackage{metalogo}
 
 \ifthenelse{\boolean{luatex}}{
 	\let\CompilerLogo\LuaLaTeX
@@ -58,126 +17,18 @@
 	}
 }
 
-\ifthenelse{\boolean{xetex} \OR \boolean{luatex}}{
-	\PassOptionsToPackage{no-math}{fontspec}
-	\RequirePackage{fontspec}
-	\ifthenelse{\boolean{xetex}}{\RequirePackage{xltxtra}}{}
-	%\setmainfont{ETH Light}
-	\newfontfamily{\ComputerModern}{cmunrm.otf}
-	\everylogo{\ComputerModern}
-}{
-	\RequirePackage{ucs}
-	\ifthenelse{\boolean{luatex}}{
-		\RequirePackage[lutf8x]{luainputenc}
-	}{
-		\RequirePackage[utf8x]{inputenc}
-	}
-	\RequirePackage[T1]{fontenc}
-%	\renewcommand{\familydefault}{let}
-%	\renewcommand{\sfdefault}{let}
-}
-
-\ifthenelse{\boolean{xetex} \OR \boolean{luatex}}{
-	\RequirePackage{polyglossia}
-}{
-	\RequirePackage{babeltools}
-	\RequirePackage[english,german,ngerman]{babel}
-	\RequirePackage{babelbib}
-}
-
-\RequirePackage{ellipsis}
-
-\RequirePackage{hologo}
-
-\RequirePackage[usenames,dvipsnames]{xcolor}
-\RequirePackage{pdfpages}
-\RequirePackage{graphicx}
-\RequirePackage{grffile}
-\RequirePackage{grfpaste}
-\RequirePackage{gincltex}
-\RequirePackage{grfext}
-\RequirePackage{epstopdf}
-\RequirePackage{media9}
-%\RequirePackage{pgf}
-\RequirePackage{tikz}
-\usetikzlibrary{arrows,intersections,patterns,hobby}
-\RequirePackage{pgfplots}
-\pgfplotsset{compat=1.14}
-\RequirePackage{egplot}
-%\RequirePackage[all]{xy}
-\RequirePackage{marginnote}
-\RequirePackage{changes}
-
-\ifthenelse{\classloaded{beamer}}{}{
-	%\RequirePackage{titlesec}
-}
-
-%TODO: try to extract wmmath, not need for stuff like meeting minutes
-\RequirePackage{wmmath}
-
-\RequirePackage{microtype}
-\RequirePackage{colortbl}
-\RequirePackage{tabularx}
-\RequirePackage{longtable}
-\RequirePackage{ltabptch}
-\RequirePackage{tabu}
-\RequirePackage{multirow}
-\RequirePackage{bigdelim}
-\PassOptionsToPackage{normalem}{ulem}
-\RequirePackage{ulem}
-\RequirePackage{soulutf8}
-\RequirePackage{wmtext}
-\PassOptionsToPackage{unicode,hyperindex=false}{hyperref}
-\RequirePackage{zref}
-\RequirePackage{xr}
-\RequirePackage{xr-hyper}
-\PassOptionsToPackage{inline}{enumitem}
-\RequirePackage{enumitem}
-\ifthenelse{\boolean{luatex}}{}{\RequirePackage{enumitem-zref}} % catcode errors in lualatex
-%\RequirePackage{refcheck}
-\RequirePackage{hyperref}
-\RequirePackage{listings}
-\RequirePackage{wmtheorem}
-\RequirePackage{tocloft}
-\PassOptionsToPackage{xindy,acronym,shortcuts,toc}{glossaries}
-\RequirePackage{glossaries}
-\RequirePackage{glossaries-extra}
-\RequirePackage{algorithm}
-\RequirePackage{algorithmic}
-%\RequirePackage{xesearch}
-\ifthenelse{\classloaded{beamer}}{}{\RequirePackage{wmref}}
-%\RequirePackage{fancyhdr}
-\RequirePackage{scrlayer-scrpage}
-\RequirePackage{fnbreak}
-\RequirePackage[defaultlines=3,all]{nowidow}
-\RequirePackage[obeyFinal]{todonotes}
-%\RequirePackage[nothing]{todo}
-\RequirePackage{attachfile2}
-\RequirePackage{embedfile}
-%\RequirePackage{hypgotoe} %breaks xr-hyper
-\RequirePackage{pdfcomment}
-%\RequirePackage{minutes} %breaks toc
-
-\PassOptionsToPackage{version=4}{mhchem}
-\RequirePackage{mychemistry}
-\RequirePackage{mhchem} % loaded by mychemistry
-\RequirePackage{chemfig} % loaded by mychemistry
-\RequirePackage{chemmacros}
-
-\RequirePackage{authoraftertitle}
-
-\RequirePackage{csquotes}
-\RequirePackage{lipsum}
+\newfontfamily{\ComputerModern}{cmunrm.otf}
+\everylogo{\ComputerModern}
 
 \setcounter{tocdepth}{4}
 
 \reversemarginpar
 \allowdisplaybreaks[1]
 \hypersetup{
-	hyperindex = false ,
-	pageanchor = true ,
-	plainpages = true ,
-	pdfborder = 0 0 0 ,
+	hyperindex    = false ,
+	pageanchor    = true  ,
+	plainpages    = true  ,
+	pdfborder     = 0 0 0 ,
 	bookmarksopen = true
 }
 
