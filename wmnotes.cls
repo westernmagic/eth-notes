@@ -139,19 +139,88 @@
 }{}
 
 \savegeometry{wmnotes}
-%TODO: move to koma-script implementation
-\fancypagestyle{wmnotes}{
-	\setlength{\headheight}{53pt}
-	\fancyhf{}
-	\fancyhf[HL]{\leftmark\vspace{25pt}}
-	\fancyhf[HR]{\rightmark}
-	\fancyhf[FL]{\ifthenelse{\expandafter\isempty\expandafter{\MyAuthor}}{}{\MyAuthor\\}\translate{Status}: \today}
-	\fancyhf[FC]{\thepage}
-	\fancyhf[FR]{\ccbyncsaeu}
+% \fancypagestyle{wmnotes}{
+% 	\setlength{\headheight}{53pt}
+% 	\fancyhf{}
+% 	\fancyhf[HL]{\leftmark\vspace{25pt}}
+% 	\fancyhf[HR]{\rightmark}
+% 	\fancyhf[FL]{\ifthenelse{\expandafter\isempty\expandafter{\MyAuthor}}{}{\MyAuthor\\}\translate{Status}: \today}
+% 	\fancyhf[FC]{\thepage}
+% 	\fancyhf[FR]{\ccbyncsaeu}
+% }
+\lohead*{\leftmark\vspace{25pt}}
+\rohead*{\rightmark}
+\lofoot*{\ifthenelse{\expandafter\isempty\expandafter{\MyAuthor}}{}{\MyAuthor\\}\translate{Status}: \today}
+\cofoot*{\thepage}
+\rofoot*{\ccbyncsaeu}
+
+\geometry{
+	a4paper              ,
+	textwidth  =  16.6cm ,
+	textheight =  23.5cm ,
+	voffset    = -0.49cm ,
+	top        =     0cm ,
+	headheight =     0cm ,
+	headsep    =  1.45cm ,
+	inner      =    -3mm ,
+	outer      =    -3mm ,
+	hoffset    =     0cm ,
+	footskip   =    15mm
 }
+\savegeometry{eth}
+%\loadgeometry{wmnotes}
+% \fancypagestyle{eth}{
+% 	\fancyhf{}
+% 	%\fancyhf[HL]{\ETHLogo}
+% 	\fancyhf[FL]{\translate{Page} \thepage / \pageref{LastPage}}
+% }
+
+\geometry{
+	a4paper         ,
+	top       = 38mm ,
+	left      = 20mm ,
+	right     = 20mm ,
+	bottom    = 24mm ,
+	headsep   = 26mm ,
+	footskip  = 15mm ,
+	columnsep =  5mm ,
+	marginpar = 15mm ,
+	marginparsep = 2.5mm
+}
+\savegeometry{uzh}
+%\loadgeometry{wmnotes}
+% \fancypagestyle{uzh}{
+% 	\fancyhf{}
+% 	\fancyhf[HL]{\ifthenelse{\expandafter\isempty\expandafter{\MyLecture}}{}{\MyLecture\\}\leftmark\\\rightmark}
+% 	%\fancyhf[HR]{\UZHLogo}
+% 	\fancyhf[FL]{\ifthenelse{\expandafter\isempty\expandafter{\MyAuthor}}{}{\MyAuthor\\}\translate{Status}: \today}
+% 	\fancyhf[FC]{\thepage}
+% 	%\fancyhf[FR]{\ccbyncsaeu}
+% }
+
+\geometry{
+	a4paper          ,
+	top       = 35mm ,
+	left      = 15mm ,
+	right     = 15mm ,
+	bottom    = 15mm ,
+	headheight = 10mm ,
+	headsep = 5mm ,
+	footskip = 10mm
+}
+\savegeometry{cv}
+% \fancypagestyle{cv}{
+% 	\fancyhf{}
+% 	\fancyhf[HL]{}
+% 	\fancyhf[HC]{}
+% 	\fancyhf[HR]{\MyAuthor ~-~\MyTitle}
+% 	\fancyhf[FL]{}
+% 	\fancyhf[FC]{\thepage}
+% 	\fancyhf[FR]{}
+% 	}
 
 \loadgeometry{wmnotes}
-\pagestyle{wmnotes}
+% \pagestyle{wmnotes}
 
 \abovedisplayshortskip=1ex
 \belowdisplayshortskip=1ex
