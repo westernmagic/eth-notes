@@ -146,7 +146,9 @@
 \rofoot*{\ccbyncsaeu}
 
 \setmainfont{TeX Gyre Pagella}
-% \@ifpackageloaded{unicode-math}{\setmathfont{TeX Gyre Pagella Math}}{}
+\@ifpackageloaded{unicode-math}{
+	\setmathfont{TeX Gyre Pagella Math}
+}{}
 \setkomafont{pageheadfoot}{\normalcolor}
 \setkomafont{disposition}{\normalfont\bfseries}
 \setkomafont{descriptionlabel}{\normalfont\bfseries}
