@@ -95,9 +95,17 @@
 }
 
 % TODO: fix - maybe using pkgloader?
-%\BeforePackage{etextools}{
+\BeforePackage{etextools}{
 	%\RequirePackage{pdftexcmds}
-	%\let\pdfstrcmp\pdf@strcmp
-%}
+	\@ifundefined{pdfstrcmp}{
+		\@ifpackageloaded{pdftexcmds}{
+			\let\pdfstrcmp\pdf@strcmp
+		}{}
+	}{}
+}
+
+\hopatch@AfterPackage{glossaries-extra}{
+	\let\glsabbvfont\glsabbrvfont
+}
 
 \endinput

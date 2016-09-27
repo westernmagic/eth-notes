@@ -1,4 +1,6 @@
 \NeedsTeXFormat{LaTeX2e}
+\PassOptionsToPackage{log-functions=false}{expl3}
+\PassOptionsToPackage{log-declarations=false}{xparse}
 \RequirePackage{expl3}
 \ProvidesExplPackage{wmnotes}{2016/04/06}{}{}
 \makeatletter
@@ -11,7 +13,8 @@
 \RequirePackage[aux]{rerunfilecheck}
 %\RequirePackage{silence}
 
-\RequirePackage{fixltx2e}
+%\RequirePackage{fixltx2e}
+\RequirePackage{pdftexcmds}
 \RequirePackage{etextools}
 \RequirePackage{morewrites} %etextools > etex-pkg redefines \newwrites
 \RequirePackage{makecmds}
@@ -100,6 +103,7 @@
 \RequirePackage{tikz}
 \usetikzlibrary{arrows,intersections,patterns,hobby}
 \RequirePackage{pgfplots}
+\pgfplotsset{compat=1.14}
 \RequirePackage{egplot}
 %\RequirePackage[all]{xy}
 \RequirePackage{marginnote}
@@ -109,8 +113,10 @@
 	%\RequirePackage{titlesec}
 }
 
+%TODO: try to extract wmmath, not need for stuff like meeting minutes
 \RequirePackage{wmmath}
 
+\RequirePackage[verbose=silent]{microtype}
 \RequirePackage{colortbl}
 \RequirePackage{tabularx}
 \RequirePackage{longtable}
@@ -136,11 +142,13 @@
 \RequirePackage{tocloft}
 \PassOptionsToPackage{xindy,acronym,shortcuts,toc}{glossaries}
 \RequirePackage{glossaries}
+\RequirePackage{glossaries-extra}
 \RequirePackage{algorithm}
 \RequirePackage{algorithmic}
 %\RequirePackage{xesearch}
 \ifthenelse{\classloaded{beamer}}{}{\RequirePackage{wmref}}
 \RequirePackage{fancyhdr}
+%\RequirePackage{scrlayer-scrpage}
 \RequirePackage{fnbreak}
 \RequirePackage[defaultlines=3,all]{nowidow}
 \RequirePackage[obeyFinal]{todonotes}
@@ -167,10 +175,10 @@
 \reversemarginpar
 \allowdisplaybreaks[1]
 \hypersetup{
-	hyperindex = false , 
+	hyperindex = false ,
 	pageanchor = true ,
 	plainpages = true ,
-	pdfborder = 0 0 0 , 
+	pdfborder = 0 0 0 ,
 	bookmarksopen = true
 }
 
