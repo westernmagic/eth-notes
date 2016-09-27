@@ -30,12 +30,6 @@
 	\NewDocumentCommand \ursh      {} { \Rsh }
 	\NewDocumentCommand \dlsh      {} { \Ldsh }
 	\NewDocumentCommand \drsh      {} { \Rdsh }
-
-	% \newcommand*\lightning{\downzigzagarrow}
-	% \newcommand*\ulsh{\Lsh}
-	% \newcommand*\ursh{\Rsh}
-	% \newcommand*\dlsh{\Ldsh}
-	% \newcommand*\drsh{\Rdsh}
 } {
 	\RequirePackage{amssymb}
 	\RequirePackage{amsfonts}
@@ -88,14 +82,21 @@
 \DeclareSIUnit\svedberg{S}
 %\DeclareSIUnit\mmH2O{mmH2O}
 
-
-\let\oldimplies\implies
-\def\implies{\ensuremath{\oldimplies}{ }}
+\cs_gset_eq:NN \wmmath_original_implies \implies
+\DeclareDocumentCommand \implies {} {
+	\mode_if_math:TF {
+		\wmmath_original_implies
+	} {
+		$\wmmath_original_implies$~
+	}
+}
 
 % unicode-math sets \rightarrow in a \AtBeginDocument, so we have to as well
 \AtBeginDocument{
-	\let\oldrightarrow\rightarrow
-	\def\rightarrow{\oldrightarrow{}~}
+	\cs_gset_eq:NN \wmmath_original_rightarrow \rightarrow
+	\DeclareDocumentCommand \rightarrow {} {
+		\wmmath_original_rightarrow \mode_if_math:F {~}
+	}
 }
 
 %refactor
