@@ -23,8 +23,8 @@
 %\RequirePackage{nath} % breaks things
 \sys_if_feature_utf:TF {
 	\RequirePackage[math-style = ISO , bold-style = ISO , vargreek-shape = unicode]{unicode-math}
-	\setmathfont{XITS Math}
-	
+	%\setmathfont{XITS Math}
+
 	\NewDocumentCommand \lightning {} { \downzigzagarrow }
 	\NewDocumentCommand \ulsh      {} { \Lsh }
 	\NewDocumentCommand \ursh      {} { \Rsh }
@@ -37,7 +37,7 @@
 	\RequirePackage[nointegrals]{wasysym}
 	\RequirePackage{trfsigns}
 	\RequirePackage{esint}
-	
+
 	\changenotsign
 	\let\oldepsilon\epsilon
 	\renewcommand*{\epsilon}{\ensuremath{\varepsilon}}
@@ -100,71 +100,80 @@
 }
 
 %refactor
-\let\oldoverbrace\overbrace
-\let\oldunderbrace\underbrace
+\cs_gset_eq:NN \oldoverbrace  \overbrace
+\cs_gset_eq:NN \oldunderbrace \underbrace
 
-\ExplSyntaxOff % due to using _ ; fix?
-\DeclareDocumentCommand{\underbrace}{ s g t_ +g }{
-	\IfNoValueTF{#2}{
-		\oldunderbrace
-	}{
-		\IfBooleanTF{#3}{
-			\IfNoValueTF{#4}{}{
-				\IfBooleanTF{#1}{
-					\smash{\oldunderbrace{#2}_{#4}}
-					\vphantom{#2}
-					\gappto{\bracevspacing}{\vphantom{\oldunderbrace{#2}_{#4}}}
+
+{
+	\char_set_catcode_math_superscript:N ^
+	\char_set_catcode_math_subscript:N _
+
+	\AtBeginDocument{ % otherwise errors if font changed later on
+		\DeclareDocumentCommand{\underbrace}{ s g t_ +g }{
+			\IfNoValueTF{#2}{
+				\oldunderbrace
+			}{
+				\IfBooleanTF{#3}{
+					\IfNoValueTF{#4}{}{
+						\IfBooleanTF{#1}{
+							\smash{\oldunderbrace{#2}_{#4}}
+							\vphantom{#2}
+							\gappto{\bracevspacing}{\vphantom{\oldunderbrace{#2}_{#4}}}
+						}{
+							\smash{\oldunderbrace{#2}_{\mathclap{\substack{#4}}}}
+							\vphantom{#2}
+							\gappto{\bracevspacing}{\vphantom{\oldunderbrace{#2}_{\mathclap{\substack{#4}}}}}
+						}
+					}
 				}{
-					\smash{\oldunderbrace{#2}_{\mathclap{\substack{#4}}}}
+					\smash{\oldunderbrace{#2}}
 					\vphantom{#2}
-					\gappto{\bracevspacing}{\vphantom{\oldunderbrace{#2}_{\mathclap{\substack{#4}}}}}
+					\gappto{\bracevspacing}{\vphantom{\oldunderbrace{#2}}}
 				}
 			}
-		}{
-			\smash{\oldunderbrace{#2}}
-			\vphantom{#2}
-			\gappto{\bracevspacing}{\vphantom{\oldunderbrace{#2}}}
+		}
+
+		\DeclareDocumentCommand{\overbrace}{ s g t^ +g }{
+			\IfNoValueTF{#2}{
+				\oldoverbrace
+			}{
+				\IfBooleanTF{#3}{
+					\IfNoValueTF{#4}{}{
+						\IfBooleanTF{#1}{
+							\smash{\oldoverbrace{#2}^{#4}}
+							\vphantom{#2}
+							\gappto{\bracevspacing}{\vphantom{\oldoverbrace{#2}^{#4}}}
+						}{
+							\smash{\oldoverbrace{#2}^{\mathclap{\substack{#4}}}}
+							\vphantom{#2}
+							\gappto{\bracevspacing}{\vphantom{\oldoverbrace{#2}^{\mathclap{\substack{#4}}}}}
+						}
+					}
+				}{
+					\smash{\oldoverbrace{#2}}
+					\vphantom{#2}
+					\gappto{\bracevspacing}{\vphantom{\oldoverbrace{#2}}}
+				}
+			}
 		}
 	}
 }
-\DeclareDocumentCommand{\overbrace}{ s g t^ +g }{
-	\IfNoValueTF{#2}{
-		\oldoverbrace
-	}{
-		\IfBooleanTF{#3}{
-			\IfNoValueTF{#4}{}{
-				\IfBooleanTF{#1}{
-					\smash{\oldoverbrace{#2}^{#4}}
-					\vphantom{#2}
-					\gappto{\bracevspacing}{\vphantom{\oldoverbrace{#2}^{#4}}}
-				}{
-					\smash{\oldoverbrace{#2}^{\mathclap{\substack{#4}}}}
-					\vphantom{#2}
-					\gappto{\bracevspacing}{\vphantom{\oldoverbrace{#2}^{\mathclap{\substack{#4}}}}}
-				}
-			}
-		}{
-			\smash{\oldoverbrace{#2}}
-			\vphantom{#2}
-			\gappto{\bracevspacing}{\vphantom{\oldoverbrace{#2}}}
-		}
-	}
+
+\AtBeginDocument{
+	%\let\cR\R
+	%\let\cS\S
+	%\let\cE\Ent
+	%\let\cZ\Zus
+
+	\newcommand{\gdw}{g.d., w. }
+	\makecommand{\R}{\ensuremath{\mathbb{R}}}
+	%\makecommand{\Q}{\ensuremath{\mathbb{Q}}}
+	\makecommand{\N}{\ensuremath{\mathbb{N}}}
+	\makecommand{\Z}{\ensuremath{\mathbb{Z}}}
+	\makecommand{\C}{\ensuremath{\mathbb{C}}}
+	\newcommand{\I}{\ensuremath{\mathbb{I}}}
+	\makecommand{\L}{\ensuremath{\mathcal{L}}}
 }
-\ExplSyntaxOn
-
-\let\cR\R
-\let\cS\S
-\let\cE\Ent
-\let\cZ\Zus
-
-\newcommand{\gdw}{g.d., w. }
-\makecommand{\R}{\ensuremath{\mathbb{R}}}
-\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
-\newcommand{\N}{\ensuremath{\mathbb{N}}}
-\makecommand{\Z}{\ensuremath{\mathbb{Z}}}
-\makecommand{\C}{\ensuremath{\mathbb{C}}}
-\newcommand{\I}{\ensuremath{\mathbb{I}}}
-\makecommand{\L}{\ensuremath{\mathcal{L}}}
 
 %\newcommand*{\abs}[1]{\left\lvert #1 \right\rvert}
 %\newcommand*{\norm}[1]{\left\lVert #1 \right\rVert}
