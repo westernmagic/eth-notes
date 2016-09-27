@@ -100,15 +100,16 @@
 }
 
 %refactor
-\cs_gset_eq:NN \oldoverbrace  \overbrace
-\cs_gset_eq:NN \oldunderbrace \underbrace
+%\cs_gset_eq:NN \oldoverbrace  \overbrace
+%\cs_gset_eq:NN \oldunderbrace \underbrace
 
-
+\ExplSyntaxOff
 {
-	\char_set_catcode_math_superscript:N ^
-	\char_set_catcode_math_subscript:N _
+	%\char_set_catcode_math_superscript:N ^
+	%\char_set_catcode_math_subscript:N _
 
 	\AtBeginDocument{ % otherwise errors if font changed later on
+		\global\let\oldunderbrace\underbrace
 		\DeclareDocumentCommand{\underbrace}{ s g t_ +g }{
 			\IfNoValueTF{#2}{
 				\oldunderbrace
@@ -133,6 +134,7 @@
 			}
 		}
 
+		\global\let\oldoverbrace\overbrace
 		\DeclareDocumentCommand{\overbrace}{ s g t^ +g }{
 			\IfNoValueTF{#2}{
 				\oldoverbrace
@@ -158,6 +160,7 @@
 		}
 	}
 }
+\ExplSyntaxOn
 
 \AtBeginDocument{
 	%\let\cR\R
