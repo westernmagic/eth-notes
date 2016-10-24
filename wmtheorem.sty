@@ -56,7 +56,7 @@
 		innerleftmargin   = #1 ,
 		innerrightmargin  = #1 ,
 		innertopmargin    = #1 ,
-		innerbottommargin = #1 , 
+		innerbottommargin = #1 ,
 		splittopskip      = #1 ,
 		splitbottomskip   = #1
 	}
@@ -78,7 +78,7 @@
 	fontcolor         = Black ,
 	indent            = 0.5cm ,
 	headfont          = \normalfont\bfseries ,
-	notefont          = \normalfont\bfseries , 
+	notefont          = \normalfont\bfseries ,
 	bodyfont          = \normalfont ,
 	headnotesep       = {: } ,
 	notebodysep       = : ,
@@ -163,6 +163,17 @@
 	fontcolor       = Black
 ]{bsp*}
 \maketheorem[
+	head            = Example ,
+	counter         = bspcounter ,
+	backgroundcolor = SkyBlue ,
+	fontcolor       = Black
+]{ex}
+\maketheorem[
+	head            = Example ,
+	backgroundcolor = SkyBlue ,
+	fontcolor       = Black
+]{ex*}
+\maketheorem[
 	head            = Satz ,
 	counter         = satzcounter ,
 	backgroundcolor = Orange ,
@@ -173,6 +184,17 @@
 	backgroundcolor = Orange ,
 	fontcolor       = Black
 ]{satz*}
+\maketheorem[
+	head            = Theorem ,
+	counter         = satzcounter ,
+	backgroundcolor = Orange ,
+	fontcolor       = Black
+]{thm}
+\maketheorem[
+	head            = Theorem ,
+	backgroundcolor = Orange ,
+	fontcolor       = Black
+]{thm*}
 \maketheorem[
 	head            = Korrolar ,
 	counter         = satzcounter ,
@@ -207,7 +229,7 @@
 	fontcolor       = Yellow
 ]{rep*}
 \maketheorem[
-	head            = Def. ,
+	head            = Definition ,
 	backgroundcolor = Red ,
 	fontcolor       = Yellow ,
 	indexstyle      = def ,
@@ -218,10 +240,20 @@
 	fontcolor       = Black
 ]{bew}
 \maketheorem[
+	head            = Proof ,
+	backgroundcolor = Yellow ,
+	fontcolor       = Black
+]{proof}
+\maketheorem[
 	head            = Bem. ,
 	backgroundcolor = Purple ,
 	fontcolor       = Yellow
 ]{bem}
+\maketheorem[
+	head            = Remark ,
+	backgroundcolor = Purple ,
+	fontcolor       = Yellow
+]{rem}
 \maketheorem[
 	head            = Fakt ,
 	backgroundcolor = Purple ,

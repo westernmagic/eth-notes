@@ -176,6 +176,7 @@
 	\makecommand{\C}{\ensuremath{\mathbb{C}}}
 	\newcommand{\I}{\ensuremath{\mathbb{I}}}
 	\makecommand{\L}{\ensuremath{\mathcal{L}}}
+	\makecommand{\T}{\intercal}
 }
 
 %\newcommand*{\abs}[1]{\left\lvert #1 \right\rvert}
@@ -196,6 +197,7 @@
 
 \mleftright
 
+\AtBeginDocument{
 \char_gset_mathactive:Nn ( { \left\token_to_str:N ( }
 
 \char_gset_mathactive:Nn ) { \right\token_to_str:N ) }
@@ -275,7 +277,7 @@
 		> % preferably \textrangle
 	}
 }
-
+}
 
 %\ExplSyntaxOff
 
@@ -302,6 +304,7 @@
 \DeclareMathOperator{\rang}{rang}
 \DeclareMathOperator*{\res}{res}
 \DeclareMathOperator{\rot}{rot}
+\DeclareMathOperator{\Jac}{Jac}
 
 %\let\olddiv\div
 %\renewcommand*{\div}{\operatorname{div}}
