@@ -120,7 +120,7 @@
 
 \ifthenelse{\boolean{xetex} \OR \boolean{luatex}}{
 	\setmainfont{SwissBT}[
-		Path           = /Users/westernmagic/Library/Fonts/,
+		%Path           = /Users/westernmagic/Library/Fonts/,
 		Extension      = .otf,
 		UprightFont    = *LigCon,
 		ItalicFont     = *LigConIta,

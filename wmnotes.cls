@@ -145,9 +145,16 @@
 \cofoot*{\thepage}
 \rofoot*{\ccbyncsaeu}
 
+\setmainfont{TeX Gyre Pagella}
+\@ifpackageloaded{unicode-math}{
+	\setmathfont{TeX Gyre Pagella Math}
+}{}
 \setkomafont{pageheadfoot}{\normalcolor}
-%\setkomafont{disposition}{\normalfont\bfseries}
-%\setkomafont{descriptionlabel}{\normalfont\bfseries}
+\setkomafont{disposition}{\normalfont\bfseries}
+\setkomafont{descriptionlabel}{\normalfont\bfseries}
+
+\setlength{\headheight}{40pt}
+\setlength{\footheight}{40pt}
 
 \abovedisplayshortskip=1ex
 \belowdisplayshortskip=1ex

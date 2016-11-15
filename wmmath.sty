@@ -56,61 +56,67 @@
 }
 
 %refactor
-\cs_gset_eq:NN \oldoverbrace  \overbrace
-\cs_gset_eq:NN \oldunderbrace \underbrace
+%\cs_gset_eq:NN \oldoverbrace  \overbrace
+%\cs_gset_eq:NN \oldunderbrace \underbrace
 
-
+\ExplSyntaxOff
 {
-	\char_set_catcode_math_superscript:N ^
-	\char_set_catcode_math_subscript:N _
-	\DeclareDocumentCommand{\underbrace}{ s g t_ +g }{
-		\IfNoValueTF{#2}{
-			\oldunderbrace
-		}{
-			\IfBooleanTF{#3}{
-				\IfNoValueTF{#4}{}{
-					\IfBooleanTF{#1}{
-						\smash{\oldunderbrace{#2}_{#4}}
-						\vphantom{#2}
-						\gappto{\bracevspacing}{\vphantom{\oldunderbrace{#2}_{#4}}}
-					}{
-						\smash{\oldunderbrace{#2}_{\mathclap{\substack{#4}}}}
-						\vphantom{#2}
-						\gappto{\bracevspacing}{\vphantom{\oldunderbrace{#2}_{\mathclap{\substack{#4}}}}}
-					}
-				}
+	%\char_set_catcode_math_superscript:N ^
+	%\char_set_catcode_math_subscript:N _
+
+	\AtBeginDocument{ % otherwise errors if font changed later on
+		\global\let\oldunderbrace\underbrace
+		\DeclareDocumentCommand{\underbrace}{ s g t_ +g }{
+			\IfNoValueTF{#2}{
+				\oldunderbrace
 			}{
-				\smash{\oldunderbrace{#2}}
-				\vphantom{#2}
-				\gappto{\bracevspacing}{\vphantom{\oldunderbrace{#2}}}
+				\IfBooleanTF{#3}{
+					\IfNoValueTF{#4}{}{
+						\IfBooleanTF{#1}{
+							\smash{\oldunderbrace{#2}_{#4}}
+							\vphantom{#2}
+							\gappto{\bracevspacing}{\vphantom{\oldunderbrace{#2}_{#4}}}
+						}{
+							\smash{\oldunderbrace{#2}_{\mathclap{\substack{#4}}}}
+							\vphantom{#2}
+							\gappto{\bracevspacing}{\vphantom{\oldunderbrace{#2}_{\mathclap{\substack{#4}}}}}
+						}
+					}
+				}{
+					\smash{\oldunderbrace{#2}}
+					\vphantom{#2}
+					\gappto{\bracevspacing}{\vphantom{\oldunderbrace{#2}}}
+				}
 			}
 		}
-	}
 
-	\DeclareDocumentCommand{\overbrace}{ s g t^ +g }{
-		\IfNoValueTF{#2}{
-			\oldoverbrace
-		}{
-			\IfBooleanTF{#3}{
-				\IfNoValueTF{#4}{}{
-					\IfBooleanTF{#1}{
-						\smash{\oldoverbrace{#2}^{#4}}
-						\vphantom{#2}
-						\gappto{\bracevspacing}{\vphantom{\oldoverbrace{#2}^{#4}}}
-					}{
-						\smash{\oldoverbrace{#2}^{\mathclap{\substack{#4}}}}
-						\vphantom{#2}
-						\gappto{\bracevspacing}{\vphantom{\oldoverbrace{#2}^{\mathclap{\substack{#4}}}}}
-					}
-				}
+		\global\let\oldoverbrace\overbrace
+		\DeclareDocumentCommand{\overbrace}{ s g t^ +g }{
+			\IfNoValueTF{#2}{
+				\oldoverbrace
 			}{
-				\smash{\oldoverbrace{#2}}
-				\vphantom{#2}
-				\gappto{\bracevspacing}{\vphantom{\oldoverbrace{#2}}}
+				\IfBooleanTF{#3}{
+					\IfNoValueTF{#4}{}{
+						\IfBooleanTF{#1}{
+							\smash{\oldoverbrace{#2}^{#4}}
+							\vphantom{#2}
+							\gappto{\bracevspacing}{\vphantom{\oldoverbrace{#2}^{#4}}}
+						}{
+							\smash{\oldoverbrace{#2}^{\mathclap{\substack{#4}}}}
+							\vphantom{#2}
+							\gappto{\bracevspacing}{\vphantom{\oldoverbrace{#2}^{\mathclap{\substack{#4}}}}}
+						}
+					}
+				}{
+					\smash{\oldoverbrace{#2}}
+					\vphantom{#2}
+					\gappto{\bracevspacing}{\vphantom{\oldoverbrace{#2}}}
+				}
 			}
 		}
 	}
 }
+\ExplSyntaxOn
 
 \AtBeginDocument{
 	%\let\cR\R
@@ -126,6 +132,7 @@
 	\makecommand{\C}{\ensuremath{\mathbb{C}}}
 	\newcommand{\I}{\ensuremath{\mathbb{I}}}
 	\makecommand{\L}{\ensuremath{\mathcal{L}}}
+	\makecommand{\T}{\intercal}
 }
 
 %\newcommand*{\abs}[1]{\left\lvert #1 \right\rvert}
@@ -146,6 +153,7 @@
 
 \mleftright
 
+\AtBeginDocument{
 \char_gset_mathactive:Nn ( { \left\token_to_str:N ( }
 
 \char_gset_mathactive:Nn ) { \right\token_to_str:N ) }
@@ -225,7 +233,7 @@
 		> % preferably \textrangle
 	}
 }
-
+}
 
 %\ExplSyntaxOff
 
@@ -252,6 +260,7 @@
 \DeclareMathOperator{\rang}{rang}
 \DeclareMathOperator*{\res}{res}
 \DeclareMathOperator{\rot}{rot}
+\DeclareMathOperator{\Jac}{Jac}
 
 %\let\olddiv\div
 %\renewcommand*{\div}{\operatorname{div}}

@@ -9,6 +9,7 @@ A 'bundle' of miscellaneous packages that I have developped—first for taking l
  - `wmtext.sty` implements text decorations
  - `wmversions.sty` handles changes in documents—usefull for typesetting a version of the bylaws with all changes since their conception
  - `wmtheorem.sty` makes fancy page-breaking boxes for theorems, lemmata and examples in the lecture notes
+ - `wmignoreitems` gobbles text and items in lists (with or without side-effects)
  - `wmptt.cls` is our beamer class
  - `wml3.sty` are useful LaTeX3 functions we created
  - `vsuzh.cls` and `kosta.cls` are style files for their respective organizations
