@@ -1,0 +1,47 @@
+
+% Based of https://tex.stackexchange.com/questions/4502/onlyitems-how-to-select-specific-items-from-an-item-list#_=_ by Ryan Reich and Yossi Farjoun
+\RequirePackage{expl3}
+\ProvidesExplPackage{wmignoreitems}{2016/11/15}{}{}
+\RequirePackage{xparse}
+
+\cs_new_eq:NN \wm_ignoreitems_item_saved \item
+
+\DeclareDocumentCommand \wm_ignoreitems_item { o } {
+	\vbox_set_end:
+	\next:
+}
+
+\DeclareDocumentEnvironment {ignoreitems} { >{\ReverseBoolean} s } {
+	\cs_set_eq:NN \item \wm_ignoreitems_item
+	\IfBooleanTF{#1}{
+		% The vbox is set and then discarded, effectively ignoring an entire \item.
+		% This inner \wm_ignoreitems_item_saved is necessary to avoid a glitch when we ignore the first \item of an itemize that itself contains a nested \itemize.  Don't ask, I don't know.
+		\cs_set:Nn \next: {
+			\vbox_set:Nw \l_tmpa_box
+				\cs_set_eq:NN \item \wm_ignoreitems_item_saved
+				\item
+		}
+	}{
+		% the \@gobble s are so that various numerated lists still work as if
+		% the items are missing (i.e, no side effects).
+		% http://tex.stackexchange.com/questions/34811/how-to-skip-an-item-entirely-with-no-side-effects/34821#34821
+		\cs_set:Nn \next: {
+			\vbox_set:Nw \l_tmpa_box
+				\cs_set_eq:NN \item         \wm_ignoreitems_item_saved
+				\cs_set_eq:NN \stepcounter  \use_none:n
+				\cs_set_eq:NN \addtocounter \use_none:nn
+				\item
+		}
+	}
+	\vbox_set:Nw \l_tmpb_box
+
+}{
+	% The \egroup closes off any \vbox'es from the previously ignored \item.
+	\vbox_set_end:
+}
+
+\DeclareDocumentEnvironment {ignoreitems*} {} {
+	\begin{ignoreitems}*
+}{
+	\end{ignoreitems}
+}
