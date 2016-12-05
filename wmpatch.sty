@@ -113,4 +113,8 @@
 	\let\marginpar\marginnote
 }
 
+\hopatch@AfterPackage{todonotes}{
+	\xapptocmd{\todo}{\relax}{}{}
+}
+
 \endinput
