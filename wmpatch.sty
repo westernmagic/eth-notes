@@ -108,4 +108,9 @@
 	\let\glsabbvfont\glsabbrvfont
 }
 
+\hopatch@AfterPackage{marginnote}{
+	\let\oldmarginpar\marginpar
+	\let\marginpar\marginnote
+}
+
 \endinput
