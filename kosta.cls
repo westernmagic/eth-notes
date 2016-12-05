@@ -230,16 +230,48 @@
 \newlist{personen*}{itemize*}{1}
 \setlist[personen*]{itemjoin={, {}}, itemjoin*={{} und {}}, label={}, afterlabel={}}
 
+\let\olditem\item
+\DeclareDocumentCommand\itemtitle{o}{
+	\IfNoValueTF{#1}{
+		\olditem
+	}{
+		{\bfseries
+			\olditem #1 \par\nobreak
+		}
+	}
+}
+
 \newlist{articles}{enumerate}{1}
-\setlist[articles]{label={\protect\label{§\arabic*}§ \arabic*.}, ref={§ \arabic*}, resume}
+\setlist[articles]{label={\protect\label{§\arabic*}§ \arabic*.}, ref={§ \arabic*}, resume, before* = {\let\item\itemtitle}}
 \newlist{paragraphs}{enumerate}{1}
-\setlist[paragraphs]{label={\protect\label{§\arabic{articlesi}.\arabic*}\textsuperscript{\arabic*}}, ref={Abs. \arabic*}}
+\setlist[paragraphs]{label={\protect\label{§\arabic{articlesi}.\arabic*}\textsuperscript{\arabic*}}, ref={Abs. \arabic*}, before* = {\let\item\itemtitle}}
 \newlist{letters}{enumerate}{1}
-\setlist[letters]{label={\protect\label{§\arabic{articlesi}.\arabic{paragraphsi}.\alph*}\alph*.}, ref={lit. \alph*.}}
+\setlist[letters]{label={\protect\label{§\arabic{articlesi}.\arabic{paragraphsi}.\alph*}\alph*.}, ref={lit. \alph*.}, before* = {\let\item\itemtitle}}
 
 \setdeletedmarkup{\delete{#1}}
 \setauthormarkuptext{name}
 \setauthormarkup{\footnote{#1}}
+
+\externaldocument[St]{Stiftungsurkunde}
+\externaldocument[VR]{Verwaltungsreglement}
+
+
+% #1 : skip first ref
+% #2 : skip second ref
+% #3 : Reglement-Kürzel
+% #4 : Text
+% #5 : §
+% #6 : Abs. ggf. lit.
+% #7 : lit.
+\DeclareDocumentCommand\artref{t- t- o o m o o}{%
+	\hyperref[\IfNoValueF{#3}{#3}§#5\IfNoValueF{#6}{.#6\IfNoValueF{#7}{.#7}}]{%
+		\IfNoValueTF{#4}{%
+			\IfBooleanF{#1}{\ref*{\IfNoValueF{#3}{#3}§#5}}\IfBooleanF{#2}{%
+					\IfNoValueF{#6}{\IfBooleanF{#1}{ }\ref*{\IfNoValueF{#3}{#3}§#5.#6}}%
+				}\IfNoValueF{#7}{ \ref*{\IfNoValueF{#3}{#3}§#5.#6.#7}}%
+		}{#4}%
+	}%
+}
 
 \noindexprenote
 
