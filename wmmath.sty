@@ -281,6 +281,18 @@
 
 %\ExplSyntaxOff
 
+\DeclareDocumentCommand{\DeclareMathOperator}{s m m}{
+	\addto@hook\everymath{		
+		\def#2{
+			\IfBooleanTF{#1}{
+				\operatorname*{#3}
+			}{
+				\operatorname{#3}
+			}
+		}
+	}
+}
+
 %\DeclareMathOperator{\Res}{Res}
 \DeclareMathOperator{\Resf}{Res*}
 \DeclareMathOperator{\Prim}{Prim}
@@ -294,7 +306,8 @@
 \DeclareMathOperator{\arsinh}{arsinh}
 \DeclareMathOperator{\arcosh}{arcosh}
 \DeclareMathOperator{\artanh}{artanh}
-%\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\grad}{grad}
+\DeclareMathOperator{\div}{div}
 \DeclareMathOperator{\ord}{ord}
 %\DeclareMathOperator{\dd}{d\!}
 \DeclareMathOperator{\Kern}{Kern}
