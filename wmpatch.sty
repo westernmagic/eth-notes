@@ -6,11 +6,12 @@
 \RequirePackage{scrlfile}
 \RequirePackage{hopatch}
 \RequirePackage{xpatch}
+\RequirePackage{etoolbox}
 
 \ifthenelse{\boolean{luatex}}{
-	\hopatch@AfterPackage{amsmath}{\RequirePackage{lualatex-math}}
-	\hopatch@AfterPackage{mathtools}{\RequirePackage{lualatex-math}}
-	\hopatch@AfterPackage{icomma}{\RequirePackage{lualatex-math}}
+	\hopatch@AfterPackage{amsmath}{\AtEndPreamble{\RequirePackage{lualatex-math}}}
+	\hopatch@AfterPackage{mathtools}{\AtEndPreamble{\RequirePackage{lualatex-math}}}
+	\hopatch@AfterPackage{icomma}{\AtEndPreamble{\RequirePackage{lualatex-math}}}
 }
 
 \hopatch@AfterPackage{makecmds}{
