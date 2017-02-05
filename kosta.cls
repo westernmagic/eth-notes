@@ -42,6 +42,8 @@
 \makecommand{\ETHLogo}{\includegraphics{ETHLogo}}
 \makecommand{\KostaLogo}[1][]{\includegraphics[#1]{kosta}}
 
+\definecolor{KostaDarkBlue}{HTML}{2394d8}
+\definecolor{KostaLightBlue}{HTML}{abd9e5}
 
 \setabbreviationstyle[acronym]{short-sc-nolong}
 \glssetcategoryattribute{acronym}{headuc}{true}
