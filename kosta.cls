@@ -42,12 +42,18 @@
 \makecommand{\ETHLogo}{\includegraphics{ETHLogo}}
 \makecommand{\KostaLogo}[1][]{\includegraphics[#1]{kosta}}
 
+
+\setabbreviationstyle[acronym]{short-sc-nolong}
+\glssetcategoryattribute{acronym}{headuc}{true}
 \newacronym{eth}{ETH}{Eidgenössiche Technische Hochschule}
 \newacronym{ethz}{ETHZ}{\glstext{eth} Zürich}
 \newacronym{vseth}{VSETH}{Verband der Studierenden an der \glstext{ethz}}
 \newacronym{uzh}{UZH}{Universität Zürich}
 \newacronym{vsuzh}{VSUZH}{Verband der Studierenden der \glsfirst{uzh}}
-%\newacronym{kosta}{KOSTA}{Stiftung KOSTA}
+\newacronym{kosta}{Kosta}{Stiftung KOSTA}
+\newacronym{sola}{SOLA}{SOLA Stafette}
+\newacronym{asvz}{ASVZ}{Akademischer Sportverband Zürich}
+
 
 \DeclareOption{english}{
 	\@ifpackageloaded{babel}{
@@ -120,12 +126,16 @@
 
 \ifthenelse{\boolean{xetex} \OR \boolean{luatex}}{
 	\setmainfont{SwissBT}[
-		%Path           = /Users/westernmagic/Library/Fonts/,
-		Extension      = .otf,
-		UprightFont    = *LigCon,
-		ItalicFont     = *LigConIta,
-		BoldFont       = *BlaCon,
-		BoldItalicFont = *BlaConIta
+		Extension          = .otf,
+		UprightFont        = *LigCon,
+		ItalicFont         = *LigConIta,
+		BoldFont           = *BlaCon,
+		BoldItalicFont     = *BlaConIta,
+		UprightFeatures    = {SmallCapsFont = *RomCon},
+		ItalicFeatures     = {SmallCapsFont = *ItaCon},
+		BoldFeatures       = {SmallCapsFont = *BlaCon},
+		BoldItalicFeatures = {SmallCapsFont = *BlaConIta},
+		SmallCapsFeatures  = {Scale         = 0.75}
 	]
 }{}
 

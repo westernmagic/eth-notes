@@ -1,0 +1,53 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{wmfakesc}[2017/02/05]
+\RequirePackage{xparse}
+\RequirePackage{expl3}
+\RequirePackage{fontspec}
+
+\makeatother
+\ExplSyntaxOff
+
+% Inspired by
+% http://tex.stackexchange.com/a/225078/105667
+\let\oldtextsc\textsc
+
+\def\textschelper#1 #2\relax{%
+  \textschelphelp#1\relax\relax%
+  \if\relax#2\relax\else\ \textschelper#2\relax\fi%
+}
+
+\def\textschelphelp#1#2\relax{%
+	\ifnum\uccode`#1=0\relax%
+		#1%
+	\else{%
+		\ifnum\uccode`#1=`#1\relax%
+			#1%
+		\else%
+			\oldtextsc{\uppercase{#1}}%
+		\fi%
+	}\fi%
+	\ifx\relax#2%
+		\relax%
+	\else%
+		\textschelphelp#2\relax%
+	\fi%
+}
+
+\ExplSyntaxOn
+
+\DeclareDocumentCommand{\textsc}{m} {
+	\fontspec_if_feature:nTF {smcp} {
+		\oldtextsc{#1}
+	}{
+		\fontspec_if_small_caps:TF {
+			\textschelper#1~\relax\relax
+		}{
+			\oldtextsc{#1}
+		}
+	}
+}
+
+\ExplSyntaxOff
+
+\endinput
+

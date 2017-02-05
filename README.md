@@ -6,6 +6,7 @@ A 'bundle' of miscellaneous packages that I have developped—first for taking l
  - `wmpatch.sty` contains an amalgamation of patches for the packages we load
  - `wmref.sty` is a handy referencing scheme
  - `wmtext.sty` implements text decorations
+ - `wmfakesc.sty` implements fake small caps by making lowercase letters uppercase in a smaller font (weight chosen by `fontspec` specification)
  - `wmversions.sty` handles changes in documents—usefull for typesetting a version of the bylaws with all changes since their conception
  - `wmtheorem.sty` makes fancy page-breaking boxes for theorems, lemmata and examples in the lecture notes
  - `wmignoreitems` gobbles text and items in lists (with or without side-effects)
