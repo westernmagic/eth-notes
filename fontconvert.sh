@@ -1,4 +1,4 @@
-#!/usr/local/bin/fontforge
+#!/usr/bin/env fontforge
 # https://fontforge.github.io/en-US/documentation/scripting/
 i=1
 format=".ttf"
