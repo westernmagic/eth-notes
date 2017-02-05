@@ -213,7 +213,7 @@
 	\IfBooleanTF{#1}{%
 		\IfBooleanF{#2}{#3 }\ztitleref{trakt:#3}%
 	}{%
-		\hyperref[trakt:#3]{\IfBooleanF{#2}{#3 }\ztitleref{trakt:#3}}%
+		\hyperref[trakt:#3]{\IfBooleanF{#2}{\ref*{trakt:#3} }\ztitleref{trakt:#3}}%
 	}%
 	\unskip%
 }
